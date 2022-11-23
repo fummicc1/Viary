@@ -115,11 +115,8 @@ class ViaryRepositoryImpl implements ViaryRepository {
 
   @override
   Future<Viary> refreshEmotions({required Viary viary}) async {
-    final messages = viary.message.split("\n");
-    for (final message in messages) {
-      final response = await _apiClient.get("text2emotion?text=$message");
-      print(response);
-    }
+    final response = await _apiClient.get("text2emotion?text=${viary.message}");
+    print(response);
     return viary;
   }
 }

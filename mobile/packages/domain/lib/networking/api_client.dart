@@ -40,7 +40,7 @@ class ApiClientImpl implements ApiClient {
   Future<String> get(String endpoint) async {
     return _safeApiCall(
       () async => http.get(
-        Uri.parse('$baseUrl$endpoint'),
+        Uri.parse(Uri.encodeFull('$baseUrl$endpoint')),
       ),
     );
   }
@@ -48,7 +48,7 @@ class ApiClientImpl implements ApiClient {
   @override
   Future<String> post(String endpoint, {required String body}) async {
     return _safeApiCall(
-      () async => http.post(Uri.parse('$baseUrl$endpoint'),
+      () async => http.post(Uri.parse(Uri.encodeFull('$baseUrl$endpoint')),
           headers: headers, body: body),
     );
   }
@@ -56,7 +56,7 @@ class ApiClientImpl implements ApiClient {
   @override
   Future<String> put(String endpoint, {required String body}) async {
     return _safeApiCall(
-      () async => http.put(Uri.parse('$baseUrl$endpoint'),
+      () async => http.put(Uri.parse(Uri.encodeFull('$baseUrl$endpoint')),
           headers: headers, body: body),
     );
   }
@@ -65,14 +65,16 @@ class ApiClientImpl implements ApiClient {
   Future<String> delete(String endpoint) async {
     return _safeApiCall(
       () async => http.delete(
-        Uri.parse('$baseUrl$endpoint'),
+        Uri.parse(Uri.encodeFull('$baseUrl$endpoint')),
       ),
     );
   }
 
   String _parseResponse(int httpStatus, String responseBody) {
     switch (httpStatus) {
-      case 200 | 201:
+      case 200:
+        return responseBody;
+      case 201:
         return responseBody;
       case 400:
         throw Exception('400 Bad Request');

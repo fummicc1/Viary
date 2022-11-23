@@ -15,7 +15,13 @@ class RootStateNotifier extends StateNotifier<RootState> {
         _viaryRepository = viaryRepository,
         super(state);
 
+  bool isSetupCalled = false;
+
   Future setup() async {
+    if (isSetupCalled) {
+      return;
+    }
+    isSetupCalled = true;
     User? me = await _userRepository.fetchMe();
     if (me == null) {
       await _userRepository.createMe();
