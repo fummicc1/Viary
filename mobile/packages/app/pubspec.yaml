@@ -32,6 +32,7 @@ dependencies:
   freezed: ^2.2.1
   flutter_hooks: ^0.18.2+1
   hooks_riverpod: ^2.1.1
+  flutter_dotenv: ^5.0.2
 
 dev_dependencies:
   flutter_test:
@@ -48,5 +49,7 @@ flutter_icons:
   min_sdk_android: 24 # android min sdk min:16, default 21
 
 flutter:
-
   uses-material-design: true
+
+assets:
+  - .env
