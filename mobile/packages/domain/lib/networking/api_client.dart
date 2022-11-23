@@ -1,6 +1,8 @@
 import 'dart:io';
 import 'package:http/http.dart' as http;
 
+// Base implementation:
+// https://zuma-lab.com/posts/flutter-create-http-api-client
 abstract class TodoApiClient {
   Future<String> get(String endpoint);
 
@@ -16,13 +18,10 @@ class TodoApiClientImpl implements TodoApiClient {
     return _instance ??= TodoApiClientImpl._internal(baseUrl);
   }
 
-  // クラス生成時に instance を生成する class コンストラクタ
   TodoApiClientImpl._internal(this.baseUrl);
 
-  // singleton にする為の instance キャッシュ
   static TodoApiClientImpl? _instance;
 
-  // APIの基底Url
   final String baseUrl;
 
   static const headers = <String, String>{'content-type': 'application/json'};
