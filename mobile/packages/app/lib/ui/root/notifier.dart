@@ -30,6 +30,11 @@ class RootStateNotifier extends StateNotifier<RootState> {
     state = state.copyWith(
       viaries: viaries,
     );
+    Future(() async {
+      for (final viary in viaries) {
+        await _viaryRepository.refreshEmotions(viary: viary);
+      }
+    });
   }
 
   StreamSubscription? _subscription;

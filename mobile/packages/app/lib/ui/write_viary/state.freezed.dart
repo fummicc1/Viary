@@ -12,32 +12,7 @@ part of 'state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$WriteViaryStateTearOff {
-  const _$WriteViaryStateTearOff();
-
-  _WriteViaryState call(
-      {required Viary viary,
-      bool isSpeeching = false,
-      String temporaryWords = "",
-      bool showDetermineDialog = false,
-      LocaleName? currentLocale,
-      List<LocaleName> availableLocales = const []}) {
-    return _WriteViaryState(
-      viary: viary,
-      isSpeeching: isSpeeching,
-      temporaryWords: temporaryWords,
-      showDetermineDialog: showDetermineDialog,
-      currentLocale: currentLocale,
-      availableLocales: availableLocales,
-    );
-  }
-}
-
-/// @nodoc
-const $WriteViaryState = _$WriteViaryStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$WriteViaryState {
@@ -57,7 +32,8 @@ mixin _$WriteViaryState {
 abstract class $WriteViaryStateCopyWith<$Res> {
   factory $WriteViaryStateCopyWith(
           WriteViaryState value, $Res Function(WriteViaryState) then) =
-      _$WriteViaryStateCopyWithImpl<$Res>;
+      _$WriteViaryStateCopyWithImpl<$Res, WriteViaryState>;
+  @useResult
   $Res call(
       {Viary viary,
       bool isSpeeching,
@@ -70,66 +46,70 @@ abstract class $WriteViaryStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$WriteViaryStateCopyWithImpl<$Res>
+class _$WriteViaryStateCopyWithImpl<$Res, $Val extends WriteViaryState>
     implements $WriteViaryStateCopyWith<$Res> {
   _$WriteViaryStateCopyWithImpl(this._value, this._then);
 
-  final WriteViaryState _value;
   // ignore: unused_field
-  final $Res Function(WriteViaryState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viary = freezed,
-    Object? isSpeeching = freezed,
-    Object? temporaryWords = freezed,
-    Object? showDetermineDialog = freezed,
+    Object? viary = null,
+    Object? isSpeeching = null,
+    Object? temporaryWords = null,
+    Object? showDetermineDialog = null,
     Object? currentLocale = freezed,
-    Object? availableLocales = freezed,
+    Object? availableLocales = null,
   }) {
     return _then(_value.copyWith(
-      viary: viary == freezed
+      viary: null == viary
           ? _value.viary
           : viary // ignore: cast_nullable_to_non_nullable
               as Viary,
-      isSpeeching: isSpeeching == freezed
+      isSpeeching: null == isSpeeching
           ? _value.isSpeeching
           : isSpeeching // ignore: cast_nullable_to_non_nullable
               as bool,
-      temporaryWords: temporaryWords == freezed
+      temporaryWords: null == temporaryWords
           ? _value.temporaryWords
           : temporaryWords // ignore: cast_nullable_to_non_nullable
               as String,
-      showDetermineDialog: showDetermineDialog == freezed
+      showDetermineDialog: null == showDetermineDialog
           ? _value.showDetermineDialog
           : showDetermineDialog // ignore: cast_nullable_to_non_nullable
               as bool,
-      currentLocale: currentLocale == freezed
+      currentLocale: freezed == currentLocale
           ? _value.currentLocale
           : currentLocale // ignore: cast_nullable_to_non_nullable
               as LocaleName?,
-      availableLocales: availableLocales == freezed
+      availableLocales: null == availableLocales
           ? _value.availableLocales
           : availableLocales // ignore: cast_nullable_to_non_nullable
               as List<LocaleName>,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $ViaryCopyWith<$Res> get viary {
     return $ViaryCopyWith<$Res>(_value.viary, (value) {
-      return _then(_value.copyWith(viary: value));
+      return _then(_value.copyWith(viary: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$WriteViaryStateCopyWith<$Res>
+abstract class _$$_WriteViaryStateCopyWith<$Res>
     implements $WriteViaryStateCopyWith<$Res> {
-  factory _$WriteViaryStateCopyWith(
-          _WriteViaryState value, $Res Function(_WriteViaryState) then) =
-      __$WriteViaryStateCopyWithImpl<$Res>;
+  factory _$$_WriteViaryStateCopyWith(
+          _$_WriteViaryState value, $Res Function(_$_WriteViaryState) then) =
+      __$$_WriteViaryStateCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {Viary viary,
       bool isSpeeching,
@@ -143,48 +123,46 @@ abstract class _$WriteViaryStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$WriteViaryStateCopyWithImpl<$Res>
-    extends _$WriteViaryStateCopyWithImpl<$Res>
-    implements _$WriteViaryStateCopyWith<$Res> {
-  __$WriteViaryStateCopyWithImpl(
-      _WriteViaryState _value, $Res Function(_WriteViaryState) _then)
-      : super(_value, (v) => _then(v as _WriteViaryState));
+class __$$_WriteViaryStateCopyWithImpl<$Res>
+    extends _$WriteViaryStateCopyWithImpl<$Res, _$_WriteViaryState>
+    implements _$$_WriteViaryStateCopyWith<$Res> {
+  __$$_WriteViaryStateCopyWithImpl(
+      _$_WriteViaryState _value, $Res Function(_$_WriteViaryState) _then)
+      : super(_value, _then);
 
-  @override
-  _WriteViaryState get _value => super._value as _WriteViaryState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viary = freezed,
-    Object? isSpeeching = freezed,
-    Object? temporaryWords = freezed,
-    Object? showDetermineDialog = freezed,
+    Object? viary = null,
+    Object? isSpeeching = null,
+    Object? temporaryWords = null,
+    Object? showDetermineDialog = null,
     Object? currentLocale = freezed,
-    Object? availableLocales = freezed,
+    Object? availableLocales = null,
   }) {
-    return _then(_WriteViaryState(
-      viary: viary == freezed
+    return _then(_$_WriteViaryState(
+      viary: null == viary
           ? _value.viary
           : viary // ignore: cast_nullable_to_non_nullable
               as Viary,
-      isSpeeching: isSpeeching == freezed
+      isSpeeching: null == isSpeeching
           ? _value.isSpeeching
           : isSpeeching // ignore: cast_nullable_to_non_nullable
               as bool,
-      temporaryWords: temporaryWords == freezed
+      temporaryWords: null == temporaryWords
           ? _value.temporaryWords
           : temporaryWords // ignore: cast_nullable_to_non_nullable
               as String,
-      showDetermineDialog: showDetermineDialog == freezed
+      showDetermineDialog: null == showDetermineDialog
           ? _value.showDetermineDialog
           : showDetermineDialog // ignore: cast_nullable_to_non_nullable
               as bool,
-      currentLocale: currentLocale == freezed
+      currentLocale: freezed == currentLocale
           ? _value.currentLocale
           : currentLocale // ignore: cast_nullable_to_non_nullable
               as LocaleName?,
-      availableLocales: availableLocales == freezed
-          ? _value.availableLocales
+      availableLocales: null == availableLocales
+          ? _value._availableLocales
           : availableLocales // ignore: cast_nullable_to_non_nullable
               as List<LocaleName>,
     ));
@@ -200,24 +178,29 @@ class _$_WriteViaryState implements _WriteViaryState {
       this.temporaryWords = "",
       this.showDetermineDialog = false,
       this.currentLocale,
-      this.availableLocales = const []});
+      final List<LocaleName> availableLocales = const []})
+      : _availableLocales = availableLocales;
 
   @override
   final Viary viary;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool isSpeeching;
-  @JsonKey()
   @override
+  @JsonKey()
   final String temporaryWords;
-  @JsonKey()
   @override
+  @JsonKey()
   final bool showDetermineDialog;
   @override
   final LocaleName? currentLocale;
-  @JsonKey()
+  final List<LocaleName> _availableLocales;
   @override
-  final List<LocaleName> availableLocales;
+  @JsonKey()
+  List<LocaleName> get availableLocales {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_availableLocales);
+  }
 
   @override
   String toString() {
@@ -228,44 +211,45 @@ class _$_WriteViaryState implements _WriteViaryState {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _WriteViaryState &&
-            const DeepCollectionEquality().equals(other.viary, viary) &&
+            other is _$_WriteViaryState &&
+            (identical(other.viary, viary) || other.viary == viary) &&
+            (identical(other.isSpeeching, isSpeeching) ||
+                other.isSpeeching == isSpeeching) &&
+            (identical(other.temporaryWords, temporaryWords) ||
+                other.temporaryWords == temporaryWords) &&
+            (identical(other.showDetermineDialog, showDetermineDialog) ||
+                other.showDetermineDialog == showDetermineDialog) &&
+            (identical(other.currentLocale, currentLocale) ||
+                other.currentLocale == currentLocale) &&
             const DeepCollectionEquality()
-                .equals(other.isSpeeching, isSpeeching) &&
-            const DeepCollectionEquality()
-                .equals(other.temporaryWords, temporaryWords) &&
-            const DeepCollectionEquality()
-                .equals(other.showDetermineDialog, showDetermineDialog) &&
-            const DeepCollectionEquality()
-                .equals(other.currentLocale, currentLocale) &&
-            const DeepCollectionEquality()
-                .equals(other.availableLocales, availableLocales));
+                .equals(other._availableLocales, _availableLocales));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(viary),
-      const DeepCollectionEquality().hash(isSpeeching),
-      const DeepCollectionEquality().hash(temporaryWords),
-      const DeepCollectionEquality().hash(showDetermineDialog),
-      const DeepCollectionEquality().hash(currentLocale),
-      const DeepCollectionEquality().hash(availableLocales));
+      viary,
+      isSpeeching,
+      temporaryWords,
+      showDetermineDialog,
+      currentLocale,
+      const DeepCollectionEquality().hash(_availableLocales));
 
   @JsonKey(ignore: true)
   @override
-  _$WriteViaryStateCopyWith<_WriteViaryState> get copyWith =>
-      __$WriteViaryStateCopyWithImpl<_WriteViaryState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_WriteViaryStateCopyWith<_$_WriteViaryState> get copyWith =>
+      __$$_WriteViaryStateCopyWithImpl<_$_WriteViaryState>(this, _$identity);
 }
 
 abstract class _WriteViaryState implements WriteViaryState {
   const factory _WriteViaryState(
-      {required Viary viary,
-      bool isSpeeching,
-      String temporaryWords,
-      bool showDetermineDialog,
-      LocaleName? currentLocale,
-      List<LocaleName> availableLocales}) = _$_WriteViaryState;
+      {required final Viary viary,
+      final bool isSpeeching,
+      final String temporaryWords,
+      final bool showDetermineDialog,
+      final LocaleName? currentLocale,
+      final List<LocaleName> availableLocales}) = _$_WriteViaryState;
 
   @override
   Viary get viary;
@@ -281,6 +265,6 @@ abstract class _WriteViaryState implements WriteViaryState {
   List<LocaleName> get availableLocales;
   @override
   @JsonKey(ignore: true)
-  _$WriteViaryStateCopyWith<_WriteViaryState> get copyWith =>
+  _$$_WriteViaryStateCopyWith<_$_WriteViaryState> get copyWith =>
       throw _privateConstructorUsedError;
 }

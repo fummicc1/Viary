@@ -1,9 +1,11 @@
 import 'dart:io';
+import 'package:domain/networking/baseURL.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
 
 // Base implementation:
 // https://zuma-lab.com/posts/flutter-create-http-api-client
-abstract class TodoApiClient {
+abstract class ApiClient {
   Future<String> get(String endpoint);
 
   Future<String> post(String endpoint, {required String body});
@@ -13,14 +15,13 @@ abstract class TodoApiClient {
   Future<String> delete(String endpoint);
 }
 
-class TodoApiClientImpl implements TodoApiClient {
-  factory TodoApiClientImpl({required String baseUrl}) {
-    return _instance ??= TodoApiClientImpl._internal(baseUrl);
+class ApiClientImpl implements ApiClient {
+  factory ApiClientImpl({required String baseUrl}) {
+    return ApiClientImpl._internal(baseUrl);
   }
 
-  TodoApiClientImpl._internal(this.baseUrl);
+  ApiClientImpl._internal(this.baseUrl);
 
-  static TodoApiClientImpl? _instance;
 
   final String baseUrl;
 
@@ -90,3 +91,8 @@ class TodoApiClientImpl implements TodoApiClient {
     }
   }
 }
+
+
+final Provider<ApiClient> apiClientProvider = Provider((ref) {
+  return ApiClientImpl(baseUrl: BaseURL.value);
+});

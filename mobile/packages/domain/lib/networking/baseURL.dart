@@ -1,22 +1,21 @@
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class BaseURL {
   static String get value {
     if (_value != null) {
       return _value!;
     }
-    return getURL();
+    return _getURL();
   }
   static String? _value;
 
-  static String getURL() {
+  static String _getURL() {
     if (kDebugMode) {
-      _value = "localhost";
+      _value = "http://18.177.88.113/";
     } else {
-      _value = dotenv.get("API_BASE_URL");
+      _value = "http://18.177.88.113/";
     }
     return _value!;
   }
