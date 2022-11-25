@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:domain/entities/user.dart';
+import 'package:domain/entities/viary.dart';
 import 'package:domain/repositories/user.dart';
 import 'package:domain/repositories/viary.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +16,13 @@ class RootStateNotifier extends StateNotifier<RootState> {
         _viaryRepository = viaryRepository,
         super(state);
 
+  bool isSetupCalled = false;
+
   Future setup() async {
+    if (isSetupCalled) {
+      return;
+    }
+    isSetupCalled = true;
     User? me = await _userRepository.fetchMe();
     if (me == null) {
       await _userRepository.createMe();
@@ -23,18 +30,25 @@ class RootStateNotifier extends StateNotifier<RootState> {
     }
     state = state.copyWith(
       isSignedIn: me != null,
+      myUserId: me?.id,
     );
-    final ref = _viaryRepository.collectionReference;
-    final query = ref.where("sender", isEqualTo: me!.id);
-    final viaries = await _viaryRepository.fetchQuery(query: query);
-    state = state.copyWith(
-      viaries: viaries,
-    );
+    fetchStatus();
   }
 
   StreamSubscription? _subscription;
   final ViaryRepository _viaryRepository;
   final UserRepository _userRepository;
+
+  Future<void> fetchStatus() async {
+    final ref = _viaryRepository.collectionReference;
+    final query = ref.where("sender", isEqualTo: state.myUserId);
+    final viaries = await _viaryRepository.fetchQuery(query: query);
+    final sorted = List.from(viaries).cast<Viary>();
+    sorted.sort((a, b) => b.date.compareTo(a.date));
+    state = state.copyWith(
+      viaries: sorted,
+    );
+  }
 
   @override
   void dispose() {

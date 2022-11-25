@@ -17,7 +17,7 @@ class RootPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+    WidgetsBinding.instance.addPostFrameCallback((_) async {
       await ref.read(rootProvider.notifier).setup();
     });
     final RootState rootState = ref.watch(rootProvider);
