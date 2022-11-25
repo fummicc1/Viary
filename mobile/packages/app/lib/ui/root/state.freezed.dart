@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$RootState {
   dynamic get isSignedIn => throw _privateConstructorUsedError;
+  String? get myUserId => throw _privateConstructorUsedError;
   List<Viary> get viaries => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -29,7 +30,7 @@ abstract class $RootStateCopyWith<$Res> {
   factory $RootStateCopyWith(RootState value, $Res Function(RootState) then) =
       _$RootStateCopyWithImpl<$Res, RootState>;
   @useResult
-  $Res call({dynamic isSignedIn, List<Viary> viaries});
+  $Res call({dynamic isSignedIn, String? myUserId, List<Viary> viaries});
 }
 
 /// @nodoc
@@ -46,6 +47,7 @@ class _$RootStateCopyWithImpl<$Res, $Val extends RootState>
   @override
   $Res call({
     Object? isSignedIn = null,
+    Object? myUserId = freezed,
     Object? viaries = null,
   }) {
     return _then(_value.copyWith(
@@ -53,6 +55,10 @@ class _$RootStateCopyWithImpl<$Res, $Val extends RootState>
           ? _value.isSignedIn
           : isSignedIn // ignore: cast_nullable_to_non_nullable
               as dynamic,
+      myUserId: freezed == myUserId
+          ? _value.myUserId
+          : myUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
       viaries: null == viaries
           ? _value.viaries
           : viaries // ignore: cast_nullable_to_non_nullable
@@ -68,7 +74,7 @@ abstract class _$$_RootStateCopyWith<$Res> implements $RootStateCopyWith<$Res> {
       __$$_RootStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({dynamic isSignedIn, List<Viary> viaries});
+  $Res call({dynamic isSignedIn, String? myUserId, List<Viary> viaries});
 }
 
 /// @nodoc
@@ -83,10 +89,15 @@ class __$$_RootStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? isSignedIn = null,
+    Object? myUserId = freezed,
     Object? viaries = null,
   }) {
     return _then(_$_RootState(
       isSignedIn: null == isSignedIn ? _value.isSignedIn : isSignedIn,
+      myUserId: freezed == myUserId
+          ? _value.myUserId
+          : myUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
       viaries: null == viaries
           ? _value._viaries
           : viaries // ignore: cast_nullable_to_non_nullable
@@ -99,12 +110,16 @@ class __$$_RootStateCopyWithImpl<$Res>
 
 class _$_RootState implements _RootState {
   const _$_RootState(
-      {this.isSignedIn = false, final List<Viary> viaries = const []})
+      {this.isSignedIn = false,
+      this.myUserId,
+      final List<Viary> viaries = const []})
       : _viaries = viaries;
 
   @override
   @JsonKey()
   final dynamic isSignedIn;
+  @override
+  final String? myUserId;
   final List<Viary> _viaries;
   @override
   @JsonKey()
@@ -115,7 +130,7 @@ class _$_RootState implements _RootState {
 
   @override
   String toString() {
-    return 'RootState(isSignedIn: $isSignedIn, viaries: $viaries)';
+    return 'RootState(isSignedIn: $isSignedIn, myUserId: $myUserId, viaries: $viaries)';
   }
 
   @override
@@ -125,6 +140,8 @@ class _$_RootState implements _RootState {
             other is _$_RootState &&
             const DeepCollectionEquality()
                 .equals(other.isSignedIn, isSignedIn) &&
+            (identical(other.myUserId, myUserId) ||
+                other.myUserId == myUserId) &&
             const DeepCollectionEquality().equals(other._viaries, _viaries));
   }
 
@@ -132,6 +149,7 @@ class _$_RootState implements _RootState {
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isSignedIn),
+      myUserId,
       const DeepCollectionEquality().hash(_viaries));
 
   @JsonKey(ignore: true)
@@ -143,10 +161,14 @@ class _$_RootState implements _RootState {
 
 abstract class _RootState implements RootState {
   const factory _RootState(
-      {final dynamic isSignedIn, final List<Viary> viaries}) = _$_RootState;
+      {final dynamic isSignedIn,
+      final String? myUserId,
+      final List<Viary> viaries}) = _$_RootState;
 
   @override
   dynamic get isSignedIn;
+  @override
+  String? get myUserId;
   @override
   List<Viary> get viaries;
   @override

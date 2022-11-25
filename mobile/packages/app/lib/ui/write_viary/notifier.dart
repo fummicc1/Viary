@@ -16,7 +16,24 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
   final SpeechToText _speechToText = SpeechToText();
 
   Future save() async {
-    await _viaryRepository.create(state.viary);
+    if (state.isLoading) {
+      return;
+    }
+    try {
+      state = state.copyWith(
+        isLoading: true,
+      );
+      final emotionViary = await _viaryRepository.refreshEmotions(viary: state.viary);
+      state = state.copyWith(
+        viary: emotionViary,
+      );
+      await _viaryRepository.create(state.viary);
+    } catch (e) {
+      print(e);
+      state = state.copyWith(
+        isLoading: false,
+      );
+    }
   }
 
   void updateLocale(LocaleName localeName) {
@@ -50,10 +67,9 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
   void decideMessage({required bool append}) {
     state = state.copyWith(
       viary: state.viary.copyWith(
-        message: (append
+        message: "${append
                 ? state.viary.message + state.temporaryWords
-                : state.temporaryWords) +
-            "\n",
+                : state.temporaryWords}\n",
       ),
     );
     Future(() async {

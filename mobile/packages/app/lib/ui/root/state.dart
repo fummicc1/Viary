@@ -7,6 +7,7 @@ part 'state.freezed.dart';
 class RootState with _$RootState {
   const factory RootState({
     @Default(false) isSignedIn,
+    String? myUserId,
     @Default([]) List<Viary> viaries,
   }) = _RootState;
 }

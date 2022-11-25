@@ -16,16 +16,29 @@ class Viary with _$Viary {
     required String title,
     required String message,
     required DateTime date,
-    @Default([]) List<ViaryEmotion> emotions,
+    @ViaryEmotionListJsonConverter() @Default([]) List<ViaryEmotion> emotions,
   }) = _Viary;
 
+  const Viary._();
+
   factory Viary.fromJson(Map<String, dynamic> json) => _$ViaryFromJson(json);
+
+  ViaryEmotion? get bestEmotion {
+    // To make emotions modifiable, wrap it with `List.from`.
+    List<ViaryEmotion> emotions = List.from(this.emotions);
+    emotions.sort((a, b) => a.score.compareTo(b.score));
+    if (emotions.isEmpty) {
+      return null;
+    }
+    return emotions[0];
+  }
 }
 
 @freezed
 class ViaryEmotion with _$ViaryEmotion {
   const factory ViaryEmotion({
     required String sentence,
+    required int score,
     @EmotionJsonConverter() @Default(Emotion.unknown) Emotion emotion,
   }) = _ViaryEmotion;
 

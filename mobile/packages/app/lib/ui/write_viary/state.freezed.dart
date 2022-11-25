@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$WriteViaryState {
   Viary get viary => throw _privateConstructorUsedError;
   bool get isSpeeching => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
   String get temporaryWords => throw _privateConstructorUsedError;
   bool get showDetermineDialog => throw _privateConstructorUsedError;
   LocaleName? get currentLocale => throw _privateConstructorUsedError;
@@ -37,6 +38,7 @@ abstract class $WriteViaryStateCopyWith<$Res> {
   $Res call(
       {Viary viary,
       bool isSpeeching,
+      bool isLoading,
       String temporaryWords,
       bool showDetermineDialog,
       LocaleName? currentLocale,
@@ -60,6 +62,7 @@ class _$WriteViaryStateCopyWithImpl<$Res, $Val extends WriteViaryState>
   $Res call({
     Object? viary = null,
     Object? isSpeeching = null,
+    Object? isLoading = null,
     Object? temporaryWords = null,
     Object? showDetermineDialog = null,
     Object? currentLocale = freezed,
@@ -73,6 +76,10 @@ class _$WriteViaryStateCopyWithImpl<$Res, $Val extends WriteViaryState>
       isSpeeching: null == isSpeeching
           ? _value.isSpeeching
           : isSpeeching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       temporaryWords: null == temporaryWords
           ? _value.temporaryWords
@@ -113,6 +120,7 @@ abstract class _$$_WriteViaryStateCopyWith<$Res>
   $Res call(
       {Viary viary,
       bool isSpeeching,
+      bool isLoading,
       String temporaryWords,
       bool showDetermineDialog,
       LocaleName? currentLocale,
@@ -135,6 +143,7 @@ class __$$_WriteViaryStateCopyWithImpl<$Res>
   $Res call({
     Object? viary = null,
     Object? isSpeeching = null,
+    Object? isLoading = null,
     Object? temporaryWords = null,
     Object? showDetermineDialog = null,
     Object? currentLocale = freezed,
@@ -148,6 +157,10 @@ class __$$_WriteViaryStateCopyWithImpl<$Res>
       isSpeeching: null == isSpeeching
           ? _value.isSpeeching
           : isSpeeching // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isLoading: null == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
               as bool,
       temporaryWords: null == temporaryWords
           ? _value.temporaryWords
@@ -175,6 +188,7 @@ class _$_WriteViaryState implements _WriteViaryState {
   const _$_WriteViaryState(
       {required this.viary,
       this.isSpeeching = false,
+      this.isLoading = false,
       this.temporaryWords = "",
       this.showDetermineDialog = false,
       this.currentLocale,
@@ -186,6 +200,9 @@ class _$_WriteViaryState implements _WriteViaryState {
   @override
   @JsonKey()
   final bool isSpeeching;
+  @override
+  @JsonKey()
+  final bool isLoading;
   @override
   @JsonKey()
   final String temporaryWords;
@@ -204,7 +221,7 @@ class _$_WriteViaryState implements _WriteViaryState {
 
   @override
   String toString() {
-    return 'WriteViaryState(viary: $viary, isSpeeching: $isSpeeching, temporaryWords: $temporaryWords, showDetermineDialog: $showDetermineDialog, currentLocale: $currentLocale, availableLocales: $availableLocales)';
+    return 'WriteViaryState(viary: $viary, isSpeeching: $isSpeeching, isLoading: $isLoading, temporaryWords: $temporaryWords, showDetermineDialog: $showDetermineDialog, currentLocale: $currentLocale, availableLocales: $availableLocales)';
   }
 
   @override
@@ -215,6 +232,8 @@ class _$_WriteViaryState implements _WriteViaryState {
             (identical(other.viary, viary) || other.viary == viary) &&
             (identical(other.isSpeeching, isSpeeching) ||
                 other.isSpeeching == isSpeeching) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
             (identical(other.temporaryWords, temporaryWords) ||
                 other.temporaryWords == temporaryWords) &&
             (identical(other.showDetermineDialog, showDetermineDialog) ||
@@ -230,6 +249,7 @@ class _$_WriteViaryState implements _WriteViaryState {
       runtimeType,
       viary,
       isSpeeching,
+      isLoading,
       temporaryWords,
       showDetermineDialog,
       currentLocale,
@@ -246,6 +266,7 @@ abstract class _WriteViaryState implements WriteViaryState {
   const factory _WriteViaryState(
       {required final Viary viary,
       final bool isSpeeching,
+      final bool isLoading,
       final String temporaryWords,
       final bool showDetermineDialog,
       final LocaleName? currentLocale,
@@ -255,6 +276,8 @@ abstract class _WriteViaryState implements WriteViaryState {
   Viary get viary;
   @override
   bool get isSpeeching;
+  @override
+  bool get isLoading;
   @override
   String get temporaryWords;
   @override

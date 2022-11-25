@@ -25,6 +25,7 @@ mixin _$Viary {
   String get title => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
+  @ViaryEmotionListJsonConverter()
   List<ViaryEmotion> get emotions => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -43,7 +44,7 @@ abstract class $ViaryCopyWith<$Res> {
       String title,
       String message,
       DateTime date,
-      List<ViaryEmotion> emotions});
+      @ViaryEmotionListJsonConverter() List<ViaryEmotion> emotions});
 }
 
 /// @nodoc
@@ -107,7 +108,7 @@ abstract class _$$_ViaryCopyWith<$Res> implements $ViaryCopyWith<$Res> {
       String title,
       String message,
       DateTime date,
-      List<ViaryEmotion> emotions});
+      @ViaryEmotionListJsonConverter() List<ViaryEmotion> emotions});
 }
 
 /// @nodoc
@@ -157,15 +158,17 @@ class __$$_ViaryCopyWithImpl<$Res> extends _$ViaryCopyWithImpl<$Res, _$_Viary>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Viary with DiagnosticableTreeMixin implements _Viary {
+class _$_Viary extends _Viary with DiagnosticableTreeMixin {
   const _$_Viary(
       {this.id,
       this.sender,
       required this.title,
       required this.message,
       required this.date,
-      final List<ViaryEmotion> emotions = const []})
-      : _emotions = emotions;
+      @ViaryEmotionListJsonConverter()
+          final List<ViaryEmotion> emotions = const []})
+      : _emotions = emotions,
+        super._();
 
   factory _$_Viary.fromJson(Map<String, dynamic> json) =>
       _$$_ViaryFromJson(json);
@@ -183,6 +186,7 @@ class _$_Viary with DiagnosticableTreeMixin implements _Viary {
   final List<ViaryEmotion> _emotions;
   @override
   @JsonKey()
+  @ViaryEmotionListJsonConverter()
   List<ViaryEmotion> get emotions {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_emotions);
@@ -238,14 +242,16 @@ class _$_Viary with DiagnosticableTreeMixin implements _Viary {
   }
 }
 
-abstract class _Viary implements Viary {
+abstract class _Viary extends Viary {
   const factory _Viary(
-      {final String? id,
-      final String? sender,
-      required final String title,
-      required final String message,
-      required final DateTime date,
-      final List<ViaryEmotion> emotions}) = _$_Viary;
+          {final String? id,
+          final String? sender,
+          required final String title,
+          required final String message,
+          required final DateTime date,
+          @ViaryEmotionListJsonConverter() final List<ViaryEmotion> emotions}) =
+      _$_Viary;
+  const _Viary._() : super._();
 
   factory _Viary.fromJson(Map<String, dynamic> json) = _$_Viary.fromJson;
 
@@ -260,6 +266,7 @@ abstract class _Viary implements Viary {
   @override
   DateTime get date;
   @override
+  @ViaryEmotionListJsonConverter()
   List<ViaryEmotion> get emotions;
   @override
   @JsonKey(ignore: true)
@@ -274,6 +281,7 @@ ViaryEmotion _$ViaryEmotionFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ViaryEmotion {
   String get sentence => throw _privateConstructorUsedError;
+  int get score => throw _privateConstructorUsedError;
   @EmotionJsonConverter()
   Emotion get emotion => throw _privateConstructorUsedError;
 
@@ -289,7 +297,8 @@ abstract class $ViaryEmotionCopyWith<$Res> {
           ViaryEmotion value, $Res Function(ViaryEmotion) then) =
       _$ViaryEmotionCopyWithImpl<$Res, ViaryEmotion>;
   @useResult
-  $Res call({String sentence, @EmotionJsonConverter() Emotion emotion});
+  $Res call(
+      {String sentence, int score, @EmotionJsonConverter() Emotion emotion});
 }
 
 /// @nodoc
@@ -306,6 +315,7 @@ class _$ViaryEmotionCopyWithImpl<$Res, $Val extends ViaryEmotion>
   @override
   $Res call({
     Object? sentence = null,
+    Object? score = null,
     Object? emotion = null,
   }) {
     return _then(_value.copyWith(
@@ -313,6 +323,10 @@ class _$ViaryEmotionCopyWithImpl<$Res, $Val extends ViaryEmotion>
           ? _value.sentence
           : sentence // ignore: cast_nullable_to_non_nullable
               as String,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
       emotion: null == emotion
           ? _value.emotion
           : emotion // ignore: cast_nullable_to_non_nullable
@@ -329,7 +343,8 @@ abstract class _$$_ViaryEmotionCopyWith<$Res>
       __$$_ViaryEmotionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String sentence, @EmotionJsonConverter() Emotion emotion});
+  $Res call(
+      {String sentence, int score, @EmotionJsonConverter() Emotion emotion});
 }
 
 /// @nodoc
@@ -344,6 +359,7 @@ class __$$_ViaryEmotionCopyWithImpl<$Res>
   @override
   $Res call({
     Object? sentence = null,
+    Object? score = null,
     Object? emotion = null,
   }) {
     return _then(_$_ViaryEmotion(
@@ -351,6 +367,10 @@ class __$$_ViaryEmotionCopyWithImpl<$Res>
           ? _value.sentence
           : sentence // ignore: cast_nullable_to_non_nullable
               as String,
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
+              as int,
       emotion: null == emotion
           ? _value.emotion
           : emotion // ignore: cast_nullable_to_non_nullable
@@ -364,6 +384,7 @@ class __$$_ViaryEmotionCopyWithImpl<$Res>
 class _$_ViaryEmotion with DiagnosticableTreeMixin implements _ViaryEmotion {
   const _$_ViaryEmotion(
       {required this.sentence,
+      required this.score,
       @EmotionJsonConverter() this.emotion = Emotion.unknown});
 
   factory _$_ViaryEmotion.fromJson(Map<String, dynamic> json) =>
@@ -372,13 +393,15 @@ class _$_ViaryEmotion with DiagnosticableTreeMixin implements _ViaryEmotion {
   @override
   final String sentence;
   @override
+  final int score;
+  @override
   @JsonKey()
   @EmotionJsonConverter()
   final Emotion emotion;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ViaryEmotion(sentence: $sentence, emotion: $emotion)';
+    return 'ViaryEmotion(sentence: $sentence, score: $score, emotion: $emotion)';
   }
 
   @override
@@ -387,6 +410,7 @@ class _$_ViaryEmotion with DiagnosticableTreeMixin implements _ViaryEmotion {
     properties
       ..add(DiagnosticsProperty('type', 'ViaryEmotion'))
       ..add(DiagnosticsProperty('sentence', sentence))
+      ..add(DiagnosticsProperty('score', score))
       ..add(DiagnosticsProperty('emotion', emotion));
   }
 
@@ -397,12 +421,13 @@ class _$_ViaryEmotion with DiagnosticableTreeMixin implements _ViaryEmotion {
             other is _$_ViaryEmotion &&
             (identical(other.sentence, sentence) ||
                 other.sentence == sentence) &&
+            (identical(other.score, score) || other.score == score) &&
             (identical(other.emotion, emotion) || other.emotion == emotion));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, sentence, emotion);
+  int get hashCode => Object.hash(runtimeType, sentence, score, emotion);
 
   @JsonKey(ignore: true)
   @override
@@ -421,6 +446,7 @@ class _$_ViaryEmotion with DiagnosticableTreeMixin implements _ViaryEmotion {
 abstract class _ViaryEmotion implements ViaryEmotion {
   const factory _ViaryEmotion(
       {required final String sentence,
+      required final int score,
       @EmotionJsonConverter() final Emotion emotion}) = _$_ViaryEmotion;
 
   factory _ViaryEmotion.fromJson(Map<String, dynamic> json) =
@@ -428,6 +454,8 @@ abstract class _ViaryEmotion implements ViaryEmotion {
 
   @override
   String get sentence;
+  @override
+  int get score;
   @override
   @EmotionJsonConverter()
   Emotion get emotion;
