@@ -10,7 +10,11 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     WriteViaryState state, {
     required ViaryRepository viaryRepository,
   })  : _viaryRepository = viaryRepository,
-        super(state);
+        super(state) {
+    Future(() async {
+      await _setupSpeech();
+    });
+  }
 
   final ViaryRepository _viaryRepository;
   final SpeechToText _speechToText = SpeechToText();
@@ -81,6 +85,35 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     Future(() async {
       await stopSpeech();
     });
+  }
+
+  Future _setupSpeech() async {
+    await _speechToText.initialize(onError: (error) {
+      debugPrint(error.errorMsg);
+    }, onStatus: (status) {
+      debugPrint("Recognition Status: $status");
+    });
+    List<LocaleName> avaiables;
+    try {
+      avaiables = await _speechToText.locales();
+      avaiables = List<LocaleName>.from(avaiables)
+          .where(
+            (element) =>
+                element.localeId.contains("en") ||
+                element.localeId.contains("ja"),
+          )
+          .toList()
+          .reversed
+          .toList();
+    } catch (e) {
+      debugPrint(e.toString());
+      avaiables = [];
+    }
+    final LocaleName? current = await _speechToText.systemLocale();
+    state = state.copyWith(
+      currentLocale: current,
+      availableLocales: avaiables,
+    );
   }
 
   Future startSpeech() async {
