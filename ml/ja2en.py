@@ -1,6 +1,10 @@
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 import argparse
 
+import warnings
+warnings.filterwarnings("ignore")
+
+
 tokenizer = AutoTokenizer.from_pretrained("Helsinki-NLP/opus-mt-ja-en")
 
 model = AutoModelForSeq2SeqLM.from_pretrained("Helsinki-NLP/opus-mt-ja-en")
