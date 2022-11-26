@@ -6,15 +6,11 @@ export class Text2emotionController {
   constructor(private readonly text2emotionService: Text2emotionService) {}
   @Get()
   fetch(@Query('text') text: string, @Query('lang') lang: string): string {
-    const texts = text.split('.');
-    let allResult = [];
-    console.log('texts:', texts);
-    for (const text of texts) {
-      const result = this.text2emotionService.execute(text, lang);
-      allResult.push(result);
-    }
+    text = text.replace(/\n/g, ". ");
+    console.log(text);
+    const result = this.text2emotionService.execute(text, lang);
     const response = {
-      results: allResult,
+      results: result,
     };
     return JSON.stringify(response);
   }

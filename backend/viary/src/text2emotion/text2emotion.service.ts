@@ -10,7 +10,7 @@ export class Text2emotionService {
     let sentence = _sentence;
     if (lang === 'ja') {
       const translationCommand = `/home/ubuntu/workspace/Viary/ml/venv/bin/python /home/ubuntu/workspace/Viary/ml/ja2en.py \"${sentence}\"`;
-      sentence = execSync(translationCommand).toString().replace(/'/g, '"');    
+      sentence = execSync(translationCommand).toString().replace(/'/g, '"').replace(/\n/g, ". ");
     }
     console.log(sentence);
     const command = `/home/ubuntu/workspace/Viary/ml/venv/bin/python /home/ubuntu/workspace/Viary/ml/text2emotion.py \"${sentence}\"`;
