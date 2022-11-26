@@ -1,17 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="70441a38-bd2e-4129-9832-bd9f053bd0da" name="Changes" comment="&#10;&#10;; 🐛  :bug: バグ修正&#10;; 👍  :+1: 機能改善&#10;; ✨  :sparkles: 部分的な機能追加&#10;; 🎨  :art: デザイン変更のみ&#10;; 💢  :anger: コンフリクト&#10;; 🚧  :construction: WIP&#10;; 📝  :memo: 文言修正&#10;; ♻️  :recycle: リファクタリング&#10;; 🔥  :fire: 不要な機能・使われなくなった機能の削除&#10;; 💚  :green_heart: テストやCIの修正・改善&#10;; 👕  :shirt: Lintエラーの修正やコードスタイルの修正&#10;; 🚀  :rocket: パフォーマンス改善&#10;; 🆙  :up: 依存パッケージなどのアップデート&#10;; 👮  :cop: セキュリティ関連の改善&#10;; ⚙   :gear: config変更&#10;; 📚  :books: ドキュメント" />
+    <list default="true" id="70441a38-bd2e-4129-9832-bd9f053bd0da" name="Changes" comment="&#10;&#10;; 🐛  :bug: バグ修正&#10;; 👍  :+1: 機能改善&#10;; ✨  :sparkles: 部分的な機能追加&#10;; 🎨  :art: デザイン変更のみ&#10;; 💢  :anger: コンフリクト&#10;; 🚧  :construction: WIP&#10;; 📝  :memo: 文言修正&#10;; ♻️  :recycle: リファクタリング&#10;; 🔥  :fire: 不要な機能・使われなくなった機能の削除&#10;; 💚  :green_heart: テストやCIの修正・改善&#10;; 👕  :shirt: Lintエラーの修正やコードスタイルの修正&#10;; 🚀  :rocket: パフォーマンス改善&#10;; 🆙  :up: 依存パッケージなどのアップデート&#10;; 👮  :cop: セキュリティ関連の改善&#10;; ⚙   :gear: config変更&#10;; 📚  :books: ドキュメント">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/ios/Podfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Podfile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/root/notifier.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/root/notifier.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/root/state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/root/state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/root/state.freezed.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/root/state.freezed.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/viary_list/page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/viary_list/page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/notifier.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/notifier.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/state.freezed.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/state.freezed.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/domain/lib/entities/emotion.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/domain/lib/entities/emotion.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/domain/lib/entities/viary.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/domain/lib/entities/viary.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/domain/lib/entities/viary.freezed.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/domain/lib/entities/viary.freezed.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/domain/lib/entities/viary.g.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/domain/lib/entities/viary.g.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/domain/lib/repositories/viary.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/domain/lib/repositories/viary.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/domain/lib/utils/datetime.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/domain/lib/utils/datetime.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/packages/app/melos_viary.iml" root0="FORCE_HIGHLIGHTING" />
@@ -38,6 +76,7 @@
     <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
     <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="flutter.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
@@ -70,5 +109,19 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
+          <url>file://$PROJECT_DIR$/../../../flutter/packages/flutter/lib/src/services/message_codecs.dart</url>
+          <line>425</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+      </breakpoints>
+      <default-breakpoints>
+        <breakpoint suspend="THREAD" type="dart-exception" />
+      </default-breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

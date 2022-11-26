@@ -12,27 +12,12 @@ part of 'state.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
-
-/// @nodoc
-class _$RootStateTearOff {
-  const _$RootStateTearOff();
-
-  _RootState call(
-      {dynamic isSignedIn = false, List<Viary> viaries = const []}) {
-    return _RootState(
-      isSignedIn: isSignedIn,
-      viaries: viaries,
-    );
-  }
-}
-
-/// @nodoc
-const $RootState = _$RootStateTearOff();
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
 mixin _$RootState {
   dynamic get isSignedIn => throw _privateConstructorUsedError;
+  String? get myUserId => throw _privateConstructorUsedError;
   List<Viary> get viaries => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -43,63 +28,78 @@ mixin _$RootState {
 /// @nodoc
 abstract class $RootStateCopyWith<$Res> {
   factory $RootStateCopyWith(RootState value, $Res Function(RootState) then) =
-      _$RootStateCopyWithImpl<$Res>;
-  $Res call({dynamic isSignedIn, List<Viary> viaries});
+      _$RootStateCopyWithImpl<$Res, RootState>;
+  @useResult
+  $Res call({dynamic isSignedIn, String? myUserId, List<Viary> viaries});
 }
 
 /// @nodoc
-class _$RootStateCopyWithImpl<$Res> implements $RootStateCopyWith<$Res> {
+class _$RootStateCopyWithImpl<$Res, $Val extends RootState>
+    implements $RootStateCopyWith<$Res> {
   _$RootStateCopyWithImpl(this._value, this._then);
 
-  final RootState _value;
   // ignore: unused_field
-  final $Res Function(RootState) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isSignedIn = freezed,
-    Object? viaries = freezed,
+    Object? isSignedIn = null,
+    Object? myUserId = freezed,
+    Object? viaries = null,
   }) {
     return _then(_value.copyWith(
-      isSignedIn: isSignedIn == freezed
+      isSignedIn: null == isSignedIn
           ? _value.isSignedIn
           : isSignedIn // ignore: cast_nullable_to_non_nullable
               as dynamic,
-      viaries: viaries == freezed
+      myUserId: freezed == myUserId
+          ? _value.myUserId
+          : myUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      viaries: null == viaries
           ? _value.viaries
           : viaries // ignore: cast_nullable_to_non_nullable
               as List<Viary>,
-    ));
+    ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$RootStateCopyWith<$Res> implements $RootStateCopyWith<$Res> {
-  factory _$RootStateCopyWith(
-          _RootState value, $Res Function(_RootState) then) =
-      __$RootStateCopyWithImpl<$Res>;
+abstract class _$$_RootStateCopyWith<$Res> implements $RootStateCopyWith<$Res> {
+  factory _$$_RootStateCopyWith(
+          _$_RootState value, $Res Function(_$_RootState) then) =
+      __$$_RootStateCopyWithImpl<$Res>;
   @override
-  $Res call({dynamic isSignedIn, List<Viary> viaries});
+  @useResult
+  $Res call({dynamic isSignedIn, String? myUserId, List<Viary> viaries});
 }
 
 /// @nodoc
-class __$RootStateCopyWithImpl<$Res> extends _$RootStateCopyWithImpl<$Res>
-    implements _$RootStateCopyWith<$Res> {
-  __$RootStateCopyWithImpl(_RootState _value, $Res Function(_RootState) _then)
-      : super(_value, (v) => _then(v as _RootState));
+class __$$_RootStateCopyWithImpl<$Res>
+    extends _$RootStateCopyWithImpl<$Res, _$_RootState>
+    implements _$$_RootStateCopyWith<$Res> {
+  __$$_RootStateCopyWithImpl(
+      _$_RootState _value, $Res Function(_$_RootState) _then)
+      : super(_value, _then);
 
-  @override
-  _RootState get _value => super._value as _RootState;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isSignedIn = freezed,
-    Object? viaries = freezed,
+    Object? isSignedIn = null,
+    Object? myUserId = freezed,
+    Object? viaries = null,
   }) {
-    return _then(_RootState(
-      isSignedIn: isSignedIn == freezed ? _value.isSignedIn : isSignedIn,
-      viaries: viaries == freezed
-          ? _value.viaries
+    return _then(_$_RootState(
+      isSignedIn: null == isSignedIn ? _value.isSignedIn : isSignedIn,
+      myUserId: freezed == myUserId
+          ? _value.myUserId
+          : myUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      viaries: null == viaries
+          ? _value._viaries
           : viaries // ignore: cast_nullable_to_non_nullable
               as List<Viary>,
     ));
@@ -109,52 +109,70 @@ class __$RootStateCopyWithImpl<$Res> extends _$RootStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_RootState implements _RootState {
-  const _$_RootState({this.isSignedIn = false, this.viaries = const []});
+  const _$_RootState(
+      {this.isSignedIn = false,
+      this.myUserId,
+      final List<Viary> viaries = const []})
+      : _viaries = viaries;
 
-  @JsonKey()
   @override
+  @JsonKey()
   final dynamic isSignedIn;
-  @JsonKey()
   @override
-  final List<Viary> viaries;
+  final String? myUserId;
+  final List<Viary> _viaries;
+  @override
+  @JsonKey()
+  List<Viary> get viaries {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_viaries);
+  }
 
   @override
   String toString() {
-    return 'RootState(isSignedIn: $isSignedIn, viaries: $viaries)';
+    return 'RootState(isSignedIn: $isSignedIn, myUserId: $myUserId, viaries: $viaries)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _RootState &&
+            other is _$_RootState &&
             const DeepCollectionEquality()
                 .equals(other.isSignedIn, isSignedIn) &&
-            const DeepCollectionEquality().equals(other.viaries, viaries));
+            (identical(other.myUserId, myUserId) ||
+                other.myUserId == myUserId) &&
+            const DeepCollectionEquality().equals(other._viaries, _viaries));
   }
 
   @override
   int get hashCode => Object.hash(
       runtimeType,
       const DeepCollectionEquality().hash(isSignedIn),
-      const DeepCollectionEquality().hash(viaries));
+      myUserId,
+      const DeepCollectionEquality().hash(_viaries));
 
   @JsonKey(ignore: true)
   @override
-  _$RootStateCopyWith<_RootState> get copyWith =>
-      __$RootStateCopyWithImpl<_RootState>(this, _$identity);
+  @pragma('vm:prefer-inline')
+  _$$_RootStateCopyWith<_$_RootState> get copyWith =>
+      __$$_RootStateCopyWithImpl<_$_RootState>(this, _$identity);
 }
 
 abstract class _RootState implements RootState {
-  const factory _RootState({dynamic isSignedIn, List<Viary> viaries}) =
-      _$_RootState;
+  const factory _RootState(
+      {final dynamic isSignedIn,
+      final String? myUserId,
+      final List<Viary> viaries}) = _$_RootState;
 
   @override
   dynamic get isSignedIn;
   @override
+  String? get myUserId;
+  @override
   List<Viary> get viaries;
   @override
   @JsonKey(ignore: true)
-  _$RootStateCopyWith<_RootState> get copyWith =>
+  _$$_RootStateCopyWith<_$_RootState> get copyWith =>
       throw _privateConstructorUsedError;
 }

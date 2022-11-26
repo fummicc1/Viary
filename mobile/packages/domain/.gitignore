@@ -27,3 +27,7 @@
 .dart_tool/
 .packages
 build/
+
+
+# Secret IP address
+prod_baseURL.dart

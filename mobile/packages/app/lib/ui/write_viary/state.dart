@@ -10,6 +10,7 @@ class WriteViaryState with _$WriteViaryState {
   const factory WriteViaryState({
     required Viary viary,
     @Default(false) bool isSpeeching,
+    @Default(false) bool isLoading,
     @Default("") String temporaryWords,
     @Default(false) bool showDetermineDialog,
     LocaleName? currentLocale,
