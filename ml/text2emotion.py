@@ -8,11 +8,16 @@ Original file is located at
 """
 
 from transformers import pipeline
-import torch
-torch.cuda.is_available()
+import argparse
 
+import warnings
+warnings.filterwarnings("ignore")
 
 model = pipeline("text-classification",
-                 model="j-hartmann/emotion-english-distilroberta-base", return_all_scores=False)
+                 model="j-hartmann/emotion-english-distilroberta-base", top_k=5)
 
-print(model("I eat tomato"))
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("text", default="")
+    text = parser.parse_args().text
+    print(model(text))

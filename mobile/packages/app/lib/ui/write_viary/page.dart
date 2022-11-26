@@ -175,6 +175,7 @@ class WriteViaryPage extends ConsumerWidget {
                 : const SizedBox(),
           ],
         ),
+
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
