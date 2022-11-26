@@ -20,10 +20,17 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
       return;
     }
     try {
+      String lang = "ja";
+      if ((state.currentLocale?.localeId.contains("en") ?? false)) {
+        lang = "en";
+      }
       state = state.copyWith(
         isLoading: true,
       );
-      final emotionViary = await _viaryRepository.refreshEmotions(viary: state.viary);
+      final emotionViary = await _viaryRepository.refreshEmotions(
+        viary: state.viary,
+        language: lang,
+      );
       state = state.copyWith(
         viary: emotionViary,
       );
@@ -67,9 +74,8 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
   void decideMessage({required bool append}) {
     state = state.copyWith(
       viary: state.viary.copyWith(
-        message: "${append
-                ? state.viary.message + state.temporaryWords
-                : state.temporaryWords}\n",
+        message:
+            "${append ? state.viary.message + state.temporaryWords : state.temporaryWords}\n",
       ),
     );
     Future(() async {
@@ -87,6 +93,15 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
       List<LocaleName> avaiables;
       try {
         avaiables = await _speechToText.locales();
+        avaiables = List<LocaleName>.from(avaiables)
+            .where(
+              (element) =>
+                  element.localeId.contains("en") ||
+                  element.localeId.contains("ja"),
+            )
+            .toList()
+            .reversed
+            .toList();
       } catch (e) {
         debugPrint(e.toString());
         avaiables = [];

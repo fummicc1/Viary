@@ -26,7 +26,7 @@ class Viary with _$Viary {
   ViaryEmotion? get bestEmotion {
     // To make emotions modifiable, wrap it with `List.from`.
     List<ViaryEmotion> emotions = List.from(this.emotions);
-    emotions.sort((a, b) => a.score.compareTo(b.score));
+    emotions.sort((a, b) => b.score.compareTo(a.score));
     if (emotions.isEmpty) {
       return null;
     }
