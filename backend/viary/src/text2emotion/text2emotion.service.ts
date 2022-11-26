@@ -6,11 +6,15 @@ export class Text2emotionService {
   execute(_sentence: string, lang: string) {
     if (!['en', 'ja'].includes(lang)) {
       return JSON.parse('{}');
-    }    
+    }
     let sentence = _sentence;
+    sentence = sentence.replace(/\n/g, ". ");
+    sentence = sentence.replace(/"/g, "\'");
     if (lang === 'ja') {
       const translationCommand = `/home/ubuntu/workspace/Viary/ml/venv/bin/python /home/ubuntu/workspace/Viary/ml/ja2en.py \"${sentence}\"`;
-      sentence = execSync(translationCommand).toString().replace(/'/g, '"').replace(/\n/g, ". ");
+      sentence = execSync(translationCommand).toString();
+      sentence = sentence.replace(/\n/g, ". ");
+      sentence = sentence.replace(/"/g, "\'");
     }
     console.log(sentence);
     const command = `/home/ubuntu/workspace/Viary/ml/venv/bin/python /home/ubuntu/workspace/Viary/ml/text2emotion.py \"${sentence}\"`;
