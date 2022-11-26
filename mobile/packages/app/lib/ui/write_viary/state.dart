@@ -1,5 +1,4 @@
 import 'package:domain/entities/viary.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
