@@ -135,10 +135,19 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     );
     await _speechToText.listen(
         localeId: state.currentLocale?.localeId ?? "ja_JP",
+        pauseFor: const Duration(seconds: 3),
+        listenMode: ListenMode.dictation,
         onResult: (SpeechRecognitionResult result) {
           final message = result.recognizedWords;
           state = state.copyWith(temporaryWords: message);
           if (result.finalResult) {
+            String suffix = ".";
+            if (state.currentLocale?.localeId == "ja-JP") {
+              suffix = "。";
+            }
+            state = state.copyWith(
+              temporaryWords: message + suffix,
+            );
             state = state.copyWith(
               showDetermineDialog: true,
             );

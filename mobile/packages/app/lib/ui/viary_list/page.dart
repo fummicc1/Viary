@@ -19,94 +19,110 @@ class ViaryListPage extends ConsumerWidget {
         title: const Text("一覧"),
       ),
       body: ListView.builder(
-          shrinkWrap: true,
-          itemCount: rootState.viaries.length,
-          itemBuilder: (context, index) {
-            Viary viary = rootState.viaries[index];
-            return Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Card(
-                  child: Column(
-                    children: [
-                      ListTile(
-                        title: Text(viary.title),
-                        subtitle: Text(viary.message),
-                        trailing: Text(viary.date.format()),
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                final TextEditingController
-                                    textEditingController =
-                                    TextEditingController(text: viary.message);
-                                textEditingController.addListener(() {
-                                  viary = viary.copyWith(
-                                    message: textEditingController.text,
-                                  );
-                                });
-                                return AlertDialog(
-                                  content: TextField(
-                                    controller: textEditingController,
-                                    maxLines: null,
-                                    scrollPhysics:
-                                        const NeverScrollableScrollPhysics(),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text("キャンセル"),
-                                    ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        await ref
-                                            .read(viaryRepositoryProvider)
-                                            .update(
-                                                id: viary.id ?? "",
-                                                viary: viary);
-                                        await ref.read(rootProvider.notifier).fetchStatus();
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text("保存"),
-                                    ),
-                                  ],
+        shrinkWrap: true,
+        itemCount: rootState.viaries.length,
+        itemBuilder: (context, index) {
+          Viary viary = rootState.viaries[index];
+          return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Card(
+                child: Column(
+                  children: [
+                    ListTile(
+                      title: Text(viary.title),
+                      subtitle: Text(viary.message),
+                      trailing: Text(viary.date.format()),
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            final TextEditingController textEditingController =
+                                TextEditingController(text: viary.message);
+                            textEditingController.addListener(
+                              () {
+                                viary = viary.copyWith(
+                                  message: textEditingController.text,
                                 );
-                              });
-                        },
-                      ),
-                      viary.bestEmotion != null
-                          ? Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(6.0),
-                                  child: Text(
-                                    "${viary.bestEmotion!.emotion.message}の感情",
-                                    textAlign: TextAlign.end,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.apply(
-                                          fontWeightDelta: 2,
-                                          color:
-                                              viary.bestEmotion!.emotion.color,
-                                        ),
-                                  ),
+                              },
+                            );
+                            return AlertDialog(
+                              content: TextField(
+                                controller: textEditingController,
+                                maxLines: null,
+                                scrollPhysics:
+                                    const NeverScrollableScrollPhysics(),
+                              ),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text("キャンセル"),
                                 ),
-                                LinearProgressIndicator(
-                                  value: viary.bestEmotion!.score / 100,
-                                  color: viary.bestEmotion!.emotion.color,
-                                  backgroundColor: viary
-                                      .bestEmotion!.emotion.color
-                                      .withOpacity(0.3),
+                                TextButton(
+                                  onPressed: () async {
+                                    await ref
+                                        .read(viaryRepositoryProvider)
+                                        .update(
+                                            id: viary.id ?? "", viary: viary);
+                                    await ref
+                                        .read(rootProvider.notifier)
+                                        .fetchStatus();
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text("保存"),
                                 ),
                               ],
-                            )
-                          : const SizedBox(),
-                    ],
-                  ),
-                ));
-          }),
+                            );
+                          },
+                        );
+                      },
+                    ),
+                    viary.emotions.isNotEmpty
+                        ? Column(
+                            children: viary.emotions
+                                .toList()
+                                .map(
+                                  (viaryEmotion) => Row(
+                                    children: [
+                                      SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.7,
+                                        child: LinearProgressIndicator(
+                                          value: viaryEmotion.score / 100,
+                                          color: viaryEmotion.emotion.color,
+                                          backgroundColor: viaryEmotion
+                                              .emotion.color
+                                              .withOpacity(0.3),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(6.0),
+                                        child: Text(
+                                          "${viaryEmotion.emotion.message}の感情",
+                                          textAlign: TextAlign.end,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodySmall
+                                              ?.apply(
+                                                fontWeightDelta: 2,
+                                                color:
+                                                    viaryEmotion.emotion.color,
+                                              ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                .toList(),
+                          )
+                        : const SizedBox()
+                  ],
+                ),
+              ));
+        },
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.of(context).push(
