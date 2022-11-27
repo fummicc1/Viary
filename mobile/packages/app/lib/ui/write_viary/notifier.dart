@@ -45,6 +45,16 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
         isLoading: false,
       );
     }
+    _clearState();
+  }
+
+  void _clearState() {
+    state = state.copyWith(
+      isSpeeching: false,
+      isLoading: false,
+      temporaryWords: "",
+      showDetermineDialog: false,
+    );
   }
 
   void updateLocale(LocaleName localeName) {
@@ -118,32 +128,7 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
 
   Future startSpeech() async {
     if (!_speechToText.isAvailable) {
-      await _speechToText.initialize(onError: (error) {
-        debugPrint(error.errorMsg);
-      }, onStatus: (status) {
-        debugPrint("Recognition Status: $status");
-      });
-      List<LocaleName> avaiables;
-      try {
-        avaiables = await _speechToText.locales();
-        avaiables = List<LocaleName>.from(avaiables)
-            .where(
-              (element) =>
-                  element.localeId.contains("en") ||
-                  element.localeId.contains("ja"),
-            )
-            .toList()
-            .reversed
-            .toList();
-      } catch (e) {
-        debugPrint(e.toString());
-        avaiables = [];
-      }
-      final LocaleName? current = await _speechToText.systemLocale();
-      state = state.copyWith(
-        currentLocale: current,
-        availableLocales: avaiables,
-      );
+      await _setupSpeech();
     }
     state = state.copyWith(
       isSpeeching: true,

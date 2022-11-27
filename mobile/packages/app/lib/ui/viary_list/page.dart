@@ -65,6 +65,7 @@ class ViaryListPage extends ConsumerWidget {
                                             .update(
                                                 id: viary.id ?? "",
                                                 viary: viary);
+                                        await ref.read(rootProvider.notifier).fetchStatus();
                                         Navigator.of(context).pop();
                                       },
                                       child: const Text("保存"),
