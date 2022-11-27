@@ -1,3 +1,4 @@
+import 'package:domain/entities/emotion.dart';
 import 'package:domain/repositories/viary.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -21,6 +22,9 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
 
   Future save() async {
     if (state.isLoading) {
+      return;
+    }
+    if (state.viary.message.isEmpty) {
       return;
     }
     try {
@@ -70,6 +74,13 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     ));
   }
 
+  void addPeriodToTemporaryWords() {
+    state = state.copyWith(
+      temporaryWords: state.temporaryWords +
+          (state.currentLocale?.localeId.contains("ja") ?? false ? "。" : "."),
+    );
+  }
+
   void updateDate(DateTime dateTime) {
     state = state.copyWith(
         viary: state.viary.copyWith(
@@ -109,8 +120,8 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
       avaiables = List<LocaleName>.from(avaiables)
           .where(
             (element) =>
-                element.localeId.contains("en") ||
-                element.localeId.contains("ja"),
+                element.localeId.contains("en-US") ||
+                element.localeId.contains("ja-JP"),
           )
           .toList()
           .reversed
@@ -133,21 +144,19 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     state = state.copyWith(
       isSpeeching: true,
     );
+    int cnt = 0;
     await _speechToText.listen(
         localeId: state.currentLocale?.localeId ?? "ja_JP",
-        pauseFor: const Duration(seconds: 8),
         listenMode: ListenMode.dictation,
+        partialResults: true,
         onResult: (SpeechRecognitionResult result) {
-          final message = result.recognizedWords;
-          state = state.copyWith(temporaryWords: message);
+          final message = result.recognizedWords.characters.toList();
+          message.fillRange(0, cnt, "");
+          cnt = result.recognizedWords.characters.toList().length;
+          state = state.copyWith(
+            temporaryWords: state.temporaryWords + message.join(),
+          );
           if (result.finalResult) {
-            String suffix = ".";
-            if (state.currentLocale?.localeId == "ja-JP") {
-              suffix = "。";
-            }
-            state = state.copyWith(
-              temporaryWords: message + suffix,
-            );
             state = state.copyWith(
               showDetermineDialog: true,
             );
@@ -165,7 +174,17 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
   }
 
   void clearState() {
-    state = WriteViaryState(viary: _viaryRepository.generateNewViary());
+    final newState = WriteViaryState(viary: _viaryRepository.generateNewViary());
+    state = state.copyWith(
+      viary: newState.viary,
+      isLoading: newState.isLoading,
+      isSpeeching: newState.isSpeeching,
+      temporaryWords: newState.temporaryWords,
+      showDetermineDialog: newState.showDetermineDialog,
+    );
+    Future(() async {
+      await _setupSpeech();
+    });
   }
 
   @override

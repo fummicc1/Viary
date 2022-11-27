@@ -39,7 +39,6 @@ class WriteViaryPage extends ConsumerWidget {
                   TextButton(
                       onPressed: () {
                         ref.read(writeViaryProvider.notifier).stopSpeech();
-                        ref.read(writeViaryProvider.notifier).clearState();
                         Navigator.of(context).pop();
                       },
                       child: const Text(
@@ -56,6 +55,12 @@ class WriteViaryPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("新規作成"),
+        leading: IconButton(
+          onPressed: () {
+            ref.read(writeViaryProvider.notifier).clearState();
+          },
+          icon: const Icon(Icons.close),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -78,10 +83,10 @@ class WriteViaryPage extends ConsumerWidget {
                       child: Text(
                         state.viary.message,
                         style: Theme.of(context).textTheme.titleLarge?.merge(
-                          const TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
+                              const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                       ),
                     ),
                   ),
@@ -118,11 +123,11 @@ class WriteViaryPage extends ConsumerWidget {
                           onPressed: () async {
                             state.isSpeeching
                                 ? await ref
-                                .read(writeViaryProvider.notifier)
-                                .stopSpeech()
+                                    .read(writeViaryProvider.notifier)
+                                    .stopSpeech()
                                 : await ref
-                                .read(writeViaryProvider.notifier)
-                                .startSpeech();
+                                    .read(writeViaryProvider.notifier)
+                                    .startSpeech();
                           },
                           icon: state.isSpeeching
                               ? const Icon(Icons.mic)
@@ -131,6 +136,16 @@ class WriteViaryPage extends ConsumerWidget {
                               ? const Text("マイク: ON")
                               : const Text("マイク: OFF"),
                         ),
+                        state.isSpeeching
+                            ? ElevatedButton(
+                                onPressed: () async {
+                                  ref
+                                      .read(writeViaryProvider.notifier)
+                                      .addPeriodToTemporaryWords();
+                                },
+                                child: const Text("ピリオド(.)をつける"),
+                              )
+                            : const SizedBox(),
                         const SizedBox(
                           height: 16,
                         ),
@@ -171,12 +186,11 @@ class WriteViaryPage extends ConsumerWidget {
             ),
             state.isLoading
                 ? const Center(
-              child: CircularProgressIndicator(),
-            )
+                    child: CircularProgressIndicator(),
+                  )
                 : const SizedBox(),
           ],
         ),
-
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
@@ -187,7 +201,8 @@ class WriteViaryPage extends ConsumerWidget {
           if (Navigator.of(context).canPop()) {
             ref.read(writeViaryProvider.notifier).clearState();
             Navigator.of(context).pop();
-          };
+          }
+          ;
         },
         label: const Text("保存"),
         icon: const Icon(Icons.save),
