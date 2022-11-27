@@ -2,7 +2,7 @@
 
 Viary is a voicy diary application with automatic sentiment analysis feature.
 
-For now, I support english and japanese language.
+For now, I'm supporting english and japanese language.
 
 |demo|
 |---|
