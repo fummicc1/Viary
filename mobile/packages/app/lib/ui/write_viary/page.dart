@@ -39,6 +39,7 @@ class WriteViaryPage extends ConsumerWidget {
                   TextButton(
                       onPressed: () {
                         ref.read(writeViaryProvider.notifier).stopSpeech();
+                        ref.read(writeViaryProvider.notifier).clearState();
                         Navigator.of(context).pop();
                       },
                       child: const Text(
@@ -183,7 +184,10 @@ class WriteViaryPage extends ConsumerWidget {
           Future(() async {
             await ref.read(rootProvider.notifier).fetchStatus();
           });
-          if (Navigator.of(context).canPop()) Navigator.of(context).pop();
+          if (Navigator.of(context).canPop()) {
+            ref.read(writeViaryProvider.notifier).clearState();
+            Navigator.of(context).pop();
+          };
         },
         label: const Text("保存"),
         icon: const Icon(Icons.save),

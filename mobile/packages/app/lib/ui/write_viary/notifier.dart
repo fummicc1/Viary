@@ -135,7 +135,7 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     );
     await _speechToText.listen(
         localeId: state.currentLocale?.localeId ?? "ja_JP",
-        pauseFor: const Duration(seconds: 3),
+        pauseFor: const Duration(seconds: 8),
         listenMode: ListenMode.dictation,
         onResult: (SpeechRecognitionResult result) {
           final message = result.recognizedWords;
@@ -162,6 +162,10 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
       isSpeeching: false,
       showDetermineDialog: false,
     );
+  }
+
+  void clearState() {
+    state = WriteViaryState(viary: _viaryRepository.generateNewViary());
   }
 
   @override
