@@ -1,6 +1,6 @@
 # Viary
 
-Viary is a voicy diary application with automatic sentiment analyze feature.
+Viary is a voicy diary application with automatic sentiment analysis feature.
 
 For now, we support english and japanese language.
 
