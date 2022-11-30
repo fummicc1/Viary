@@ -6,4 +6,4 @@ For now, I'm supporting english and japanese language.
 
 |demo|
 |---|
-|![RPReplay_Final1669517466](https://user-images.githubusercontent.com/44002126/204117474-fbd32298-7fcc-434c-9423-92d0dcf99307.gif)|
+|<img src="https://user-images.githubusercontent.com/44002126/204831811-c2b97629-73fc-4eb7-af50-113523016b30.gif" width=320px>|
