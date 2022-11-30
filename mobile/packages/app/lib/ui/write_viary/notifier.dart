@@ -1,4 +1,5 @@
 import 'package:domain/entities/emotion.dart';
+import 'package:domain/entities/viary.dart';
 import 'package:domain/repositories/viary.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -29,7 +30,7 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     }
     try {
       String lang = "ja";
-      if ((state.currentLocale?.localeId.contains("en") ?? false)) {
+      if ((state.currentLocaleId.contains("en"))) {
         lang = "en";
       }
       state = state.copyWith(
@@ -63,7 +64,7 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
 
   void updateLocale(LocaleName localeName) {
     state = state.copyWith(
-      currentLocale: localeName,
+      currentLocaleId: localeName.localeId,
     );
   }
 
@@ -77,7 +78,7 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
   void addPeriodToTemporaryWords() {
     state = state.copyWith(
       temporaryWords: state.temporaryWords +
-          (state.currentLocale?.localeId.contains("ja") ?? false ? "。" : "."),
+          (state.currentLocaleId.contains("ja") ? "。" : "."),
     );
   }
 
@@ -86,6 +87,13 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
         viary: state.viary.copyWith(
       date: dateTime,
     ));
+  }
+
+  void cancelTemporaryMessage() {
+    state = state.copyWith(
+      temporaryWords: "",
+      showDetermineDialog: false,
+    );
   }
 
   void directlyEditMessage(String message) {
@@ -102,6 +110,9 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
         message:
             "${append ? state.viary.message + state.temporaryWords : state.temporaryWords}\n",
       ),
+      temporaryWords: "",
+      isSpeeching: false,
+      showDetermineDialog: false,
     );
     Future(() async {
       await stopSpeech();
@@ -132,7 +143,7 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     }
     final LocaleName? current = await _speechToText.systemLocale();
     state = state.copyWith(
-      currentLocale: current,
+      currentLocaleId: current?.localeId ?? "ja-JP",
       availableLocales: avaiables,
     );
   }
@@ -146,56 +157,41 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     );
     int cnt = 0;
     await _speechToText.listen(
-        localeId: state.currentLocale?.localeId ?? "ja_JP",
+        localeId: state.currentLocaleId,
         listenMode: ListenMode.dictation,
         partialResults: true,
         onResult: (SpeechRecognitionResult result) {
-          final message = result.recognizedWords.characters.toList();
-          message.fillRange(0, cnt, "");
-          cnt = result.recognizedWords.characters.toList().length;
-          state = state.copyWith(
-            temporaryWords: state.temporaryWords + message.join(),
-          );
           if (result.finalResult) {
             state = state.copyWith(
               showDetermineDialog: true,
+            );
+          } else {
+            final message = result.recognizedWords.characters.toList();
+            message.fillRange(0, cnt, "");
+            cnt = result.recognizedWords.characters.toList().length;
+            state = state.copyWith(
+              temporaryWords: state.temporaryWords + message.join(),
             );
           }
         });
   }
 
-  Future stopSpeech() async {
+  Future stopSpeech({bool clearTemporaryWords = false}) async {
     await _speechToText.stop();
     state = state.copyWith(
-      temporaryWords: "",
       isSpeeching: false,
-      showDetermineDialog: false,
     );
-  }
-
-  void clearState() {
-    final newState = WriteViaryState(viary: _viaryRepository.generateNewViary());
-    state = state.copyWith(
-      viary: newState.viary,
-      isLoading: newState.isLoading,
-      isSpeeching: newState.isSpeeching,
-      temporaryWords: newState.temporaryWords,
-      showDetermineDialog: newState.showDetermineDialog,
-    );
-    Future(() async {
-      await _setupSpeech();
-    });
   }
 
   @override
   void dispose() {
+    _speechToText.stop();
     super.dispose();
-    stopSpeech();
   }
 }
 
 final writeViaryProvider =
-    StateNotifierProvider<WriteViaryNotifier, WriteViaryState>((ref) {
+    StateNotifierProvider.autoDispose<WriteViaryNotifier, WriteViaryState>((ref) {
   final ViaryRepository viaryRepository = ref.watch(viaryRepositoryProvider);
   final viary = viaryRepository.generateNewViary();
   return WriteViaryNotifier(

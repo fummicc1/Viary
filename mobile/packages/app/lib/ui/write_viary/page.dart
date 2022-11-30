@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:viary/ui/root/notifier.dart';
 import 'package:viary/ui/write_viary/notifier.dart';
@@ -38,8 +39,11 @@ class WriteViaryPage extends ConsumerWidget {
                   ),
                   TextButton(
                       onPressed: () {
-                        ref.read(writeViaryProvider.notifier).stopSpeech();
                         Navigator.of(context).pop();
+                        ref.read(writeViaryProvider.notifier).stopSpeech(
+                              clearTemporaryWords: true,
+                            );
+                        ref.read(writeViaryProvider.notifier).cancelTemporaryMessage();
                       },
                       child: const Text(
                         "キャンセル",
@@ -57,7 +61,7 @@ class WriteViaryPage extends ConsumerWidget {
         title: const Text("新規作成"),
         leading: IconButton(
           onPressed: () {
-            ref.read(writeViaryProvider.notifier).clearState();
+            Navigator.of(context).pop();
           },
           icon: const Icon(Icons.close),
         ),
@@ -158,21 +162,27 @@ class WriteViaryPage extends ConsumerWidget {
                       child: Wrap(
                         direction: Axis.horizontal,
                         children: state.availableLocales.map((locale) {
-                          final bool isSelected = locale == state.currentLocale;
-                          return GestureDetector(
-                            onTap: () {
-                              ref
-                                  .read(writeViaryProvider.notifier)
-                                  .updateLocale(locale);
-                            },
-                            child: Chip(
-                              backgroundColor: isSelected
-                                  ? Theme.of(context).primaryColor
-                                  : Colors.transparent,
-                              label: Container(
-                                color: isSelected
-                                    ? Theme.of(context).primaryColor
-                                    : Colors.transparent,
+                          final bool isSelected =
+                              locale.localeId == state.currentLocaleId;
+                          return Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                ref
+                                    .read(writeViaryProvider.notifier)
+                                    .updateLocale(locale);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: isSelected
+                                      ? Theme.of(context).primaryColor
+                                      : Colors.transparent,
+                                  border: Border.all(
+                                    color: Theme.of(context).dividerColor,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                                 child: Text(locale.name),
                               ),
                             ),
@@ -199,10 +209,8 @@ class WriteViaryPage extends ConsumerWidget {
             await ref.read(rootProvider.notifier).fetchStatus();
           });
           if (Navigator.of(context).canPop()) {
-            ref.read(writeViaryProvider.notifier).clearState();
             Navigator.of(context).pop();
           }
-          ;
         },
         label: const Text("保存"),
         icon: const Icon(Icons.save),

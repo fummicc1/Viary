@@ -12,7 +12,7 @@ class WriteViaryState with _$WriteViaryState {
     @Default(false) bool isLoading,
     @Default("") String temporaryWords,
     @Default(false) bool showDetermineDialog,
-    LocaleName? currentLocale,
+    @Default("ja-JP") String currentLocaleId,
     @Default([]) List<LocaleName> availableLocales,
   }) = _WriteViaryState;
 }

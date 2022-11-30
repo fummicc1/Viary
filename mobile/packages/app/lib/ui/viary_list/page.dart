@@ -88,7 +88,7 @@ class ViaryListPage extends ConsumerWidget {
                                       SizedBox(
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.7,
+                                                0.75,
                                         child: LinearProgressIndicator(
                                           value: viaryEmotion.score / 100,
                                           color: viaryEmotion.emotion.color,
@@ -100,7 +100,7 @@ class ViaryListPage extends ConsumerWidget {
                                       Padding(
                                         padding: const EdgeInsets.all(6.0),
                                         child: Text(
-                                          "${viaryEmotion.emotion.message}の感情",
+                                          viaryEmotion.emotion.message,
                                           textAlign: TextAlign.end,
                                           style: Theme.of(context)
                                               .textTheme
