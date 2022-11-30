@@ -9,36 +9,76 @@
   <component name="ChangeListManager">
     <list default="true" id="70441a38-bd2e-4129-9832-bd9f053bd0da" name="Changes" comment="&#10;&#10;; 🐛  :bug: バグ修正&#10;; 👍  :+1: 機能改善&#10;; ✨  :sparkles: 部分的な機能追加&#10;; 🎨  :art: デザイン変更のみ&#10;; 💢  :anger: コンフリクト&#10;; 🚧  :construction: WIP&#10;; 📝  :memo: 文言修正&#10;; ♻️  :recycle: リファクタリング&#10;; 🔥  :fire: 不要な機能・使われなくなった機能の削除&#10;; 💚  :green_heart: テストやCIの修正・改善&#10;; 👕  :shirt: Lintエラーの修正やコードスタイルの修正&#10;; 🚀  :rocket: パフォーマンス改善&#10;; 🆙  :up: 依存パッケージなどのアップデート&#10;; 👮  :cop: セキュリティ関連の改善&#10;; ⚙   :gear: config変更&#10;; 📚  :books: ドキュメント">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/android/app/src/main/res/mipmap-hdpi/launcher_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/android/app/src/main/res/mipmap-hdpi/launcher_icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/android/app/src/main/res/mipmap-mdpi/launcher_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/android/app/src/main/res/mipmap-mdpi/launcher_icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/android/app/src/main/res/mipmap-xhdpi/launcher_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/android/app/src/main/res/mipmap-xhdpi/launcher_icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/android/app/src/main/res/mipmap-xxhdpi/launcher_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/android/app/src/main/res/mipmap-xxhdpi/launcher_icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/android/app/src/main/res/mipmap-xxxhdpi/launcher_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/android/app/src/main/res/mipmap-xxxhdpi/launcher_icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/assets/icon/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/assets/icon/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-50x50@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-50x50@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-50x50@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-50x50@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-57x57@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-57x57@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-57x57@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-57x57@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-72x72@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-72x72@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-72x72@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-72x72@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/viary_list/page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/viary_list/page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/notifier.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/notifier.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/state.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/state.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/state.freezed.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/ui/write_viary/state.freezed.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/linux/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/linux/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/linux/flutter/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/linux/flutter/generated_plugin_registrant.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/linux/flutter/generated_plugins.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/linux/main.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/linux/my_application.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/linux/my_application.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Flutter/Flutter-Debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Flutter/Flutter-Release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Podfile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Podfile.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner.xcodeproj/project.pbxproj" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/AppDelegate.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_1024.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_128.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_16.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_256.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_32.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Assets.xcassets/AppIcon.appiconset/app_icon_64.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Base.lproj/MainMenu.xib" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Configs/AppInfo.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Configs/Debug.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Configs/Release.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Configs/Warnings.xcconfig" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/DebugProfile.entitlements" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/GoogleService-Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Info.plist" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/MainFlutterWindow.swift" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/macos/Runner/Release.entitlements" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/web/favicon.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/web/icons/Icon-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/web/icons/Icon-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/web/icons/Icon-maskable-192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/web/icons/Icon-maskable-512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/web/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/web/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/flutter/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/flutter/generated_plugin_registrant.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/flutter/generated_plugins.cmake" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/CMakeLists.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/Runner.rc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/flutter_window.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/flutter_window.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/main.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/resource.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/resources/app_icon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/runner.exe.manifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/utils.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/utils.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/win32_window.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/app/windows/runner/win32_window.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/packages/domain/lib/utils/datetime.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/domain/lib/utils/datetime.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,11 +108,15 @@
     <setting file="file://$PROJECT_DIR$/packages/app/melos_viary.iml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/app/lib/ui/root/notifier.dart" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/app/lib/ui/root/page.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/domain/lib/utils/datetime.dart" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/app/lib/ui/viary_list/page.dart" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/melos.yaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/app/lib/ui/write_viary/notifier.dart" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/app/lib/ui/write_viary/page.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/domain/lib/entities/viary.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/app/lib/ui/write_viary/state.dart" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/domain/lib/repositories/viary.dart" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/packages/domain/lib/entities/emotion.dart" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/app/pubspec.yaml" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/packages/app/README.md" root0="FORCE_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/../../../flutter/packages/flutter/lib/src/services/message_codecs.dart" root0="SKIP_INSPECTION" />
@@ -148,11 +192,6 @@
           <url>file://$PROJECT_DIR$/packages/domain/lib/repositories/viary.dart</url>
           <line>132</line>
           <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="Dart">
-          <url>file://$PROJECT_DIR$/packages/app/lib/ui/write_viary/notifier.dart</url>
-          <line>192</line>
-          <option name="timeStamp" value="20" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>

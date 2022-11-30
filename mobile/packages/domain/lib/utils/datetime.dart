@@ -11,7 +11,7 @@ extension DateTimeDescription on DateTime {
     }
     final diff = now.difference(this);
     final hour = diff.inHours;
-    final minute = diff.inMinutes;
+    final minute = diff.inMinutes % 60;
     if (hour == 0) {
       return "$minute分前";
     }
