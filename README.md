@@ -6,4 +6,5 @@ For now, I'm supporting english and japanese language.
 
 |demo|
 |---|
-|<img src="https://user-images.githubusercontent.com/44002126/204831811-c2b97629-73fc-4eb7-af50-113523016b30.gif" width=320px>|
+|<img src="https://user-images.githubusercontent.com/44002126/205115019-0f46dc1a-d135-46c4-89ac-975d1200fa81.gif" width=320px>|
+
