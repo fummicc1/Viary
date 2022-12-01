@@ -16,7 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ViaryDetailState {
-  Viary get viary => throw _privateConstructorUsedError;
+  String get viaryID => throw _privateConstructorUsedError;
+  Viary? get viary => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ViaryDetailStateCopyWith<ViaryDetailState> get copyWith =>
@@ -29,9 +30,9 @@ abstract class $ViaryDetailStateCopyWith<$Res> {
           ViaryDetailState value, $Res Function(ViaryDetailState) then) =
       _$ViaryDetailStateCopyWithImpl<$Res, ViaryDetailState>;
   @useResult
-  $Res call({Viary viary});
+  $Res call({String viaryID, Viary? viary});
 
-  $ViaryCopyWith<$Res> get viary;
+  $ViaryCopyWith<$Res>? get viary;
 }
 
 /// @nodoc
@@ -47,20 +48,29 @@ class _$ViaryDetailStateCopyWithImpl<$Res, $Val extends ViaryDetailState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viary = null,
+    Object? viaryID = null,
+    Object? viary = freezed,
   }) {
     return _then(_value.copyWith(
-      viary: null == viary
+      viaryID: null == viaryID
+          ? _value.viaryID
+          : viaryID // ignore: cast_nullable_to_non_nullable
+              as String,
+      viary: freezed == viary
           ? _value.viary
           : viary // ignore: cast_nullable_to_non_nullable
-              as Viary,
+              as Viary?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $ViaryCopyWith<$Res> get viary {
-    return $ViaryCopyWith<$Res>(_value.viary, (value) {
+  $ViaryCopyWith<$Res>? get viary {
+    if (_value.viary == null) {
+      return null;
+    }
+
+    return $ViaryCopyWith<$Res>(_value.viary!, (value) {
       return _then(_value.copyWith(viary: value) as $Val);
     });
   }
@@ -74,10 +84,10 @@ abstract class _$$_ViaryDetailStateCopyWith<$Res>
       __$$_ViaryDetailStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Viary viary});
+  $Res call({String viaryID, Viary? viary});
 
   @override
-  $ViaryCopyWith<$Res> get viary;
+  $ViaryCopyWith<$Res>? get viary;
 }
 
 /// @nodoc
@@ -91,13 +101,18 @@ class __$$_ViaryDetailStateCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? viary = null,
+    Object? viaryID = null,
+    Object? viary = freezed,
   }) {
     return _then(_$_ViaryDetailState(
-      viary: null == viary
+      viaryID: null == viaryID
+          ? _value.viaryID
+          : viaryID // ignore: cast_nullable_to_non_nullable
+              as String,
+      viary: freezed == viary
           ? _value.viary
           : viary // ignore: cast_nullable_to_non_nullable
-              as Viary,
+              as Viary?,
     ));
   }
 }
@@ -105,14 +120,16 @@ class __$$_ViaryDetailStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_ViaryDetailState implements _ViaryDetailState {
-  const _$_ViaryDetailState({required this.viary});
+  const _$_ViaryDetailState({required this.viaryID, this.viary});
 
   @override
-  final Viary viary;
+  final String viaryID;
+  @override
+  final Viary? viary;
 
   @override
   String toString() {
-    return 'ViaryDetailState(viary: $viary)';
+    return 'ViaryDetailState(viaryID: $viaryID, viary: $viary)';
   }
 
   @override
@@ -120,11 +137,12 @@ class _$_ViaryDetailState implements _ViaryDetailState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ViaryDetailState &&
+            (identical(other.viaryID, viaryID) || other.viaryID == viaryID) &&
             (identical(other.viary, viary) || other.viary == viary));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, viary);
+  int get hashCode => Object.hash(runtimeType, viaryID, viary);
 
   @JsonKey(ignore: true)
   @override
@@ -134,11 +152,14 @@ class _$_ViaryDetailState implements _ViaryDetailState {
 }
 
 abstract class _ViaryDetailState implements ViaryDetailState {
-  const factory _ViaryDetailState({required final Viary viary}) =
-      _$_ViaryDetailState;
+  const factory _ViaryDetailState(
+      {required final String viaryID,
+      final Viary? viary}) = _$_ViaryDetailState;
 
   @override
-  Viary get viary;
+  String get viaryID;
+  @override
+  Viary? get viary;
   @override
   @JsonKey(ignore: true)
   _$$_ViaryDetailStateCopyWith<_$_ViaryDetailState> get copyWith =>

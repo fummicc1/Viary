@@ -36,7 +36,9 @@ class ViaryListPage extends ConsumerWidget {
                       trailing: Text(viary.date.format()),
                       onTap: () {
                         final route = MaterialPageRoute(
-                          builder: (context) => ViaryDetailPage(viary: viary),
+                          builder: (context) => ViaryDetailPage(
+                            viaryID: viary.id!,
+                          ),
                           settings: const RouteSettings(name: "viary_detail/"),
                         );
                         Navigator.of(context).push(route);

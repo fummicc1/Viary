@@ -4,12 +4,24 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:viary/ui/root/notifier.dart';
 import 'package:viary/ui/write_viary/notifier.dart';
 
-class WriteViaryPage extends ConsumerWidget {
+class WriteViaryPage extends HookConsumerWidget {
   const WriteViaryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(writeViaryProvider);
+    final scrollController = useScrollController();
+    final textEditController = useTextEditingController(text: state.message);
+    scrollController.addListener(() {
+      primaryFocus?.unfocus();
+    });
+    textEditController.addListener(() {
+      if (state.message != textEditController.text && !state.isSpeeching) {
+        ref
+            .read(writeViaryProvider.notifier)
+            .directlyEditMessage(textEditController.text);
+      }
+    });
     if (state.showDetermineDialog) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showDialog(
@@ -43,7 +55,9 @@ class WriteViaryPage extends ConsumerWidget {
                         ref.read(writeViaryProvider.notifier).stopSpeech(
                               clearTemporaryWords: true,
                             );
-                        ref.read(writeViaryProvider.notifier).cancelTemporaryMessage();
+                        ref
+                            .read(writeViaryProvider.notifier)
+                            .cancelTemporaryMessage();
                       },
                       child: const Text(
                         "キャンセル",
@@ -74,6 +88,7 @@ class WriteViaryPage extends ConsumerWidget {
         child: Stack(
           children: [
             SingleChildScrollView(
+              controller: scrollController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -84,7 +99,7 @@ class WriteViaryPage extends ConsumerWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
+                      child: SelectableText(
                         state.message,
                         style: Theme.of(context).textTheme.titleLarge?.merge(
                               const TextStyle(
@@ -141,13 +156,32 @@ class WriteViaryPage extends ConsumerWidget {
                               : const Text("開始"),
                         ),
                         state.isSpeeching
-                            ? ElevatedButton(
-                                onPressed: () async {
-                                  ref
-                                      .read(writeViaryProvider.notifier)
-                                      .addPeriodToTemporaryWords();
-                                },
-                                child: const Text("ピリオド(.)をつける"),
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        ref
+                                            .read(writeViaryProvider.notifier)
+                                            .addPeriodToTemporaryWords();
+                                      },
+                                      child: const Text("ピリオド(.)をつける"),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        ref
+                                            .read(writeViaryProvider.notifier)
+                                            .clearTemporaryMessage();
+                                      },
+                                      child: const Text("クリア"),
+                                    ),
+                                  )
+                                ],
                               )
                             : const SizedBox(),
                         const SizedBox(
@@ -204,7 +238,11 @@ class WriteViaryPage extends ConsumerWidget {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          await ref.read(writeViaryProvider.notifier).save();
+          final isSuccessful =
+              await ref.read(writeViaryProvider.notifier).save();
+          if (!isSuccessful) {
+            return;
+          }
           Future(() async {
             await ref.read(rootProvider.notifier).fetchStatus();
           });

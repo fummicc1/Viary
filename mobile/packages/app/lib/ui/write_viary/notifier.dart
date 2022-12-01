@@ -21,12 +21,12 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
   final ViaryRepository _viaryRepository;
   final SpeechToText _speechToText = SpeechToText();
 
-  Future save() async {
+  Future<bool> save() async {
     if (state.isLoading) {
-      return;
+      return false;
     }
     if (state.message.isEmpty) {
-      return;
+      return false;
     }
     try {
       String lang = "ja";
@@ -44,17 +44,17 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
         viary: viary,
         language: lang,
       );
-      state = state.copyWith(
-        viary: emotionViary,
-      );
-      await _viaryRepository.create(viary);
+      await _viaryRepository.create(emotionViary);
+      _clearState();
+      return true;
     } catch (e) {
       print(e);
       state = state.copyWith(
         isLoading: false,
       );
+      _clearState();
+      return false;
     }
-    _clearState();
   }
 
   void _clearState() {
@@ -101,18 +101,22 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     );
   }
 
+  void clearTemporaryMessage() {
+    state = state.copyWith(
+      temporaryWords: "",
+    );
+  }
+
   void directlyEditMessage(String message) {
     state = state.copyWith(
-      viary: state.viary.copyWith(
-        message: message,
-      ),
+      message: message,
     );
   }
 
   void decideMessage({required bool append}) {
     state = state.copyWith(
       message:
-          "${append ? state.message + state.temporaryWords : state.temporaryWords}. ",
+          append ? state.message + state.temporaryWords : state.temporaryWords,
       temporaryWords: "",
       isSpeeching: false,
       showDetermineDialog: false,

@@ -6,6 +6,7 @@ part 'state.freezed.dart';
 @freezed
 class ViaryDetailState with _$ViaryDetailState {
   const factory ViaryDetailState({
-    required Viary viary,
+    required String viaryID,
+    Viary? viary,
   }) = _ViaryDetailState;
 }
