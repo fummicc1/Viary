@@ -11,6 +11,7 @@ class WriteViaryState with _$WriteViaryState {
     @Default(false) bool isSpeeching,
     @Default(false) bool isLoading,
     @Default("") String temporaryWords,
+    @Default("") String message,
     @Default(false) bool showDetermineDialog,
     @Default("ja-JP") String currentLocaleId,
     @Default([]) List<LocaleName> availableLocales,

@@ -25,7 +25,7 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     if (state.isLoading) {
       return;
     }
-    if (state.viary.message.isEmpty) {
+    if (state.message.isEmpty) {
       return;
     }
     try {
@@ -36,14 +36,18 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
       state = state.copyWith(
         isLoading: true,
       );
+      Viary viary = state.viary;
+      viary = viary.copyWith(
+        message: state.message,
+      );
       final emotionViary = await _viaryRepository.refreshEmotions(
-        viary: state.viary,
+        viary: viary,
         language: lang,
       );
       state = state.copyWith(
         viary: emotionViary,
       );
-      await _viaryRepository.create(state.viary);
+      await _viaryRepository.create(viary);
     } catch (e) {
       print(e);
       state = state.copyWith(
@@ -58,6 +62,7 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
       isSpeeching: false,
       isLoading: false,
       temporaryWords: "",
+      message: "",
       showDetermineDialog: false,
     );
   }
@@ -106,10 +111,8 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
 
   void decideMessage({required bool append}) {
     state = state.copyWith(
-      viary: state.viary.copyWith(
-        message:
-            "${append ? state.viary.message + state.temporaryWords : state.temporaryWords}\n",
-      ),
+      message:
+          "${append ? state.message + state.temporaryWords : state.temporaryWords}. ",
       temporaryWords: "",
       isSpeeching: false,
       showDetermineDialog: false,
@@ -191,7 +194,8 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
 }
 
 final writeViaryProvider =
-    StateNotifierProvider.autoDispose<WriteViaryNotifier, WriteViaryState>((ref) {
+    StateNotifierProvider.autoDispose<WriteViaryNotifier, WriteViaryState>(
+        (ref) {
   final ViaryRepository viaryRepository = ref.watch(viaryRepositoryProvider);
   final viary = viaryRepository.generateNewViary();
   return WriteViaryNotifier(

@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viary/ui/root/notifier.dart';
 import 'package:viary/ui/root/state.dart';
 import 'package:domain/utils/datetime.dart';
+import 'package:viary/ui/viary_detail/page.dart';
+import 'package:viary/ui/viary_detail/state.dart';
 import 'package:viary/ui/write_viary/page.dart';
 import 'package:domain/entities/emotion.dart';
 
@@ -33,49 +35,11 @@ class ViaryListPage extends ConsumerWidget {
                       subtitle: Text(viary.message),
                       trailing: Text(viary.date.format()),
                       onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            final TextEditingController textEditingController =
-                                TextEditingController(text: viary.message);
-                            textEditingController.addListener(
-                              () {
-                                viary = viary.copyWith(
-                                  message: textEditingController.text,
-                                );
-                              },
-                            );
-                            return AlertDialog(
-                              content: TextField(
-                                controller: textEditingController,
-                                maxLines: null,
-                                scrollPhysics:
-                                    const NeverScrollableScrollPhysics(),
-                              ),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text("キャンセル"),
-                                ),
-                                TextButton(
-                                  onPressed: () async {
-                                    await ref
-                                        .read(viaryRepositoryProvider)
-                                        .update(
-                                            id: viary.id ?? "", viary: viary);
-                                    await ref
-                                        .read(rootProvider.notifier)
-                                        .fetchStatus();
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text("保存"),
-                                ),
-                              ],
-                            );
-                          },
+                        final route = MaterialPageRoute(
+                          builder: (context) => ViaryDetailPage(viary: viary),
+                          settings: const RouteSettings(name: "viary_detail/"),
                         );
+                        Navigator.of(context).push(route);
                       },
                     ),
                     viary.emotions.isNotEmpty

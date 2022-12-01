@@ -85,7 +85,7 @@ class WriteViaryPage extends ConsumerWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
-                        state.viary.message,
+                        state.message,
                         style: Theme.of(context).textTheme.titleLarge?.merge(
                               const TextStyle(
                                 color: Colors.white,
@@ -137,8 +137,8 @@ class WriteViaryPage extends ConsumerWidget {
                               ? const Icon(Icons.mic)
                               : const Icon(Icons.mic_off),
                           label: state.isSpeeching
-                              ? const Text("マイク: ON")
-                              : const Text("マイク: OFF"),
+                              ? const Text("終了")
+                              : const Text("開始"),
                         ),
                         state.isSpeeching
                             ? ElevatedButton(
