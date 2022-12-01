@@ -27,64 +27,66 @@ class ViaryListPage extends ConsumerWidget {
           Viary viary = rootState.viaries[index];
           return Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Card(
-                child: Column(
-                  children: [
-                    ListTile(
-                      title: Text(viary.title),
-                      subtitle: Text(viary.message),
-                      trailing: Text(viary.date.format()),
-                      onTap: () {
-                        final route = MaterialPageRoute(
-                          builder: (context) => ViaryDetailPage(
-                            viaryID: viary.id!,
-                          ),
-                          settings: const RouteSettings(name: "viary_detail/"),
-                        );
-                        Navigator.of(context).push(route);
-                      },
+              child: GestureDetector(
+                onTap: () {
+                  final route = MaterialPageRoute(
+                    builder: (context) => ViaryDetailPage(
+                      viaryID: viary.id!,
                     ),
-                    viary.emotions.isNotEmpty
-                        ? Column(
-                            children: viary.emotions
-                                .toList()
-                                .map(
-                                  (viaryEmotion) => Row(
-                                    children: [
-                                      SizedBox(
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.75,
-                                        child: LinearProgressIndicator(
-                                          value: viaryEmotion.score / 100,
-                                          color: viaryEmotion.emotion.color,
-                                          backgroundColor: viaryEmotion
-                                              .emotion.color
-                                              .withOpacity(0.3),
+                    settings: const RouteSettings(name: "viary_detail/"),
+                  );
+                  Navigator.of(context).push(route);
+                },
+                child: Card(
+                  child: Column(
+                    children: [
+                      ListTile(
+                        title: Text(viary.title),
+                        subtitle: Text(viary.message),
+                        trailing: Text(viary.date.format()),
+                      ),
+                      viary.emotions.isNotEmpty
+                          ? Column(
+                              children: viary.emotions
+                                  .toList()
+                                  .map(
+                                    (viaryEmotion) => Row(
+                                      children: [
+                                        SizedBox(
+                                          width:
+                                              MediaQuery.of(context).size.width *
+                                                  0.75,
+                                          child: LinearProgressIndicator(
+                                            value: viaryEmotion.score / 100,
+                                            color: viaryEmotion.emotion.color,
+                                            backgroundColor: viaryEmotion
+                                                .emotion.color
+                                                .withOpacity(0.3),
+                                          ),
                                         ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(6.0),
-                                        child: Text(
-                                          viaryEmotion.emotion.message,
-                                          textAlign: TextAlign.end,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodySmall
-                                              ?.apply(
-                                                fontWeightDelta: 2,
-                                                color:
-                                                    viaryEmotion.emotion.color,
-                                              ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child: Text(
+                                            viaryEmotion.emotion.message,
+                                            textAlign: TextAlign.end,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall
+                                                ?.apply(
+                                                  fontWeightDelta: 2,
+                                                  color:
+                                                      viaryEmotion.emotion.color,
+                                                ),
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                )
-                                .toList(),
-                          )
-                        : const SizedBox()
-                  ],
+                                      ],
+                                    ),
+                                  )
+                                  .toList(),
+                            )
+                          : const SizedBox()
+                    ],
+                  ),
                 ),
               ));
         },

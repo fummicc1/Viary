@@ -113,6 +113,11 @@ class ViaryRepositoryImpl implements ViaryRepository {
 
   @override
   Future<void> update({required String id, required Viary viary}) async {
+    List<ViaryEmotion> emotions = List.from(viary.emotions);
+    emotions.sort((a, b) => b.score.compareTo(a.score));
+    viary = viary.copyWith(
+      emotions: emotions,
+    );
     await collectionReference.doc(id).set(
           viary,
           SetOptions(merge: true),
