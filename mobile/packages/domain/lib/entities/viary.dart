@@ -13,7 +13,6 @@ class Viary with _$Viary {
   const factory Viary({
     String? id,
     String? sender,
-    required String title,
     required String message,
     required DateTime date,
     @ViaryEmotionListJsonConverter() @Default([]) List<ViaryEmotion> emotions,

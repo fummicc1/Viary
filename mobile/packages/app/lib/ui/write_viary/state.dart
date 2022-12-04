@@ -8,6 +8,7 @@ part 'state.freezed.dart';
 class WriteViaryState with _$WriteViaryState {
   const factory WriteViaryState({
     required Viary viary,
+    DateTime? date,
     @Default(false) bool isSpeeching,
     @Default(false) bool isLoading,
     @Default("") String temporaryWords,
@@ -16,4 +17,5 @@ class WriteViaryState with _$WriteViaryState {
     @Default("ja-JP") String currentLocaleId,
     @Default([]) List<LocaleName> availableLocales,
   }) = _WriteViaryState;
+
 }

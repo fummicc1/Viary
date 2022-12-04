@@ -13,9 +13,9 @@ class BaseURL {
 
   static String _getURL() {
     if (kDebugMode) {
-      _value = "http://18.177.88.113/";
+      _value = "https://voice-diary.net/";
     } else {
-      _value = "http://18.177.88.113/";
+      _value = "https://voice-diary.net/";
     }
     return _value!;
   }

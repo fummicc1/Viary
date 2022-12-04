@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$WriteViaryState {
   Viary get viary => throw _privateConstructorUsedError;
+  DateTime? get date => throw _privateConstructorUsedError;
   bool get isSpeeching => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String get temporaryWords => throw _privateConstructorUsedError;
@@ -38,6 +39,7 @@ abstract class $WriteViaryStateCopyWith<$Res> {
   @useResult
   $Res call(
       {Viary viary,
+      DateTime? date,
       bool isSpeeching,
       bool isLoading,
       String temporaryWords,
@@ -63,6 +65,7 @@ class _$WriteViaryStateCopyWithImpl<$Res, $Val extends WriteViaryState>
   @override
   $Res call({
     Object? viary = null,
+    Object? date = freezed,
     Object? isSpeeching = null,
     Object? isLoading = null,
     Object? temporaryWords = null,
@@ -76,6 +79,10 @@ class _$WriteViaryStateCopyWithImpl<$Res, $Val extends WriteViaryState>
           ? _value.viary
           : viary // ignore: cast_nullable_to_non_nullable
               as Viary,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       isSpeeching: null == isSpeeching
           ? _value.isSpeeching
           : isSpeeching // ignore: cast_nullable_to_non_nullable
@@ -126,6 +133,7 @@ abstract class _$$_WriteViaryStateCopyWith<$Res>
   @useResult
   $Res call(
       {Viary viary,
+      DateTime? date,
       bool isSpeeching,
       bool isLoading,
       String temporaryWords,
@@ -150,6 +158,7 @@ class __$$_WriteViaryStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? viary = null,
+    Object? date = freezed,
     Object? isSpeeching = null,
     Object? isLoading = null,
     Object? temporaryWords = null,
@@ -163,6 +172,10 @@ class __$$_WriteViaryStateCopyWithImpl<$Res>
           ? _value.viary
           : viary // ignore: cast_nullable_to_non_nullable
               as Viary,
+      date: freezed == date
+          ? _value.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       isSpeeching: null == isSpeeching
           ? _value.isSpeeching
           : isSpeeching // ignore: cast_nullable_to_non_nullable
@@ -200,6 +213,7 @@ class __$$_WriteViaryStateCopyWithImpl<$Res>
 class _$_WriteViaryState implements _WriteViaryState {
   const _$_WriteViaryState(
       {required this.viary,
+      this.date,
       this.isSpeeching = false,
       this.isLoading = false,
       this.temporaryWords = "",
@@ -211,6 +225,8 @@ class _$_WriteViaryState implements _WriteViaryState {
 
   @override
   final Viary viary;
+  @override
+  final DateTime? date;
   @override
   @JsonKey()
   final bool isSpeeching;
@@ -239,7 +255,7 @@ class _$_WriteViaryState implements _WriteViaryState {
 
   @override
   String toString() {
-    return 'WriteViaryState(viary: $viary, isSpeeching: $isSpeeching, isLoading: $isLoading, temporaryWords: $temporaryWords, message: $message, showDetermineDialog: $showDetermineDialog, currentLocaleId: $currentLocaleId, availableLocales: $availableLocales)';
+    return 'WriteViaryState(viary: $viary, date: $date, isSpeeching: $isSpeeching, isLoading: $isLoading, temporaryWords: $temporaryWords, message: $message, showDetermineDialog: $showDetermineDialog, currentLocaleId: $currentLocaleId, availableLocales: $availableLocales)';
   }
 
   @override
@@ -248,6 +264,7 @@ class _$_WriteViaryState implements _WriteViaryState {
         (other.runtimeType == runtimeType &&
             other is _$_WriteViaryState &&
             (identical(other.viary, viary) || other.viary == viary) &&
+            (identical(other.date, date) || other.date == date) &&
             (identical(other.isSpeeching, isSpeeching) ||
                 other.isSpeeching == isSpeeching) &&
             (identical(other.isLoading, isLoading) ||
@@ -267,6 +284,7 @@ class _$_WriteViaryState implements _WriteViaryState {
   int get hashCode => Object.hash(
       runtimeType,
       viary,
+      date,
       isSpeeching,
       isLoading,
       temporaryWords,
@@ -285,6 +303,7 @@ class _$_WriteViaryState implements _WriteViaryState {
 abstract class _WriteViaryState implements WriteViaryState {
   const factory _WriteViaryState(
       {required final Viary viary,
+      final DateTime? date,
       final bool isSpeeching,
       final bool isLoading,
       final String temporaryWords,
@@ -295,6 +314,8 @@ abstract class _WriteViaryState implements WriteViaryState {
 
   @override
   Viary get viary;
+  @override
+  DateTime? get date;
   @override
   bool get isSpeeching;
   @override

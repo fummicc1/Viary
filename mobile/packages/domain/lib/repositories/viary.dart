@@ -56,7 +56,6 @@ class ViaryRepositoryImpl implements ViaryRepository {
   @override
   Viary generateNewViary() {
     return Viary(
-      title: "",
       message: "",
       date: DateTime.now(),
     );

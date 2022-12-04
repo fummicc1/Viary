@@ -22,7 +22,6 @@ Viary _$ViaryFromJson(Map<String, dynamic> json) {
 mixin _$Viary {
   String? get id => throw _privateConstructorUsedError;
   String? get sender => throw _privateConstructorUsedError;
-  String get title => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   @ViaryEmotionListJsonConverter()
@@ -41,7 +40,6 @@ abstract class $ViaryCopyWith<$Res> {
   $Res call(
       {String? id,
       String? sender,
-      String title,
       String message,
       DateTime date,
       @ViaryEmotionListJsonConverter() List<ViaryEmotion> emotions});
@@ -62,7 +60,6 @@ class _$ViaryCopyWithImpl<$Res, $Val extends Viary>
   $Res call({
     Object? id = freezed,
     Object? sender = freezed,
-    Object? title = null,
     Object? message = null,
     Object? date = null,
     Object? emotions = null,
@@ -76,10 +73,6 @@ class _$ViaryCopyWithImpl<$Res, $Val extends Viary>
           ? _value.sender
           : sender // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -105,7 +98,6 @@ abstract class _$$_ViaryCopyWith<$Res> implements $ViaryCopyWith<$Res> {
   $Res call(
       {String? id,
       String? sender,
-      String title,
       String message,
       DateTime date,
       @ViaryEmotionListJsonConverter() List<ViaryEmotion> emotions});
@@ -122,7 +114,6 @@ class __$$_ViaryCopyWithImpl<$Res> extends _$ViaryCopyWithImpl<$Res, _$_Viary>
   $Res call({
     Object? id = freezed,
     Object? sender = freezed,
-    Object? title = null,
     Object? message = null,
     Object? date = null,
     Object? emotions = null,
@@ -136,10 +127,6 @@ class __$$_ViaryCopyWithImpl<$Res> extends _$ViaryCopyWithImpl<$Res, _$_Viary>
           ? _value.sender
           : sender // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: null == title
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
-              as String,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -162,7 +149,6 @@ class _$_Viary extends _Viary with DiagnosticableTreeMixin {
   const _$_Viary(
       {this.id,
       this.sender,
-      required this.title,
       required this.message,
       required this.date,
       @ViaryEmotionListJsonConverter()
@@ -178,8 +164,6 @@ class _$_Viary extends _Viary with DiagnosticableTreeMixin {
   @override
   final String? sender;
   @override
-  final String title;
-  @override
   final String message;
   @override
   final DateTime date;
@@ -194,7 +178,7 @@ class _$_Viary extends _Viary with DiagnosticableTreeMixin {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'Viary(id: $id, sender: $sender, title: $title, message: $message, date: $date, emotions: $emotions)';
+    return 'Viary(id: $id, sender: $sender, message: $message, date: $date, emotions: $emotions)';
   }
 
   @override
@@ -204,7 +188,6 @@ class _$_Viary extends _Viary with DiagnosticableTreeMixin {
       ..add(DiagnosticsProperty('type', 'Viary'))
       ..add(DiagnosticsProperty('id', id))
       ..add(DiagnosticsProperty('sender', sender))
-      ..add(DiagnosticsProperty('title', title))
       ..add(DiagnosticsProperty('message', message))
       ..add(DiagnosticsProperty('date', date))
       ..add(DiagnosticsProperty('emotions', emotions));
@@ -217,7 +200,6 @@ class _$_Viary extends _Viary with DiagnosticableTreeMixin {
             other is _$_Viary &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.sender, sender) || other.sender == sender) &&
-            (identical(other.title, title) || other.title == title) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.date, date) || other.date == date) &&
             const DeepCollectionEquality().equals(other._emotions, _emotions));
@@ -225,7 +207,7 @@ class _$_Viary extends _Viary with DiagnosticableTreeMixin {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, sender, title, message, date,
+  int get hashCode => Object.hash(runtimeType, id, sender, message, date,
       const DeepCollectionEquality().hash(_emotions));
 
   @JsonKey(ignore: true)
@@ -246,7 +228,6 @@ abstract class _Viary extends Viary {
   const factory _Viary(
           {final String? id,
           final String? sender,
-          required final String title,
           required final String message,
           required final DateTime date,
           @ViaryEmotionListJsonConverter() final List<ViaryEmotion> emotions}) =
@@ -259,8 +240,6 @@ abstract class _Viary extends Viary {
   String? get id;
   @override
   String? get sender;
-  @override
-  String get title;
   @override
   String get message;
   @override

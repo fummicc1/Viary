@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
+import 'package:viary/ui/viary_list/notifier.dart';
 import 'package:viary/ui/write_viary/state.dart';
 
 class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
@@ -39,6 +40,7 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
       Viary viary = state.viary;
       viary = viary.copyWith(
         message: state.message,
+        date: state.date ?? DateTime.now(),
       );
       final emotionViary = await _viaryRepository.refreshEmotions(
         viary: viary,
@@ -73,25 +75,11 @@ class WriteViaryNotifier extends StateNotifier<WriteViaryState> {
     );
   }
 
-  void updateTitle(String title) {
-    state = state.copyWith(
-        viary: state.viary.copyWith(
-      title: title,
-    ));
-  }
-
   void addPeriodToTemporaryWords() {
     state = state.copyWith(
       temporaryWords: state.temporaryWords +
           (state.currentLocaleId.contains("ja") ? "。" : "."),
     );
-  }
-
-  void updateDate(DateTime dateTime) {
-    state = state.copyWith(
-        viary: state.viary.copyWith(
-      date: dateTime,
-    ));
   }
 
   void cancelTemporaryMessage() {
@@ -201,9 +189,13 @@ final writeViaryProvider =
     StateNotifierProvider.autoDispose<WriteViaryNotifier, WriteViaryState>(
         (ref) {
   final ViaryRepository viaryRepository = ref.watch(viaryRepositoryProvider);
+  final selecteDate = ref.watch(viaryListProvider).selectedDate;
   final viary = viaryRepository.generateNewViary();
   return WriteViaryNotifier(
-    WriteViaryState(viary: viary),
+    WriteViaryState(
+      viary: viary,
+      date: selecteDate,
+    ),
     viaryRepository: viaryRepository,
   );
 });

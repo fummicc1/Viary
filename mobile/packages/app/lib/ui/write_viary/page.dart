@@ -1,3 +1,4 @@
+import 'package:domain/utils/datetime.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -5,7 +6,9 @@ import 'package:viary/ui/root/notifier.dart';
 import 'package:viary/ui/write_viary/notifier.dart';
 
 class WriteViaryPage extends HookConsumerWidget {
-  const WriteViaryPage({Key? key}) : super(key: key);
+  const WriteViaryPage({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -72,7 +75,7 @@ class WriteViaryPage extends HookConsumerWidget {
     }
     return Scaffold(
       appBar: AppBar(
-        title: const Text("新規作成"),
+        title: Text(state.date != null ? "新規作成 (${state.date!.format()})" : "新規作成"),
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
