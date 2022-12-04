@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:viary/ui/root/notifier.dart';
 import 'package:viary/ui/write_viary/notifier.dart';
 
-class WriteViaryPage extends ConsumerWidget {
+class WriteViaryPage extends HookConsumerWidget {
   const WriteViaryPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(writeViaryProvider);
+    final scrollController = useScrollController();
+    final textEditController = useTextEditingController(text: state.message);
+    scrollController.addListener(() {
+      primaryFocus?.unfocus();
+    });
+    textEditController.addListener(() {
+      if (state.message != textEditController.text && !state.isSpeeching) {
+        ref
+            .read(writeViaryProvider.notifier)
+            .directlyEditMessage(textEditController.text);
+      }
+    });
     if (state.showDetermineDialog) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showDialog(
@@ -38,8 +51,13 @@ class WriteViaryPage extends ConsumerWidget {
                   ),
                   TextButton(
                       onPressed: () {
-                        ref.read(writeViaryProvider.notifier).stopSpeech();
                         Navigator.of(context).pop();
+                        ref.read(writeViaryProvider.notifier).stopSpeech(
+                              clearTemporaryWords: true,
+                            );
+                        ref
+                            .read(writeViaryProvider.notifier)
+                            .cancelTemporaryMessage();
                       },
                       child: const Text(
                         "キャンセル",
@@ -55,6 +73,12 @@ class WriteViaryPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("新規作成"),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(Icons.close),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(
@@ -64,6 +88,7 @@ class WriteViaryPage extends ConsumerWidget {
         child: Stack(
           children: [
             SingleChildScrollView(
+              controller: scrollController,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
@@ -74,13 +99,13 @@ class WriteViaryPage extends ConsumerWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        state.viary.message,
+                      child: SelectableText(
+                        state.message,
                         style: Theme.of(context).textTheme.titleLarge?.merge(
-                          const TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
+                              const TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
                       ),
                     ),
                   ),
@@ -117,19 +142,48 @@ class WriteViaryPage extends ConsumerWidget {
                           onPressed: () async {
                             state.isSpeeching
                                 ? await ref
-                                .read(writeViaryProvider.notifier)
-                                .stopSpeech()
+                                    .read(writeViaryProvider.notifier)
+                                    .stopSpeech()
                                 : await ref
-                                .read(writeViaryProvider.notifier)
-                                .startSpeech();
+                                    .read(writeViaryProvider.notifier)
+                                    .startSpeech();
                           },
                           icon: state.isSpeeching
                               ? const Icon(Icons.mic)
                               : const Icon(Icons.mic_off),
                           label: state.isSpeeching
-                              ? const Text("マイク: ON")
-                              : const Text("マイク: OFF"),
+                              ? const Text("終了")
+                              : const Text("開始"),
                         ),
+                        state.isSpeeching
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        ref
+                                            .read(writeViaryProvider.notifier)
+                                            .addPeriodToTemporaryWords();
+                                      },
+                                      child: const Text("ピリオド(.)をつける"),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                      onPressed: () async {
+                                        ref
+                                            .read(writeViaryProvider.notifier)
+                                            .clearTemporaryMessage();
+                                      },
+                                      child: const Text("クリア"),
+                                    ),
+                                  )
+                                ],
+                              )
+                            : const SizedBox(),
                         const SizedBox(
                           height: 16,
                         ),
@@ -142,21 +196,27 @@ class WriteViaryPage extends ConsumerWidget {
                       child: Wrap(
                         direction: Axis.horizontal,
                         children: state.availableLocales.map((locale) {
-                          final bool isSelected = locale == state.currentLocale;
-                          return GestureDetector(
-                            onTap: () {
-                              ref
-                                  .read(writeViaryProvider.notifier)
-                                  .updateLocale(locale);
-                            },
-                            child: Chip(
-                              backgroundColor: isSelected
-                                  ? Theme.of(context).primaryColor
-                                  : Colors.transparent,
-                              label: Container(
-                                color: isSelected
-                                    ? Theme.of(context).primaryColor
-                                    : Colors.transparent,
+                          final bool isSelected =
+                              locale.localeId == state.currentLocaleId;
+                          return Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                ref
+                                    .read(writeViaryProvider.notifier)
+                                    .updateLocale(locale);
+                              },
+                              child: Container(
+                                padding: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: isSelected
+                                      ? Theme.of(context).primaryColor
+                                      : Colors.transparent,
+                                  border: Border.all(
+                                    color: Theme.of(context).dividerColor,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
                                 child: Text(locale.name),
                               ),
                             ),
@@ -170,20 +230,25 @@ class WriteViaryPage extends ConsumerWidget {
             ),
             state.isLoading
                 ? const Center(
-              child: CircularProgressIndicator(),
-            )
+                    child: CircularProgressIndicator(),
+                  )
                 : const SizedBox(),
           ],
         ),
-
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
-          await ref.read(writeViaryProvider.notifier).save();
+          final isSuccessful =
+              await ref.read(writeViaryProvider.notifier).save();
+          if (!isSuccessful) {
+            return;
+          }
           Future(() async {
             await ref.read(rootProvider.notifier).fetchStatus();
           });
-          if (Navigator.of(context).canPop()) Navigator.of(context).pop();
+          if (Navigator.of(context).canPop()) {
+            Navigator.of(context).pop();
+          }
         },
         label: const Text("保存"),
         icon: const Icon(Icons.save),

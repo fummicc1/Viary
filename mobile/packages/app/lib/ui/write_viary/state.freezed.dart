@@ -20,8 +20,9 @@ mixin _$WriteViaryState {
   bool get isSpeeching => throw _privateConstructorUsedError;
   bool get isLoading => throw _privateConstructorUsedError;
   String get temporaryWords => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
   bool get showDetermineDialog => throw _privateConstructorUsedError;
-  LocaleName? get currentLocale => throw _privateConstructorUsedError;
+  String get currentLocaleId => throw _privateConstructorUsedError;
   List<LocaleName> get availableLocales => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -40,8 +41,9 @@ abstract class $WriteViaryStateCopyWith<$Res> {
       bool isSpeeching,
       bool isLoading,
       String temporaryWords,
+      String message,
       bool showDetermineDialog,
-      LocaleName? currentLocale,
+      String currentLocaleId,
       List<LocaleName> availableLocales});
 
   $ViaryCopyWith<$Res> get viary;
@@ -64,8 +66,9 @@ class _$WriteViaryStateCopyWithImpl<$Res, $Val extends WriteViaryState>
     Object? isSpeeching = null,
     Object? isLoading = null,
     Object? temporaryWords = null,
+    Object? message = null,
     Object? showDetermineDialog = null,
-    Object? currentLocale = freezed,
+    Object? currentLocaleId = null,
     Object? availableLocales = null,
   }) {
     return _then(_value.copyWith(
@@ -85,14 +88,18 @@ class _$WriteViaryStateCopyWithImpl<$Res, $Val extends WriteViaryState>
           ? _value.temporaryWords
           : temporaryWords // ignore: cast_nullable_to_non_nullable
               as String,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
       showDetermineDialog: null == showDetermineDialog
           ? _value.showDetermineDialog
           : showDetermineDialog // ignore: cast_nullable_to_non_nullable
               as bool,
-      currentLocale: freezed == currentLocale
-          ? _value.currentLocale
-          : currentLocale // ignore: cast_nullable_to_non_nullable
-              as LocaleName?,
+      currentLocaleId: null == currentLocaleId
+          ? _value.currentLocaleId
+          : currentLocaleId // ignore: cast_nullable_to_non_nullable
+              as String,
       availableLocales: null == availableLocales
           ? _value.availableLocales
           : availableLocales // ignore: cast_nullable_to_non_nullable
@@ -122,8 +129,9 @@ abstract class _$$_WriteViaryStateCopyWith<$Res>
       bool isSpeeching,
       bool isLoading,
       String temporaryWords,
+      String message,
       bool showDetermineDialog,
-      LocaleName? currentLocale,
+      String currentLocaleId,
       List<LocaleName> availableLocales});
 
   @override
@@ -145,8 +153,9 @@ class __$$_WriteViaryStateCopyWithImpl<$Res>
     Object? isSpeeching = null,
     Object? isLoading = null,
     Object? temporaryWords = null,
+    Object? message = null,
     Object? showDetermineDialog = null,
-    Object? currentLocale = freezed,
+    Object? currentLocaleId = null,
     Object? availableLocales = null,
   }) {
     return _then(_$_WriteViaryState(
@@ -166,14 +175,18 @@ class __$$_WriteViaryStateCopyWithImpl<$Res>
           ? _value.temporaryWords
           : temporaryWords // ignore: cast_nullable_to_non_nullable
               as String,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
       showDetermineDialog: null == showDetermineDialog
           ? _value.showDetermineDialog
           : showDetermineDialog // ignore: cast_nullable_to_non_nullable
               as bool,
-      currentLocale: freezed == currentLocale
-          ? _value.currentLocale
-          : currentLocale // ignore: cast_nullable_to_non_nullable
-              as LocaleName?,
+      currentLocaleId: null == currentLocaleId
+          ? _value.currentLocaleId
+          : currentLocaleId // ignore: cast_nullable_to_non_nullable
+              as String,
       availableLocales: null == availableLocales
           ? _value._availableLocales
           : availableLocales // ignore: cast_nullable_to_non_nullable
@@ -190,8 +203,9 @@ class _$_WriteViaryState implements _WriteViaryState {
       this.isSpeeching = false,
       this.isLoading = false,
       this.temporaryWords = "",
+      this.message = "",
       this.showDetermineDialog = false,
-      this.currentLocale,
+      this.currentLocaleId = "ja-JP",
       final List<LocaleName> availableLocales = const []})
       : _availableLocales = availableLocales;
 
@@ -208,9 +222,13 @@ class _$_WriteViaryState implements _WriteViaryState {
   final String temporaryWords;
   @override
   @JsonKey()
+  final String message;
+  @override
+  @JsonKey()
   final bool showDetermineDialog;
   @override
-  final LocaleName? currentLocale;
+  @JsonKey()
+  final String currentLocaleId;
   final List<LocaleName> _availableLocales;
   @override
   @JsonKey()
@@ -221,7 +239,7 @@ class _$_WriteViaryState implements _WriteViaryState {
 
   @override
   String toString() {
-    return 'WriteViaryState(viary: $viary, isSpeeching: $isSpeeching, isLoading: $isLoading, temporaryWords: $temporaryWords, showDetermineDialog: $showDetermineDialog, currentLocale: $currentLocale, availableLocales: $availableLocales)';
+    return 'WriteViaryState(viary: $viary, isSpeeching: $isSpeeching, isLoading: $isLoading, temporaryWords: $temporaryWords, message: $message, showDetermineDialog: $showDetermineDialog, currentLocaleId: $currentLocaleId, availableLocales: $availableLocales)';
   }
 
   @override
@@ -236,10 +254,11 @@ class _$_WriteViaryState implements _WriteViaryState {
                 other.isLoading == isLoading) &&
             (identical(other.temporaryWords, temporaryWords) ||
                 other.temporaryWords == temporaryWords) &&
+            (identical(other.message, message) || other.message == message) &&
             (identical(other.showDetermineDialog, showDetermineDialog) ||
                 other.showDetermineDialog == showDetermineDialog) &&
-            (identical(other.currentLocale, currentLocale) ||
-                other.currentLocale == currentLocale) &&
+            (identical(other.currentLocaleId, currentLocaleId) ||
+                other.currentLocaleId == currentLocaleId) &&
             const DeepCollectionEquality()
                 .equals(other._availableLocales, _availableLocales));
   }
@@ -251,8 +270,9 @@ class _$_WriteViaryState implements _WriteViaryState {
       isSpeeching,
       isLoading,
       temporaryWords,
+      message,
       showDetermineDialog,
-      currentLocale,
+      currentLocaleId,
       const DeepCollectionEquality().hash(_availableLocales));
 
   @JsonKey(ignore: true)
@@ -268,8 +288,9 @@ abstract class _WriteViaryState implements WriteViaryState {
       final bool isSpeeching,
       final bool isLoading,
       final String temporaryWords,
+      final String message,
       final bool showDetermineDialog,
-      final LocaleName? currentLocale,
+      final String currentLocaleId,
       final List<LocaleName> availableLocales}) = _$_WriteViaryState;
 
   @override
@@ -281,9 +302,11 @@ abstract class _WriteViaryState implements WriteViaryState {
   @override
   String get temporaryWords;
   @override
+  String get message;
+  @override
   bool get showDetermineDialog;
   @override
-  LocaleName? get currentLocale;
+  String get currentLocaleId;
   @override
   List<LocaleName> get availableLocales;
   @override

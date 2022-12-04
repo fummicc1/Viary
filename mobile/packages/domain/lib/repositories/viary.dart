@@ -113,6 +113,11 @@ class ViaryRepositoryImpl implements ViaryRepository {
 
   @override
   Future<void> update({required String id, required Viary viary}) async {
+    List<ViaryEmotion> emotions = List.from(viary.emotions);
+    emotions.sort((a, b) => b.score.compareTo(a.score));
+    viary = viary.copyWith(
+      emotions: emotions,
+    );
     await collectionReference.doc(id).set(
           viary,
           SetOptions(merge: true),
@@ -124,7 +129,8 @@ class ViaryRepositoryImpl implements ViaryRepository {
     required Viary viary,
     required String language,
   }) async {
-    final response = await _apiClient.get("text2emotion?text=${viary.message}&lang=$language");
+    final response = await _apiClient
+        .get("text2emotion?text=${viary.message}&lang=$language");
     final jsonResponse = jsonDecode(response);
     List results = jsonResponse["results"] as List;
     if (results.isEmpty) {
@@ -132,10 +138,19 @@ class ViaryRepositoryImpl implements ViaryRepository {
     }
     results = results[0] as List;
     List<ViaryEmotion> emotions = [];
-    for (final result in results) {
-      final emotion = Emotion.values.firstWhere(
-            (element) => element.name == result["label"],
-      );
+    for (final emotion in Emotion.values) {
+      Map<String, dynamic> result;
+      if (!results.map((e) => e["label"]).contains(emotion.name)) {
+        result = {
+          "score": 0.0,
+        };
+      } else {
+        result = results.firstWhere(
+          (element) {
+            return element["label"] == emotion.name;
+          },
+        );
+      }
       final score = ((result["score"] as double) * 100).toInt();
       final viaryEmotion = ViaryEmotion(
         sentence: viary.message,
@@ -144,6 +159,7 @@ class ViaryRepositoryImpl implements ViaryRepository {
       );
       emotions.add(viaryEmotion);
     }
+    emotions.sort((a, b) => b.score.compareTo(a.score));
     viary = viary.copyWith(
       emotions: emotions,
     );

@@ -25,7 +25,11 @@ class Viary with _$Viary {
 
   ViaryEmotion? get bestEmotion {
     // To make emotions modifiable, wrap it with `List.from`.
-    List<ViaryEmotion> emotions = List.from(this.emotions);
+    List<ViaryEmotion> emotions = List.from(
+      this.emotions.where(
+            (element) => element.emotion != Emotion.neutral,
+          ),
+    );
     emotions.sort((a, b) => b.score.compareTo(a.score));
     if (emotions.isEmpty) {
       return null;
@@ -42,5 +46,6 @@ class ViaryEmotion with _$ViaryEmotion {
     @EmotionJsonConverter() @Default(Emotion.unknown) Emotion emotion,
   }) = _ViaryEmotion;
 
-  factory ViaryEmotion.fromJson(Map<String, dynamic> json) => _$ViaryEmotionFromJson(json);
+  factory ViaryEmotion.fromJson(Map<String, dynamic> json) =>
+      _$ViaryEmotionFromJson(json);
 }

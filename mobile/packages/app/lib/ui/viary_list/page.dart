@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:viary/ui/root/notifier.dart';
 import 'package:viary/ui/root/state.dart';
 import 'package:domain/utils/datetime.dart';
+import 'package:viary/ui/viary_detail/page.dart';
+import 'package:viary/ui/viary_detail/state.dart';
 import 'package:viary/ui/write_viary/page.dart';
 import 'package:domain/entities/emotion.dart';
 
@@ -19,12 +21,22 @@ class ViaryListPage extends ConsumerWidget {
         title: const Text("一覧"),
       ),
       body: ListView.builder(
-          shrinkWrap: true,
-          itemCount: rootState.viaries.length,
-          itemBuilder: (context, index) {
-            Viary viary = rootState.viaries[index];
-            return Padding(
-                padding: const EdgeInsets.all(8.0),
+        shrinkWrap: true,
+        itemCount: rootState.viaries.length,
+        itemBuilder: (context, index) {
+          Viary viary = rootState.viaries[index];
+          return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () {
+                  final route = MaterialPageRoute(
+                    builder: (context) => ViaryDetailPage(
+                      viaryID: viary.id!,
+                    ),
+                    settings: const RouteSettings(name: "viary_detail/"),
+                  );
+                  Navigator.of(context).push(route);
+                },
                 child: Card(
                   child: Column(
                     children: [
@@ -32,80 +44,53 @@ class ViaryListPage extends ConsumerWidget {
                         title: Text(viary.title),
                         subtitle: Text(viary.message),
                         trailing: Text(viary.date.format()),
-                        onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                final TextEditingController
-                                    textEditingController =
-                                    TextEditingController(text: viary.message);
-                                textEditingController.addListener(() {
-                                  viary = viary.copyWith(
-                                    message: textEditingController.text,
-                                  );
-                                });
-                                return AlertDialog(
-                                  content: TextField(
-                                    controller: textEditingController,
-                                    maxLines: null,
-                                    scrollPhysics:
-                                        const NeverScrollableScrollPhysics(),
-                                  ),
-                                  actions: [
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text("キャンセル"),
-                                    ),
-                                    TextButton(
-                                      onPressed: () async {
-                                        await ref
-                                            .read(viaryRepositoryProvider)
-                                            .update(
-                                                id: viary.id ?? "",
-                                                viary: viary);
-                                        Navigator.of(context).pop();
-                                      },
-                                      child: const Text("保存"),
-                                    ),
-                                  ],
-                                );
-                              });
-                        },
                       ),
-                      viary.bestEmotion != null
+                      viary.emotions.isNotEmpty
                           ? Column(
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.all(6.0),
-                                  child: Text(
-                                    "${viary.bestEmotion!.emotion.message}の感情",
-                                    textAlign: TextAlign.end,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodySmall
-                                        ?.apply(
-                                          fontWeightDelta: 2,
-                                          color:
-                                              viary.bestEmotion!.emotion.color,
+                              children: viary.emotions
+                                  .toList()
+                                  .map(
+                                    (viaryEmotion) => Row(
+                                      children: [
+                                        SizedBox(
+                                          width:
+                                              MediaQuery.of(context).size.width *
+                                                  0.75,
+                                          child: LinearProgressIndicator(
+                                            value: viaryEmotion.score / 100,
+                                            color: viaryEmotion.emotion.color,
+                                            backgroundColor: viaryEmotion
+                                                .emotion.color
+                                                .withOpacity(0.3),
+                                          ),
                                         ),
-                                  ),
-                                ),
-                                LinearProgressIndicator(
-                                  value: viary.bestEmotion!.score / 100,
-                                  color: viary.bestEmotion!.emotion.color,
-                                  backgroundColor: viary
-                                      .bestEmotion!.emotion.color
-                                      .withOpacity(0.3),
-                                ),
-                              ],
+                                        Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child: Text(
+                                            viaryEmotion.emotion.message,
+                                            textAlign: TextAlign.end,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodySmall
+                                                ?.apply(
+                                                  fontWeightDelta: 2,
+                                                  color:
+                                                      viaryEmotion.emotion.color,
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                  .toList(),
                             )
-                          : const SizedBox(),
+                          : const SizedBox()
                     ],
                   ),
-                ));
-          }),
+                ),
+              ));
+        },
+      ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
           Navigator.of(context).push(

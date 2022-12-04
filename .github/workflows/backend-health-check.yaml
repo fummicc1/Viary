@@ -1,0 +1,16 @@
+on:
+  schedule:
+    - cron: '00 9 * * *'
+
+defaults:
+  run:
+    working-directory: scripts
+
+jobs:
+  test_schedule:
+    runs-on: ubuntu-latest    
+    steps:
+      - uses: actions/checkout@v3
+      - name: call backend endpoint
+        run: ./healthcheck.sh
+      
