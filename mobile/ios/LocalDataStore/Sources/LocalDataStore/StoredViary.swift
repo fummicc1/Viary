@@ -2,8 +2,9 @@ import Foundation
 import RealmSwift
 
 public class StoredViary: Object {
-    @Persisted(primaryKey: true) var id: String = UUID().uuidString
+    @Persisted(primaryKey: true) public var id: String = UUID().uuidString
     @Persisted public var message: String = ""
+    @Published public var language: String = "en"
     @Persisted public var date: Date = Date()
     @Persisted public var emotions: List<StoredEmotion> = .init()
 

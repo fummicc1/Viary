@@ -1,7 +1,7 @@
 import Foundation
 import Moya
 
-public protocol APIClient {
+public protocol APIClient<Target> {
     associatedtype Target: TargetType
     func request<Response: Decodable>(with target: Target) async throws -> Response
     func request(with target: Target) async throws
