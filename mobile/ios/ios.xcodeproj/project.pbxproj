@@ -56,6 +56,7 @@
 		D30F2502296B40F20028E0B5 /* Repositories */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Repositories; sourceTree = "<group>"; };
 		D30F2503296B41010028E0B5 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
 		D30F250B296B41120028E0B5 /* ViaryListFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryListFeature; path = Features/ViaryListFeature; sourceTree = "<group>"; };
+		D30F250C296B4C1C0028E0B5 /* LocalDataStore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LocalDataStore; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +156,7 @@
 				D30F2502296B40F20028E0B5 /* Repositories */,
 				D30F2503296B41010028E0B5 /* Networking */,
 				D30F250B296B41120028E0B5 /* ViaryListFeature */,
+				D30F250C296B4C1C0028E0B5 /* LocalDataStore */,
 			);
 			name = Packages;
 			sourceTree = "<group>";

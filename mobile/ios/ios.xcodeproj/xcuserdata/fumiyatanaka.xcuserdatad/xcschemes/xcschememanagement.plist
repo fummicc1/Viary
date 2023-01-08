@@ -4,12 +4,47 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>GettingStarted (Playground) 1.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>52</integer>
+		</dict>
+		<key>GettingStarted (Playground) 2.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>53</integer>
+		</dict>
+		<key>GettingStarted (Playground).xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>51</integer>
+		</dict>
 		<key>ReactiveSwift (Playground) 1.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 			<key>orderHint</key>
 			<integer>6</integer>
+		</dict>
+		<key>ReactiveSwift (Playground) 10.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>49</integer>
+		</dict>
+		<key>ReactiveSwift (Playground) 11.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>50</integer>
 		</dict>
 		<key>ReactiveSwift (Playground) 2.xcscheme</key>
 		<dict>
@@ -60,6 +95,13 @@
 			<key>orderHint</key>
 			<integer>34</integer>
 		</dict>
+		<key>ReactiveSwift (Playground) 9.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>48</integer>
+		</dict>
 		<key>ReactiveSwift (Playground).xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -73,6 +115,20 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>9</integer>
+		</dict>
+		<key>ReactiveSwift-UIExamples (Playground) 10.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>46</integer>
+		</dict>
+		<key>ReactiveSwift-UIExamples (Playground) 11.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>47</integer>
 		</dict>
 		<key>ReactiveSwift-UIExamples (Playground) 2.xcscheme</key>
 		<dict>
@@ -123,6 +179,13 @@
 			<key>orderHint</key>
 			<integer>31</integer>
 		</dict>
+		<key>ReactiveSwift-UIExamples (Playground) 9.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>45</integer>
+		</dict>
 		<key>ReactiveSwift-UIExamples (Playground).xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -136,6 +199,20 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>12</integer>
+		</dict>
+		<key>Rx (Playground) 10.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>43</integer>
+		</dict>
+		<key>Rx (Playground) 11.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>44</integer>
 		</dict>
 		<key>Rx (Playground) 2.xcscheme</key>
 		<dict>
@@ -185,6 +262,13 @@
 			<false/>
 			<key>orderHint</key>
 			<integer>40</integer>
+		</dict>
+		<key>Rx (Playground) 9.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+			<key>orderHint</key>
+			<integer>42</integer>
 		</dict>
 		<key>Rx (Playground).xcscheme</key>
 		<dict>
