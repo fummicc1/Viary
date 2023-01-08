@@ -9,7 +9,6 @@
   <component name="ChangeListManager">
     <list default="true" id="70441a38-bd2e-4129-9832-bd9f053bd0da" name="Changes" comment="&#10;&#10;; 🐛  :bug: バグ修正&#10;; 👍  :+1: 機能改善&#10;; ✨  :sparkles: 部分的な機能追加&#10;; 🎨  :art: デザイン変更のみ&#10;; 💢  :anger: コンフリクト&#10;; 🚧  :construction: WIP&#10;; 📝  :memo: 文言修正&#10;; ♻️  :recycle: リファクタリング&#10;; 🔥  :fire: 不要な機能・使われなくなった機能の削除&#10;; 💚  :green_heart: テストやCIの修正・改善&#10;; 👕  :shirt: Lintエラーの修正やコードスタイルの修正&#10;; 🚀  :rocket: パフォーマンス改善&#10;; 🆙  :up: 依存パッケージなどのアップデート&#10;; 👮  :cop: セキュリティ関連の改善&#10;; ⚙   :gear: config変更&#10;; 📚  :books: ドキュメント">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/packages/app/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/packages/app/lib/main.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,7 +110,7 @@
       <breakpoints>
         <line-breakpoint suspend="THREAD" type="Dart">
           <url>file://$PROJECT_DIR$/../../../flutter/packages/flutter/lib/src/services/message_codecs.dart</url>
-          <line>425</line>
+          <line>465</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
       </breakpoints>

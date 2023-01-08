@@ -1,6 +1,0 @@
-name: viary
-packages:
-  - packages/**
-command:
-  bootstrap:
-    usePubspecOverrides: true
