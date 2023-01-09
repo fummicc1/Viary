@@ -9,6 +9,7 @@ import Tagged
 public protocol ViaryRepository {
     var myViaries: AnyPublisher<IdentifiedArrayOf<Viary>, Never> { get }
 
+    @discardableResult
     func load() async throws -> IdentifiedArrayOf<Viary>
     func create(viary: Viary) async throws
     func delete(id: Tagged<Viary, String>) async throws
@@ -30,6 +31,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
         myViariesSubject.eraseToAnyPublisher()
     }
 
+    @discardableResult
     public func load() async throws -> IdentifiedArrayOf<Viary> {
         let latest = try await StoredViary.fetchAll()
         let viaries = latest.map { storedViary in

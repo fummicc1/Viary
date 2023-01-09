@@ -8,18 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		D30F24CE296B3EF40028E0B5 /* iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24CD296B3EF40028E0B5 /* iosApp.swift */; };
-		D30F24D0296B3EF40028E0B5 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24CF296B3EF40028E0B5 /* ContentView.swift */; };
 		D30F24D2296B3EF50028E0B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30F24D1296B3EF50028E0B5 /* Assets.xcassets */; };
 		D30F24D6296B3EF50028E0B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30F24D5296B3EF50028E0B5 /* Preview Assets.xcassets */; };
 		D30F24E0296B3EF50028E0B5 /* iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24DF296B3EF50028E0B5 /* iosTests.swift */; };
 		D30F24EA296B3EF50028E0B5 /* iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24E9296B3EF50028E0B5 /* iosUITests.swift */; };
 		D30F24EC296B3EF50028E0B5 /* iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24EB296B3EF50028E0B5 /* iosUITestsLaunchTests.swift */; };
-		D30F24FA296B40390028E0B5 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D30F24F9296B40390028E0B5 /* ComposableArchitecture */; };
-		D30F24FD296B40480028E0B5 /* SwiftUINavigation in Frameworks */ = {isa = PBXBuildFile; productRef = D30F24FC296B40480028E0B5 /* SwiftUINavigation */; };
 		D30F24FF296B40DB0028E0B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D30F24FE296B40DB0028E0B5 /* GoogleService-Info.plist */; };
-		D30F2506296B410A0028E0B5 /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = D30F2505296B410A0028E0B5 /* Entities */; };
-		D30F2508296B410A0028E0B5 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = D30F2507296B410A0028E0B5 /* Networking */; };
-		D30F250A296B410A0028E0B5 /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = D30F2509296B410A0028E0B5 /* Repositories */; };
+		D3A5710F296C81630083B71B /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = D3A5710E296C81630083B71B /* Entities */; };
+		D3A57116296C81AC0083B71B /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = D3A57115296C81AC0083B71B /* Repositories */; };
+		D3C58E65296C86040061B391 /* ViaryListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D3C58E64296C86040061B391 /* ViaryListFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,7 +39,6 @@
 /* Begin PBXFileReference section */
 		D30F24CA296B3EF40028E0B5 /* ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30F24CD296B3EF40028E0B5 /* iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosApp.swift; sourceTree = "<group>"; };
-		D30F24CF296B3EF40028E0B5 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D30F24D1296B3EF50028E0B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D30F24D3296B3EF50028E0B5 /* ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ios.entitlements; sourceTree = "<group>"; };
 		D30F24D5296B3EF50028E0B5 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -52,11 +48,9 @@
 		D30F24E9296B3EF50028E0B5 /* iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosUITests.swift; sourceTree = "<group>"; };
 		D30F24EB296B3EF50028E0B5 /* iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D30F24FE296B40DB0028E0B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D30F2501296B40E90028E0B5 /* Entities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Entities; sourceTree = "<group>"; };
-		D30F2502296B40F20028E0B5 /* Repositories */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Repositories; sourceTree = "<group>"; };
-		D30F2503296B41010028E0B5 /* Networking */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Networking; sourceTree = "<group>"; };
-		D30F250B296B41120028E0B5 /* ViaryListFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryListFeature; path = Features/ViaryListFeature; sourceTree = "<group>"; };
-		D30F250C296B4C1C0028E0B5 /* LocalDataStore */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = LocalDataStore; sourceTree = "<group>"; };
+		D3A5710D296C81450083B71B /* Entities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Entities; sourceTree = "<group>"; };
+		D3A57114296C81790083B71B /* Repositories */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Repositories; sourceTree = "<group>"; };
+		D3A57117296C81E40083B71B /* ViaryListFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryListFeature; path = Features/ViaryListFeature; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,11 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D30F250A296B410A0028E0B5 /* Repositories in Frameworks */,
-				D30F24FD296B40480028E0B5 /* SwiftUINavigation in Frameworks */,
-				D30F24FA296B40390028E0B5 /* ComposableArchitecture in Frameworks */,
-				D30F2508296B410A0028E0B5 /* Networking in Frameworks */,
-				D30F2506296B410A0028E0B5 /* Entities in Frameworks */,
+				D3A57116296C81AC0083B71B /* Repositories in Frameworks */,
+				D3A5710F296C81630083B71B /* Entities in Frameworks */,
+				D3C58E65296C86040061B391 /* ViaryListFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,7 +84,7 @@
 		D30F24C1296B3EF40028E0B5 = {
 			isa = PBXGroup;
 			children = (
-				D30F2500296B40E90028E0B5 /* Packages */,
+				D3A5710C296C81450083B71B /* Packages */,
 				D30F24CC296B3EF40028E0B5 /* ios */,
 				D30F24DE296B3EF50028E0B5 /* iosTests */,
 				D30F24E8296B3EF50028E0B5 /* iosUITests */,
@@ -116,7 +108,6 @@
 			children = (
 				D30F24FE296B40DB0028E0B5 /* GoogleService-Info.plist */,
 				D30F24CD296B3EF40028E0B5 /* iosApp.swift */,
-				D30F24CF296B3EF40028E0B5 /* ContentView.swift */,
 				D30F24D1296B3EF50028E0B5 /* Assets.xcassets */,
 				D30F24D3296B3EF50028E0B5 /* ios.entitlements */,
 				D30F24D4296B3EF50028E0B5 /* Preview Content */,
@@ -149,23 +140,21 @@
 			path = iosUITests;
 			sourceTree = "<group>";
 		};
-		D30F2500296B40E90028E0B5 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				D30F2501296B40E90028E0B5 /* Entities */,
-				D30F2502296B40F20028E0B5 /* Repositories */,
-				D30F2503296B41010028E0B5 /* Networking */,
-				D30F250B296B41120028E0B5 /* ViaryListFeature */,
-				D30F250C296B4C1C0028E0B5 /* LocalDataStore */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		D30F2504296B410A0028E0B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D3A5710C296C81450083B71B /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D3A5710D296C81450083B71B /* Entities */,
+				D3A57114296C81790083B71B /* Repositories */,
+				D3A57117296C81E40083B71B /* ViaryListFeature */,
+			);
+			name = Packages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -185,11 +174,9 @@
 			);
 			name = ios;
 			packageProductDependencies = (
-				D30F24F9296B40390028E0B5 /* ComposableArchitecture */,
-				D30F24FC296B40480028E0B5 /* SwiftUINavigation */,
-				D30F2505296B410A0028E0B5 /* Entities */,
-				D30F2507296B410A0028E0B5 /* Networking */,
-				D30F2509296B410A0028E0B5 /* Repositories */,
+				D3A5710E296C81630083B71B /* Entities */,
+				D3A57115296C81AC0083B71B /* Repositories */,
+				D3C58E64296C86040061B391 /* ViaryListFeature */,
 			);
 			productName = ios;
 			productReference = D30F24CA296B3EF40028E0B5 /* ios.app */;
@@ -310,7 +297,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D30F24D0296B3EF40028E0B5 /* ContentView.swift in Sources */,
 				D30F24CE296B3EF40028E0B5 /* iosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -684,27 +670,17 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D30F24F9296B40390028E0B5 /* ComposableArchitecture */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D30F24F8296B40390028E0B5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
-			productName = ComposableArchitecture;
-		};
-		D30F24FC296B40480028E0B5 /* SwiftUINavigation */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D30F24FB296B40480028E0B5 /* XCRemoteSwiftPackageReference "swiftui-navigation" */;
-			productName = SwiftUINavigation;
-		};
-		D30F2505296B410A0028E0B5 /* Entities */ = {
+		D3A5710E296C81630083B71B /* Entities */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Entities;
 		};
-		D30F2507296B410A0028E0B5 /* Networking */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Networking;
-		};
-		D30F2509296B410A0028E0B5 /* Repositories */ = {
+		D3A57115296C81AC0083B71B /* Repositories */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Repositories;
+		};
+		D3C58E64296C86040061B391 /* ViaryListFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ViaryListFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
