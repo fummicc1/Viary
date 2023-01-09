@@ -348,6 +348,7 @@
         <entry key="flutter">
           <value>
             <list>
+              <option value="$USER_HOME$/fvm/versions/3.0.5/packages/flutter/lib" />
               <option value="$PROJECT_DIR$/../../../flutter/packages/flutter/lib" />
             </list>
           </value>
@@ -376,6 +377,7 @@
         <entry key="flutter_localizations">
           <value>
             <list>
+              <option value="$USER_HOME$/fvm/versions/3.0.5/packages/flutter_localizations/lib" />
               <option value="$PROJECT_DIR$/../../../flutter/packages/flutter_localizations/lib" />
             </list>
           </value>
@@ -390,6 +392,7 @@
         <entry key="flutter_test">
           <value>
             <list>
+              <option value="$USER_HOME$/fvm/versions/3.0.5/packages/flutter_test/lib" />
               <option value="$PROJECT_DIR$/../../../flutter/packages/flutter_test/lib" />
             </list>
           </value>
@@ -397,6 +400,7 @@
         <entry key="flutter_web_plugins">
           <value>
             <list>
+              <option value="$USER_HOME$/fvm/versions/3.0.5/packages/flutter_web_plugins/lib" />
               <option value="$PROJECT_DIR$/../../../flutter/packages/flutter_web_plugins/lib" />
             </list>
           </value>
@@ -740,6 +744,7 @@
         <entry key="sky_engine">
           <value>
             <list>
+              <option value="$USER_HOME$/fvm/versions/3.0.5/bin/cache/pkg/sky_engine/lib" />
               <option value="$PROJECT_DIR$/../../../flutter/bin/cache/pkg/sky_engine/lib" />
             </list>
           </value>
@@ -1045,6 +1050,11 @@
       <root url="file://$PROJECT_DIR$/../../../flutter/packages/flutter_localizations/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/packages/flutter_test/lib" />
       <root url="file://$PROJECT_DIR$/../../../flutter/packages/flutter_web_plugins/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/3.0.5/bin/cache/pkg/sky_engine/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/3.0.5/packages/flutter/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/3.0.5/packages/flutter_localizations/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/3.0.5/packages/flutter_test/lib" />
+      <root url="file://$USER_HOME$/fvm/versions/3.0.5/packages/flutter_web_plugins/lib" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

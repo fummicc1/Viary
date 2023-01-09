@@ -30,3 +30,5 @@ doc/api/
 .flutter-plugins-dependencies
 
 
+GoogleService-Info.plist
+google-services.json
