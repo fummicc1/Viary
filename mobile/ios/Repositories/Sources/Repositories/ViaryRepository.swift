@@ -3,7 +3,7 @@ import Entities
 import Foundation
 import IdentifiedCollections
 import LocalDataStore
-import Networking
+import MoyaAPIClient
 import Tagged
 
 public protocol ViaryRepository {

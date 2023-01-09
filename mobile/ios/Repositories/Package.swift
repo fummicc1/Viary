@@ -15,7 +15,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(name: "Networking", path: "../Networking"),
+        .package(url: "https://github.com/fummicc1/MoyaAPIClient", .upToNextMajor(from: "1.0.0")),
         .package(name: "LocalDataStore", path: "../LocalDataStore"),
         .package(name: "Entities", path: "../Entities"),
         .package(url: "https://github.com/pointfreeco/swift-tagged", .upToNextMajor(from: "0.6.0")),
@@ -29,7 +29,7 @@ let package = Package(
         .target(
             name: "Repositories",
             dependencies: [
-                .product(name: "Networking", package: "Networking"),
+                .product(name: "MoyaAPIClient", package: "MoyaAPIClient"),
                 .product(name: "LocalDataStore", package: "LocalDataStore"),
                 .product(name: "Entities", package: "Entities"),
                 .product(name: "Tagged", package: "swift-tagged"),
