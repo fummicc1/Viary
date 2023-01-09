@@ -1,7 +1,7 @@
 import Foundation
 import RealmSwift
 
-public class StoredViary: Object {
+public class StoredViary: Object, ObjectWithList {
     @Persisted(primaryKey: true) public var id: String = UUID().uuidString
     @Persisted public var message: String = ""
     @Published public var language: String = "en"

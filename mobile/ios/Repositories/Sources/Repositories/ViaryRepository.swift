@@ -11,7 +11,7 @@ public protocol ViaryRepository {
 
     func load() async throws -> IdentifiedArrayOf<Viary>
     func create(viary: Viary) async throws
-    func delete(id: Tagged<Viary, String>)
+    func delete(id: Tagged<Viary, String>) async throws
 }
 
 public typealias AppAPIClient = any APIClient<APIRequest>
@@ -56,12 +56,29 @@ extension ViaryRepositoryImpl: ViaryRepository {
 
     public func create(viary: Viary) async throws {
         let newStoredViary = StoredViary()
-        let text = viary.message
+        let message = viary.message
         let lang = viary.lang
-        let resppnse = try await apiClient.request(with: .text2emotion(text: text, lang: lang))
+        let date = viary.date
+        let resppnse: Text2EmotionResponse = try await apiClient.request(with: .text2emotion(text: message, lang: lang))
+        let results = resppnse.results.flatMap { $0 }
+
+        newStoredViary.language = lang.rawValue
+        newStoredViary.message = message
+        newStoredViary.date = date
+        let emotions = results.map({ result in
+            let emotion = StoredEmotion()
+            emotion.kind = result.label
+            emotion.score = Int(result.score * 100)
+            emotion.sentence = message
+            return emotion
+        })
+        newStoredViary.updateListByArray(keyPath: \.emotions, array: emotions)
+        try await newStoredViary.create()
     }
 
-    public func delete(id: Tagged<Viary, String>) {
-
+    public func delete(id: Tagged<Viary, String>) async throws {
+        let predicate = NSPredicate(format: "id = %@", id.rawValue)
+        let viary = try await StoredViary.fetch(by: predicate).first
+        try await viary?.delete()
     }
 }

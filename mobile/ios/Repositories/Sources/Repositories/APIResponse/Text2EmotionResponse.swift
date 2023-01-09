@@ -1,7 +1,7 @@
 import Foundation
 
 public struct Text2EmotionResponse: Decodable {
-    public let result: [[Result]]
+    public let results: [[Result]]
 }
 
 public extension Text2EmotionResponse {
