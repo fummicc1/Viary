@@ -18,9 +18,10 @@ let package = Package(
         .package(name: "Networking", path: "../Networking"),
         .package(name: "LocalDataStore", path: "../LocalDataStore"),
         .package(name: "Entities", path: "../Entities"),
-        .package(url: "https://github.com/pointfreeco/swift-tagged", from: "0.6.0"),
-        .package(url: "https://github.com/pointfreeco/swift-identified-collections", from: "0.6.0"),
+        .package(url: "https://github.com/pointfreeco/swift-tagged", .upToNextMajor(from: "0.6.0")),
+        .package(url: "https://github.com/pointfreeco/swift-identified-collections", .upToNextMajor(from: "0.6.0")),
         .package(url: "https://github.com/Moya/Moya.git", .upToNextMajor(from: "15.0.0")),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "0.1.1")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -34,6 +35,7 @@ let package = Package(
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "IdentifiedCollections", package: "swift-identified-collections"),
                 .product(name: "Moya", package: "Moya"),
+                .product(name: "Dependencies", package: "swift-dependencies"),
             ]
         ),
         .testTarget(
