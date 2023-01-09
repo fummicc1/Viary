@@ -20,6 +20,7 @@
 		D30F2506296B410A0028E0B5 /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = D30F2505296B410A0028E0B5 /* Entities */; };
 		D30F2508296B410A0028E0B5 /* Networking in Frameworks */ = {isa = PBXBuildFile; productRef = D30F2507296B410A0028E0B5 /* Networking */; };
 		D30F250A296B410A0028E0B5 /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = D30F2509296B410A0028E0B5 /* Repositories */; };
+		D35EE9DC296C7A35001F21A4 /* Dependencies in Frameworks */ = {isa = PBXBuildFile; productRef = D35EE9DB296C7A35001F21A4 /* Dependencies */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 				D30F250A296B410A0028E0B5 /* Repositories in Frameworks */,
 				D30F24FD296B40480028E0B5 /* SwiftUINavigation in Frameworks */,
 				D30F24FA296B40390028E0B5 /* ComposableArchitecture in Frameworks */,
+				D35EE9DC296C7A35001F21A4 /* Dependencies in Frameworks */,
 				D30F2508296B410A0028E0B5 /* Networking in Frameworks */,
 				D30F2506296B410A0028E0B5 /* Entities in Frameworks */,
 			);
@@ -190,6 +192,7 @@
 				D30F2505296B410A0028E0B5 /* Entities */,
 				D30F2507296B410A0028E0B5 /* Networking */,
 				D30F2509296B410A0028E0B5 /* Repositories */,
+				D35EE9DB296C7A35001F21A4 /* Dependencies */,
 			);
 			productName = ios;
 			productReference = D30F24CA296B3EF40028E0B5 /* ios.app */;
@@ -705,6 +708,11 @@
 		D30F2509296B410A0028E0B5 /* Repositories */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Repositories;
+		};
+		D35EE9DB296C7A35001F21A4 /* Dependencies */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D30F24F8296B40390028E0B5 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
+			productName = Dependencies;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
