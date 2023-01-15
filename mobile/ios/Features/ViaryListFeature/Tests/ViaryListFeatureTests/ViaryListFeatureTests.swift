@@ -15,7 +15,6 @@ final class ViaryListFeatureTests: XCTestCase {
             reducer: viaryListReducer,
             environment: ViaryListEnv(viaryRepository: viaryRepositoryMock)
         )
-        print(listStub)
         viaryRepositoryMock.loadHandler = { listStub }
         XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
         XCTAssertEqual(store.state.viaries, [])
