@@ -32,7 +32,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fummicc1/MoyaAPIClient",
       "state" : {
-        "revision" : "f9cbfee79ac80cbdeeb9c73fa3c6133df96605a2",
+        "revision" : "74a0d110b5aa48f7dcb2c07312aace5a5dc0b23a",
         "version" : "1.0.0"
       }
     },

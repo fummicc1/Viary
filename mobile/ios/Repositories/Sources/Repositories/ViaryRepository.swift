@@ -6,6 +6,7 @@ import LocalDataStore
 import MoyaAPIClient
 import Tagged
 
+/// @mockable
 public protocol ViaryRepository {
     var myViaries: AnyPublisher<IdentifiedArrayOf<Viary>, Never> { get }
 
