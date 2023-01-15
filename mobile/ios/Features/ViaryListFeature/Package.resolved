@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "moyaapiclient",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fummicc1/MoyaAPIClient",
+      "state" : {
+        "revision" : "38b5298e1515c5631d67ac5b6fa9142e1930335e",
+        "version" : "1.0.1"
+      }
+    },
+    {
       "identity" : "reactiveswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveCocoa/ReactiveSwift.git",

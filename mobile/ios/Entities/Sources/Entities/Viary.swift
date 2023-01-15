@@ -2,7 +2,7 @@ import Foundation
 import IdentifiedCollections
 import Tagged
 
-public struct Viary: Identifiable {
+public struct Viary: Identifiable, Equatable {
     public let id: Tagged<Self, String>
     public var message: String
     public var lang: Lang

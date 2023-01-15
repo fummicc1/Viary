@@ -1,6 +1,6 @@
 import Foundation
 
-public struct Emotion: Identifiable {
+public struct Emotion: Identifiable, Equatable {
     public var sentence: String
     public var score: Int
     public var kind: Kind
@@ -17,7 +17,7 @@ public struct Emotion: Identifiable {
 }
 
 public extension Emotion {
-    enum Kind: String, Identifiable {
+    enum Kind: String, Equatable, Identifiable {
         case anger
         case disgust
         case fear

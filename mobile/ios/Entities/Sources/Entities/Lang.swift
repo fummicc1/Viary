@@ -1,4 +1,4 @@
-public enum Lang: String, ExpressibleByStringLiteral {
+public enum Lang: String, Equatable, ExpressibleByStringLiteral {
     case ja
     case en
 
