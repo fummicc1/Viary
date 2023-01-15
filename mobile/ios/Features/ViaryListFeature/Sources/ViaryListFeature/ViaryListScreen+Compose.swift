@@ -10,9 +10,9 @@ public struct ViaryListState: Equatable {
     public var errorMessage: String?
 }
 
-public enum ViaryListAction {
+public enum ViaryListAction: Equatable {
     case load
-    case loaded(Result<IdentifiedArrayOf<Viary>, Error>)
+    case loaded(TaskResult<IdentifiedArrayOf<Viary>>)
 }
 
 public struct ViaryListEnv {

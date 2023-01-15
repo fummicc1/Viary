@@ -17,6 +17,7 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
         .package(name: "Entities", path: "../../Entities"),
         .package(name: "Repositories", path: "../../Repositories"),
+        .package(name: "Mock", path: "../../Mock"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "0.1.1")),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: "0.49.0")),
         .package(url: "https://github.com/pointfreeco/swift-identified-collections", .upToNextMajor(from: "0.5.0")),
@@ -29,6 +30,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Entities", package: "Entities"),
                 .product(name: "Repositories", package: "Repositories"),
+                .product(name: "Mock", package: "Mock"),
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "IdentifiedCollections", package: "swift-identified-collections"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),                
