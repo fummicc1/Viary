@@ -9,12 +9,13 @@ final class ViaryListFeatureTests: XCTestCase {
     @MainActor
     func testLoad() async throws {
         let viaryRepositoryMock = ViaryRepositoryMock()
-        let listStub: IdentifiedArrayOf<Viary> = .init(repeating: viaryStub(), count: 10)
+        let listStub: IdentifiedArrayOf<Viary> = [viaryStub()]
         let store = TestStore(
             initialState: ViaryListState(),
             reducer: viaryListReducer,
             environment: ViaryListEnv(viaryRepository: viaryRepositoryMock)
         )
+        print(listStub)
         viaryRepositoryMock.loadHandler = { listStub }
         XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
         XCTAssertEqual(store.state.viaries, [])
