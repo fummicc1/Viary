@@ -8,10 +8,10 @@ import ComposableArchitecture
 final class ViaryListFeatureTests: XCTestCase {
     @MainActor
     func testLoad() async throws {
+        // MARK: Assign
         let viaryRepositoryMock = ViaryRepositoryMock()
         let listStub: IdentifiedArrayOf<Viary> = [viaryStub()]
         viaryRepositoryMock.loadHandler = { listStub }
-
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock
         } operation: {
@@ -21,7 +21,7 @@ final class ViaryListFeatureTests: XCTestCase {
             initialState: ViaryList.State(),
             reducer: reducer
         )
-        
+        // MARK: Act, Assert
         XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
         XCTAssertEqual(store.state.viaries, [])
         await store.send(.load)

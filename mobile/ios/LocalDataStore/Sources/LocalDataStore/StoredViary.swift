@@ -1,6 +1,7 @@
 import Foundation
 import RealmSwift
 
+@MainActor
 public class StoredViary: Object, ObjectWithList {
     @Persisted(primaryKey: true) public var id: String = UUID().uuidString
     @Persisted public var message: String = ""
@@ -13,6 +14,7 @@ public class StoredViary: Object, ObjectWithList {
     }
 }
 
+@MainActor
 public extension StoredViary {
     static func fetchAll() async throws -> [StoredViary] {
         let realm = try await Realm()
