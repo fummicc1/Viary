@@ -1,14 +1,10 @@
 import Foundation
+import Entities
 import ComposableArchitecture
 import SwiftUI
 
 public struct ViaryListScreen: View {
-
-    let store: Store<ViaryListState, ViaryListAction>
-
-    public init(store: Store<ViaryListState, ViaryListAction>) {
-        self.store = store
-    }
+    let store: StoreOf<ViaryList>
 
     public var body: some View {
         WithViewStore(store) { viewStore in
