@@ -1,4 +1,4 @@
-# Viary
+# Viary (app is available on `main` branch)
 
 Viary is a voicy diary application with automatic sentiment analysis feature. (currently, working on only iOS.)
 
