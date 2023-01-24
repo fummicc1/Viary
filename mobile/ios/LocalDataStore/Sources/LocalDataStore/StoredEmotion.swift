@@ -1,6 +1,7 @@
 import Foundation
 import RealmSwift
 
+@MainActor
 public class StoredEmotion: Object {
     @Persisted public var sentence: String = ""
     @Persisted public var score: Int = 0

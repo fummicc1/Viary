@@ -36,48 +36,51 @@ extension ViaryRepositoryImpl: ViaryRepository {
     @discardableResult
     public func load() async throws -> IdentifiedArrayOf<Viary> {
         let latest = try await StoredViary.fetchAll()
-        let viaries = latest.map { storedViary in
-            let emotions: [Emotion] = Array(storedViary.emotions.compactMap { storedEmotion in
-                guard let kind = Emotion.Kind(rawValue: storedEmotion.kind) else {
-                    return nil
-                }
-                return Emotion(
-                    sentence: storedEmotion.sentence,
-                    score: storedEmotion.score,
-                    kind: kind
-                )
-            })
-            return Viary(
-                id: .init(storedViary.id),
-                message: storedViary.message,
-                lang: Lang(stringLiteral: storedViary.language),
-                date: storedViary.date,
-                emotions: .init(uniqueElements: emotions)
-            )
-        }
+        let viaries = await MainActor.run(body: {
+            latest.map { storedViary in
+               let emotions: [Emotion] = Array(storedViary.emotions.compactMap { storedEmotion in
+                   guard let kind = Emotion.Kind(rawValue: storedEmotion.kind) else {
+                       return nil
+                   }
+                   return Emotion(
+                       sentence: storedEmotion.sentence,
+                       score: storedEmotion.score,
+                       kind: kind
+                   )
+               })
+               return Viary(
+                   id: .init(storedViary.id),
+                   message: storedViary.message,
+                   lang: Lang(stringLiteral: storedViary.language),
+                   date: storedViary.date,
+                   emotions: .init(uniqueElements: emotions)
+               )
+           }
+        })
         return IdentifiedArrayOf(uniqueElements: viaries)
     }
 
     public func create(viary: Viary) async throws {
-        let newStoredViary = StoredViary()
         let message = viary.message
         let lang = viary.lang
         let date = viary.date
         let resppnse: Text2EmotionResponse = try await apiClient.request(with: .text2emotion(text: message, lang: lang))
         let results = resppnse.results.flatMap { $0 }
-
-        newStoredViary.language = lang.rawValue
-        newStoredViary.message = message
-        newStoredViary.date = date
-        let emotions = results.map({ result in
-            let emotion = StoredEmotion()
-            emotion.kind = result.label
-            emotion.score = Int(result.score * 100)
-            emotion.sentence = message
-            return emotion
-        })
-        newStoredViary.updateListByArray(keyPath: \.emotions, array: emotions)
-        try await newStoredViary.create()
+        Task { @MainActor in
+            let newStoredViary = StoredViary()
+            newStoredViary.language = lang.rawValue
+            newStoredViary.message = message
+            newStoredViary.date = date
+            let emotions = results.map({ result in
+                let emotion = StoredEmotion()
+                emotion.kind = result.label
+                emotion.score = Int(result.score * 100)
+                emotion.sentence = message
+                return emotion
+            })
+            newStoredViary.updateListByArray(keyPath: \.emotions, array: emotions)
+            try await newStoredViary.create()
+        }
     }
 
     public func delete(id: Tagged<Viary, String>) async throws {
