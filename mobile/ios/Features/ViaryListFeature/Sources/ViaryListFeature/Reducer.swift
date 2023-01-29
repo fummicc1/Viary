@@ -19,9 +19,15 @@ public struct ViaryList: ReducerProtocol {
     public struct State: Equatable {
         public var viaries: IdentifiedArrayOf<Viary> = []
         public var errorMessage: String?
+        public var destination: ViaryListDestination?
 
-        public init(viaries: IdentifiedArrayOf<Viary> = [], errorMessage: String? = nil) {
+        public init(
+            viaries: IdentifiedArrayOf<Viary> = [],
+            destination: ViaryListDestination? = nil,
+            errorMessage: String? = nil
+        ) {
             self.viaries = viaries
+            self.destination = destination
             self.errorMessage = errorMessage
         }
     }
@@ -30,6 +36,7 @@ public struct ViaryList: ReducerProtocol {
         case load
         case loaded(TaskResult<IdentifiedArrayOf<Viary>>)
         case createSample
+        case transit(ViaryListDestination?)
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -67,6 +74,9 @@ public struct ViaryList: ReducerProtocol {
                 try await viaryRepository.create(viary: newViary)
                 return .load
             }
+
+        case .transit(let destination):
+            state.destination = destination
         }
         return .none
     }

@@ -1,6 +1,7 @@
 import Foundation
 import Entities
 import ComposableArchitecture
+import FloatingActionButton
 import SwiftUI
 
 public struct ViaryListScreen: View {
@@ -22,9 +23,26 @@ public struct ViaryListScreen: View {
                     }
                     .buttonStyle(.borderedProminent)
                 } else {
-                    list
+                    FloatingActionable(
+                        .bottomTrailing,
+                        fab: .image(Image(systemName: "plus"))
+                    ) {
+                        list
+                    } didPress: {
+                        viewStore.send(.transit(.createViary))
+                    }
                 }
             }
+            .sheet(
+                item: viewStore.binding(
+                    get: \.destination,
+                    send: { .transit($0) }
+                ),
+                content: { destination in
+                    
+                    VStack {}
+                }
+            )
             .task {
                 viewStore.send(.load)
             }
