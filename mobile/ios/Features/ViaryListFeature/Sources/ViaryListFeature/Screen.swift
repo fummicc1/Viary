@@ -3,6 +3,7 @@ import Entities
 import ComposableArchitecture
 import FloatingActionButton
 import SwiftUI
+import SwiftUINavigation
 
 public struct ViaryListScreen: View {
     let store: StoreOf<ViaryList>
@@ -33,16 +34,14 @@ public struct ViaryListScreen: View {
                     }
                 }
             }
-            .sheet(
-                item: viewStore.binding(
-                    get: \.destination,
-                    send: { .transit($0) }
-                ),
-                content: { destination in
-                    
+            .sheet(unwrapping: viewStore.binding(get: \.destination, send: { .transit($0) }), content: { destination in
+                switch destination.wrappedValue {
+                case .createViary:
                     VStack {}
+                default:
+                    EmptyView()
                 }
-            )
+            })
             .task {
                 viewStore.send(.load)
             }

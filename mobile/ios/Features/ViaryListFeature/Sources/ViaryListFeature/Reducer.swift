@@ -12,6 +12,11 @@ public struct ViaryList: ReducerProtocol {
 
     public init() {}
 
+    public enum Destination: Equatable {
+        case createViary
+        case viaryDetail(Viary)
+    }
+
     public enum Error: LocalizedError {
         case failedToCreateSample
     }
@@ -19,11 +24,11 @@ public struct ViaryList: ReducerProtocol {
     public struct State: Equatable {
         public var viaries: IdentifiedArrayOf<Viary> = []
         public var errorMessage: String?
-        public var destination: ViaryListDestination?
+        public var destination: Destination?
 
         public init(
             viaries: IdentifiedArrayOf<Viary> = [],
-            destination: ViaryListDestination? = nil,
+            destination: Destination? = nil,
             errorMessage: String? = nil
         ) {
             self.viaries = viaries
@@ -36,7 +41,7 @@ public struct ViaryList: ReducerProtocol {
         case load
         case loaded(TaskResult<IdentifiedArrayOf<Viary>>)
         case createSample
-        case transit(ViaryListDestination?)
+        case transit(Destination?)
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {

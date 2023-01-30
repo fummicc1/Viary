@@ -20,6 +20,7 @@ let package = Package(
         .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "0.1.1")),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: "0.49.0")),
         .package(url: "https://github.com/pointfreeco/swift-identified-collections", .upToNextMajor(from: "0.5.0")),
+        .package(url: "https://github.com/pointfreeco/swiftui-navigation", .upToNextMajor(from: "0.6.0")),
         .package(url: "https://github.com/fummicc1/FloatingActionButton", .upToNextMinor(from: "0.0.2")),
     ],
     targets: [
@@ -33,6 +34,7 @@ let package = Package(
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "IdentifiedCollections", package: "swift-identified-collections"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "SwiftUINavigation", package: "swiftui-navigation"),
                 .product(name: "FloatingActionButton", package: "FloatingActionButton"),
             ]
         ),
