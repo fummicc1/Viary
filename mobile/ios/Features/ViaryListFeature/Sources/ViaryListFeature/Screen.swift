@@ -8,6 +8,8 @@ import SwiftUINavigation
 public struct ViaryListScreen: View {
     let store: StoreOf<ViaryList>
 
+    @Dependency(\.router) var router
+
     public init(store: StoreOf<ViaryList>) {
         self.store = store
     }
@@ -35,12 +37,7 @@ public struct ViaryListScreen: View {
                 }
             }
             .sheet(unwrapping: viewStore.binding(get: \.destination, send: { .transit($0) }), content: { destination in
-                switch destination.wrappedValue {
-                case .createViary:
-                    VStack {}
-                default:
-                    EmptyView()
-                }
+                router.destinate(ViaryList.self, destination: destination.wrappedValue)
             })
             .task {
                 viewStore.send(.load)

@@ -12,11 +12,6 @@ public struct ViaryList: ReducerProtocol {
 
     public init() {}
 
-    public enum Destination: Equatable {
-        case createViary
-        case viaryDetail(Viary)
-    }
-
     public enum Error: LocalizedError {
         case failedToCreateSample
     }
