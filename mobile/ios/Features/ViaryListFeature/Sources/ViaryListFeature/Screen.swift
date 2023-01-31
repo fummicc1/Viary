@@ -1,10 +1,14 @@
 import Foundation
 import Entities
 import ComposableArchitecture
+import FloatingActionButton
 import SwiftUI
+import SwiftUINavigation
 
 public struct ViaryListScreen: View {
     let store: StoreOf<ViaryList>
+
+    @Dependency(\.router) var router
 
     public init(store: StoreOf<ViaryList>) {
         self.store = store
@@ -22,9 +26,19 @@ public struct ViaryListScreen: View {
                     }
                     .buttonStyle(.borderedProminent)
                 } else {
-                    list
+                    FloatingActionable(
+                        .bottomTrailing,
+                        fab: .image(Image(systemName: "plus"))
+                    ) {
+                        list
+                    } didPress: {
+                        viewStore.send(.transit(.createViary))
+                    }
                 }
             }
+            .sheet(unwrapping: viewStore.binding(get: \.destination, send: { .transit($0) }), content: { destination in
+                router.destinate(ViaryList.self, destination: destination.wrappedValue)
+            })
             .task {
                 viewStore.send(.load)
             }

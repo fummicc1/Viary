@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30DF2AE29891B3800B41FA6 /* Wireframe in Frameworks */ = {isa = PBXBuildFile; productRef = D30DF2AD29891B3800B41FA6 /* Wireframe */; };
+		D30DF2B029891B3B00B41FA6 /* CreateViaryFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D30DF2AF29891B3B00B41FA6 /* CreateViaryFeature */; };
 		D30F24CE296B3EF40028E0B5 /* iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24CD296B3EF40028E0B5 /* iosApp.swift */; };
 		D30F24D2296B3EF50028E0B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30F24D1296B3EF50028E0B5 /* Assets.xcassets */; };
 		D30F24D6296B3EF50028E0B5 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D30F24D5296B3EF50028E0B5 /* Preview Assets.xcassets */; };
@@ -14,6 +16,7 @@
 		D30F24EA296B3EF50028E0B5 /* iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24E9296B3EF50028E0B5 /* iosUITests.swift */; };
 		D30F24EC296B3EF50028E0B5 /* iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24EB296B3EF50028E0B5 /* iosUITestsLaunchTests.swift */; };
 		D30F24FF296B40DB0028E0B5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D30F24FE296B40DB0028E0B5 /* GoogleService-Info.plist */; };
+		D325CC8929891A5A00F27A54 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D325CC8829891A5A00F27A54 /* AppRouter.swift */; };
 		D3A5710F296C81630083B71B /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = D3A5710E296C81630083B71B /* Entities */; };
 		D3A57116296C81AC0083B71B /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = D3A57115296C81AC0083B71B /* Repositories */; };
 		D3C58E65296C86040061B391 /* ViaryListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D3C58E64296C86040061B391 /* ViaryListFeature */; };
@@ -48,9 +51,12 @@
 		D30F24E9296B3EF50028E0B5 /* iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosUITests.swift; sourceTree = "<group>"; };
 		D30F24EB296B3EF50028E0B5 /* iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D30F24FE296B40DB0028E0B5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D325CC8829891A5A00F27A54 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
+		D325CC8A29891A6C00F27A54 /* Wireframe */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Wireframe; sourceTree = "<group>"; };
 		D3A5710D296C81450083B71B /* Entities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Entities; sourceTree = "<group>"; };
 		D3A57114296C81790083B71B /* Repositories */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Repositories; sourceTree = "<group>"; };
 		D3A57117296C81E40083B71B /* ViaryListFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryListFeature; path = Features/ViaryListFeature; sourceTree = "<group>"; };
+		D3BD9FAF2987FB6400576340 /* CreateViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CreateViaryFeature; path = Features/CreateViaryFeature; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,8 +65,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3A57116296C81AC0083B71B /* Repositories in Frameworks */,
+				D30DF2B029891B3B00B41FA6 /* CreateViaryFeature in Frameworks */,
 				D3A5710F296C81630083B71B /* Entities in Frameworks */,
 				D3C58E65296C86040061B391 /* ViaryListFeature in Frameworks */,
+				D30DF2AE29891B3800B41FA6 /* Wireframe in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -111,6 +119,7 @@
 				D30F24D1296B3EF50028E0B5 /* Assets.xcassets */,
 				D30F24D3296B3EF50028E0B5 /* ios.entitlements */,
 				D30F24D4296B3EF50028E0B5 /* Preview Content */,
+				D325CC8829891A5A00F27A54 /* AppRouter.swift */,
 			);
 			path = ios;
 			sourceTree = "<group>";
@@ -153,6 +162,8 @@
 				D3A5710D296C81450083B71B /* Entities */,
 				D3A57114296C81790083B71B /* Repositories */,
 				D3A57117296C81E40083B71B /* ViaryListFeature */,
+				D3BD9FAF2987FB6400576340 /* CreateViaryFeature */,
+				D325CC8A29891A6C00F27A54 /* Wireframe */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -177,6 +188,8 @@
 				D3A5710E296C81630083B71B /* Entities */,
 				D3A57115296C81AC0083B71B /* Repositories */,
 				D3C58E64296C86040061B391 /* ViaryListFeature */,
+				D30DF2AD29891B3800B41FA6 /* Wireframe */,
+				D30DF2AF29891B3B00B41FA6 /* CreateViaryFeature */,
 			);
 			productName = ios;
 			productReference = D30F24CA296B3EF40028E0B5 /* ios.app */;
@@ -297,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D325CC8929891A5A00F27A54 /* AppRouter.swift in Sources */,
 				D30F24CE296B3EF40028E0B5 /* iosApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -466,7 +480,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -505,7 +519,7 @@
 				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
@@ -672,6 +686,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D30DF2AD29891B3800B41FA6 /* Wireframe */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Wireframe;
+		};
+		D30DF2AF29891B3B00B41FA6 /* CreateViaryFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = CreateViaryFeature;
+		};
 		D3A5710E296C81630083B71B /* Entities */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Entities;
