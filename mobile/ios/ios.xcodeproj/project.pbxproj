@@ -52,6 +52,7 @@
 		D30F24EB296B3EF50028E0B5 /* iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D325CC8829891A5A00F27A54 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		D325CC8A29891A6C00F27A54 /* Wireframe */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Wireframe; sourceTree = "<group>"; };
+		D3A367E629940548007D6FBE /* Utils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utils; sourceTree = "<group>"; };
 		D3A5710D296C81450083B71B /* Entities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Entities; sourceTree = "<group>"; };
 		D3A57114296C81790083B71B /* Repositories */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Repositories; sourceTree = "<group>"; };
 		D3A57117296C81E40083B71B /* ViaryListFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryListFeature; path = Features/ViaryListFeature; sourceTree = "<group>"; };
@@ -164,6 +165,7 @@
 				D3A57117296C81E40083B71B /* ViaryListFeature */,
 				D3BD9FAF2987FB6400576340 /* CreateViaryFeature */,
 				D325CC8A29891A6C00F27A54 /* Wireframe */,
+				D3A367E629940548007D6FBE /* Utils */,
 			);
 			name = Packages;
 			sourceTree = "<group>";

@@ -66,7 +66,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
         let date = viary.date
         let resppnse: Text2EmotionResponse = try await apiClient.request(with: .text2emotion(text: message, lang: lang))
         let results = resppnse.results.flatMap { $0 }
-        Task { @MainActor in
+        try await Task { @MainActor in
             let newStoredViary = StoredViary()
             newStoredViary.language = lang.rawValue
             newStoredViary.message = message
@@ -80,7 +80,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
             })
             newStoredViary.updateListByArray(keyPath: \.emotions, array: emotions)
             try await newStoredViary.create()
-        }
+        }.value
     }
 
     public func delete(id: Tagged<Viary, String>) async throws {
