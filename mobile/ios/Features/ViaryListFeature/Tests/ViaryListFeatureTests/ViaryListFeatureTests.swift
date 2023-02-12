@@ -76,6 +76,7 @@ final class ViaryListFeatureTests: XCTestCase {
         // MARK: Act, Assert
         XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
         XCTAssertEqual(store.state.viaries, [])
+        XCTAssertNil(store.state.destination)
         await store.send(.transit(expectedDestination)) {
             $0.destination = expectedDestination
         }
