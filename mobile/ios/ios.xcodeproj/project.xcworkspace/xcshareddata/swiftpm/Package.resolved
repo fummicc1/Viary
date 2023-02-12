@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fummicc1/MoyaAPIClient",
       "state" : {
-        "revision" : "38b5298e1515c5631d67ac5b6fa9142e1930335e",
-        "version" : "1.0.1"
+        "revision" : "0d3e9174f9b65725494d0d8d41d904bec0eed6f4",
+        "version" : "1.1.0"
       }
     },
     {
@@ -59,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "b77443ca7fa25407869ca537bf3ae912b1427bff",
-        "version" : "12.13.0"
+        "revision" : "b9467f3ecfead791cc87ab70b4f1c3c290be6ffd",
+        "version" : "13.4.0"
       }
     },
     {
@@ -68,8 +68,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-swift",
       "state" : {
-        "revision" : "b1072f3ef733108dfcc62c2001781e5d65605fbf",
-        "version" : "10.34.1"
+        "revision" : "41fc81b00678f34a2d24781ada35e3937d2eeb25",
+        "version" : "10.35.1"
       }
     },
     {
@@ -79,6 +79,15 @@
       "state" : {
         "revision" : "b4307ba0b6425c0ba4178e138799946c3da594f8",
         "version" : "6.5.0"
+      }
+    },
+    {
+      "identity" : "sfsafesymbols",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols",
+      "state" : {
+        "revision" : "7cca2d60925876b5953a2cf7341cd80fbeac983c",
+        "version" : "4.1.1"
       }
     },
     {
@@ -113,8 +122,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-composable-architecture",
       "state" : {
-        "revision" : "63972fa9ea670405011ddc76a09f11e924341fca",
-        "version" : "0.50.0"
+        "revision" : "a99024bbd171d85a92bccbcea23e7c66f05dc12b",
+        "version" : "0.50.2"
       }
     },
     {
@@ -122,8 +131,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-custom-dump",
       "state" : {
-        "revision" : "ead7d30cc224c3642c150b546f4f1080d1c411a8",
-        "version" : "0.6.1"
+        "revision" : "dd86159e25c749873f144577e5d18309bf57534f",
+        "version" : "0.8.0"
       }
     },
     {
@@ -149,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-tagged",
       "state" : {
-        "revision" : "af06825aaa6adffd636c10a2570b2010c7c07e6a",
-        "version" : "0.9.0"
+        "revision" : "3907a9438f5b57d317001dc99f3f11b46882272b",
+        "version" : "0.10.0"
       }
     },
     {
@@ -158,8 +167,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swiftui-navigation",
       "state" : {
-        "revision" : "bf0fb9d53019cbde1a1e0cf290b560a0a0411282",
-        "version" : "0.6.0"
+        "revision" : "270a754308f5440be52fc295242eb7031638bd15",
+        "version" : "0.6.1"
       }
     },
     {
@@ -167,8 +176,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
       "state" : {
-        "revision" : "16b23a295fa322eb957af98037f86791449de60f",
-        "version" : "0.8.1"
+        "revision" : "ace21305e0dd3a9e749aef79fef14be79a3b4669",
+        "version" : "0.8.2"
       }
     }
   ],

@@ -36,7 +36,7 @@ public struct ViaryListScreen: View {
                     }
                 }
             }
-            .sheet(unwrapping: viewStore.binding(get: \.destination, send: { .transit($0) }), content: { destination in
+            .fullScreenCover(unwrapping: viewStore.binding(get: \.destination, send: { .transit($0) }), content: { destination in
                 router.destinate(ViaryList.self, destination: destination.wrappedValue)
             })
             .task {

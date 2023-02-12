@@ -17,7 +17,7 @@ public protocol ViaryRepository {
     func delete(id: Tagged<Viary, String>) async throws
 }
 
-public typealias AppAPIClient = any APIClient<APIRequest>
+public typealias AppAPIClient = APIClient<APIRequest>
 
 public class ViaryRepositoryImpl {
     private let myViariesSubject: CurrentValueSubject<IdentifiedArrayOf<Viary>, Never> = .init([])

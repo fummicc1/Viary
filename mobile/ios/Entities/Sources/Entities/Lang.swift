@@ -1,4 +1,4 @@
-public enum Lang: String, Equatable, ExpressibleByStringLiteral {
+public enum Lang: String, Identifiable, Equatable, ExpressibleByStringLiteral, CaseIterable {
     case ja
     case en
 
@@ -8,5 +8,18 @@ public enum Lang: String, Equatable, ExpressibleByStringLiteral {
         } else {
             self = .en
         }
+    }
+
+    public var displayName: String {
+        switch self {
+        case .ja:
+            return "Japanese"
+        case .en:
+            return "English"
+        }
+    }
+
+    public var id: String {
+        rawValue
     }
 }
