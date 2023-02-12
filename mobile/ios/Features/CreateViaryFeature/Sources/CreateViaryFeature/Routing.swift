@@ -7,9 +7,7 @@ public struct CreateViaryRouting: Routing {
 
     public typealias Input = Void
 
-    public enum Destination {
-        case list
-    }
+    public enum Destination {}
 
     public init() {}
 

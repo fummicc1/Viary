@@ -4,7 +4,7 @@ import Foundation
 import Repositories
 import Utils
 
-public struct CreateViaryReducer: ReducerProtocol {
+public struct CreateViary: ReducerProtocol {
 
     @Dependency(\.viaryRepository) var viaryRepository
     @Dependency(\.uuid) var uuid

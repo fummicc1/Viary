@@ -4,7 +4,9 @@ public enum AsyncStatus<Response: Equatable>: Equatable {
     public static func == (lhs: AsyncStatus<Response>, rhs: AsyncStatus<Response>) -> Bool {
         switch lhs {
         case .idle:
-            return rhs == .idle
+            if case Self.idle = rhs {
+                return true
+            }
         case .loading(let cache):
             if case Self.loading(let rhsCache) = rhs {
                 return cache == rhsCache
