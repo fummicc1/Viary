@@ -23,3 +23,21 @@ public struct Viary: Identifiable, Equatable {
         self.emotions = emotions
     }
 }
+
+public extension Viary {
+    static func sample() -> Viary {
+        Viary(
+            id: Tagged<Viary, String>.uuid,
+            message: "This is sample viary!",
+            lang: .en,
+            date: .now,
+            emotions: []
+        )
+    }
+}
+
+private extension Tagged where RawValue == String {
+    static var uuid: Self {
+        Self(UUID().uuidString)
+    }
+}

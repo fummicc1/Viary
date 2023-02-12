@@ -64,13 +64,7 @@ public struct ViaryList: ReducerProtocol {
                 return .none
             }
             return .task {
-                let newViary = Viary(
-                    id: Tagged<Viary, String>.uuid,
-                    message: "This is sample viary!",
-                    lang: .en,
-                    date: .now,
-                    emotions: []
-                )
+                let newViary = Viary.sample()
                 try await viaryRepository.create(viary: newViary)
                 return .load
             }
@@ -79,11 +73,5 @@ public struct ViaryList: ReducerProtocol {
             state.destination = destination
         }
         return .none
-    }
-}
-
-private extension Tagged where RawValue == String {
-    static var uuid: Self {
-        Self(UUID().uuidString)
     }
 }

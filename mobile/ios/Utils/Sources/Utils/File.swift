@@ -37,6 +37,8 @@ public enum AsyncStatus<Response: Equatable>: Equatable {
         switch self {
         case .success(let response):
             return response
+        case .loading(let cache):
+            return cache
         default:
             return nil
         }
