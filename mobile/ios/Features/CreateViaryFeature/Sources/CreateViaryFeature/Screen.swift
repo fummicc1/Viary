@@ -23,10 +23,8 @@ public struct CreateViaryScreen: View {
                 }
                 .toolbar {
                     ToolbarItem {
-                        Button {
+                        CloseButton {
                             dismiss()
-                        } label: {
-                            Image(systemSymbol: .xmarkCircle)
                         }
                     }
                 }
@@ -42,6 +40,7 @@ public struct CreateViaryScreen: View {
                     focus.toggle()
                 } label: {
                     Text("Note")
+                        .font(.title3)
                         .foregroundColor(.textColor)
                 }
                 ZStack(alignment: .leading) {
@@ -61,6 +60,13 @@ public struct CreateViaryScreen: View {
                         .onTapGesture {
                             focus = true
                         }
+                    }
+                }
+            }
+            .toolbar {
+                ToolbarItem(placement: .keyboard) {
+                    CloseButton(.text) {
+                        focus = false
                     }
                 }
             }
