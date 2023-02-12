@@ -58,6 +58,28 @@ final class ViaryListFeatureTests: XCTestCase {
         }
         XCTAssertEqual(viaryRepositoryMock.loadCallCount, 1)
     }
+
+    @MainActor
+    func test_transit() async throws {
+        // MARK: Assign
+        let viaryRepositoryMock = ViaryRepositoryMock()
+        let expectedDestination = ViaryList.Destination.createViary
+        let reducer = withDependencies {
+            $0.viaryRepository = viaryRepositoryMock
+        } operation: {
+            ViaryList()
+        }
+        let store = TestStore(
+            initialState: ViaryList.State(),
+            reducer: reducer
+        )
+        // MARK: Act, Assert
+        XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
+        XCTAssertEqual(store.state.viaries, [])
+        await store.send(.transit(expectedDestination)) {
+            $0.destination = expectedDestination
+        }
+    }
 }
 
 private extension ViaryListFeatureTests {
