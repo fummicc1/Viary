@@ -57,16 +57,15 @@ public class SpeechToTextServiceImpl {
     let errorSubject: PassthroughSubject<SpeechToTextError, Never> = .init()
     let speechStatusSubject: CurrentValueSubject<SpeechStatus, Never> = .init(.idle)
 
-    private let speechRecognizer: SFSpeechRecognizer
+    private var locale: Locale
+    private var speechRecognizer: SFSpeechRecognizer?
     private var request: SFSpeechAudioBufferRecognitionRequest?
     private var task: SFSpeechRecognitionTask?
     private let engine: AVAudioEngine = .init()
 
-    public init(locale: Locale) throws {
-        guard let speechRecognizer = SFSpeechRecognizer(locale: locale) else {
-            throw SpeechToTextError.invalidLocale(locale)
-        }
-        self.speechRecognizer = speechRecognizer
+    public init(locale: Locale) {
+        self.locale = locale
+        self.speechRecognizer = SFSpeechRecognizer(locale: locale)
 
         Task { [weak self] in
             try await self?.requestPermission()
@@ -115,6 +114,9 @@ public class SpeechToTextServiceImpl {
     }
 
     func stream() throws {
+        guard let speechRecognizer else {
+            throw SpeechToTextError.invalidLocale(locale)
+        }
         let session = AVAudioSession.sharedInstance()
         try session.setCategory(.record, mode: .measurement, options: .duckOthers)
         try session.setActive(true, options: .notifyOthersOnDeactivation)

@@ -2,12 +2,18 @@ import ComposableArchitecture
 import Entities
 import Foundation
 import Repositories
+import SpeechToText
 import Utils
 
 public struct CreateViary: ReducerProtocol {
 
     @Dependency(\.viaryRepository) var viaryRepository
     @Dependency(\.uuid) var uuid
+
+    public enum TextInput: Equatable {
+        case text
+        case voice(SpeechStatus)
+    }
 
     public struct State: Equatable {
         public var message: String
