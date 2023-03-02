@@ -20,7 +20,7 @@ public enum SpeechToTextError: LocalizedError {
     case failedPreparation
 }
 
-public enum SpeechStatus {
+public enum SpeechStatus: Hashable, Equatable {
     case idle
     case started
     case speeching
@@ -41,7 +41,7 @@ public struct SpeechPermission: OptionSet {
     }
 }
 
-public struct SpeechToTextModel {
+public struct SpeechToTextModel: Equatable {
     public var text: String
     public var isFinal: Bool
 

@@ -15,7 +15,6 @@ public struct CreateViaryScreen: View {
                 ScrollView {
                     VStack {
                         date
-                        lang
                     }
                     .padding()
                     note
@@ -34,8 +33,20 @@ public struct CreateViaryScreen: View {
     }
 
     var note: some View {
-        WithViewStore(store) { viewStore in
+        WithViewStore(store) { viewStore in            
             VStack(alignment: .leading) {
+                LangListSelectionView(
+                    selectedLang: viewStore.binding(
+                        get: \.currentLang,
+                        send: { .editLang($0) }
+                    )
+                )
+                InputTypeSelectionView(
+                    selectedInputType: viewStore.binding(
+                        get: \.currentInput.type,
+                        send: { .editInputType($0) }
+                    )
+                )
                 Button {
                     focus.toggle()
                 } label: {
@@ -44,12 +55,17 @@ public struct CreateViaryScreen: View {
                         .foregroundColor(.textColor)
                 }
                 ZStack(alignment: .leading) {
-                    TextEditor(text: viewStore.binding(get: \.message, send: { .editMessage($0) }))
-                        .focused($focus)
-                        .scrollContentBackground(.hidden)
-                        .background(Color.accentColor.opacity(0.3))
-                        .cornerRadius(4)
-                        .frame(minHeight: 64)
+                    TextEditor(
+                        text: viewStore.binding(
+                            get: \.currentInput.message,
+                            send: { .editMessage($0) }
+                        )
+                    )
+                    .focused($focus)
+                    .scrollContentBackground(.hidden)
+                    .background(Color.accentColor.opacity(0.3))
+                    .cornerRadius(4)
+                    .frame(minHeight: 64)
                     if viewStore.message.isEmpty && !focus {
                         VStack(alignment: .leading) {
                             Text("Let's note!")
@@ -73,27 +89,11 @@ public struct CreateViaryScreen: View {
         }
     }
 
-    var lang: some View {
-        WithViewStore(store) { viewStore in
-            Picker(
-                selection: viewStore.binding(get: \.lang, send: { .editLang($0) })
-            ) {
-                ForEach(Lang.allCases) { lang in
-                    Text(lang.displayName)
-                        .bold()
-                        .tag(lang)
-                }
-            } label: {
-                Text("Language")
-            }
-            .pickerStyle(.segmented)
-        }
-    }
-
     var date: some View {
         WithViewStore(store) { viewStore in
-            DatePicker("Date", selection: viewStore.binding(get: \.date, send: { .editDate($0) }), displayedComponents: .date)
-                .datePickerStyle(.graphical)
+            DateSelectionView(
+                selectedDate: viewStore.binding(get: \.date, send: { .editDate($0) })
+            )
         }
     }
 }

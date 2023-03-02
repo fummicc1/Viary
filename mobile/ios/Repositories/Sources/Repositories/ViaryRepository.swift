@@ -48,23 +48,26 @@ extension ViaryRepositoryImpl: ViaryRepository {
                        kind: kind
                    )
                })
-               return Viary(
-                   id: .init(storedViary.id),
-                   message: storedViary.message,
-                   lang: Lang(stringLiteral: storedViary.language),
-                   date: storedViary.date,
-                   emotions: .init(uniqueElements: emotions)
-               )
-           }
+                return Viary(
+                    id: .init(storedViary.id),
+                    messages: [
+                        .init(message: storedViary.message, lang: Lang(stringLiteral: storedViary.language))
+                    ],
+                    lang: Lang(stringLiteral: storedViary.language),
+                    date: storedViary.date,
+                    emotions: .init(uniqueElements: emotions)
+                )
+            }
         })
         return IdentifiedArrayOf(uniqueElements: viaries)
     }
 
     public func create(viary: Viary) async throws {
-        let message = viary.message
+        // TODO: Supprt multi language
+        let message = viary.messages.map(\.message).joined(separator: "\n")
         let lang = viary.lang
         let date = viary.date
-        let resppnse: Text2EmotionResponse = try await apiClient.request(with: .text2emotion(text: message, lang: lang))
+        let resppnse: Text2EmotionResponse = try await APIRequest.text2emotion(text: message, lang: lang).send()
         let results = resppnse.results.flatMap { $0 }
         try await Task { @MainActor in
             let newStoredViary = StoredViary()
