@@ -12,6 +12,7 @@ public protocol SpeechToTextService {
     var speechStatus: AnyPublisher<SpeechStatus, Never> { get }
 
     func start() async throws
+    func stop() async throws
 }
 
 public enum SpeechToTextError: LocalizedError {
@@ -23,8 +24,19 @@ public enum SpeechToTextError: LocalizedError {
 public enum SpeechStatus: Hashable, Equatable {
     case idle
     case started
-    case speeching
-    case stopped
+    case speeching(SpeechToTextModel)
+    case stopped(SpeechToTextModel)
+
+    mutating public func setModel(_ model: SpeechToTextModel) {
+        switch self {
+        case .idle, .started:
+            break
+        case .speeching:
+            self = .speeching(model)
+        case .stopped:
+            self = .stopped(model)
+        }
+    }
 }
 
 public struct SpeechPermission: OptionSet {
@@ -41,7 +53,7 @@ public struct SpeechPermission: OptionSet {
     }
 }
 
-public struct SpeechToTextModel: Equatable {
+public struct SpeechToTextModel: Equatable, Hashable {
     public var text: String
     public var isFinal: Bool
 
@@ -52,7 +64,7 @@ public struct SpeechToTextModel: Equatable {
 }
 
 public class SpeechToTextServiceImpl {
-    let onTextUpdateSubject: PassthroughSubject<SpeechToTextModel, Never> = .init()
+    let onTextUpdateSubject: CurrentValueSubject<SpeechToTextModel, Never> = .init(SpeechToTextModel(text: "", isFinal: false))
     let permissionSubject: CurrentValueSubject<SpeechPermission, Never> = .init([])
     let errorSubject: PassthroughSubject<SpeechToTextError, Never> = .init()
     let speechStatusSubject: CurrentValueSubject<SpeechStatus, Never> = .init(.idle)
@@ -159,10 +171,10 @@ public class SpeechToTextServiceImpl {
                 self.request = nil
                 self.task = nil
 
-                self.speechStatusSubject.send(.stopped)
+                self.speechStatusSubject.send(.stopped(self.onTextUpdateSubject.value))
                 self.speechStatusSubject.send(.idle)
             } else {
-                self.speechStatusSubject.send(.speeching)
+                self.speechStatusSubject.send(.speeching(self.onTextUpdateSubject.value))
             }
         })
     }
@@ -192,5 +204,17 @@ extension SpeechToTextServiceImpl: SpeechToTextService {
             try await requestPermission()
         }
         try stream()
+    }
+
+    public func stop() async throws {
+        // Stop recognizing speech
+        engine.stop()
+        engine.inputNode.removeTap(onBus: 0)
+
+        request = nil
+        task = nil
+
+        speechStatusSubject.send(.stopped(onTextUpdateSubject.value))
+        speechStatusSubject.send(.idle)
     }
 }

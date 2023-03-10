@@ -16,8 +16,9 @@ public struct InputTypeSelectionView: View {
         Picker("入力方式", selection: $selectedInputType) {
             ForEach(CreateViary.InputType.allCases) { inputType in
                 Text(inputType.description)
+                    .tag(inputType)
             }
         }
-
+        .pickerStyle(.segmented)
     }
 }

@@ -3,4 +3,70 @@
    uuid = "3CF2037D-AAB8-46C1-AAF6-358B859020F4"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5016B160-6255-480F-A142-F2100A5E87E2"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Features/CreateViaryFeature/Sources/CreateViaryFeature/Reducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
+            landmarkName = "reduce(into:action:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C48BBC16-BB38-4DE4-9476-C18ADF9BF123"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Features/CreateViaryFeature/Sources/CreateViaryFeature/Components/InputTypeSelectionView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "C48BBC16-BB38-4DE4-9476-C18ADF9BF123 - b8a76849b9ee240"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CreateViaryFeature.InputTypeSelectionView.body.getter : some"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Features/CreateViaryFeature/Sources/CreateViaryFeature/Components/InputTypeSelectionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "564">
+               </Location>
+               <Location
+                  uuid = "C48BBC16-BB38-4DE4-9476-C18ADF9BF123 - 5445c0b56dd691a8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;CreateViaryFeature.CreateViary.InputType&gt;, Swift.String, &lt;&lt;opaque return type of SwiftUI.View.tag&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in CreateViaryFeature.InputTypeSelectionView.body.getter : some"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Features/CreateViaryFeature/Sources/CreateViaryFeature/Components/InputTypeSelectionView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "252">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

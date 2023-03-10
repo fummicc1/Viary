@@ -1,3 +1,4 @@
+import Combine
 import ComposableArchitecture
 import Dependencies
 import Entities
@@ -11,6 +12,7 @@ public struct CreateViary: ReducerProtocol {
     @Dependency(\.viaryRepository) var viaryRepository
     @Dependency(\.speechToTextService) var speechToTextService
     @Dependency(\.uuid) var uuid
+    private var cancellables: Set<AnyCancellable> = []
 
     public struct InputState: Equatable {
         public var type: InputType
@@ -74,12 +76,14 @@ public struct CreateViary: ReducerProtocol {
     }
 
     public enum Action: Equatable {
+        case onAppear
         case editMessage(String)
         case endEditing(String)
         case editLang(Lang)
         case editInputType(InputType)
         case startRecording
         case stopRecording
+        case updateSpeechStatus(SpeechStatus)
         case editDate(Date)
         case save
         case saved(TaskResult<Bool>)
@@ -87,6 +91,13 @@ public struct CreateViary: ReducerProtocol {
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
+        case .onAppear:
+            return EffectTask.run { send in
+                for await speechStatus in speechToTextService.speechStatus.values {
+                    await send(.updateSpeechStatus(speechStatus))
+                }
+            }
+
         case .editMessage(let message):
             state.currentInput.message = message
 
@@ -104,9 +115,17 @@ public struct CreateViary: ReducerProtocol {
 
         case .startRecording:
             state.speechStatus = .started
+            return .fireAndForget {
+                try await speechToTextService.start()
+            }
 
         case .stopRecording:
-            state.speechStatus = .stopped
+            return .fireAndForget {
+                try await speechToTextService.stop()
+            }
+
+        case .updateSpeechStatus(let status):
+            state.speechStatus = status
 
         case .editDate(let date):
             state.date = date

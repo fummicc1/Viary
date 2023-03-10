@@ -29,6 +29,9 @@ public struct CreateViaryScreen: View {
                 }
                 .navigationTitle("Create new Viary")
             }
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
         }
     }
 
