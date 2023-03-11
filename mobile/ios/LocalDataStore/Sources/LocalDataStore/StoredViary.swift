@@ -7,6 +7,7 @@ public class StoredViary: Object, ObjectWithList {
     @Persisted public var message: String = ""
     @Published public var language: String = "en"
     @Persisted public var date: Date = Date()
+    @Persisted public var updatedAt: Date = Date()
     @Persisted public var emotions: List<StoredEmotion> = .init()
 
     public override init() {

@@ -22,7 +22,7 @@ public struct SpeechStatusView: View {
         case .idle:
             idleView
         case .started:
-            startedView
+            speechingView(model: SpeechToTextModel(text: "", isFinal: false))
         case .speeching(let speechToTextModel):
             speechingView(model: speechToTextModel)
         case .stopped(let speechToTextModel):
@@ -42,16 +42,6 @@ public struct SpeechStatusView: View {
         }
     }
 
-    var startedView: some View {
-        idleView
-            .opacity(opacity)
-            .onAppear {
-                withAnimation {
-                    opacity = abs(1 - opacity)
-                }
-            }
-    }
-
     func speechingView(model: SpeechToTextModel) -> some View {
         VStack {
             HStack {
@@ -67,7 +57,7 @@ public struct SpeechStatusView: View {
                     }
                 }
             }
-            Text(model.text)
+            Text(model.text).padding()
         }
     }
 

@@ -125,7 +125,7 @@ public class SpeechToTextServiceImpl {
         }
     }
 
-    func stream() throws {
+    func stream() async throws {
         guard let speechRecognizer else {
             throw SpeechToTextError.invalidLocale(locale)
         }
@@ -145,7 +145,9 @@ public class SpeechToTextServiceImpl {
 
         speechStatusSubject.send(.started)
 
-        task?.cancel()
+        if task != nil {
+            try await stop()
+        }
 
         // Create a recognition task for the speech recognition session.
         // Keep a reference to the task so that it can be canceled.
@@ -181,6 +183,7 @@ public class SpeechToTextServiceImpl {
 
         // Configure the microphone input.
         let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.removeTap(onBus: 0)
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self?.request?.append(buffer)
         }
@@ -212,13 +215,14 @@ extension SpeechToTextServiceImpl: SpeechToTextService {
         if permission != [.mic, .recognition] {
             try await requestPermission()
         }
-        try stream()
+        try await stream()
     }
 
     public func stop() async throws {
         // Stop recognizing speech
         engine.stop()
         engine.inputNode.removeTap(onBus: 0)
+        task?.cancel()
 
         request = nil
         task = nil

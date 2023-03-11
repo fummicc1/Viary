@@ -125,6 +125,12 @@ public struct CreateViary: ReducerProtocol {
 
         case .updateSpeechStatus(let status):
             state.speechStatus = status
+            if state.currentInput.type == .voice, case let SpeechStatus.speeching(model) = status {
+                state.currentInput.message = model.text
+            }
+            if case let SpeechStatus.stopped(model) = status {
+                return .send(.endEditing(model.text))
+            }
 
         case .editDate(let date):
             state.date = date

@@ -64,7 +64,8 @@ extension ViaryRepositoryImpl: ViaryRepository {
 
     public func create(viary: Viary) async throws {
         // TODO: Supprt multi language
-        let message = viary.messages.map(\.message).joined(separator: "\n")
+        let message = viary.message
+        let updatedAt = viary.updatedAt
         let lang = viary.lang
         let date = viary.date
         let resppnse: Text2EmotionResponse = try await APIRequest.text2emotion(text: message, lang: lang).send()
@@ -74,6 +75,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
             newStoredViary.language = lang.rawValue
             newStoredViary.message = message
             newStoredViary.date = date
+            newStoredViary.updatedAt = updatedAt
             let emotions = results.map({ result in
                 let emotion = StoredEmotion()
                 emotion.kind = result.label

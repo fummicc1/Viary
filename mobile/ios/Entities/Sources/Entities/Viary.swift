@@ -10,17 +10,27 @@ public struct Viary: Identifiable, Equatable {
     public var date: Date
     public var emotions: IdentifiedArrayOf<Emotion>
 
+    public var updatedAt: Date {
+        messages.map(\.updatedAt).sorted().last ?? Date()
+    }
+
     public var message: String {
         messages.map(\.message).joined(separator: "\n")
     }
 
-    public struct Message: Equatable {
+    public struct Message: Identifiable, Equatable {
         public var message: String
         public var lang: Lang
+        public var updatedAt: Date
 
-        public init(message: String, lang: Lang) {
+        public var id: String {
+            "\(updatedAt)-\(message)"
+        }
+
+        public init(message: String, lang: Lang, updatedAt: Date = Date()) {
             self.message = message
             self.lang = lang
+            self.updatedAt = updatedAt
         }
     }
 

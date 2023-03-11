@@ -7,143 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5016B160-6255-480F-A142-F2100A5E87E2"
+            uuid = "765DB283-6E71-4E55-B583-8B30C2D2A336"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Features/CreateViaryFeature/Sources/CreateViaryFeature/Reducer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "reduce(into:action:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5467639C-0BB0-45CA-A4A5-F3BC784C67B4"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SpeechToText/Sources/SpeechToText/SpeechToTextService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "212"
-            endingLineNumber = "212"
-            landmarkName = "start()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "B7C1A260-68EC-48B3-9667-3F6C9A16A11D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SpeechToText/Sources/SpeechToText/SpeechToTextService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
-            landmarkName = "stream()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E0CE0A36-173A-4364-B1D7-68C9C759C08D"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SpeechToText/Sources/SpeechToText/SpeechToTextService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "153"
-            endingLineNumber = "153"
-            landmarkName = "stream()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "9701163C-E570-4004-8CB5-E9040781C509"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Features/CreateViaryFeature/Sources/CreateViaryFeature/Reducer.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "reduce(into:action:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "9701163C-E570-4004-8CB5-E9040781C509 - aedd4906851911ed"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable (ComposableArchitecture.Send&lt;CreateViaryFeature.CreateViary.Action&gt;) async -&gt; () in CreateViaryFeature.CreateViary.reduce(into: inout CreateViaryFeature.CreateViary.State, action: CreateViaryFeature.CreateViary.Action) -&gt; ComposableArchitecture.EffectPublisher&lt;CreateViaryFeature.CreateViary.Action, Swift.Never&gt;"
-                  moduleName = "ios"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Features/CreateViaryFeature/Sources/CreateViaryFeature/Reducer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97"
-                  offsetFromSymbolStart = "284">
-               </Location>
-               <Location
-                  uuid = "9701163C-E570-4004-8CB5-E9040781C509 - 8473a98be86c7ff2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable (ComposableArchitecture.Send&lt;CreateViaryFeature.CreateViary.Action&gt;) async -&gt; () in CreateViaryFeature.CreateViary.reduce(into: inout CreateViaryFeature.CreateViary.State, action: CreateViaryFeature.CreateViary.Action) -&gt; ComposableArchitecture.EffectPublisher&lt;CreateViaryFeature.CreateViary.Action, Swift.Never&gt;"
-                  moduleName = "ios"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Features/CreateViaryFeature/Sources/CreateViaryFeature/Reducer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97"
-                  offsetFromSymbolStart = "52">
-               </Location>
-               <Location
-                  uuid = "9701163C-E570-4004-8CB5-E9040781C509 - fb89880d7fb0ddf3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable (ComposableArchitecture.Send&lt;CreateViaryFeature.CreateViary.Action&gt;) async -&gt; () in CreateViaryFeature.CreateViary.reduce(into: inout CreateViaryFeature.CreateViary.State, action: CreateViaryFeature.CreateViary.Action) -&gt; ComposableArchitecture.EffectPublisher&lt;CreateViaryFeature.CreateViary.Action, Swift.Never&gt;"
-                  moduleName = "ios"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Features/CreateViaryFeature/Sources/CreateViaryFeature/Reducer.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "97"
-                  endingLineNumber = "97"
-                  offsetFromSymbolStart = "100">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "49FB3D47-A01D-4DB4-A712-190EF2EB21FE"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SpeechToText/Sources/SpeechToText/SpeechToTextService.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "220"
-            endingLineNumber = "220"
-            landmarkName = "stop()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

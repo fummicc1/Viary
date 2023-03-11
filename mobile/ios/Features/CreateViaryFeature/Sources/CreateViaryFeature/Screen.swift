@@ -29,6 +29,11 @@ public struct CreateViaryScreen: View {
                 }
                 .navigationTitle("Create new Viary")
             }
+            .onChange(of: viewStore.saveStatus.response, perform: { newValue in
+                if newValue == true {
+                    dismiss()
+                }
+            })
             .onAppear {
                 viewStore.send(.onAppear)
             }
@@ -50,14 +55,6 @@ public struct CreateViaryScreen: View {
                         send: { .editInputType($0) }
                     )
                 )
-                if viewStore.currentInput.type == .voice {
-                    Spacer().frame(height: 4)
-                    SpeechStatusView(
-                        status: viewStore.speechStatus,
-                        viewStore: viewStore
-                    )
-                    Spacer().frame(height: 4)
-                }
                 Button {
                     focus.toggle()
                 } label: {
@@ -65,28 +62,42 @@ public struct CreateViaryScreen: View {
                         .font(.title3)
                         .foregroundColor(.textColor)
                 }
-                ZStack(alignment: .leading) {
-                    TextEditor(
-                        text: viewStore.binding(
-                            get: \.currentInput.message,
-                            send: { .editMessage($0) }
-                        )
+                if viewStore.currentInput.type == .voice {
+                    Spacer().frame(height: 4)
+                    SpeechStatusView(
+                        status: viewStore.speechStatus,
+                        viewStore: viewStore
                     )
-                    .focused($focus)
-                    .scrollContentBackground(.hidden)
-                    .background(Color.accentColor.opacity(0.3))
-                    .cornerRadius(4)
-                    .frame(minHeight: 64)
-                    if viewStore.message.isEmpty && !focus {
-                        VStack(alignment: .leading) {
-                            Text("Let's note!")
-                                .foregroundColor(.secondary)
-                                .padding(2)
-                            Spacer()
+                    Spacer().frame(height: 4)
+                } else {
+                    ZStack(alignment: .leading) {
+                        TextEditor(
+                            text: viewStore.binding(
+                                get: \.currentInput.message,
+                                send: { .editMessage($0) }
+                            )
+                        )
+                        .focused($focus)
+                        .scrollContentBackground(.hidden)
+                        .background(Color.accentColor.opacity(0.3))
+                        .cornerRadius(4)
+                        .frame(minHeight: 64)
+                        if viewStore.message.isEmpty && !focus {
+                            VStack(alignment: .leading) {
+                                Text("Let's note!")
+                                    .foregroundColor(.secondary)
+                                    .padding(2)
+                                Spacer()
+                            }
+                            .onTapGesture {
+                                focus = true
+                            }
                         }
-                        .onTapGesture {
-                            focus = true
-                        }
+                    }
+                }
+                LazyVStack {
+                    ForEach(viewStore.messages) { message in
+                        Text(message.message)
                     }
                 }
             }
