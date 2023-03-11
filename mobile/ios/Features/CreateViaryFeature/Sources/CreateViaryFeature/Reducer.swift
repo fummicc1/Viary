@@ -18,7 +18,7 @@ public struct CreateViary: ReducerProtocol {
         public var type: InputType
         public var message: String
 
-        public init(type: InputType = .keyboard, message: String = "") {
+        public init(type: InputType = .voice, message: String = "") {
             self.type = type
             self.message = message
         }
@@ -73,6 +73,10 @@ public struct CreateViary: ReducerProtocol {
             self.date = date
             self.saveStatus = saveStatus
         }
+
+        public var isValidInput: Bool {
+            !message.isEmpty && date.timeIntervalSince(Date()) < 0 && speechStatus == .idle && !saveStatus.isLoading
+        }
     }
 
     public enum Action: Equatable {
@@ -103,6 +107,9 @@ public struct CreateViary: ReducerProtocol {
 
         case .endEditing:
             let message = state.currentInput.message
+            if message.isEmpty {
+                return .none
+            }
             let newMessage = Viary.Message(
                 message: message,
                 lang: state.currentLang
@@ -112,6 +119,9 @@ public struct CreateViary: ReducerProtocol {
 
         case .editLang(let lang):
             state.currentLang = lang
+            return .fireAndForget {
+                self.speechToTextService.change(locale: lang.locale)
+            }
 
         case .startRecording:
             return .fireAndForget {

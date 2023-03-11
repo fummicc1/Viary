@@ -12,22 +12,50 @@ public struct CreateViaryScreen: View {
     public var body: some View {
         WithViewStore(store) { viewStore in
             NavigationView {
-                ScrollView {
-                    VStack {
-                        date
+                ZStack {
+                    Form {
+                        Section("日付") {
+                            date
+                        }
+                        Section("メタデータ") {
+                            metadata
+                        }
+                        Section("ノート") {
+                            note
+                        }
                     }
-                    .padding()
-                    note
-                        .padding(6)
+                    if viewStore.saveStatus.isLoading {
+                        VStack {
+                            Spacer()
+                            ProgressView().progressViewStyle(.circular)
+                                .bold()
+                                .background(content: {
+                                    RoundedRectangle(cornerRadius: 8)
+                                        .foregroundColor(Color(uiColor: .systemBackground))
+                                        .frame(width: 64, height: 64)
+                                })
+                                .frame(width: 64, height: 64)
+                            Spacer()
+                        }
+                    }
                 }
+                .navigationTitle("Create new Viary")
                 .toolbar {
-                    ToolbarItem {
+                    if viewStore.isValidInput {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button {
+                                viewStore.send(.save)
+                            } label: {
+                                Image(systemSymbol: .checkmark)
+                            }
+                        }
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
                         CloseButton {
                             dismiss()
                         }
                     }
                 }
-                .navigationTitle("Create new Viary")
             }
             .onChange(of: viewStore.saveStatus.response, perform: { newValue in
                 if newValue == true {
@@ -40,8 +68,8 @@ public struct CreateViaryScreen: View {
         }
     }
 
-    var note: some View {
-        WithViewStore(store) { viewStore in            
+    var metadata: some View {
+        WithViewStore(store) { viewStore in
             VStack(alignment: .leading) {
                 LangListSelectionView(
                     selectedLang: viewStore.binding(
@@ -49,56 +77,34 @@ public struct CreateViaryScreen: View {
                         send: { .editLang($0) }
                     )
                 )
-                InputTypeSelectionView(
-                    selectedInputType: viewStore.binding(
-                        get: \.currentInput.type,
-                        send: { .editInputType($0) }
-                    )
+                SpeechStatusView(
+                    status: viewStore.speechStatus,
+                    viewStore: viewStore
                 )
-                Button {
-                    focus.toggle()
-                } label: {
-                    Text("Note")
-                        .font(.title3)
-                        .foregroundColor(.textColor)
-                }
-                if viewStore.currentInput.type == .voice {
-                    Spacer().frame(height: 4)
-                    SpeechStatusView(
-                        status: viewStore.speechStatus,
-                        viewStore: viewStore
-                    )
-                    Spacer().frame(height: 4)
-                } else {
-                    ZStack(alignment: .leading) {
-                        TextEditor(
-                            text: viewStore.binding(
-                                get: \.currentInput.message,
-                                send: { .editMessage($0) }
-                            )
-                        )
-                        .focused($focus)
-                        .scrollContentBackground(.hidden)
-                        .background(Color.accentColor.opacity(0.3))
-                        .cornerRadius(4)
-                        .frame(minHeight: 64)
-                        if viewStore.message.isEmpty && !focus {
-                            VStack(alignment: .leading) {
-                                Text("Let's note!")
-                                    .foregroundColor(.secondary)
-                                    .padding(2)
-                                Spacer()
-                            }
-                            .onTapGesture {
-                                focus = true
-                            }
+            }
+        }
+    }
+
+    var note: some View {
+        WithViewStore(store) { viewStore in            
+            List {
+                ForEach(viewStore.messages) { message in
+                    VStack {
+                        Text(message.message)
+                        HStack {
+                            Spacer()
+                            Text(message.updatedAt, style: .time)
                         }
                     }
                 }
-                LazyVStack {
-                    ForEach(viewStore.messages) { message in
-                        Text(message.message)
+                .onDelete { index in
+                    // TODO: Delete feature
+                }
+                .swipeActions {
+                    Button("編集") {
+                        // TODO: Edit feature
                     }
+                    .tint(.orange)
                 }
             }
             .toolbar {

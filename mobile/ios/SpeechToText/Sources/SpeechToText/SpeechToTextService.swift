@@ -11,6 +11,7 @@ public protocol SpeechToTextService {
     var error: AnyPublisher<SpeechToTextError, Never> { get }
     var speechStatus: AnyPublisher<SpeechStatus, Never> { get }
 
+    func change(locale: Locale)
     func start() async throws
     func stop() async throws
 }
@@ -208,6 +209,11 @@ extension SpeechToTextServiceImpl: SpeechToTextService {
 
     public var speechStatus: AnyPublisher<SpeechStatus, Never> {
         speechStatusSubject.eraseToAnyPublisher()
+    }
+
+    public func change(locale: Locale) {
+        self.locale = locale
+        speechRecognizer = SFSpeechRecognizer(locale: locale)
     }
 
     public func start() async throws {

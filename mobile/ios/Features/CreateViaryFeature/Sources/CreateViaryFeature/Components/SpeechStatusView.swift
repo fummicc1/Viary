@@ -31,7 +31,7 @@ public struct SpeechStatusView: View {
     }
 
     var idleView: some View {
-        HStack {
+        VStack(alignment: .leading) {
             Text("音声で日記を描きましょう")
             Button {
                 viewStore.send(.startRecording)
@@ -39,11 +39,12 @@ public struct SpeechStatusView: View {
                 Text("録音開始")
                 Image(systemSymbol: .mic)
             }
+            .bold()
         }
     }
 
     func speechingView(model: SpeechToTextModel) -> some View {
-        VStack {
+        VStack(alignment: .leading) {
             HStack {
                 if !model.isFinal {
                     Text("録音中です")
