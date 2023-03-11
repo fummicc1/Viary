@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import ComposableArchitecture
 import SpeechToText
 import SwiftUI
 
 public struct SpeechStatusView: View {
 
     let status: SpeechStatus
+    let viewStore: ViewStoreOf<CreateViary>
 
     @State private var opacity: Double = 0
 
@@ -31,7 +33,12 @@ public struct SpeechStatusView: View {
     var idleView: some View {
         HStack {
             Text("音声で日記を描きましょう")
-            Image(systemSymbol: .mic)
+            Button {
+                viewStore.send(.startRecording)
+            } label: {
+                Text("録音開始")
+                Image(systemSymbol: .mic)
+            }
         }
     }
 
@@ -47,8 +54,18 @@ public struct SpeechStatusView: View {
 
     func speechingView(model: SpeechToTextModel) -> some View {
         VStack {
-            if !model.isFinal {
-                Text("録音中です")
+            HStack {
+                if !model.isFinal {
+                    Text("録音中です")
+                }
+                Button {
+                    viewStore.send(.stopRecording)
+                } label: {
+                    HStack {
+                        Text("停止")
+                        Image(systemSymbol: .stop)
+                    }
+                }
             }
             Text(model.text)
         }

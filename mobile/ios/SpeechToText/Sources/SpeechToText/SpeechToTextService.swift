@@ -145,6 +145,8 @@ public class SpeechToTextServiceImpl {
 
         speechStatusSubject.send(.started)
 
+        task?.cancel()
+
         // Create a recognition task for the speech recognition session.
         // Keep a reference to the task so that it can be canceled.
         task = speechRecognizer.recognitionTask(with: request, resultHandler: { [weak self] result, error in
@@ -160,6 +162,7 @@ public class SpeechToTextServiceImpl {
                     isFinal: result.isFinal
                 )
                 self.onTextUpdateSubject.send(new)
+                self.speechStatusSubject.send(.speeching(new))
                 isFinal = result.isFinal
             }
 
@@ -167,16 +170,22 @@ public class SpeechToTextServiceImpl {
                 // Stop recognizing speech if there is a problem.
                 self.engine.stop()
                 inputNode.removeTap(onBus: 0)
-
+                
                 self.request = nil
                 self.task = nil
-
+                
                 self.speechStatusSubject.send(.stopped(self.onTextUpdateSubject.value))
                 self.speechStatusSubject.send(.idle)
-            } else {
-                self.speechStatusSubject.send(.speeching(self.onTextUpdateSubject.value))
             }
         })
+
+        // Configure the microphone input.
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+            self?.request?.append(buffer)
+        }
+        engine.prepare()
+        try engine.start()
     }
 }
 

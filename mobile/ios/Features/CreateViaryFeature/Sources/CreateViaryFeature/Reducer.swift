@@ -114,7 +114,6 @@ public struct CreateViary: ReducerProtocol {
             state.currentLang = lang
 
         case .startRecording:
-            state.speechStatus = .started
             return .fireAndForget {
                 try await speechToTextService.start()
             }

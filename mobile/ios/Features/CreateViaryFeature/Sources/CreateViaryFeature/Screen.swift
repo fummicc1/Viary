@@ -50,6 +50,14 @@ public struct CreateViaryScreen: View {
                         send: { .editInputType($0) }
                     )
                 )
+                if viewStore.currentInput.type == .voice {
+                    Spacer().frame(height: 4)
+                    SpeechStatusView(
+                        status: viewStore.speechStatus,
+                        viewStore: viewStore
+                    )
+                    Spacer().frame(height: 4)
+                }
                 Button {
                     focus.toggle()
                 } label: {
