@@ -18,6 +18,13 @@ public struct Viary: Identifiable, Equatable {
         messages.map(\.message).joined(separator: "\n")
     }
 
+    public func score(of emotionKind: Emotion.Kind) -> Int {
+        guard let score = emotions.first(where: { $0.kind == emotionKind })?.score else {
+            return 0
+        }
+        return score
+    }
+
     public struct Message: Identifiable, Equatable {
         public var message: String
         public var lang: Lang

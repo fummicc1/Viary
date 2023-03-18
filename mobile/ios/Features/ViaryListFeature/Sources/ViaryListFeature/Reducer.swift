@@ -44,7 +44,9 @@ public struct ViaryList: ReducerProtocol {
         case .load:
             return .task {
                 do {
-                    let viaries = try await viaryRepository.load()
+                    var viaries = try await viaryRepository.load()
+                    viaries.sort(using: KeyPathComparator(\.updatedAt))
+                    viaries.reverse()
                     return .loaded(.success(viaries))
                 } catch {
                     return .loaded(.failure(error))

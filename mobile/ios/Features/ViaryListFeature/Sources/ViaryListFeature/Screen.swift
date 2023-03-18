@@ -49,8 +49,19 @@ public struct ViaryListScreen: View {
         WithViewStore(store, observe: \.viaries) { viewStore in
             List {
                 ForEach(viewStore.state) { viary in
-                    VStack {
+                    VStack(alignment: .leading) {
                         Text(viary.message)
+                        LazyVStack {
+                            ForEach(Emotion.Kind.allCases) { kind in
+                                let value = viary.score(of: kind)
+                                HStack {
+                                    Text(kind.text)
+                                    ProgressView(value: Double(value) / 100)
+                                        .foregroundColor(kind.color)
+                                    Text("\(value)%")
+                                }
+                            }
+                        }
                         HStack {
                             Text(viary.date, style: .relative)
                                 .foregroundColor(.secondary)
