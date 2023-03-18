@@ -17,7 +17,7 @@ public protocol ViaryRepository {
     func delete(id: Tagged<Viary, String>) async throws
 }
 
-public typealias AppAPIClient = any APIClient<APIRequest>
+public typealias AppAPIClient = APIClient<APIRequest>
 
 public class ViaryRepositoryImpl {
     private let myViariesSubject: CurrentValueSubject<IdentifiedArrayOf<Viary>, Never> = .init([])
@@ -48,29 +48,34 @@ extension ViaryRepositoryImpl: ViaryRepository {
                        kind: kind
                    )
                })
-               return Viary(
-                   id: .init(storedViary.id),
-                   message: storedViary.message,
-                   lang: Lang(stringLiteral: storedViary.language),
-                   date: storedViary.date,
-                   emotions: .init(uniqueElements: emotions)
-               )
-           }
+                return Viary(
+                    id: .init(storedViary.id),
+                    messages: [
+                        .init(message: storedViary.message, lang: Lang(stringLiteral: storedViary.language))
+                    ],
+                    lang: Lang(stringLiteral: storedViary.language),
+                    date: storedViary.date,
+                    emotions: .init(uniqueElements: emotions)
+                )
+            }
         })
         return IdentifiedArrayOf(uniqueElements: viaries)
     }
 
     public func create(viary: Viary) async throws {
+        // TODO: Supprt multi language
         let message = viary.message
+        let updatedAt = viary.updatedAt
         let lang = viary.lang
         let date = viary.date
-        let resppnse: Text2EmotionResponse = try await apiClient.request(with: .text2emotion(text: message, lang: lang))
+        let resppnse: Text2EmotionResponse = try await APIRequest.text2emotion(text: message, lang: lang).send()
         let results = resppnse.results.flatMap { $0 }
         try await Task { @MainActor in
             let newStoredViary = StoredViary()
             newStoredViary.language = lang.rawValue
             newStoredViary.message = message
             newStoredViary.date = date
+            newStoredViary.updatedAt = updatedAt
             let emotions = results.map({ result in
                 let emotion = StoredEmotion()
                 emotion.kind = result.label

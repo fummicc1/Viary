@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 public struct Emotion: Identifiable, Equatable {
     public var sentence: String
@@ -17,7 +18,7 @@ public struct Emotion: Identifiable, Equatable {
 }
 
 public extension Emotion {
-    enum Kind: String, Equatable, Identifiable {
+    enum Kind: String, Equatable, Identifiable, CaseIterable {
         case anger
         case disgust
         case fear
@@ -29,6 +30,14 @@ public extension Emotion {
 
         public var id: String {
             rawValue
+        }
+
+        public var text: String {
+            rawValue
+        }
+
+        public var color: Color {
+            Color.orange
         }
     }
 }

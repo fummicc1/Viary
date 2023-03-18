@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "CreateViaryFeature",
-    platforms: [.iOS(.v15)],
+    platforms: [.iOS(.v16)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -18,7 +18,9 @@ let package = Package(
         .package(name: "Entities", path: "../../Entities"),
         .package(name: "Repositories", path: "../../Repositories"),
         .package(name: "Utils", path: "../../Utils"),
+        .package(name: "SharedUI", path: "../../SharedUI"),
         .package(name: "Wireframe", path: "../../Wireframe"),
+        .package(name: "SpeechToText", path: "../../SpeechToText"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "0.1.1")),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: "0.49.0")),
         .package(url: "https://github.com/pointfreeco/swift-identified-collections", .upToNextMajor(from: "0.5.0")),
@@ -33,7 +35,9 @@ let package = Package(
                 .product(name: "Entities", package: "Entities"),
                 .product(name: "Repositories", package: "Repositories"),
                 .product(name: "Utils", package: "Utils"),
+                .product(name: "SharedUI", package: "SharedUI"),
                 .product(name: "Wireframe", package: "Wireframe"),
+                .product(name: "SpeechToText", package: "SpeechToText"),
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "IdentifiedCollections", package: "swift-identified-collections"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),

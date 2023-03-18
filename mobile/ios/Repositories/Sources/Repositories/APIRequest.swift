@@ -1,12 +1,13 @@
 import Entities
 import Foundation
 import Moya
+import MoyaAPIClient
 
 public enum APIRequest {
     case text2emotion(text: String, lang: Lang)
 }
 
-extension APIRequest: TargetType {
+extension APIRequest: APITarget {
     public var baseURL: URL {
         URL(string: "https://voice-diary.net")!
     }
