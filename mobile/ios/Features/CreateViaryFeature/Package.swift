@@ -16,6 +16,8 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
         .package(name: "Entities", path: "../../Entities"),
+        .package(name: "Entities", path: "../../Transformers"),
+        .package(name: "Resources", path: "../../Resources"),
         .package(name: "Repositories", path: "../../Repositories"),
         .package(name: "Utils", path: "../../Utils"),
         .package(name: "SharedUI", path: "../../SharedUI"),
@@ -33,6 +35,7 @@ let package = Package(
             name: "CreateViaryFeature",
             dependencies: [
                 .product(name: "Entities", package: "Entities"),
+                .product(name: "Resources", package: "Resources"),
                 .product(name: "Repositories", package: "Repositories"),
                 .product(name: "Utils", package: "Utils"),
                 .product(name: "SharedUI", package: "SharedUI"),
