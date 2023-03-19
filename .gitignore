@@ -32,3 +32,5 @@ doc/api/
 
 GoogleService-Info.plist
 google-services.json
+
+*.mlpackage
