@@ -11,6 +11,7 @@ public struct CreateViary: ReducerProtocol {
 
     @Dependency(\.viaryRepository) var viaryRepository
     @Dependency(\.speechToTextService) var speechToTextService
+    @Dependency(\.emotionDetector) var emotionDetector
     @Dependency(\.uuid) var uuid
     private var cancellables: Set<AnyCancellable> = []
 
@@ -149,6 +150,16 @@ public struct CreateViary: ReducerProtocol {
         case .save:
             state.saveStatus.start()
             return .task { [state] in
+                
+                let emotionScores = try emotionDetector.infer(text: state.message, lang: state.currentLang)
+                let emotions = Emotion.Kind.allCases.indices.map { index in
+                    let score = emotionScores[index]
+                    return Emotion(
+                        sentence: state.message,
+                        score: Int(score * 100),
+                        kind: Emotion.Kind.allCases[index]
+                    )
+                }
                 let viary = Viary(
                     id: .init(rawValue: uuid().uuidString),
                     messages: state.messages,
@@ -156,7 +167,7 @@ public struct CreateViary: ReducerProtocol {
                     date: state.date,
                     emotions: []
                 )
-                try await viaryRepository.create(viary: viary)
+                try await viaryRepository.create(viary: viary, with: emotions)
                 return .saved(.success(true))
             } catch: { error in
                 return .saved(.failure(error))

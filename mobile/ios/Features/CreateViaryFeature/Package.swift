@@ -16,7 +16,6 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
         .package(name: "Entities", path: "../../Entities"),
-        .package(name: "Entities", path: "../../Transformers"),
         .package(name: "Resources", path: "../../Resources"),
         .package(name: "Repositories", path: "../../Repositories"),
         .package(name: "Utils", path: "../../Utils"),
