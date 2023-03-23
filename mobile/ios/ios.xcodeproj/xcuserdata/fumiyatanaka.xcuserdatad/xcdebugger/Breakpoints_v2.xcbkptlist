@@ -5,31 +5,50 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.SymbolicBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7C2A6EEF-0386-4A5E-BA69-A7411EEBDCC4"
+            uuid = "007CD289-5350-4184-AFDE-D94B0A49E8E4"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            symbolName = ""
-            moduleName = "">
-            <Locations>
-            </Locations>
+            filePath = "Features/CreateViaryFeature/Sources/CreateViaryFeature/ML/EmotionDetector.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "predictEmotion(text:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6CA5A02D-6FCF-4BD8-A3D3-64C632155A5D"
+            uuid = "EC890C61-731B-4A57-8C98-D59C4D2202A6"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Features/CreateViaryFeature/Sources/CreateViaryFeature/Reducer.swift"
+            filePath = "Features/CreateViaryFeature/Sources/CreateViaryFeature/ML/EmotionDetector.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
-            landmarkName = "reduce(into:action:)"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "predictEmotion(text:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "82393960-119C-4C50-BFB2-41E9E31DFDD5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Features/CreateViaryFeature/Sources/CreateViaryFeature/ML/EmotionDetector.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
+            landmarkName = "predictEmotion(text:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

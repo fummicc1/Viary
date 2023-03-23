@@ -28,12 +28,60 @@ public class EmotionDetectorImpl {
 extension EmotionDetectorImpl: EmotionDetector {
     public func infer(text: String, lang: Lang) -> [Double] {
         assert(lang == .en)
-        let tokens = tokenizer.tokenize(text: text).map { tokenizer.tokenToId(token: $0) }.map { Float($0) }
-        let inputIds = MLShapedArray(scalars: tokens, shape: [tokens.count, 1])
-        let input = emotion_classification_modelInput(input_ids_1: inputIds)
-        let results = try! model.prediction(input: input)
-        dump(results)
-        let doubles = try! UnsafeBufferPointer<Double>(results.hidden_states)
-        return Array(doubles)
+        return predictEmotion(text: "This is a sample input text.")
+    }
+
+    func createAttentionMask(text: String) throws -> MLMultiArray {
+        let model = BertTokenizer()
+        let tokens = model.tokenizeToIds(text: text)
+
+        let attentionMask = try MLMultiArray(shape: [1, tokens.count as NSNumber], dataType: .int32)
+
+        for (index, token) in tokens.enumerated() {
+            if token == 1 {
+                attentionMask[index] = 0
+            } else {
+                attentionMask[index] = 1
+            }
+        }
+        return attentionMask
+    }
+
+    func predictEmotion(text: String) -> [Double] {
+        // Load the Core ML model
+        guard let model = try? emotion_classification_model() else {
+            print("Error loading Core ML model")
+            return []
+        }
+
+        // Tokenize the input text and create the attention_mask
+        let tokenizer = BertTokenizer()
+        let inputTokens = tokenizer.tokenizeToIds(text: text)
+        let inputArray = try! MLMultiArray(shape: [1, inputTokens.count as NSNumber], dataType: .int32)
+
+        for (index, token) in inputTokens.enumerated() {
+            inputArray[index] = token as NSNumber
+        }
+        let attentionMask = try? createAttentionMask(text: text)
+
+        // Create the model input
+        let input = emotion_classification_modelInput(input_ids: inputArray, attention_mask: attentionMask!)
+
+        // Perform the prediction
+        guard let prediction = try? model.prediction(input: input) else {
+            print("Error making prediction")
+            return []
+        }
+
+        // Handle the prediction result
+        let emotionProbabilities = prediction.featureValue(for: "classLabelProbs")
+        let predictedEmotion = prediction.classLabel
+
+        let emotions = emotionProbabilities?.dictionaryValue
+            .values.compactMap { $0.doubleValue } ?? []
+
+        print("Predicted emotion: \(predictedEmotion)")
+        print("Emotion probabilities: \(emotionProbabilities)")
+        return emotions
     }
 }

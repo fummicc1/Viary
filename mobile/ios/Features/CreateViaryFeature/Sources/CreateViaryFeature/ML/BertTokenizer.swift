@@ -23,14 +23,12 @@ class BertTokenizer {
     private let ids_to_tokens: [Int: String]
 
     init() {
-        let url = Bundle.main.url(forResource: "vocab", withExtension: "txt")!
-        let vocabTxt = try! String(contentsOf: url)
-        let tokens = vocabTxt.split(separator: "\n").map { String($0) }
-        var vocab: [String: Int] = [:]
+        let url = Bundle.main.url(forResource: "vocab", withExtension: "json")!
+        let data = try! Data(contentsOf: url)
+        let vocab = try! JSONSerialization.jsonObject(with: data) as! [String: Int]
         var ids_to_tokens: [Int: String] = [:]
-        for (i, token) in tokens.enumerated() {
-            vocab[token] = i
-            ids_to_tokens[i] = token
+        vocab.forEach { (key, val) in
+            ids_to_tokens[val] = key
         }
         self.vocab = vocab
         self.ids_to_tokens = ids_to_tokens
@@ -39,12 +37,13 @@ class BertTokenizer {
 
 
     func tokenize(text: String) -> [String] {
-        var tokens: [String] = []
+        var tokens: [String] = ["<s>"]
         for token in basicTokenizer.tokenize(text: text) {
             for subToken in wordpieceTokenizer.tokenize(word: token) {
                 tokens.append(subToken)
             }
         }
+        tokens.append("</s>")
         return tokens
     }
 
@@ -102,7 +101,7 @@ class BertTokenizer {
 
 class BasicTokenizer {
     let neverSplit = [
-        "[UNK]", "[SEP]", "[PAD]", "[CLS]", "[MASK]"
+        "<unk>", "<s>", "<pad>", "</s>"
     ]
 
     func tokenize(text: String) -> [String] {
@@ -136,7 +135,7 @@ class BasicTokenizer {
 
 
 class WordpieceTokenizer {
-    private let unkToken = "[UNK]"
+    private let unkToken = "<unk>"
     private let maxInputCharsPerWord = 100
     private let vocab: [String: Int]
 

@@ -1,47 +1,57 @@
-import torch
-import numpy as np
-from transformers import AutoModel, AutoTokenizer
 import coremltools as ct
+import torch.nn.functional as F
+import torch
+from transformers import RobertaForSequenceClassification, RobertaTokenizerFast
 
-model_name = "emotion_classification_model"
-model = AutoModel.from_pretrained(model_name)
-tokenizer = AutoTokenizer.from_pretrained(model_name)
+class ModifiedRobertaForSequenceClassification(RobertaForSequenceClassification):
+    def forward(self, input_ids, attention_mask=None):
+        outputs = super().forward(input_ids, attention_mask=attention_mask)
+        logits = outputs.logits
+        # Assuming logits is the output from the model
+        probabilities = F.softmax(logits, dim=-1)
+        return probabilities
 
+def main():
+    model_name = "j-hartmann/emotion-english-distilroberta-base"
+    model = ModifiedRobertaForSequenceClassification.from_pretrained(model_name)
+    tokenizer = RobertaTokenizerFast.from_pretrained(model_name)
 
-class WrappedModel(torch.nn.Module):
-    def __init__(self, model):
-        super(WrappedModel, self).__init__()
-        self.model = model
+    # Set up a sample input to trace the model
+    text = "This is a sample input text."
+    tokens = tokenizer(text, return_tensors='pt')
+    input_names = list(tokens.keys())
 
-    def forward(self, input_ids):
-        # Ensure we only return the tensor from the output dictionary
-        input_ids = input_ids.long()  # Convert input_ids to torch.long
-        return self.model(input_ids)["last_hidden_state"]
-
-
-# Wrap the model
-wrapped_model = WrappedModel(model)
-
-# Convert the model to TorchScript
-dummy_input = "This is a sample text"
-dummy_tokens = tokenizer.encode(dummy_input, return_tensors="pt")
-traced_model = torch.jit.trace(wrapped_model, dummy_tokens)
-
-# Set the input_shape to use RangeDim for each dimension.
-input_shape = ct.Shape(
-    shape=(
-        ct.RangeDim(lower_bound=3, upper_bound=300, default=3),
-        1
+    # Trace the model with the sample input
+    traced_model = torch.jit.trace(model, [tokens['input_ids'], tokens['attention_mask']], strict=False)
+    
+    # Set the input_shape to use RangeDim for each dimension.
+    input_shape = ct.Shape(
+        shape=(
+            ct.RangeDim(lower_bound=3, upper_bound=300, default=3),
+            1
+        )
     )
-)
+    
+    attention_shape = ct.Shape(
+        shape=(
+            ct.RangeDim(lower_bound=3, upper_bound=300, default=3),
+            1
+        )
+    )
 
-# Convert to Core ML using the Unified Conversion API
-mlmodel = ct.convert(
-    model=traced_model,
-    inputs=[ct.TensorType(shape=input_shape, dtype=np.int64)],
-    outputs=[ct.TensorType(name="output")],
-    source="pytorch"
-)
+    # Convert to Core ML
+    coreml_model = ct.convert(
+        traced_model,
+        source="pytorch",
+        inputs=[
+                ct.TensorType(name=input_names[0], shape=input_shape, dtype=int),
+                ct.TensorType(name=input_names[1], shape=attention_shape, dtype=int),
+            ],
+        classifier_config=ct.ClassifierConfig(class_labels=list(model.config.id2label.values())),
+    )
 
-# Save the Core ML model
-mlmodel.save("emotion_classification_model.mlmodel")
+    # Save the Core ML model as an .mlpackage
+    coreml_model.save("emotion-english-distilroberta-base.mlpackage")
+
+if __name__ == "__main__":
+    main()
