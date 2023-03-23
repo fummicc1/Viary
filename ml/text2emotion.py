@@ -13,8 +13,11 @@ import argparse
 import warnings
 warnings.filterwarnings("ignore")
 
-model = pipeline("text-classification",
-                 model="j-hartmann/emotion-english-distilroberta-base", top_k=5)
+model = pipeline(
+    "text-classification",
+    model="j-hartmann/emotion-english-distilroberta-base",
+    return_all_scores=True
+)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

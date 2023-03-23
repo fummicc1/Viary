@@ -41,6 +41,16 @@ public class ViaryRepositoryMock: ViaryRepository {
         
     }
 
+    public private(set) var createViaryCallCount = 0
+    public var createViaryHandler: ((Viary, [Emotion]) async throws -> ())?
+    public func create(viary: Viary, with emotions: [Emotion]) async throws  {
+        createViaryCallCount += 1
+        if let createViaryHandler = createViaryHandler {
+            try await createViaryHandler(viary, emotions)
+        }
+        
+    }
+
     public private(set) var deleteCallCount = 0
     public var deleteHandler: ((Tagged<Viary, String>) async throws -> ())?
     public func delete(id: Tagged<Viary, String>) async throws  {

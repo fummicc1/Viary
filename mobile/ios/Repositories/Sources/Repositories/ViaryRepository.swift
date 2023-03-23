@@ -14,6 +14,7 @@ public protocol ViaryRepository {
     @discardableResult
     func load() async throws -> IdentifiedArrayOf<Viary>
     func create(viary: Viary) async throws
+    func create(viary: Viary, with emotions: [Emotion]) async throws
     func delete(id: Tagged<Viary, String>) async throws
 }
 
@@ -84,6 +85,30 @@ extension ViaryRepositoryImpl: ViaryRepository {
                 return emotion
             })
             newStoredViary.updateListByArray(keyPath: \.emotions, array: emotions)
+            try await newStoredViary.create()
+        }.value
+    }
+
+    public func create(viary: Viary, with emotions: [Emotion]) async throws {
+        // TODO: Supprt multi language
+        let message = viary.message
+        let updatedAt = viary.updatedAt
+        let lang = viary.lang
+        let date = viary.date
+        try await Task { @MainActor in
+            let newStoredViary = StoredViary()
+            newStoredViary.language = lang.rawValue
+            newStoredViary.message = message
+            newStoredViary.date = date
+            newStoredViary.updatedAt = updatedAt
+            let storedEmotions = emotions.map {
+                let emotion = StoredEmotion()
+                emotion.kind = $0.kind.text
+                emotion.score = $0.score
+                emotion.sentence = $0.sentence
+                return emotion
+            }
+            newStoredViary.updateListByArray(keyPath: \.emotions, array: storedEmotions)
             try await newStoredViary.create()
         }.value
     }
