@@ -27,15 +27,15 @@ def main():
     # Set the input_shape to use RangeDim for each dimension.
     input_shape = ct.Shape(
         shape=(
+            1,
             ct.RangeDim(lower_bound=3, upper_bound=300, default=3),
-            1
         )
     )
     
     attention_shape = ct.Shape(
         shape=(
+            1,
             ct.RangeDim(lower_bound=3, upper_bound=300, default=3),
-            1
         )
     )
 

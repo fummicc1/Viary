@@ -28,7 +28,7 @@ public class EmotionDetectorImpl {
 extension EmotionDetectorImpl: EmotionDetector {
     public func infer(text: String, lang: Lang) -> [Double] {
         assert(lang == .en)
-        return predictEmotion(text: "This is a sample input text.")
+        return predictEmotion(text: text)
     }
 
     func createAttentionMask(text: String) throws -> MLMultiArray {
@@ -74,14 +74,23 @@ extension EmotionDetectorImpl: EmotionDetector {
         }
 
         // Handle the prediction result
-        let emotionProbabilities = prediction.featureValue(for: "classLabelProbs")
+        let emotionProbabilities = prediction.featureValue(for: "var_564")
         let predictedEmotion = prediction.classLabel
 
-        let emotions = emotionProbabilities?.dictionaryValue
-            .values.compactMap { $0.doubleValue } ?? []
+        let emotions = emotionProbabilities?.dictionaryValue as? [AnyHashable: NSNumber] ?? [:]
+
+        var ret: [Double] = Array(repeating: 0, count: 7)
+
+        for (kind, val) in emotions {
+            guard let index = Emotion.Kind.allCases.firstIndex(where: { $0.text == kind as! String }) else {
+                continue
+            }
+            let _val: Double = val.doubleValue
+            ret[index] = _val
+        }
 
         print("Predicted emotion: \(predictedEmotion)")
         print("Emotion probabilities: \(emotionProbabilities)")
-        return emotions
+        return ret
     }
 }
