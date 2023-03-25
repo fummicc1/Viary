@@ -49,13 +49,6 @@ extension EmotionDetectorImpl: EmotionDetector {
 
     func predictEmotion(text: String) -> [Double] {
         // Load the Core ML model
-        guard let model = try? emotion_classification_model() else {
-            print("Error loading Core ML model")
-            return []
-        }
-
-        // Tokenize the input text and create the attention_mask
-        let tokenizer = BertTokenizer()
         let inputTokens = tokenizer.tokenizeToIds(text: text)
         let inputArray = try! MLMultiArray(shape: [1, inputTokens.count as NSNumber], dataType: .int32)
 

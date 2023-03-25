@@ -60,7 +60,9 @@ public struct CreateViary: ReducerProtocol {
         }
 
         public init(
-            messages: [Viary.Message] = [],
+            messages: [Viary.Message] = [
+                .init(message: "fdjkjfgiojfviojv fikogjoirsjgois jio sjgiorsjgoisgoiho jfijfoai ahfuiahgviuaerh ahiovahriughiaurhg aigaio ajigrh a hogps g th uishgiurh  faopj fdjkjfgiojfviojv fikogjoirsjgois jio sjgiorsjgoisgoiho jfijfoai ahfuiahgviuaerh ahiovahriughiaurhg aigaio ajigrh a hogps g th uishgiurh  faopj fdjkjfgiojfviojv fikogjoirsjgois jio sjgiorsjgoisgoiho jfijfoai ahfuiahgviuaerh ahiovahriughiaurhg aigaio ajigrh a hogps g th uishgiurh  faopj fdjkjfgiojfviojv fikogjoirsjgois jio sjgiorsjgoisgoiho jfijfoai ahfuiahgviuaerh ahiovahriughiaurhg aigaio ajigrh a hogps g th uishgiurh  faopj fdjkjfgiojfviojv fikogjoirsjgois jio sjgiorsjgoisgoiho jfijfoai ahfuiahgviuaerh ahiovahriughiaurhg aigaio ajigrh a hogps g th uishgiurh  faopj", lang: .en)
+            ],
             currentLang: Lang = .en,
             currentInput: InputState = .init(),
             speechStatus: SpeechStatus = .idle,
