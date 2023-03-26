@@ -130,5 +130,99 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BE451A0F-5507-47BB-BFBC-578B63101FAD"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Features/ViaryListFeature/Sources/ViaryListFeature/Reducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "reduce(into:action:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BE451A0F-5507-47BB-BFBC-578B63101FAD - 9add8b2da2d870d5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable (ComposableArchitecture.Send&lt;ViaryListFeature.ViaryList.Action&gt;) async -&gt; () in ViaryListFeature.ViaryList.reduce(into: inout ViaryListFeature.ViaryList.State, action: ViaryListFeature.ViaryList.Action) -&gt; ComposableArchitecture.EffectPublisher&lt;ViaryListFeature.ViaryList.Action, Swift.Never&gt;"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Features/ViaryListFeature/Sources/ViaryListFeature/Reducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "216">
+               </Location>
+               <Location
+                  uuid = "BE451A0F-5507-47BB-BFBC-578B63101FAD - 46731516599e56d6"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) suspend resume partial function for closure #1 @Sendable (ComposableArchitecture.Send&lt;ViaryListFeature.ViaryList.Action&gt;) async -&gt; () in ViaryListFeature.ViaryList.reduce(into: inout ViaryListFeature.ViaryList.State, action: ViaryListFeature.ViaryList.Action) -&gt; ComposableArchitecture.EffectPublisher&lt;ViaryListFeature.ViaryList.Action, Swift.Never&gt;"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Features/ViaryListFeature/Sources/ViaryListFeature/Reducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "BE451A0F-5507-47BB-BFBC-578B63101FAD - 1e69f4350543cca"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable (ComposableArchitecture.Send&lt;ViaryListFeature.ViaryList.Action&gt;) async -&gt; () in ViaryListFeature.ViaryList.reduce(into: inout ViaryListFeature.ViaryList.State, action: ViaryListFeature.ViaryList.Action) -&gt; ComposableArchitecture.EffectPublisher&lt;ViaryListFeature.ViaryList.Action, Swift.Never&gt;"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Features/ViaryListFeature/Sources/ViaryListFeature/Reducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "49"
+                  endingLineNumber = "49"
+                  offsetFromSymbolStart = "60">
+               </Location>
+               <Location
+                  uuid = "BE451A0F-5507-47BB-BFBC-578B63101FAD - 1e69f4350543ceb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable (ComposableArchitecture.Send&lt;ViaryListFeature.ViaryList.Action&gt;) async -&gt; () in ViaryListFeature.ViaryList.reduce(into: inout ViaryListFeature.ViaryList.State, action: ViaryListFeature.ViaryList.Action) -&gt; ComposableArchitecture.EffectPublisher&lt;ViaryListFeature.ViaryList.Action, Swift.Never&gt;"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Features/ViaryListFeature/Sources/ViaryListFeature/Reducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "116">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D0121A5E-E182-4D79-B8DA-F8BBCCC9795E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Features/ViaryListFeature/Sources/ViaryListFeature/Reducer.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "reduce(into:action:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

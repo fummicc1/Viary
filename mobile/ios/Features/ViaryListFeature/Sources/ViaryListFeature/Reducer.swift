@@ -47,7 +47,11 @@ public struct ViaryList: ReducerProtocol {
         case .onAppear:
             return .run { send in
                 for await viaries in viaryRepository.myViaries.values {
-                    await send(.loaded(.success(viaries)))
+                    await send(.loaded(.success(
+                        IdentifiedArrayOf(
+                            uniqueElements: viaries.sorted(using: KeyPathComparator(\.updatedAt)).reversed()
+                        )
+                    )))
                 }
             }
         case .loaded(let result):
