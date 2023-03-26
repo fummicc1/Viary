@@ -14,13 +14,13 @@ public struct CreateViaryScreen: View {
             NavigationView {
                 ZStack {
                     Form {
-                        Section("日付") {
+                        Section("Date") {
                             date
                         }
-                        Section("メタデータ") {
-                            metadata
+                        Section("Status") {
+                            currentStatus
                         }
-                        Section("ノート") {
+                        Section("Note") {
                             note
                         }
                     }
@@ -68,15 +68,9 @@ public struct CreateViaryScreen: View {
         }
     }
 
-    var metadata: some View {
+    var currentStatus: some View {
         WithViewStore(store) { viewStore in
-            VStack(alignment: .leading) {
-                LangListSelectionView(
-                    selectedLang: viewStore.binding(
-                        get: \.currentLang,
-                        send: { .editLang($0) }
-                    )
-                )
+            VStack(alignment: .leading) {                
                 SpeechStatusView(
                     status: viewStore.speechStatus,
                     viewStore: viewStore
@@ -96,15 +90,14 @@ public struct CreateViaryScreen: View {
                             Text(message.updatedAt, style: .time)
                         }
                     }
-                }
-                .onDelete { index in
-                    // TODO: Delete feature
-                }
-                .swipeActions {
-                    Button("編集") {
-                        // TODO: Edit feature
+                    .swipeActions {
+                        Button("Delete") {
+                            let _ = withAnimation {
+                                viewStore.send(.delete(message))
+                            }
+                        }
+                        .tint(.red)
                     }
-                    .tint(.orange)
                 }
             }
             .toolbar {

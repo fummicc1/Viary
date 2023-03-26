@@ -60,9 +60,7 @@ public struct CreateViary: ReducerProtocol {
         }
 
         public init(
-            messages: [Viary.Message] = [
-                .init(message: "This is sample viary", lang: .en)
-            ],
+            messages: [Viary.Message] = [],
             currentLang: Lang = .en,
             currentInput: InputState = .init(),
             speechStatus: SpeechStatus = .idle,
@@ -94,6 +92,7 @@ public struct CreateViary: ReducerProtocol {
         case editDate(Date)
         case save
         case saved(TaskResult<Bool>)
+        case delete(Viary.Message)
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -184,6 +183,9 @@ public struct CreateViary: ReducerProtocol {
             case .failure(let error):
                 state.saveStatus = .fail(error)
             }
+
+        case .delete(let message):
+            state.messages.removeAll(where: { $0 == message })
         }
         return .none
     }
