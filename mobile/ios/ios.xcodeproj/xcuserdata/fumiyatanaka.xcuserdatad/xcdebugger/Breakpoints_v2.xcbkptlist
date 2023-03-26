@@ -3,4 +3,132 @@
    uuid = "3CF2037D-AAB8-46C1-AAF6-358B859020F4"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D371C87-9FB0-4A54-9D22-0532ADF4D64F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Repositories/Sources/Repositories/ViaryRepository.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "init(apiClient:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9D371C87-9FB0-4A54-9D22-0532ADF4D64F - 1455a0fde6b2e61e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Repositories.ViaryRepositoryImpl.init(apiClient: MoyaAPIClient.APIClient&lt;Repositories.APIRequest&gt;) -&gt; Repositories.ViaryRepositoryImpl"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Repositories/Sources/Repositories/ViaryRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "124">
+               </Location>
+               <Location
+                  uuid = "9D371C87-9FB0-4A54-9D22-0532ADF4D64F - 3426e3253c7a173c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(4) await resume partial function for closure #1 @Sendable () async throws -&gt; () in Repositories.ViaryRepositoryImpl.init(apiClient: MoyaAPIClient.APIClient&lt;Repositories.APIRequest&gt;) -&gt; Repositories.ViaryRepositoryImpl"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Repositories/Sources/Repositories/ViaryRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "44">
+               </Location>
+               <Location
+                  uuid = "9D371C87-9FB0-4A54-9D22-0532ADF4D64F - b2400890689c2afb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Repositories.ViaryRepositoryImpl.init(apiClient: MoyaAPIClient.APIClient&lt;Repositories.APIRequest&gt;) -&gt; Repositories.ViaryRepositoryImpl"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Repositories/Sources/Repositories/ViaryRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "9D371C87-9FB0-4A54-9D22-0532ADF4D64F - b2400890689c2a1c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(5) suspend resume partial function for closure #1 @Sendable () async throws -&gt; () in Repositories.ViaryRepositoryImpl.init(apiClient: MoyaAPIClient.APIClient&lt;Repositories.APIRequest&gt;) -&gt; Repositories.ViaryRepositoryImpl"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/Repositories/Sources/Repositories/ViaryRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "108">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2E9569AA-FFAA-4656-994F-8B256F45BDD6"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "LocalDataStore/Sources/LocalDataStore/StoredViary.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "observeAll()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "2E9569AA-FFAA-4656-994F-8B256F45BDD6 - 9f6e42f5d930e61b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static LocalDataStore.StoredViary.observeAll() throws -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;LocalDataStore.StoredViary&gt;, Swift.Never&gt;"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/LocalDataStore/Sources/LocalDataStore/StoredViary.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "456">
+               </Location>
+               <Location
+                  uuid = "2E9569AA-FFAA-4656-994F-8B256F45BDD6 - 6fea70ef5181ae53"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (RealmSwift.Results&lt;LocalDataStore.StoredViary&gt;) -&gt; Swift.Array&lt;LocalDataStore.StoredViary&gt; in static LocalDataStore.StoredViary.observeAll() throws -&gt; Combine.AnyPublisher&lt;Swift.Array&lt;LocalDataStore.StoredViary&gt;, Swift.Never&gt;"
+                  moduleName = "ios"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/mobile/ios/LocalDataStore/Sources/LocalDataStore/StoredViary.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

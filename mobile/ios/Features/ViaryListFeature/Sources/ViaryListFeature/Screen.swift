@@ -40,7 +40,7 @@ public struct ViaryListScreen: View {
                 router.destinate(ViaryList.self, destination: destination.wrappedValue)
             })
             .task {
-                viewStore.send(.load)
+                viewStore.send(.onAppear)
             }
         }
     }
