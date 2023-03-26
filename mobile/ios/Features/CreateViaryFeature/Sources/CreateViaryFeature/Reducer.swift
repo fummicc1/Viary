@@ -94,6 +94,7 @@ public struct CreateViary: ReducerProtocol {
         case editDate(Date)
         case save
         case saved(TaskResult<Bool>)
+        case delete(Viary.Message)
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -184,6 +185,9 @@ public struct CreateViary: ReducerProtocol {
             case .failure(let error):
                 state.saveStatus = .fail(error)
             }
+
+        case .delete(let message):
+            state.messages.removeAll(where: { $0 == message })
         }
         return .none
     }

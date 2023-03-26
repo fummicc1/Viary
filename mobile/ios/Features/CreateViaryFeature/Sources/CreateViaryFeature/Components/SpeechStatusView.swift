@@ -32,11 +32,11 @@ public struct SpeechStatusView: View {
 
     var idleView: some View {
         VStack(alignment: .leading) {
-            Text("音声で日記を描きましょう")
+            Text("Note with voice!")
             Button {
                 viewStore.send(.startRecording)
             } label: {
-                Text("録音開始")
+                Text("Start noting")
                 Image(systemSymbol: .mic)
             }
             .bold()
@@ -47,13 +47,13 @@ public struct SpeechStatusView: View {
         VStack(alignment: .leading) {
             HStack {
                 if !model.isFinal {
-                    Text("録音中です")
+                    Text("Noting...")
                 }
                 Button {
                     viewStore.send(.stopRecording)
                 } label: {
                     HStack {
-                        Text("停止")
+                        Text("Stop")
                         Image(systemSymbol: .stop)
                     }
                 }
