@@ -61,7 +61,7 @@ public struct CreateViary: ReducerProtocol {
 
         public init(
             messages: [Viary.Message] = [
-                .init(message: "fdjkjfgiojfviojv fikogjoirsjgois jio sjgiorsjgoisgoiho jfijfoai ahfuiahgviuaerh ahiovahriughiaurhg aigaio ajigrh a hogps g th uishgiurh  faopj fdjkjfgiojfviojv fikogjoirsjgois jio sjgiorsjgoisgoiho jfijfoai ahfuiahgviuaerh ahiovahriughiaurhg aigaio ajigrh a hogps g th uishgiurh  faopj fdjkjfgiojfviojv fikogjoirsjgois jio sjgiorsjgoisgoiho jfijfoai ahfuiahgviuaerh ahiovahriughiaurhg aigaio ajigrh a hogps g th uishgiurh  faopj fdjkjfgiojfviojv fikogjoirsjgois jio sjgiorsjgoisgoiho jfijfoai ahfuiahgviuaerh ahiovahriughiaurhg aigaio ajigrh a hogps g th uishgiurh  faopj fdjkjfgiojfviojv fikogjoirsjgois jio sjgiorsjgoisgoiho jfijfoai ahfuiahgviuaerh ahiovahriughiaurhg aigaio ajigrh a hogps g th uishgiurh  faopj", lang: .en)
+                .init(message: "This is sample viary", lang: .en)
             ],
             currentLang: Lang = .en,
             currentInput: InputState = .init(),

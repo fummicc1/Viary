@@ -1,5 +1,6 @@
 import Foundation
 import RealmSwift
+import Combine
 
 @MainActor
 public class StoredViary: Object, ObjectWithList {
@@ -17,6 +18,15 @@ public class StoredViary: Object, ObjectWithList {
 
 @MainActor
 public extension StoredViary {
+    static func observeAll() throws -> AnyPublisher<[StoredViary], Never> {
+        let realm = try  Realm()
+        return realm.objects(StoredViary.self)
+            .collectionPublisher
+            .map { Array($0) }
+            .replaceError(with: [])
+            .eraseToAnyPublisher()
+    }
+
     static func fetchAll() async throws -> [StoredViary] {
         let realm = try await Realm()
         let viaries = Array(realm.objects(StoredViary.self))

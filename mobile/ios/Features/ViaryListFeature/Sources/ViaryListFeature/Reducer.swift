@@ -1,4 +1,5 @@
 import SwiftUI
+import Combine
 import ComposableArchitecture
 import Dependencies
 import Entities
@@ -21,6 +22,8 @@ public struct ViaryList: ReducerProtocol {
         public var errorMessage: String?
         public var destination: Destination?
 
+        var streamCancellable: AnyCancellable?
+
         public init(
             viaries: IdentifiedArrayOf<Viary> = [],
             destination: Destination? = nil,
@@ -33,7 +36,7 @@ public struct ViaryList: ReducerProtocol {
     }
 
     public enum Action: Equatable {
-        case load
+        case onAppear
         case loaded(TaskResult<IdentifiedArrayOf<Viary>>)
         case createSample
         case transit(Destination?)
@@ -41,15 +44,14 @@ public struct ViaryList: ReducerProtocol {
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
-        case .load:
-            return .task {
-                do {
-                    var viaries = try await viaryRepository.load()
-                    viaries.sort(using: KeyPathComparator(\.updatedAt))
-                    viaries.reverse()
-                    return .loaded(.success(viaries))
-                } catch {
-                    return .loaded(.failure(error))
+        case .onAppear:
+            return .run { send in
+                for await viaries in viaryRepository.myViaries.values {
+                    await send(.loaded(.success(
+                        IdentifiedArrayOf(
+                            uniqueElements: viaries.sorted(using: KeyPathComparator(\.updatedAt)).reversed()
+                        )
+                    )))
                 }
             }
         case .loaded(let result):
@@ -65,10 +67,9 @@ public struct ViaryList: ReducerProtocol {
                 state.errorMessage = Error.failedToCreateSample.localizedDescription
                 return .none
             }
-            return .task {
+            return .fireAndForget {
                 let newViary = Viary.sample()
                 try await viaryRepository.create(viary: newViary)
-                return .load
             }
 
         case .transit(let destination):

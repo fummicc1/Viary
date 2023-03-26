@@ -23,22 +23,25 @@ public typealias AppAPIClient = APIClient<APIRequest>
 public class ViaryRepositoryImpl {
     private let myViariesSubject: CurrentValueSubject<IdentifiedArrayOf<Viary>, Never> = .init([])
     private let apiClient: AppAPIClient
+    private var cancellables: Set<AnyCancellable> = []
 
     public init(apiClient: AppAPIClient) {
         self.apiClient = apiClient
+
+        Task { @MainActor in
+            let stream = try StoredViary.observeAll()
+            for await stored in stream.values {
+                let viaries = await mapStoredIntoDomain(stored: stored)
+                myViariesSubject.send(IdentifiedArrayOf(uniqueElements: viaries))
+            }
+        }
     }
 }
 
-extension ViaryRepositoryImpl: ViaryRepository {
-    public var myViaries: AnyPublisher<IdentifiedCollections.IdentifiedArrayOf<Entities.Viary>, Never> {
-        myViariesSubject.eraseToAnyPublisher()
-    }
-
-    @discardableResult
-    public func load() async throws -> IdentifiedArrayOf<Viary> {
-        let latest = try await StoredViary.fetchAll()
-        let viaries = await MainActor.run(body: {
-            latest.map { storedViary in
+extension ViaryRepositoryImpl {
+    func mapStoredIntoDomain(stored: [StoredViary]) async -> [Viary] {
+        await MainActor.run(body: {
+            stored.map { storedViary in
                let emotions: [Emotion] = Array(storedViary.emotions.compactMap { storedEmotion in
                    guard let kind = Emotion.Kind(rawValue: storedEmotion.kind) else {
                        return nil
@@ -60,6 +63,18 @@ extension ViaryRepositoryImpl: ViaryRepository {
                 )
             }
         })
+    }
+}
+
+extension ViaryRepositoryImpl: ViaryRepository {
+    public var myViaries: AnyPublisher<IdentifiedCollections.IdentifiedArrayOf<Entities.Viary>, Never> {
+        myViariesSubject.eraseToAnyPublisher()
+    }
+
+    @discardableResult
+    public func load() async throws -> IdentifiedArrayOf<Viary> {
+        let latest = try await StoredViary.fetchAll()
+        let viaries = await mapStoredIntoDomain(stored: latest)
         return IdentifiedArrayOf(uniqueElements: viaries)
     }
 
