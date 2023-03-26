@@ -60,9 +60,7 @@ public struct CreateViary: ReducerProtocol {
         }
 
         public init(
-            messages: [Viary.Message] = [
-                .init(message: "This is sample viary", lang: .en)
-            ],
+            messages: [Viary.Message] = [],
             currentLang: Lang = .en,
             currentInput: InputState = .init(),
             speechStatus: SpeechStatus = .idle,

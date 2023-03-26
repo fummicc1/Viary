@@ -70,13 +70,7 @@ public struct CreateViaryScreen: View {
 
     var currentStatus: some View {
         WithViewStore(store) { viewStore in
-            VStack(alignment: .leading) {
-                LangListSelectionView(
-                    selectedLang: viewStore.binding(
-                        get: \.currentLang,
-                        send: { .editLang($0) }
-                    )
-                )
+            VStack(alignment: .leading) {                
                 SpeechStatusView(
                     status: viewStore.speechStatus,
                     viewStore: viewStore
