@@ -152,7 +152,7 @@ public struct CreateViary: ReducerProtocol {
             state.saveStatus.start()
             return .task { [state] in
                 
-                let emotionScores = try emotionDetector.infer(text: state.message, lang: state.currentLang)
+                let emotionScores = emotionDetector.infer(text: state.message, lang: state.currentLang)
                 let emotions = Emotion.Kind.allCases.indices.compactMap { index -> Emotion? in
                     if emotionScores.count <= index {
                         return nil

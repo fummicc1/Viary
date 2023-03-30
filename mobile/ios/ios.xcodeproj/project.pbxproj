@@ -17,7 +17,6 @@
 		D30F24EC296B3EF50028E0B5 /* iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24EB296B3EF50028E0B5 /* iosUITestsLaunchTests.swift */; };
 		D325CC8929891A5A00F27A54 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D325CC8829891A5A00F27A54 /* AppRouter.swift */; };
 		D37818F329CA207E008D9B63 /* vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = D37818F229CA207E008D9B63 /* vocab.json */; };
-		D39DB1D929D5D3D9000EE976 /* emotion-english-distilroberta-base.mlpackage in Sources */ = {isa = PBXBuildFile; fileRef = D39DB1D829D5D3D9000EE976 /* emotion-english-distilroberta-base.mlpackage */; };
 		D3A5710F296C81630083B71B /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = D3A5710E296C81630083B71B /* Entities */; };
 		D3A57116296C81AC0083B71B /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = D3A57115296C81AC0083B71B /* Repositories */; };
 		D3C2B2572990A0EB0072F796 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3C2B2562990A0EB0072F796 /* GoogleService-Info.plist */; };
@@ -322,7 +321,6 @@
 			files = (
 				D325CC8929891A5A00F27A54 /* AppRouter.swift in Sources */,
 				D30F24CE296B3EF40028E0B5 /* iosApp.swift in Sources */,
-				D39DB1D929D5D3D9000EE976 /* emotion-english-distilroberta-base.mlpackage in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
