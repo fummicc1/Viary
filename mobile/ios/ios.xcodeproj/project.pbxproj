@@ -60,6 +60,7 @@
 		D3A57117296C81E40083B71B /* ViaryListFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryListFeature; path = Features/ViaryListFeature; sourceTree = "<group>"; };
 		D3BD9FAF2987FB6400576340 /* CreateViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CreateViaryFeature; path = Features/CreateViaryFeature; sourceTree = "<group>"; };
 		D3C2B2562990A0EB0072F796 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D3DBD34429D19D7900F2D3EF /* EditViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EditViaryFeature; path = Features/EditViaryFeature; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,12 +164,13 @@
 		D3A5710C296C81450083B71B /* Packages */ = {
 			isa = PBXGroup;
 			children = (
+				D3BD9FAF2987FB6400576340 /* CreateViaryFeature */,
+				D3DBD34429D19D7900F2D3EF /* EditViaryFeature */,
 				D3A5710D296C81450083B71B /* Entities */,
 				D3A57114296C81790083B71B /* Repositories */,
-				D3A57117296C81E40083B71B /* ViaryListFeature */,
-				D3BD9FAF2987FB6400576340 /* CreateViaryFeature */,
-				D325CC8A29891A6C00F27A54 /* Wireframe */,
 				D3A367E629940548007D6FBE /* Utils */,
+				D3A57117296C81E40083B71B /* ViaryListFeature */,
+				D325CC8A29891A6C00F27A54 /* Wireframe */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -545,6 +547,7 @@
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Osize";
 				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
