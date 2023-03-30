@@ -43,15 +43,18 @@ def main():
     coreml_model = ct.convert(
         traced_model,
         source="pytorch",
+        convert_to="mlprogram",
         inputs=[
-                ct.TensorType(name=input_names[0], shape=input_shape, dtype=int),
-                ct.TensorType(name=input_names[1], shape=attention_shape, dtype=int),
-            ],
-        classifier_config=ct.ClassifierConfig(class_labels=list(model.config.id2label.values())),
+            ct.TensorType(name=input_names[0], shape=input_shape, dtype=int),
+            ct.TensorType(name=input_names[1], shape=attention_shape, dtype=int),
+        ],
     )
+    
+    model_compressed = ct.compression_utils.affine_quantize_weights(coreml_model)
 
     # Save the Core ML model as an .mlpackage
     coreml_model.save("emotion-english-distilroberta-base.mlpackage")
+    model_compressed.save("emotion-english-distilroberta-base-compressed.mlpackage")
 
 if __name__ == "__main__":
     main()
