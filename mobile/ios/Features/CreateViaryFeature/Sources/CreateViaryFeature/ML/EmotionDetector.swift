@@ -16,12 +16,21 @@ public protocol EmotionDetector {
 
 public class EmotionDetectorImpl {
 
-    private let model: emotion_classification_model
+    private let model: emotion_english_distilroberta_base
     private let tokenizer: BertTokenizer
 
     public init() {
-        model = try! emotion_classification_model()
+        model = try! emotion_english_distilroberta_base()
         tokenizer = BertTokenizer()
+    }
+
+    private func multiArrayToArray(_ multiArray: MLMultiArray) -> [Double] {
+        let length = multiArray.count
+        var ret: [Double] = []
+        for i in 0..<length {
+            ret.append(multiArray[i].doubleValue)
+        }
+        return ret
     }
 }
 
@@ -58,32 +67,21 @@ extension EmotionDetectorImpl: EmotionDetector {
         let attentionMask = try? createAttentionMask(text: text)
 
         // Create the model input
-        let input = emotion_classification_modelInput(input_ids: inputArray, attention_mask: attentionMask!)
+        let input = emotion_english_distilroberta_baseInput(input_ids: inputArray, attention_mask: attentionMask!)
 
         // Perform the prediction
         guard let prediction = try? model.prediction(input: input) else {
-            print("Error making prediction")
             return []
         }
 
         // Handle the prediction result
-        let emotionProbabilities = prediction.featureValue(for: "var_564")
-        let predictedEmotion = prediction.classLabel
+        let predictedEmotion = prediction.var_564
 
-        let emotions = emotionProbabilities?.dictionaryValue as? [AnyHashable: NSNumber] ?? [:]
+        let ret: [Double] = multiArrayToArray(predictedEmotion)
 
-        var ret: [Double] = Array(repeating: 0, count: 7)
-
-        for (kind, val) in emotions {
-            guard let index = Emotion.Kind.allCases.firstIndex(where: { $0.text == kind as! String }) else {
-                continue
-            }
-            let _val: Double = val.doubleValue
-            ret[index] = _val
-        }
-
+        #if DEBUG
         print("Predicted emotion: \(predictedEmotion)")
-        print("Emotion probabilities: \(emotionProbabilities)")
+        #endif
         return ret
     }
 }

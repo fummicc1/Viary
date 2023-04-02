@@ -151,40 +151,19 @@ public struct CreateViary: ReducerProtocol {
         case .save:
             state.saveStatus.start()
             return .task { [state] in
-                var allEmotionsScores: [Emotion.Kind: Double] = Dictionary(
-                    uniqueKeysWithValues: zip(
-                        Emotion.Kind.allCases,
-                        Emotion.Kind.allCases.map { _ in 0 }
+                
+                let emotionScores = emotionDetector.infer(text: state.message, lang: state.currentLang)
+                let emotions = Emotion.Kind.allCases.indices.compactMap { index -> Emotion? in
+                    if emotionScores.count <= index {
+                        return nil
+                    }
+                    let score = emotionScores[index]
+                    return Emotion(
+                        sentence: state.message,
+                        score: Int(score * 100),
+                        kind: Emotion.Kind.allCases[index]
                     )
-                )
-                for message in state.messages.map(\.message) {
-                    let emotionScores = emotionDetector.infer(text: message, lang: state.currentLang)
-                    Emotion.Kind.allCases.indices.forEach { index in
-                        if emotionScores.count <= index {
-                            return
-                        }
-                        let kind = Emotion.Kind.allCases[index]
-                        let score = emotionScores[index]
-                        if let currentScore = allEmotionsScores[kind] {
-                            allEmotionsScores[kind] = currentScore + score
-                        } else {
-                            allEmotionsScores[kind] = score
-                        }
-                    }
-
                 }
-                let emotions = Dictionary(
-                    uniqueKeysWithValues: allEmotionsScores.map { (key, value) in
-                        (
-                            key,
-                            Emotion(
-                            sentence: state.message,
-                            score: Int(value / Double(allEmotionsScores.count) * 100),
-                            kind: key
-                        )
-                        )
-                    }
-                )
                 let viary = Viary(
                     id: .init(rawValue: uuid().uuidString),
                     messages: state.messages,
@@ -192,7 +171,7 @@ public struct CreateViary: ReducerProtocol {
                     date: state.date,
                     emotions: []
                 )
-                try await viaryRepository.create(viary: viary, with: emotions.values.map { $0 })
+                try await viaryRepository.create(viary: viary, with: emotions)
                 return .saved(.success(true))
             } catch: { error in
                 return .saved(.failure(error))

@@ -54,6 +54,7 @@
 		D325CC8829891A5A00F27A54 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		D325CC8A29891A6C00F27A54 /* Wireframe */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Wireframe; sourceTree = "<group>"; };
 		D37818F229CA207E008D9B63 /* vocab.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = vocab.json; path = Resources/Sources/Resources/vocab.json; sourceTree = SOURCE_ROOT; };
+		D39DB1D829D5D3D9000EE976 /* emotion-english-distilroberta-base.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = "emotion-english-distilroberta-base.mlpackage"; path = "Resources/Sources/Resources/emotion-english-distilroberta-base.mlpackage"; sourceTree = SOURCE_ROOT; };
 		D3A367E629940548007D6FBE /* Utils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utils; sourceTree = "<group>"; };
 		D3A5710D296C81450083B71B /* Entities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Entities; sourceTree = "<group>"; };
 		D3A57114296C81790083B71B /* Repositories */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Repositories; sourceTree = "<group>"; };
@@ -118,6 +119,7 @@
 		D30F24CC296B3EF40028E0B5 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				D39DB1D829D5D3D9000EE976 /* emotion-english-distilroberta-base.mlpackage */,
 				D37818F229CA207E008D9B63 /* vocab.json */,
 				D3C2B2562990A0EB0072F796 /* GoogleService-Info.plist */,
 				D30F24CD296B3EF40028E0B5 /* iosApp.swift */,
