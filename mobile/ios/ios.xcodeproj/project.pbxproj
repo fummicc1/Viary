@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3075AD929D9640700C7F006 /* EditViaryFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D3075AD829D9640700C7F006 /* EditViaryFeature */; };
 		D30DF2AE29891B3800B41FA6 /* Wireframe in Frameworks */ = {isa = PBXBuildFile; productRef = D30DF2AD29891B3800B41FA6 /* Wireframe */; };
 		D30DF2B029891B3B00B41FA6 /* CreateViaryFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D30DF2AF29891B3B00B41FA6 /* CreateViaryFeature */; };
 		D30F24CE296B3EF40028E0B5 /* iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24CD296B3EF40028E0B5 /* iosApp.swift */; };
@@ -74,6 +75,7 @@
 				D3A5710F296C81630083B71B /* Entities in Frameworks */,
 				D3C58E65296C86040061B391 /* ViaryListFeature in Frameworks */,
 				D30DF2AE29891B3800B41FA6 /* Wireframe in Frameworks */,
+				D3075AD929D9640700C7F006 /* EditViaryFeature in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,6 +201,7 @@
 				D3C58E64296C86040061B391 /* ViaryListFeature */,
 				D30DF2AD29891B3800B41FA6 /* Wireframe */,
 				D30DF2AF29891B3B00B41FA6 /* CreateViaryFeature */,
+				D3075AD829D9640700C7F006 /* EditViaryFeature */,
 			);
 			productName = ios;
 			productReference = D30F24CA296B3EF40028E0B5 /* ios.app */;
@@ -707,6 +710,10 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D3075AD829D9640700C7F006 /* EditViaryFeature */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = EditViaryFeature;
+		};
 		D30DF2AD29891B3800B41FA6 /* Wireframe */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Wireframe;

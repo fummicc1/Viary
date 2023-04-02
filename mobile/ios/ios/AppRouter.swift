@@ -1,5 +1,6 @@
 import UIKit
 import CreateViaryFeature
+import EditViaryFeature
 import Wireframe
 import ViaryListFeature
 import SwiftUI
@@ -11,8 +12,8 @@ struct AppRouter: Router {
             switch destination {
             case .createViary:
                 return AnyView(CreateViaryRouting().make(input: ()))
-            case .viaryDetail(_):
-                return AnyView(EmptyView())
+            case .viaryDetail(let viary):
+                return AnyView(EditViaryRouting().make(input: .init(viary: viary)))
             }
         }
         return AnyView(EmptyView())

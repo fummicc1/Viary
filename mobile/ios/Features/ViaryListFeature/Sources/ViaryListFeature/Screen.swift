@@ -68,6 +68,9 @@ public struct ViaryListScreen: View {
                             Spacer()
                         }
                     }
+                    .onTapGesture {
+                        viewStore.send(.transit(.viaryDetail(viary)))
+                    }
                 }
             }
         }
