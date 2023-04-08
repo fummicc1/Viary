@@ -43,17 +43,15 @@ public struct Viary: Identifiable, Equatable {
 
     public struct Message: Identifiable, Equatable {
         public var viaryID: Tagged<Viary, String>
+        public var id: Tagged<Message, String>
         public var message: String
         public var lang: Lang
         public var updatedAt: Date
         public var emotions: [Emotion]
 
-        public var id: String {
-            "\(viaryID)-\(message)"
-        }
-
-        public init(viaryID: Tagged<Viary, String>, message: String, lang: Lang, emotions: [Emotion] = [], updatedAt: Date = Date()) {
+        public init(viaryID: Tagged<Viary, String>, id: Tagged<Message, String>, message: String, lang: Lang, emotions: [Emotion] = [], updatedAt: Date = Date()) {
             self.viaryID = viaryID
+            self.id = id
             self.message = message
             self.lang = lang
             self.emotions = emotions
@@ -82,7 +80,7 @@ public extension Viary {
         return Viary(
             id: uuid,
             messages: [
-                .init(viaryID: uuid, message: "This is sample viary!", lang: .en)
+                .init(viaryID: uuid, id: Tagged.uuid, message: "This is sample viary!", lang: .en)
             ],
             date: .now
         )

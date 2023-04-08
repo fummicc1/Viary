@@ -115,6 +115,7 @@ public struct CreateViary: ReducerProtocol {
             }
             let newMessage = Viary.Message(
                 viaryID: Tagged(""),
+                id: Tagged(UUID().uuidString),
                 message: message,
                 lang: state.currentLang
             )
@@ -181,7 +182,7 @@ public struct CreateViary: ReducerProtocol {
                     date: state.date
                 )
                 var emotionsPerMessage: [Viary.Message.ID: [Emotion]] = [:]
-                for message in messages {
+                for message in viary.messages {
                     emotionsPerMessage[message.id] = message.emotions
                 }
                 try await viaryRepository.create(

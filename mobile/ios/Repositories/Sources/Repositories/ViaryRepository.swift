@@ -46,6 +46,7 @@ extension ViaryRepositoryImpl {
                 for storedMessage in storedViary.messages {
                     var message = Viary.Message(
                         viaryID: Tagged(rawValue: storedViary.id),
+                        id: Tagged(storedMessage.id),
                         message: storedMessage.sentence,
                         lang: Lang(stringLiteral: storedMessage.lang),
                         emotions: []
@@ -97,6 +98,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
             let newStoredViary = StoredViary()
             for message in messages {
                 let storedMessage = StoredMessage()
+                storedMessage.id = message.id.rawValue
                 let resppnse: Text2EmotionResponse = try await APIRequest.text2emotion(
                     text: message.message,
                     lang: message.lang
@@ -134,8 +136,12 @@ extension ViaryRepositoryImpl: ViaryRepository {
         let date = viary.date
         try await Task { @MainActor in
             let newStoredViary = StoredViary()
+            newStoredViary.id = viary.id.rawValue
             for message in messages {
                 let storedMessage = StoredMessage()
+                storedMessage.id = message.id.rawValue
+                storedMessage.sentence = message.message
+                storedMessage.lang = message.lang.id
                 emotions[message.id]?.forEach {
                     let emotion = StoredEmotion()
                     emotion.kind = $0.kind.id
@@ -143,6 +149,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
                     emotion.sentence = $0.sentence
                     storedMessage.emotions.append(emotion)
                 }
+                newStoredViary.messages.append(storedMessage)
             }
             newStoredViary.date = date
             newStoredViary.updatedAt = updatedAt
