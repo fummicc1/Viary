@@ -42,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D30CFAC729E1626100ACF46A /* SharedUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SharedUI; sourceTree = "<group>"; };
 		D30F24CA296B3EF40028E0B5 /* ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30F24CD296B3EF40028E0B5 /* iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosApp.swift; sourceTree = "<group>"; };
 		D30F24D1296B3EF50028E0B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -175,6 +176,7 @@
 				D3A367E629940548007D6FBE /* Utils */,
 				D3A57117296C81E40083B71B /* ViaryListFeature */,
 				D325CC8A29891A6C00F27A54 /* Wireframe */,
+				D30CFAC729E1626100ACF46A /* SharedUI */,
 			);
 			name = Packages;
 			sourceTree = "<group>";

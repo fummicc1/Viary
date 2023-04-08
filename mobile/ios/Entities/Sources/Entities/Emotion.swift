@@ -6,14 +6,30 @@ public struct Emotion: Identifiable, Equatable {
     public var score: Int
     public var kind: Kind
 
-    public var id: Kind {
-        kind
+    public var id: String {
+        kind.id
     }
 
     public init(sentence: String, score: Int, kind: Kind) {
         self.sentence = sentence
         self.score = score
         self.kind = kind
+    }
+
+    public static func make(message: String, with scores: [Double]) -> [Self] {
+        var emotions: [Self] = []
+        for (i, score) in scores.enumerated() {
+            let kind = Emotion.Kind.allCases[i]
+            assert(score <= 1)
+            emotions.append(
+                Emotion(
+                    sentence: message,
+                    score: Int(Double(score) * 100),
+                    kind: kind
+                )
+            )
+        }
+        return emotions
     }
 }
 

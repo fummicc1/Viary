@@ -35,7 +35,6 @@ public struct EditViary: ReducerProtocol {
             guard let index = state.editable.emotions.firstIndex(where: { $0.kind == emotion.kind }) else {
                 return .none
             }
-            state.editable.emotions[index].score = score
         case .save:
             break
         case .saved:

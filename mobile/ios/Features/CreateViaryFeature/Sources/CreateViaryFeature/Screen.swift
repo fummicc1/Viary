@@ -84,7 +84,7 @@ public struct CreateViaryScreen: View {
             List {
                 ForEach(viewStore.messages) { message in
                     VStack {
-                        Text(message.message)
+                        CopyableText(message.message)
                         HStack {
                             Spacer()
                             Text(message.updatedAt, style: .time)

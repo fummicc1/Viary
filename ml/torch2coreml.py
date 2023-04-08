@@ -21,14 +21,14 @@ def main():
     tokenizer = RobertaTokenizer.from_pretrained(model_name)
 
     # Set up a sample input to trace the model
-    text = "I cannot really"
+    text = "it's"
     tokens = tokenizer(text, return_tensors='pt')
     print("tokens", tokens)
-    return
     input_names = list(tokens.keys())
 
     # Trace the model with the sample input
     traced_model = torch.jit.trace(model, [tokens['input_ids'], tokens['attention_mask']], strict=False)
+    return
 
     # Set the input_shape to use RangeDim for each dimension.
     input_shape = ct.Shape(

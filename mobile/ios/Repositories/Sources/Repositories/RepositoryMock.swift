@@ -14,7 +14,7 @@ import MoyaAPIClient
 import Tagged
 
 
-public class ViaryRepositoryMock: ViaryRepository {
+public class ViaryRepositoryMock {
     public init() { }
 
 

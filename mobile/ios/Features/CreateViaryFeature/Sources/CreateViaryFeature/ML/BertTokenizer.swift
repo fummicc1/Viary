@@ -1,12 +1,4 @@
-// Copy from https://github.com/fummicc1/swift-coreml-transformers/blob/master/Sources/BertTokenizer.swift
-//
-//
-//  BertTokenizer.swift
-//  CoreMLBert
-//
-//  Created by Julien Chaumond on 27/06/2019.
-//  Copyright © 2019 Hugging Face. All rights reserved.
-//
+// Based on https://github.com/fummicc1/swift-coreml-transformers/blob/master/Sources/BertTokenizer.swift
 
 import Foundation
 
@@ -62,7 +54,9 @@ class BertTokenizer {
 
     /// Main entry point
     func tokenizeToIds(text: String) -> [Int] {
-        return try! convertTokensToIds(tokens: tokenize(text: text))
+        return try! convertTokensToIds(
+            tokens: tokenize(text: text)
+        )
     }
 
     func tokenToId(token: String) -> Int {

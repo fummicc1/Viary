@@ -1,5 +1,6 @@
 import Foundation
 import ComposableArchitecture
+import SharedUI
 import SwiftUI
 
 public struct EditViaryScreen: View {
@@ -12,7 +13,7 @@ public struct EditViaryScreen: View {
             observe: { $0 }
         ) { viewStore in
             VStack {
-                Text(viewStore.totalSentece)
+                CopyableText(viewStore.totalSentece)
             }
         }
     }

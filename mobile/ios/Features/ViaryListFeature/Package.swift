@@ -17,6 +17,7 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
         .package(name: "Entities", path: "../../Entities"),
         .package(name: "Repositories", path: "../../Repositories"),
+        .package(name: "SharedUI", path: "../../SharedUI"),
         .package(name: "Wireframe", path: "../../Wireframe"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "0.1.1")),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: "0.49.0")),
@@ -32,6 +33,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Entities", package: "Entities"),
                 .product(name: "Repositories", package: "Repositories"),
+                .product(name: "SharedUI", package: "SharedUI"),
                 .product(name: "Wireframe", package: "Wireframe"),
                 .product(name: "Dependencies", package: "swift-dependencies"),
                 .product(name: "IdentifiedCollections", package: "swift-identified-collections"),

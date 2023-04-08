@@ -8,6 +8,7 @@
 import Foundation
 import ComposableArchitecture
 import SpeechToText
+import SharedUI
 import SwiftUI
 
 public struct SpeechStatusView: View {
@@ -32,11 +33,11 @@ public struct SpeechStatusView: View {
 
     var idleView: some View {
         VStack(alignment: .leading) {
-            Text("Note with voice!")
+            CopyableText("Note with voice!")
             Button {
                 viewStore.send(.startRecording)
             } label: {
-                Text("Start noting")
+                CopyableText("Start noting")
                 Image(systemSymbol: .mic)
             }
             .bold()
@@ -47,7 +48,7 @@ public struct SpeechStatusView: View {
         VStack(alignment: .leading) {
             HStack {
                 if !model.isFinal {
-                    Text("Noting...")
+                    CopyableText("Noting...")
                 }
                 Button {
                     viewStore.send(.stopRecording)
@@ -58,7 +59,7 @@ public struct SpeechStatusView: View {
                     }
                 }
             }
-            Text(model.text).padding()
+            CopyableText(model.text).padding()
         }
     }
 
