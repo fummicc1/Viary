@@ -17,11 +17,11 @@
 		D30F24EA296B3EF50028E0B5 /* iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24E9296B3EF50028E0B5 /* iosUITests.swift */; };
 		D30F24EC296B3EF50028E0B5 /* iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24EB296B3EF50028E0B5 /* iosUITestsLaunchTests.swift */; };
 		D325CC8929891A5A00F27A54 /* AppRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D325CC8829891A5A00F27A54 /* AppRouter.swift */; };
-		D37818F329CA207E008D9B63 /* vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = D37818F229CA207E008D9B63 /* vocab.json */; };
 		D3A5710F296C81630083B71B /* Entities in Frameworks */ = {isa = PBXBuildFile; productRef = D3A5710E296C81630083B71B /* Entities */; };
 		D3A57116296C81AC0083B71B /* Repositories in Frameworks */ = {isa = PBXBuildFile; productRef = D3A57115296C81AC0083B71B /* Repositories */; };
 		D3C2B2572990A0EB0072F796 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3C2B2562990A0EB0072F796 /* GoogleService-Info.plist */; };
 		D3C58E65296C86040061B391 /* ViaryListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = D3C58E64296C86040061B391 /* ViaryListFeature */; };
+		D3D39E2D29E1490100F4350C /* vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = D39C703429E1486000FFD864 /* vocab.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,7 +54,7 @@
 		D30F24EB296B3EF50028E0B5 /* iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		D325CC8829891A5A00F27A54 /* AppRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRouter.swift; sourceTree = "<group>"; };
 		D325CC8A29891A6C00F27A54 /* Wireframe */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Wireframe; sourceTree = "<group>"; };
-		D37818F229CA207E008D9B63 /* vocab.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = vocab.json; path = Resources/Sources/Resources/vocab.json; sourceTree = SOURCE_ROOT; };
+		D39C703429E1486000FFD864 /* vocab.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = vocab.json; path = Resources/Sources/Resources/vocab.json; sourceTree = SOURCE_ROOT; };
 		D39DB1D829D5D3D9000EE976 /* emotion-english-distilroberta-base.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = "emotion-english-distilroberta-base.mlpackage"; path = "Resources/Sources/Resources/emotion-english-distilroberta-base.mlpackage"; sourceTree = SOURCE_ROOT; };
 		D3A367E629940548007D6FBE /* Utils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utils; sourceTree = "<group>"; };
 		D3A5710D296C81450083B71B /* Entities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Entities; sourceTree = "<group>"; };
@@ -121,8 +121,8 @@
 		D30F24CC296B3EF40028E0B5 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				D39C703429E1486000FFD864 /* vocab.json */,
 				D39DB1D829D5D3D9000EE976 /* emotion-english-distilroberta-base.mlpackage */,
-				D37818F229CA207E008D9B63 /* vocab.json */,
 				D3C2B2562990A0EB0072F796 /* GoogleService-Info.plist */,
 				D30F24CD296B3EF40028E0B5 /* iosApp.swift */,
 				D30F24D1296B3EF50028E0B5 /* Assets.xcassets */,
@@ -296,8 +296,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3D39E2D29E1490100F4350C /* vocab.json in Resources */,
 				D30F24D6296B3EF50028E0B5 /* Preview Assets.xcassets in Resources */,
-				D37818F329CA207E008D9B63 /* vocab.json in Resources */,
 				D30F24D2296B3EF50028E0B5 /* Assets.xcassets in Resources */,
 				D3C2B2572990A0EB0072F796 /* GoogleService-Info.plist in Resources */,
 			);

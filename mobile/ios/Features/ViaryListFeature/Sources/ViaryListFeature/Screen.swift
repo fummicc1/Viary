@@ -16,31 +16,59 @@ public struct ViaryListScreen: View {
 
     public var body: some View {
         WithViewStore(store) { viewStore in
-            Group {
-                let viaries = viewStore.viaries
-                if viaries.isEmpty {
-                    Button {
-                        viewStore.send(.createSample)
-                    } label: {
-                        Text("Create")
+            content(viewStore)
+                .navigationDestination(
+                    unwrapping: viewStore.binding(
+                        get: {
+                            if case /ViaryList.Destination.viaryDetail = $0.destination {
+                                return $0.destination
+                            }
+                            return nil
+                        },
+                        send: { .transit($0) }
+                    ),
+                    destination: { destination in
+                        router.destinate(ViaryList.self, destination: destination.wrappedValue)
                     }
-                    .buttonStyle(.borderedProminent)
-                } else {
-                    FloatingActionable(
-                        .bottomTrailing,
-                        fab: .image(Image(systemName: "plus"))
-                    ) {
-                        list
-                    } didPress: {
-                        viewStore.send(.transit(.createViary))
+                )
+                .fullScreenCover(
+                    unwrapping: viewStore.binding(
+                        get: {
+                            if case /ViaryList.Destination.createViary = $0.destination {
+                                return $0.destination
+                            }
+                            return nil
+                        },
+                        send: { .transit($0) }
+                    ),
+                    content: { destination in
+                        router.destinate(ViaryList.self, destination: destination.wrappedValue)
                     }
+                )
+                .onAppear {
+                    viewStore.send(.onAppear)
                 }
+        }
+    }
+
+    @ViewBuilder
+    func content(_ viewStore: ViewStoreOf<ViaryList>) -> some View {
+        let viaries = viewStore.viaries
+        if viaries.isEmpty {
+            Button {
+                viewStore.send(.createSample)
+            } label: {
+                Text("Create")
             }
-            .fullScreenCover(unwrapping: viewStore.binding(get: \.destination, send: { .transit($0) }), content: { destination in
-                router.destinate(ViaryList.self, destination: destination.wrappedValue)
-            })
-            .task {
-                viewStore.send(.onAppear)
+            .buttonStyle(.borderedProminent)
+        } else {
+            FloatingActionable(
+                .bottomTrailing,
+                fab: .image(Image(systemName: "plus"))
+            ) {
+                list
+            } didPress: {
+                viewStore.send(.transit(.createViary))
             }
         }
     }

@@ -10,6 +10,18 @@ extension ViaryList: Routing {
     public enum Destination: Equatable {
         case createViary
         case viaryDetail(Viary)
+
+        var isModal: Bool {
+            switch self {
+            case .createViary:
+                return true
+            default:
+                break
+            }
+            return false
+        }
+
+
     }
 
     public func make(input: Input) -> ViaryListScreen {

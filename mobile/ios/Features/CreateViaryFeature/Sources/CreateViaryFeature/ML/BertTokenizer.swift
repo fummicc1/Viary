@@ -107,13 +107,13 @@ class BasicTokenizer {
     func tokenize(text: String) -> [String] {
         let splitTokens = text.folding(options: .diacriticInsensitive, locale: nil)
             .components(separatedBy: NSCharacterSet.whitespaces)
-        let tokens = splitTokens.flatMap({ (token: String) -> [String] in
+        var tokens = splitTokens.flatMap({ (token: String) -> [String] in
             if neverSplit.contains(token) {
                 return [token]
             }
             var toks: [String] = []
             var currentTok = ""
-            for c in token.lowercased() {
+            for c in token {
                 if c.isLetter || c.isNumber || c == "°" {
                     currentTok += String(c)
                 } else if currentTok.count > 0 {
@@ -129,6 +129,16 @@ class BasicTokenizer {
             }
             return toks
         })
+        var first = true
+        tokens = tokens.map {
+            defer {
+                first = false
+            }
+            if !first {
+                return " \($0)"
+            }
+            return $0
+        }
         return tokens
     }
 }

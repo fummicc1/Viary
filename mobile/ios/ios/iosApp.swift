@@ -16,12 +16,14 @@ struct iosApp: App {
             $0.router = AppRouter()
         } operation: {
             WindowGroup {
-                ViaryListScreen(
-                    store: StoreOf<ViaryList>(
-                        initialState: ViaryList.State(),
-                        reducer: ViaryList()
+                NavigationStack {
+                    ViaryListScreen(
+                        store: StoreOf<ViaryList>(
+                            initialState: ViaryList.State(),
+                            reducer: ViaryList()
+                        )
                     )
-                )
+                }
             }
         }
     }
