@@ -57,7 +57,7 @@ public struct CreateViary: ReducerProtocol {
         public var saveStatus: AsyncStatus<Bool>
 
         public var message: String {
-            messages.map(\.message).joined(separator: "\n")
+            messages.map(\.sentence).joined(separator: "\n")
         }
 
         public init(
@@ -116,7 +116,7 @@ public struct CreateViary: ReducerProtocol {
             let newMessage = Viary.Message(
                 viaryID: Tagged(""),
                 id: Tagged(UUID().uuidString),
-                message: message,
+                sentence: message,
                 lang: state.currentLang
             )
             state.messages.append(newMessage)
@@ -161,14 +161,14 @@ public struct CreateViary: ReducerProtocol {
                 var messages = state.messages
 
                 for (i, message) in messages.enumerated() {
-                    let newScore = await emotionDetector.infer(text: message.message, lang: message.lang)
+                    let newScore = await emotionDetector.infer(text: message.sentence, lang: message.lang)
                     let emotions = Emotion.Kind.allCases.indices.compactMap { index -> Emotion? in
                         if newScore.count <= index {
                             return nil
                         }
                         let score = newScore[index]
                         return Emotion(
-                            sentence: state.message,
+                            sentence: message.sentence,
                             score: Int(score * 100),
                             kind: Emotion.Kind.allCases[index]
                         )

@@ -20,6 +20,7 @@ public struct Viary: Identifiable, Equatable {
                     emotions[emotion.kind] = cur
                 } else {
                     emotions[emotion.kind] = emotion
+                    emotions[emotion.kind]?.score = Int(Double(emotion.score) / Double(messages.count))
                 }
             }
         }
@@ -31,7 +32,7 @@ public struct Viary: Identifiable, Equatable {
     }
 
     public var message: String {
-        messages.map(\.message).joined(separator: "\n")
+        messages.map(\.sentence).joined(separator: "\n")
     }
 
     public func score(of emotionKind: Emotion.Kind) -> Int {
@@ -44,15 +45,15 @@ public struct Viary: Identifiable, Equatable {
     public struct Message: Identifiable, Equatable {
         public var viaryID: Tagged<Viary, String>
         public var id: Tagged<Message, String>
-        public var message: String
+        public var sentence: String
         public var lang: Lang
         public var updatedAt: Date
         public var emotions: [Emotion]
 
-        public init(viaryID: Tagged<Viary, String>, id: Tagged<Message, String>, message: String, lang: Lang, emotions: [Emotion] = [], updatedAt: Date = Date()) {
+        public init(viaryID: Tagged<Viary, String>, id: Tagged<Message, String>, sentence: String, lang: Lang, emotions: [Emotion] = [], updatedAt: Date = Date()) {
             self.viaryID = viaryID
             self.id = id
-            self.message = message
+            self.sentence = sentence
             self.lang = lang
             self.emotions = emotions
             self.updatedAt = updatedAt
@@ -80,7 +81,7 @@ public extension Viary {
         return Viary(
             id: uuid,
             messages: [
-                .init(viaryID: uuid, id: Tagged.uuid, message: "This is sample viary!", lang: .en)
+                .init(viaryID: uuid, id: Tagged.uuid, sentence: "This is sample viary!", lang: .en)
             ],
             date: .now
         )

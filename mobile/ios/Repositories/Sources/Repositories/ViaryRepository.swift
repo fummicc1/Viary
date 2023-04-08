@@ -47,7 +47,7 @@ extension ViaryRepositoryImpl {
                     var message = Viary.Message(
                         viaryID: Tagged(rawValue: storedViary.id),
                         id: Tagged(storedMessage.id),
-                        message: storedMessage.sentence,
+                        sentence: storedMessage.sentence,
                         lang: Lang(stringLiteral: storedMessage.lang),
                         emotions: []
                     )
@@ -100,19 +100,19 @@ extension ViaryRepositoryImpl: ViaryRepository {
                 let storedMessage = StoredMessage()
                 storedMessage.id = message.id.rawValue
                 let resppnse: Text2EmotionResponse = try await APIRequest.text2emotion(
-                    text: message.message,
+                    text: message.sentence,
                     lang: message.lang
                 ).send()
                 let results = resppnse.results.flatMap { $0 }
                 let emotions = results.map {
                     Emotion(
-                        sentence: message.message,
+                        sentence: message.sentence,
                         score: Int($0.score * 100.0),
                         kind: Emotion.Kind(rawValue: $0.label) ?? .unknown
                     )
                 }
                 storedMessage.lang = message.lang.id
-                storedMessage.sentence = message.message
+                storedMessage.sentence = message.sentence
                 storedMessage.emotions = .init()
                 emotions.forEach { emotion in
                     let stored = StoredEmotion()
@@ -140,7 +140,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
             for message in messages {
                 let storedMessage = StoredMessage()
                 storedMessage.id = message.id.rawValue
-                storedMessage.sentence = message.message
+                storedMessage.sentence = message.sentence
                 storedMessage.lang = message.lang.id
                 emotions[message.id]?.forEach {
                     let emotion = StoredEmotion()
