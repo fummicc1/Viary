@@ -42,7 +42,6 @@ public extension Emotion {
         case neutral
         case sadness
         case surprise
-        case unknown
 
         public var id: String {
             rawValue

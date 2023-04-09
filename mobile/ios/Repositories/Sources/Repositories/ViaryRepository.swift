@@ -90,7 +90,7 @@ extension ViaryRepositoryImpl {
         }
         let operation = {
             if isUpdate {
-                assert(storedViary.id == viary.id.rawValue)
+                assert(storedViary.id == id.rawValue)
             }
             for message in viary.messages {
                 var storedMessage: StoredMessage = .init()
@@ -169,11 +169,14 @@ extension ViaryRepositoryImpl: ViaryRepository {
                     lang: message.lang
                 ).send()
                 let results = resppnse.results.flatMap { $0 }
-                let emotions = results.map {
-                    Emotion(
+                let emotions = results.compactMap { emotion -> Emotion? in
+                    guard let kind = Emotion.Kind(rawValue: emotion.label) else {
+                        return nil
+                    }
+                    return Emotion(
                         sentence: message.sentence,
-                        score: Int($0.score * 100.0),
-                        kind: Emotion.Kind(rawValue: $0.label) ?? .unknown
+                        score: Int(emotion.score * 100.0),
+                        kind: kind
                     )
                 }
                 storedMessage.lang = message.lang.id

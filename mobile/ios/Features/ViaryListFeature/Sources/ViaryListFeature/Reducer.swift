@@ -69,7 +69,10 @@ public struct ViaryList: ReducerProtocol {
             }
             return .fireAndForget {
                 let newViary = Viary.sample()
-                try await viaryRepository.create(viary: newViary, with: [:])
+                let emotions = Dictionary(uniqueKeysWithValues: newViary.messages.map {
+                    ($0.id, $0.emotions)
+                })
+                try await viaryRepository.create(viary: newViary, with: emotions)
             }
 
         case .transit(let destination):

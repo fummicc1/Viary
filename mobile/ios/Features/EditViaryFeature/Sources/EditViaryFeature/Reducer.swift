@@ -70,7 +70,7 @@ public struct EditViary: ReducerProtocol {
             state.resolved[id] = resolved
         case .save:
             return .task { [state] in
-                try await viaryRepository.update(id: state.editable.id, viary: state.editable)
+                try await viaryRepository.update(id: state.original.id, viary: state.editable)
                 return .saved
             }
         case .saved:

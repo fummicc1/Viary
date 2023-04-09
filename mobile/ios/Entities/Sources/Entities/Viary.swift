@@ -3,7 +3,7 @@ import IdentifiedCollections
 import Tagged
 
 public struct Viary: Identifiable, Equatable {
-    public let id: Tagged<Self, String>
+    public private(set) var id: Tagged<Self, String>
     public var messages: IdentifiedArrayOf<Message>
     public var date: Date
 
@@ -42,6 +42,14 @@ public struct Viary: Identifiable, Equatable {
         return score
     }
 
+    public func asDummy() -> Self {
+        .init(
+            id: .init(""),
+            messages: messages,
+            date: date
+        )
+    }
+
     public struct Message: Identifiable, Equatable {
         public var viaryID: Tagged<Viary, String>
         public var id: Tagged<Message, String>
@@ -50,12 +58,12 @@ public struct Viary: Identifiable, Equatable {
         public var updatedAt: Date
         public var emotions: [Emotion]
 
-        public init(viaryID: Tagged<Viary, String>, id: Tagged<Message, String>, sentence: String, lang: Lang, emotions: [Emotion] = [], updatedAt: Date = Date()) {
+        public init(viaryID: Tagged<Viary, String>, id: Tagged<Message, String>, sentence: String, lang: Lang, emotions: [Emotion]? = nil, updatedAt: Date = Date()) {
             self.viaryID = viaryID
             self.id = id
             self.sentence = sentence
             self.lang = lang
-            self.emotions = emotions
+            self.emotions = emotions ?? Emotion.Kind.allCases.map { Emotion(sentence: sentence, score: 0, kind: $0) }
             self.updatedAt = updatedAt
         }
     }

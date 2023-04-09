@@ -24,7 +24,7 @@ public struct EditViaryRouting: Routing {
             store: Store(
                 initialState: EditViary.State(
                     original: input.viary,
-                    editable: input.viary
+                    editable: input.viary.asDummy()
                 ),
                 reducer: EditViary()
             )
