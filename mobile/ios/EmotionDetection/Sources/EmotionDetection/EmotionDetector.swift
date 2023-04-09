@@ -11,7 +11,7 @@ import Entities
 import Resources
 
 public protocol EmotionDetector {
-    func infer(text: String, lang: Lang) -> [Double]
+    func infer(text: String, lang: Lang) async -> [Double]
 }
 
 public class EmotionDetectorImpl {
@@ -35,9 +35,11 @@ public class EmotionDetectorImpl {
 }
 
 extension EmotionDetectorImpl: EmotionDetector {
-    public func infer(text: String, lang: Lang) -> [Double] {
+    public func infer(text: String, lang: Lang) async -> [Double] {
         assert(lang == .en)
-        return predictEmotion(text: text)
+        return await Task {
+            await predictEmotion(text: text)
+        }.value
     }
 
     func createAttentionMask(text: String) throws -> MLMultiArray {
@@ -56,7 +58,7 @@ extension EmotionDetectorImpl: EmotionDetector {
         return attentionMask
     }
 
-    func predictEmotion(text: String) -> [Double] {
+    func predictEmotion(text: String) async -> [Double] {
         // Load the Core ML model
         let inputTokens = tokenizer.tokenizeToIds(text: text)
         let inputArray = try! MLMultiArray(shape: [1, inputTokens.count as NSNumber], dataType: .int32)

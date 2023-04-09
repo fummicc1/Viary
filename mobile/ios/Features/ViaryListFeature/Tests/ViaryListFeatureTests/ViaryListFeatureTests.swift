@@ -24,7 +24,7 @@ final class ViaryListFeatureTests: XCTestCase {
         // MARK: Act, Assert
         XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
         XCTAssertEqual(store.state.viaries, [])
-        await store.send(.load)
+        await store.send(.onAppear)
         await store.receive(.loaded(.success(listStub))) {
             $0.viaries = listStub
         }
@@ -52,7 +52,7 @@ final class ViaryListFeatureTests: XCTestCase {
         XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
         XCTAssertEqual(store.state.viaries, [])
         await store.send(.createSample)
-        await store.receive(.load)
+        await store.receive(.onAppear)
         await store.receive(.loaded(.success(listStub))) {
             $0.viaries = listStub
         }
@@ -87,7 +87,9 @@ private extension ViaryListFeatureTests {
     func viaryStub() -> Viary {
         Viary(
             id: .init(UUID().uuidString),
-            message: "Message",
+            messages: [
+                Viary.Message(message: "", lang: .en)
+            ],
             lang: .en,
             date: .now,
             emotions: []

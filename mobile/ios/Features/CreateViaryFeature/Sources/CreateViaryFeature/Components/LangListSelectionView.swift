@@ -7,6 +7,7 @@
 
 import Foundation
 import Entities
+import SharedUI
 import SwiftUI
 
 struct LangListSelectionView: View {
@@ -18,12 +19,12 @@ struct LangListSelectionView: View {
             selection: $selectedLang
         ) {
             ForEach(Lang.allCases) { lang in
-                Text(lang.displayName)
+                SelectableText(lang.displayName)
                     .bold()
                     .tag(lang)
             }
         } label: {
-            Text("Language")
+            SelectableText("Language")
         }
         .pickerStyle(.segmented)
     }

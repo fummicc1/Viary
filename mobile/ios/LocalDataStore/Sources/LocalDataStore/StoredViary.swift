@@ -5,11 +5,9 @@ import Combine
 @MainActor
 public class StoredViary: Object, ObjectWithList {
     @Persisted(primaryKey: true) public var id: String = UUID().uuidString
-    @Persisted public var message: String = ""
-    @Published public var language: String = "en"
+    @Persisted public var messages: List<StoredMessage> = .init()
     @Persisted public var date: Date = Date()
     @Persisted public var updatedAt: Date = Date()
-    @Persisted public var emotions: List<StoredEmotion> = .init()
 
     public override init() {
         super.init()
@@ -42,6 +40,13 @@ public extension StoredViary {
         let realm = try await Realm()
         try realm.write {
             realm.add(self)
+        }
+    }
+
+    func update(_ handler: @escaping () -> Void) async throws {
+        let realm = try await Realm()
+        try realm.write {
+            handler()
         }
     }
 

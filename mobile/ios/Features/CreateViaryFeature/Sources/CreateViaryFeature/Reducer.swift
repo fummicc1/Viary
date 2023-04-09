@@ -2,8 +2,10 @@ import Combine
 import ComposableArchitecture
 import Dependencies
 import Entities
+import Tagged
 import Foundation
 import Repositories
+import EmotionDetection
 import SpeechToText
 import Utils
 
@@ -56,7 +58,7 @@ public struct CreateViary: ReducerProtocol {
         public var saveStatus: AsyncStatus<Bool>
 
         public var message: String {
-            messages.map(\.message).joined(separator: "\n")
+            messages.map(\.sentence).joined(separator: "\n")
         }
 
         public init(
@@ -113,7 +115,9 @@ public struct CreateViary: ReducerProtocol {
                 return .none
             }
             let newMessage = Viary.Message(
-                message: message,
+                viaryID: Tagged(""),
+                id: Tagged(UUID().uuidString),
+                sentence: message,
                 lang: state.currentLang
             )
             state.messages.append(newMessage)
@@ -149,29 +153,43 @@ public struct CreateViary: ReducerProtocol {
         case .editInputType(let inputType):
             state.currentInput.type = inputType
         case .save:
+            if state.saveStatus.isLoading {
+                return .none
+            }
             state.saveStatus.start()
             return .task { [state] in
-                
-                let emotionScores = emotionDetector.infer(text: state.message, lang: state.currentLang)
-                let emotions = Emotion.Kind.allCases.indices.compactMap { index -> Emotion? in
-                    if emotionScores.count <= index {
-                        return nil
+
+                var messages = state.messages
+
+                for (i, message) in messages.enumerated() {
+                    let newScore = await emotionDetector.infer(text: message.sentence, lang: message.lang)
+                    let emotions = Emotion.Kind.allCases.indices.compactMap { index -> Emotion? in
+                        if newScore.count <= index {
+                            return nil
+                        }
+                        let score = newScore[index]
+                        return Emotion(
+                            sentence: message.sentence,
+                            score: Int(score * 100),
+                            kind: Emotion.Kind.allCases[index]
+                        )
                     }
-                    let score = emotionScores[index]
-                    return Emotion(
-                        sentence: state.message,
-                        score: Int(score * 100),
-                        kind: Emotion.Kind.allCases[index]
-                    )
+                    messages[i].emotions = emotions
                 }
+
                 let viary = Viary(
                     id: .init(rawValue: uuid().uuidString),
-                    messages: state.messages,
-                    lang: state.currentLang,
-                    date: state.date,
-                    emotions: []
+                    messages: IdentifiedArray(uniqueElements: messages),
+                    date: state.date
                 )
-                try await viaryRepository.create(viary: viary, with: emotions)
+                var emotionsPerMessage: [Viary.Message.ID: [Emotion]] = [:]
+                for message in viary.messages {
+                    emotionsPerMessage[message.id] = message.emotions
+                }
+                try await viaryRepository.create(
+                    viary: viary,
+                    with: emotionsPerMessage
+                )
                 return .saved(.success(true))
             } catch: { error in
                 return .saved(.failure(error))
