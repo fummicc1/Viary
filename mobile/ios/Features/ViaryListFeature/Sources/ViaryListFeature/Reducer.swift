@@ -69,7 +69,7 @@ public struct ViaryList: ReducerProtocol {
             }
             return .fireAndForget {
                 let newViary = Viary.sample()
-                try await viaryRepository.create(viary: newViary)
+                try await viaryRepository.create(viary: newViary, with: [:])
             }
 
         case .transit(let destination):
