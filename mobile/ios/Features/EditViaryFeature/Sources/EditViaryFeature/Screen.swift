@@ -9,6 +9,7 @@ public struct EditViaryScreen: View {
     let store: StoreOf<EditViary>
 
     @FocusState private var focused
+    @Environment(\.dismiss) var dismiss
 
     public var body: some View {
         WithViewStore(
@@ -65,6 +66,11 @@ public struct EditViaryScreen: View {
                         Button("Save") {
                             viewStore.send(.save)
                         }
+                    }
+                }
+                .onChange(of: viewStore.saveStatus.response) {
+                    if $0 != nil {
+                        dismiss()
                     }
                 }
             }

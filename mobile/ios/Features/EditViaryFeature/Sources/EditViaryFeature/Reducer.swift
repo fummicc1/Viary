@@ -4,6 +4,7 @@ import Entities
 import SwiftUI
 import EmotionDetection
 import Repositories
+import Utils
 
 
 public struct EditViary: ReducerProtocol {
@@ -15,6 +16,7 @@ public struct EditViary: ReducerProtocol {
         public var original: Viary
         public var editable: Viary
         public var resolved: [Viary.Message.ID: Bool]
+        public var saveStatus: AsyncStatus<Int> = .idle
 
         var messages: [Viary.Message] {
             editable.messages.elements
@@ -69,12 +71,16 @@ public struct EditViary: ReducerProtocol {
             state.editable.messages[id: id] = message
             state.resolved[id] = resolved
         case .save:
+            if state.saveStatus.isLoading {
+                return .none
+            }
+            state.saveStatus.start()
             return .task { [state] in
                 try await viaryRepository.update(id: state.original.id, viary: state.editable)
                 return .saved
             }
         case .saved:
-            break
+            state.saveStatus = .success(0)
         }
         return .none
     }
