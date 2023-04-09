@@ -8,6 +8,6 @@
 import Foundation
 import SwiftUI
 
-public func CopyableText(_ text: String) -> some View {
+public func SelectableText(_ text: String) -> some View {
     Text(text).textSelection(.enabled)
 }

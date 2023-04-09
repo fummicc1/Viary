@@ -5,6 +5,7 @@ import Entities
 import Tagged
 import Foundation
 import Repositories
+import EmotionDetection
 import SpeechToText
 import Utils
 
@@ -178,7 +179,7 @@ public struct CreateViary: ReducerProtocol {
 
                 let viary = Viary(
                     id: .init(rawValue: uuid().uuidString),
-                    messages: messages,
+                    messages: IdentifiedArray(uniqueElements: messages),
                     date: state.date
                 )
                 var emotionsPerMessage: [Viary.Message.ID: [Emotion]] = [:]

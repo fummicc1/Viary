@@ -59,7 +59,7 @@ public struct ViaryListScreen: View {
             Button {
                 viewStore.send(.createSample)
             } label: {
-                CopyableText("Create")
+                SelectableText("Create")
             }
             .buttonStyle(.borderedProminent)
         } else {
@@ -79,15 +79,15 @@ public struct ViaryListScreen: View {
             List {
                 ForEach(viewStore.state) { viary in
                     VStack(alignment: .leading) {
-                        CopyableText(viary.message)
+                        SelectableText(viary.message)
                         LazyVStack {
                             ForEach(Emotion.Kind.allCases) { kind in
                                 let value = viary.score(of: kind)
                                 HStack {
-                                    CopyableText(kind.text)
+                                    SelectableText(kind.text)
                                     ProgressView(value: Double(value) / 100)
                                         .foregroundColor(kind.color)
-                                    CopyableText("\(value)%")
+                                    SelectableText("\(value)%")
                                 }
                             }
                         }

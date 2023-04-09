@@ -15,6 +15,7 @@ public protocol ViaryRepository {
     func load() async throws -> IdentifiedArrayOf<Viary>
     func create(viary: Viary) async throws
     func create(viary: Viary, with emotions: [Viary.Message.ID: [Emotion]]) async throws
+    func update(id: Tagged<Viary, String>, viary: Viary) async throws
     func delete(id: Tagged<Viary, String>) async throws
 }
 
@@ -69,11 +70,76 @@ extension ViaryRepositoryImpl {
                 }
                 return Viary(
                     id: .init(storedViary.id),
-                    messages: messages,
+                    messages: IdentifiedArray(uniqueElements: messages),
                     date: storedViary.date
                 )
             }
         })
+    }
+
+    @MainActor
+    func mapDomainIntoStored(id: Tagged<Viary, String>, viary: Viary, emotions: [Viary.Message.ID: [Emotion]], canWrite: Bool = false) async throws -> StoredViary {
+        let all = try await StoredViary.fetchAll()
+        let storedViary: StoredViary
+        var isUpdate = false
+        if let cur = all.first(where: { $0.id == id.rawValue }) {
+            storedViary = cur
+            isUpdate = true
+        } else {
+            storedViary = StoredViary()
+        }
+        let operation = {
+            if isUpdate {
+                assert(storedViary.id == viary.id.rawValue)
+            }
+            for message in viary.messages {
+                var storedMessage: StoredMessage = .init()
+                if isUpdate {
+                    guard let existing = storedViary.messages.first(where: { $0.id == message.id.rawValue }) else {
+                        assert(false)
+                        continue
+                    }
+                    storedMessage = existing
+                }
+                storedMessage.sentence = message.sentence
+                storedMessage.lang = message.lang.id
+                let storedEmotions = emotions[message.id]?.compactMap { editedEmotion -> StoredEmotion? in
+                    var emotion = StoredEmotion()
+                    if isUpdate {
+                        guard let exisiting = storedMessage.emotions.first(where: { $0.kind == editedEmotion.kind.id }) else {
+                            assert(false)
+                            return nil
+                        }
+                        emotion = exisiting
+                    }
+                    emotion.kind = editedEmotion.kind.id
+                    emotion.score = editedEmotion.score
+                    emotion.sentence = editedEmotion.sentence
+                    return emotion
+                } ?? []
+                storedMessage.updateListByArray(keyPath: \.emotions, array: storedEmotions)
+                if isUpdate {
+                    guard let i = storedViary.messages.firstIndex(where: { $0.id == message.id.rawValue }) else {
+                        continue
+                    }
+                    storedViary.messages[i] = storedMessage
+                } else {
+                    storedViary.messages.append(storedMessage)
+                }
+            }
+            storedViary.date = viary.date
+            storedViary.updatedAt = viary.updatedAt
+        }
+        if isUpdate {
+            if canWrite {
+                try await storedViary.update {
+                    operation()
+                }
+            }
+        } else {
+            operation()
+        }
+        return storedViary
     }
 }
 
@@ -90,7 +156,6 @@ extension ViaryRepositoryImpl: ViaryRepository {
     }
 
     public func create(viary: Viary) async throws {
-        // TODO: Supprt multi language
         let messages = viary.messages
         let updatedAt = viary.updatedAt
         let date = viary.date
@@ -130,30 +195,19 @@ extension ViaryRepositoryImpl: ViaryRepository {
     }
 
     public func create(viary: Viary, with emotions: [Viary.Message.ID: [Emotion]]) async throws {
-        // TODO: Supprt multi language
-        let messages = viary.messages
-        let updatedAt = viary.updatedAt
-        let date = viary.date
         try await Task { @MainActor in
-            let newStoredViary = StoredViary()
-            newStoredViary.id = viary.id.rawValue
-            for message in messages {
-                let storedMessage = StoredMessage()
-                storedMessage.id = message.id.rawValue
-                storedMessage.sentence = message.sentence
-                storedMessage.lang = message.lang.id
-                emotions[message.id]?.forEach {
-                    let emotion = StoredEmotion()
-                    emotion.kind = $0.kind.id
-                    emotion.score = $0.score
-                    emotion.sentence = $0.sentence
-                    storedMessage.emotions.append(emotion)
-                }
-                newStoredViary.messages.append(storedMessage)
+            let new = try await mapDomainIntoStored(id: viary.id, viary: viary, emotions: emotions)
+            try await new.create()
+        }.value
+    }
+
+    public func update(id: Tagged<Viary, String>, viary: Viary) async throws {
+        try await Task { @MainActor in
+            var emotions: [Tagged<Viary.Message, String>: [Emotion]] = [:]
+            for message in viary.messages {
+                emotions[message.id] = message.emotions
             }
-            newStoredViary.date = date
-            newStoredViary.updatedAt = updatedAt
-            try await newStoredViary.create()
+            _ = try await mapDomainIntoStored(id: id, viary: viary, emotions: emotions, canWrite: true)
         }.value
     }
 

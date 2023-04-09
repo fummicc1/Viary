@@ -4,7 +4,7 @@ import Tagged
 
 public struct Viary: Identifiable, Equatable {
     public let id: Tagged<Self, String>
-    public var messages: [Message]
+    public var messages: IdentifiedArrayOf<Message>
     public var date: Date
 
     var lang: Lang {
@@ -62,7 +62,7 @@ public struct Viary: Identifiable, Equatable {
 
     public init(
         id: Tagged<Self, String>,
-        messages: [Message],
+        messages: IdentifiedArrayOf<Message>,
         date: Date
     ) {
         self.id = id

@@ -43,6 +43,13 @@ public extension StoredViary {
         }
     }
 
+    func update(_ handler: @escaping () -> Void) async throws {
+        let realm = try await Realm()
+        try realm.write {
+            handler()
+        }
+    }
+
     func delete() async throws {
         let realm = try await Realm()
         try realm.write {

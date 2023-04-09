@@ -19,12 +19,12 @@ struct LangListSelectionView: View {
             selection: $selectedLang
         ) {
             ForEach(Lang.allCases) { lang in
-                CopyableText(lang.displayName)
+                SelectableText(lang.displayName)
                     .bold()
                     .tag(lang)
             }
         } label: {
-            CopyableText("Language")
+            SelectableText("Language")
         }
         .pickerStyle(.segmented)
     }

@@ -33,11 +33,11 @@ public struct SpeechStatusView: View {
 
     var idleView: some View {
         VStack(alignment: .leading) {
-            CopyableText("Note with voice!")
+            SelectableText("Note with voice!")
             Button {
                 viewStore.send(.startRecording)
             } label: {
-                CopyableText("Start noting")
+                SelectableText("Start noting")
                 Image(systemSymbol: .mic)
             }
             .bold()
@@ -48,7 +48,7 @@ public struct SpeechStatusView: View {
         VStack(alignment: .leading) {
             HStack {
                 if !model.isFinal {
-                    CopyableText("Noting...")
+                    SelectableText("Noting...")
                 }
                 Button {
                     viewStore.send(.stopRecording)
@@ -59,7 +59,7 @@ public struct SpeechStatusView: View {
                     }
                 }
             }
-            CopyableText(model.text).padding()
+            SelectableText(model.text).padding()
         }
     }
 
