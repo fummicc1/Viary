@@ -1,3 +1,0 @@
-[submodule "ml/exporters"]
-	path = ml/exporters
-	url = https://github.com/huggingface/exporters.git
