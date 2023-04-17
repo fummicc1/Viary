@@ -1,5 +1,0 @@
-venv
-*.onnx
-*.mlpackage
-*.mlmodel
-emotion_classification_model
