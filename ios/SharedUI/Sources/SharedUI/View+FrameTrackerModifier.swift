@@ -31,7 +31,7 @@ public struct AddFrameTracker: ViewModifier {
 
     /// Data Stored in the Preferences
     public struct PreferenceData: Equatable {
-        let bounds: CGRect
+        public let bounds: CGRect
     }
 
     public func body(content: Content) -> some View {
@@ -65,7 +65,7 @@ extension View {
     /**
      Add a Tracker on the frame of the current View.
      */
-    func trackFrame() -> some View {
+    public func trackFrame() -> some View {
         self.modifier(AddFrameTracker())
     }
 
