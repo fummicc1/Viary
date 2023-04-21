@@ -65,9 +65,6 @@ public struct CreateViaryScreen: View {
             .onAppear {
                 viewStore.send(.onAppear)
             }
-            .onDisappear {
-                viewStore.send(.onDisappear)
-            }
         }
     }
 
