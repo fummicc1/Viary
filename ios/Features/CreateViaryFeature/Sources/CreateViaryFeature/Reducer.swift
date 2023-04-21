@@ -95,6 +95,7 @@ public struct CreateViary: ReducerProtocol {
         case save
         case saved(TaskResult<Bool>)
         case delete(Viary.Message)
+        case onDisappear
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -120,7 +121,9 @@ public struct CreateViary: ReducerProtocol {
                 sentence: message,
                 lang: state.currentLang
             )
-            state.messages.append(newMessage)
+            var messages = state.messages
+            messages.append(newMessage)
+            state.messages = messages.sorted(using: KeyPathComparator(\.updatedAt)).reversed()
             state.currentInput.clear()
 
         case .editLang(let lang):
@@ -204,6 +207,10 @@ public struct CreateViary: ReducerProtocol {
 
         case .delete(let message):
             state.messages.removeAll(where: { $0 == message })
+        case .onDisappear:
+            return .fireAndForget {
+                try await speechToTextService.stop()
+            }
         }
         return .none
     }
