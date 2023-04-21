@@ -121,6 +121,7 @@ public struct CreateViary: ReducerProtocol {
                 sentence: message,
                 lang: state.currentLang
             )
+            state.messages.append(newMessage)
             state.currentInput.clear()
 
         case .editLang(let lang):

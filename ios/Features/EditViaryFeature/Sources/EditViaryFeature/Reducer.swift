@@ -17,6 +17,8 @@ public struct EditViary: ReducerProtocol {
         public var editable: Viary
         public var resolved: [Viary.Message.ID: Bool]
         public var saveStatus: AsyncStatus<Int> = .idle
+        public var scrollContentHeight: [Viary.Message.ID: CGFloat] = [:]
+        public var focusedMessage: Viary.Message?
 
         var messages: [Viary.Message] {
             editable.messages.elements
@@ -35,8 +37,14 @@ public struct EditViary: ReducerProtocol {
 
     public enum Action: Equatable {
         case analyze(messageID: Tagged<Viary.Message, String>)
+
         case editMessage(id: Tagged<Viary.Message, String>, sentence: String)
         case replace(id: Tagged<Viary.Message, String>, message: Viary.Message, resolved: Bool)
+
+        case tapMessage(id: Viary.Message.ID)
+        case stopEditing
+        case didAdjustMessageHeight(id: Viary.Message.ID, height: CGFloat)
+
         case save
         case saved
     }
@@ -70,6 +78,16 @@ public struct EditViary: ReducerProtocol {
             }
             state.editable.messages[id: id] = message
             state.resolved[id] = resolved
+
+        case let .tapMessage(id):
+            state.focusedMessage = state.messages.first(where: { $0.id == id })
+
+        case .stopEditing:
+            state.focusedMessage = nil
+
+        case let .didAdjustMessageHeight(id, height):
+            state.scrollContentHeight[id] = height
+
         case .save:
             if state.saveStatus.isLoading {
                 return .none
