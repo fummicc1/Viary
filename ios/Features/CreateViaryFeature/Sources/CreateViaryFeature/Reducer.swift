@@ -121,9 +121,6 @@ public struct CreateViary: ReducerProtocol {
                 sentence: message,
                 lang: state.currentLang
             )
-            var messages = state.messages
-            messages.append(newMessage)
-            state.messages = messages.sorted(using: KeyPathComparator(\.updatedAt)).reversed()
             state.currentInput.clear()
 
         case .editLang(let lang):
