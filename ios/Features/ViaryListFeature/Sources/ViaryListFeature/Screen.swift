@@ -67,39 +67,37 @@ public struct ViaryListScreen: View {
                 .bottomTrailing,
                 fab: .image(Image(systemName: "plus"))
             ) {
-                list
+                list(viewStore: viewStore)
             } didPress: {
                 viewStore.send(.transit(.createViary))
             }
         }
     }
 
-    var list: some View {
-        WithViewStore(store, observe: \.viaries) { viewStore in
-            List {
-                ForEach(viewStore.state) { viary in
-                    VStack(alignment: .leading) {
-                        SelectableText(viary.message)
-                        LazyVStack {
-                            ForEach(Emotion.Kind.allCases) { kind in
-                                let value = viary.score(of: kind)
-                                HStack {
-                                    SelectableText(kind.text)
-                                    ProgressView(value: Double(value) / 100)
-                                        .foregroundColor(kind.color)
-                                    SelectableText("\(value)%")
-                                }
+    func list(viewStore: ViewStoreOf<ViaryList>) -> some View {
+        List {
+            ForEach(viewStore.viaries) { viary in
+                VStack(alignment: .leading) {
+                    SelectableText(viary.message)
+                    LazyVStack {
+                        ForEach(Emotion.Kind.allCases) { kind in
+                            let value = viary.score(of: kind)
+                            HStack {
+                                SelectableText(kind.text)
+                                ProgressView(value: Double(value) / 100)
+                                    .foregroundColor(kind.color)
+                                SelectableText("\(value)%")
                             }
                         }
-                        HStack {
-                            Text(viary.date, style: .relative)
-                                .foregroundColor(.secondary)
-                            Spacer()
-                        }
                     }
-                    .onTapGesture {
-                        viewStore.send(.transit(.viaryDetail(viary)))
+                    HStack {
+                        Text(viary.date, style: .relative)
+                            .foregroundColor(.secondary)
+                        Spacer()
                     }
+                }
+                .onTapGesture {
+                    viewStore.send(.transit(.viaryDetail(viary)))
                 }
             }
         }
