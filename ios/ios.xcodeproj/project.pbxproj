@@ -44,7 +44,7 @@
 
 /* Begin PBXFileReference section */
 		D30CFAC729E1626100ACF46A /* SharedUI */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SharedUI; sourceTree = "<group>"; };
-		D30F24CA296B3EF40028E0B5 /* ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D30F24CA296B3EF40028E0B5 /* Viary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Viary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30F24CD296B3EF40028E0B5 /* iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosApp.swift; sourceTree = "<group>"; };
 		D30F24D1296B3EF50028E0B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D30F24D3296B3EF50028E0B5 /* ios.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ios.entitlements; sourceTree = "<group>"; };
@@ -115,7 +115,7 @@
 		D30F24CB296B3EF40028E0B5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D30F24CA296B3EF40028E0B5 /* ios.app */,
+				D30F24CA296B3EF40028E0B5 /* Viary.app */,
 				D30F24DB296B3EF50028E0B5 /* iosTests.xctest */,
 				D30F24E5296B3EF50028E0B5 /* iosUITests.xctest */,
 			);
@@ -209,7 +209,7 @@
 				D3075AD829D9640700C7F006 /* EditViaryFeature */,
 			);
 			productName = ios;
-			productReference = D30F24CA296B3EF40028E0B5 /* ios.app */;
+			productReference = D30F24CA296B3EF40028E0B5 /* Viary.app */;
 			productType = "com.apple.product-type.application";
 		};
 		D30F24DA296B3EF50028E0B5 /* iosTests */ = {
@@ -484,6 +484,7 @@
 		D30F24F0296B3EF50028E0B5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APP_NAME = Viary;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ios/ios.entitlements;
@@ -512,7 +513,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.fummicc1.viary.ios;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(APP_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -527,6 +528,7 @@
 		D30F24F1296B3EF50028E0B5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APP_NAME = Viary;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ios/ios.entitlements;
@@ -556,7 +558,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.fummicc1.viary.ios;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(APP_NAME)";
 				SDKROOT = auto;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
