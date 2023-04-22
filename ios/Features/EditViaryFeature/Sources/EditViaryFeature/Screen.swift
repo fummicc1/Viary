@@ -60,6 +60,7 @@ public struct EditViaryScreen: View {
                 }
             }
             .navigationTitle(viewStore.editable.date.formatted())
+            .navigationBarTitleDisplayMode(.inline)
         }
     }
 
