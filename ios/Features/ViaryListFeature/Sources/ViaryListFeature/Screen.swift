@@ -53,24 +53,25 @@ public struct ViaryListScreen: View {
         }
     }
 
-    @ViewBuilder
     func content(_ viewStore: ViewStoreOf<ViaryList>) -> some View {
-        let viaries = viewStore.viaries
-        if viaries.isEmpty {
-            Button {
-                viewStore.send(.createSample)
-            } label: {
-                SelectableText("Create")
-            }
-            .buttonStyle(.borderedProminent)
-        } else {
-            FloatingActionable(
-                .bottomTrailing,
-                fab: .image(Image(systemName: "plus"))
-            ) {
-                list(viewStore: viewStore)
-            } didPress: {
-                viewStore.send(.transit(.createViary))
+        VStack {
+            let viaries = viewStore.viaries
+            if viaries.isEmpty {
+                Button {
+                    viewStore.send(.createSample)
+                } label: {
+                    SelectableText("Create")
+                }
+                .buttonStyle(.borderedProminent)
+            } else {
+                FloatingActionable(
+                    .bottomTrailing,
+                    fab: .image(Image(systemName: "plus"))
+                ) {
+                    list(viewStore: viewStore)
+                } didPress: {
+                    viewStore.send(.transit(.createViary))
+                }
             }
         }
     }
