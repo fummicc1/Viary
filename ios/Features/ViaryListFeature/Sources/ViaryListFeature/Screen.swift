@@ -46,6 +46,7 @@ public struct ViaryListScreen: View {
                         router.destinate(ViaryList.self, destination: destination.wrappedValue)
                     }
                 )
+                .navigationTitle("Timeline")
                 .onAppear {
                     viewStore.send(.onAppear)
                 }
