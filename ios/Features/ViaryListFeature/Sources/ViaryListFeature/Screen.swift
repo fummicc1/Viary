@@ -7,50 +7,19 @@ import SharedUI
 import SwiftUINavigation
 
 public struct ViaryListScreen: View {
-    let store: StoreOf<ViaryList>
+    let viewStore: ViewStoreOf<ViaryList>
 
-    @Dependency(\.router) var router
-
-    public init(store: StoreOf<ViaryList>) {
-        self.store = store
+    public init(viewStore: ViewStoreOf<ViaryList>) {
+        self.viewStore = viewStore
     }
 
     public var body: some View {
-        WithViewStore(store) { viewStore in
-            content(viewStore)
-                .navigationDestination(
-                    unwrapping: viewStore.binding(
-                        get: {
-                            if case /ViaryList.Destination.viaryDetail = $0.destination {
-                                return $0.destination
-                            }
-                            return nil
-                        },
-                        send: { .transit($0) }
-                    ),
-                    destination: { destination in
-                        router.destinate(ViaryList.self, destination: destination.wrappedValue)
-                    }
-                )
-                .fullScreenCover(
-                    unwrapping: viewStore.binding(
-                        get: {
-                            if case /ViaryList.Destination.createViary = $0.destination {
-                                return $0.destination
-                            }
-                            return nil
-                        },
-                        send: { .transit($0) }
-                    ),
-                    content: { destination in
-                        router.destinate(ViaryList.self, destination: destination.wrappedValue)
-                    }
-                )
-                .navigationTitle("Timeline")
-                .onAppear {
-                    viewStore.send(.onAppear)
-                }
-        }
+        content(viewStore)
+            .navigationTitle("Timeline")
+            .navigationBarTitleDisplayMode(.inline)
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
     }
 
     func content(_ viewStore: ViewStoreOf<ViaryList>) -> some View {
@@ -70,7 +39,7 @@ public struct ViaryListScreen: View {
                 ) {
                     list(viewStore: viewStore)
                 } didPress: {
-                    viewStore.send(.transit(.createViary))
+                    viewStore.send(.didTapCreateButton)
                 }
             }
         }
@@ -99,7 +68,7 @@ public struct ViaryListScreen: View {
                     }
                 }
                 .onTapGesture {
-                    viewStore.send(.transit(.viaryDetail(viary)))
+                    viewStore.send(.didTap(viary: viary))
                 }
             }
         }

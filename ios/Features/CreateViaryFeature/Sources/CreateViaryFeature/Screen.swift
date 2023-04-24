@@ -5,119 +5,116 @@ import SharedUI
 
 public struct CreateViaryScreen: View {
 
-    let store: StoreOf<CreateViary>
+    let viewStore: ViewStoreOf<CreateViary>
     @FocusState var focus
     @Environment(\.dismiss) var dismiss
 
+    public init(viewStore: ViewStoreOf<CreateViary>) {
+        self.viewStore = viewStore
+    }
+
     public var body: some View {
-        WithViewStore(store) { viewStore in
-            NavigationView {
-                ZStack {
-                    Form {
-                        Section("Date") {
-                            date
-                        }
-                        Section("Status") {
-                            currentStatus
-                        }
-                        Section("Note") {
-                            note
-                        }
+        NavigationView {
+            ZStack {
+                Form {
+                    Section("Date") {
+                        date
                     }
-                    if viewStore.saveStatus.isLoading {
-                        VStack {
-                            Spacer()
-                            ProgressView().progressViewStyle(.circular)
-                                .bold()
-                                .background(content: {
-                                    RoundedRectangle(cornerRadius: 8)
-                                        .foregroundColor(Color(uiColor: .systemBackground))
-                                        .frame(width: 64, height: 64)
-                                })
-                                .frame(width: 64, height: 64)
-                            Spacer()
-                        }
+                    Section("Status") {
+                        currentStatus
+                    }
+                    Section("Note") {
+                        note
                     }
                 }
-                .navigationTitle("Create new Viary")
-                .toolbar {
-                    if viewStore.isValidInput {
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Button {
-                                viewStore.send(.save)
-                            } label: {
-                                Image(systemSymbol: .checkmark)
-                            }
-                        }
-                    }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        CloseButton {
-                            dismiss()
-                        }
+                if viewStore.saveStatus.isLoading {
+                    VStack {
+                        Spacer()
+                        ProgressView().progressViewStyle(.circular)
+                            .bold()
+                            .background(content: {
+                                RoundedRectangle(cornerRadius: 8)
+                                    .foregroundColor(Color(uiColor: .systemBackground))
+                                    .frame(width: 64, height: 64)
+                            })
+                            .frame(width: 64, height: 64)
+                        Spacer()
                     }
                 }
             }
-            .onChange(of: viewStore.saveStatus.response, perform: { newValue in
-                if newValue == true {
-                    dismiss()
+            .navigationTitle("Create new Viary")
+            .toolbar {
+                if viewStore.isValidInput {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button {
+                            viewStore.send(.save)
+                        } label: {
+                            Image(systemSymbol: .checkmark)
+                        }
+                    }
                 }
-            })
-            .onAppear {
-                viewStore.send(.onAppear)
+                ToolbarItem(placement: .navigationBarLeading) {
+                    CloseButton {
+                        dismiss()
+                    }
+                }
             }
-            .onDisappear {
-                viewStore.send(.onDisappear)
+        }
+        .onChange(of: viewStore.saveStatus.response, perform: { newValue in
+            if newValue == true {
+                dismiss()
             }
+        })
+        .onAppear {
+            viewStore.send(.onAppear)
+        }
+        .onDisappear {
+            viewStore.send(.onDisappear)
         }
     }
 
     var currentStatus: some View {
-        WithViewStore(store) { viewStore in
-            VStack(alignment: .leading) {                
-                SpeechStatusView(
-                    status: viewStore.speechStatus,
-                    viewStore: viewStore
-                )
-            }
+        VStack(alignment: .leading) {
+            SpeechStatusView(
+                status: viewStore.speechStatus,
+                viewStore: viewStore
+            )
         }
+
     }
 
     var note: some View {
-        WithViewStore(store) { viewStore in            
-            List {
-                ForEach(viewStore.messages) { message in
-                    VStack {
-                        SelectableText(message.sentence)
-                        HStack {
-                            Spacer()
-                            Text(message.updatedAt, style: .time)
-                        }
-                    }
-                    .swipeActions {
-                        Button("Delete") {
-                            let _ = withAnimation {
-                                viewStore.send(.delete(message))
-                            }
-                        }
-                        .tint(.red)
+        List {
+            ForEach(viewStore.messages) { message in
+                VStack {
+                    SelectableText(message.sentence)
+                    HStack {
+                        Spacer()
+                        Text(message.updatedAt, style: .time)
                     }
                 }
-            }
-            .toolbar {
-                ToolbarItem(placement: .keyboard) {
-                    CloseButton(.text) {
-                        focus = false
+                .swipeActions {
+                    Button("Delete") {
+                        let _ = withAnimation {
+                            viewStore.send(.delete(message))
+                        }
                     }
+                    .tint(.red)
+                }
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .keyboard) {
+                CloseButton(.text) {
+                    focus = false
                 }
             }
         }
     }
 
     var date: some View {
-        WithViewStore(store) { viewStore in
-            DateSelectionView(
-                selectedDate: viewStore.binding(get: \.date, send: { .editDate($0) })
-            )
-        }
+        DateSelectionView(
+            selectedDate: viewStore.binding(get: \.date, send: { .editDate($0) })
+        )
     }
 }

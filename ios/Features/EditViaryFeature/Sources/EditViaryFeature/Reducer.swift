@@ -12,6 +12,9 @@ public struct EditViary: ReducerProtocol {
     @Dependency(\.emotionDetector) var emotionDetector
     @Dependency(\.viaryRepository) var viaryRepository
 
+    public init() {
+    }
+
     public struct State: Equatable {
         public var original: Viary
         public var editable: Viary

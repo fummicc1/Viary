@@ -17,6 +17,9 @@ public struct CreateViary: ReducerProtocol {
     @Dependency(\.uuid) var uuid
     private var cancellables: Set<AnyCancellable> = []
 
+    public init() {        
+    }
+
     public struct InputState: Equatable {
         public var type: InputType
         public var message: String
