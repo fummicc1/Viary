@@ -19,18 +19,16 @@ public struct ViaryList: ReducerProtocol {
 
     public struct State: Equatable {
         public var viaries: IdentifiedArrayOf<Viary> = []
+        public var destination: Destination? = nil
         public var errorMessage: String?
-        public var destination: Destination?
 
         var streamCancellable: AnyCancellable?
 
         public init(
             viaries: IdentifiedArrayOf<Viary> = [],
-            destination: Destination? = nil,
             errorMessage: String? = nil
         ) {
             self.viaries = viaries
-            self.destination = destination
             self.errorMessage = errorMessage
         }
     }
@@ -39,7 +37,15 @@ public struct ViaryList: ReducerProtocol {
         case onAppear
         case loaded(TaskResult<IdentifiedArrayOf<Viary>>)
         case createSample
-        case transit(Destination?)
+        case didTapCreateButton
+        case didTap(viary: Viary)
+
+        case destination(Destination?)
+    }
+
+    public enum Destination: Equatable {
+        case detail(Viary)
+        case create
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
@@ -75,7 +81,13 @@ public struct ViaryList: ReducerProtocol {
                 try await viaryRepository.create(viary: newViary, with: emotions)
             }
 
-        case .transit(let destination):
+        case .didTapCreateButton:
+            return .send(.destination(.create))
+
+        case let .didTap(viary):
+            return .send(.destination(.detail(viary)))
+
+        case .destination(let destination):
             state.destination = destination
         }
         return .none

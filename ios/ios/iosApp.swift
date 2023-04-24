@@ -7,24 +7,18 @@
 
 import SwiftUI
 import ComposableArchitecture
-import ViaryListFeature
+import App
 
 @main
 struct iosApp: App {
     var body: some Scene {
-        withDependencies {
-            $0.router = AppRouter()
-        } operation: {
-            WindowGroup {
-                NavigationStack {
-                    ViaryListScreen(
-                        store: StoreOf<ViaryList>(
-                            initialState: ViaryList.State(),
-                            reducer: ViaryList()
-                        )
-                    )
-                }
-            }
+        WindowGroup {
+            AppScreen(
+                store: StoreOf<AppReducer>(
+                    initialState: AppReducer.State(),
+                    reducer: AppReducer()
+                )
+            )
         }
     }
 }

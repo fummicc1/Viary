@@ -11,6 +11,10 @@ public struct EditViaryScreen: View {
     @FocusState private var focused
     @Environment(\.dismiss) var dismiss
 
+    public init(store: StoreOf<EditViary>) {
+        self.store = store
+    }
+
     public var body: some View {
         WithViewStore(
             store,
