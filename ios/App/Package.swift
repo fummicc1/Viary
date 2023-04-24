@@ -16,14 +16,9 @@ let package = Package(
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
         .package(name: "Entities", path: "../Entities"),
-        .package(name: "Resources", path: "../Resources"),
-        .package(name: "Repositories", path: "../Repositories"),
         .package(name: "CreateViaryFeature", path: "../Features/CreateViaryFeature"),
         .package(name: "EditViaryFeature", path: "../Features/EditViaryFeature"),
         .package(name: "ViaryListFeature", path: "../Features/ViaryListFeature"),
-        .package(name: "Utils", path: "../Utils"),
-        .package(name: "SharedUI", path: "../SharedUI"),
-        .package(name: "Wireframe", path: "../Wireframe"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "0.1.1")),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: "0.49.0")),
         .package(url: "https://github.com/pointfreeco/swift-identified-collections", .upToNextMajor(from: "0.5.0")),
@@ -39,6 +34,7 @@ let package = Package(
                 .product(name: "CreateViaryFeature", package: "CreateViaryFeature"),
                 .product(name: "EditViaryFeature", package: "EditViaryFeature"),
                 .product(name: "ViaryListFeature", package: "ViaryListFeature"),
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
             ]
         ),
         .testTarget(

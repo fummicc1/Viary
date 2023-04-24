@@ -16,6 +16,7 @@ public struct ViaryListScreen: View {
     public var body: some View {
         content(viewStore)
             .navigationTitle("Timeline")
+            .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 viewStore.send(.onAppear)
             }

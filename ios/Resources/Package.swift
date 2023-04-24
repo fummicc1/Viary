@@ -21,7 +21,7 @@ let package = Package(
         .target(
             name: "Resources",
             dependencies: [],
-            resources: [.process("emotion_classification.mlpackage")]
+            resources: [.process("emotion-english-distilroberta-base.mlpackage")]
         ),
         .testTarget(
             name: "ResourcesTests",
