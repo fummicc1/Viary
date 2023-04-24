@@ -13,6 +13,7 @@
 		D30F24E0296B3EF50028E0B5 /* iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24DF296B3EF50028E0B5 /* iosTests.swift */; };
 		D30F24EA296B3EF50028E0B5 /* iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24E9296B3EF50028E0B5 /* iosUITests.swift */; };
 		D30F24EC296B3EF50028E0B5 /* iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30F24EB296B3EF50028E0B5 /* iosUITestsLaunchTests.swift */; };
+		D35EC73C29F68D5500B5643D /* vocab_ja2en.json in Resources */ = {isa = PBXBuildFile; fileRef = D35EC73B29F68D5500B5643D /* vocab_ja2en.json */; };
 		D3891C5829F64B040037C8FB /* App in Frameworks */ = {isa = PBXBuildFile; productRef = D3891C5729F64B040037C8FB /* App */; };
 		D3891C5A29F64B120037C8FB /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = D3891C5929F64B120037C8FB /* ComposableArchitecture */; };
 		D3A5272F29E3DEA1005B6531 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3A5272E29E3DEA1005B6531 /* Settings.bundle */; };
@@ -49,10 +50,12 @@
 		D30F24E5296B3EF50028E0B5 /* iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D30F24E9296B3EF50028E0B5 /* iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosUITests.swift; sourceTree = "<group>"; };
 		D30F24EB296B3EF50028E0B5 /* iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		D35EC73B29F68D5500B5643D /* vocab_ja2en.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = vocab_ja2en.json; path = Resources/Sources/Resources/vocab_ja2en.json; sourceTree = SOURCE_ROOT; };
+		D35EC73D29F6A8B200B5643D /* Ja2en */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Ja2en; sourceTree = "<group>"; };
+		D35EC73E29F6A92200B5643D /* Resources */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Resources; sourceTree = "<group>"; };
 		D3891C5229F64A620037C8FB /* ViaryListFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryListFeature; path = Features/ViaryListFeature; sourceTree = "<group>"; };
 		D3891C5B29F64BF50037C8FB /* EmotionDetection */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = EmotionDetection; sourceTree = "<group>"; };
 		D39C703429E1486000FFD864 /* vocab.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = vocab.json; path = Resources/Sources/Resources/vocab.json; sourceTree = SOURCE_ROOT; };
-		D39DB1D829D5D3D9000EE976 /* emotion-english-distilroberta-base.mlpackage */ = {isa = PBXFileReference; lastKnownFileType = folder.mlpackage; name = "emotion-english-distilroberta-base.mlpackage"; path = "Resources/Sources/Resources/emotion-english-distilroberta-base.mlpackage"; sourceTree = SOURCE_ROOT; };
 		D3A367E629940548007D6FBE /* Utils */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Utils; sourceTree = "<group>"; };
 		D3A5272E29E3DEA1005B6531 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = Settings.bundle; path = ios/Settings.bundle; sourceTree = "<group>"; };
 		D3A5710D296C81450083B71B /* Entities */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Entities; sourceTree = "<group>"; };
@@ -117,8 +120,8 @@
 		D30F24CC296B3EF40028E0B5 /* ios */ = {
 			isa = PBXGroup;
 			children = (
+				D35EC73B29F68D5500B5643D /* vocab_ja2en.json */,
 				D39C703429E1486000FFD864 /* vocab.json */,
-				D39DB1D829D5D3D9000EE976 /* emotion-english-distilroberta-base.mlpackage */,
 				D3C2B2562990A0EB0072F796 /* GoogleService-Info.plist */,
 				D30F24CD296B3EF40028E0B5 /* iosApp.swift */,
 				D30F24D1296B3EF50028E0B5 /* Assets.xcassets */,
@@ -173,6 +176,8 @@
 				D3BAEF4E29F535AF006480A4 /* App */,
 				D3891C5229F64A620037C8FB /* ViaryListFeature */,
 				D3891C5B29F64BF50037C8FB /* EmotionDetection */,
+				D35EC73D29F6A8B200B5643D /* Ja2en */,
+				D35EC73E29F6A92200B5643D /* Resources */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -292,6 +297,7 @@
 			files = (
 				D3D39E2D29E1490100F4350C /* vocab.json in Resources */,
 				D30F24D6296B3EF50028E0B5 /* Preview Assets.xcassets in Resources */,
+				D35EC73C29F68D5500B5643D /* vocab_ja2en.json in Resources */,
 				D3A5272F29E3DEA1005B6531 /* Settings.bundle in Resources */,
 				D30F24D2296B3EF50028E0B5 /* Assets.xcassets in Resources */,
 				D3C2B2572990A0EB0072F796 /* GoogleService-Info.plist in Resources */,
