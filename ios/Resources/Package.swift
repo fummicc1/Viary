@@ -23,7 +23,8 @@ let package = Package(
             dependencies: [],
             resources: [
                 .process("emotion-english-distilroberta-base.mlpackage"),
-                .process("opus_mt_ja_en"),
+                .process("opus_mt_ja_en.mlpackage"),
+                .process("vocab_ja2en.json"),
             ]
         ),
         .testTarget(

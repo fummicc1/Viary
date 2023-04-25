@@ -45,9 +45,9 @@ public struct CreateViary: ReducerProtocol {
         var description: String {
             switch self {
             case .keyboard:
-                return "キーボード"
+                return "Keyboard"
             case .voice:
-                return "音声"
+                return "Voice"
             }
         }
     }

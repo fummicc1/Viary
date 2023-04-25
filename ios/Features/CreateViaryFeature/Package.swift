@@ -20,6 +20,7 @@ let package = Package(
         .package(name: "Repositories", path: "../../Repositories"),
         .package(name: "EmotionDetection", path: "../../EmotionDetection"),
         .package(name: "Utils", path: "../../Utils"),
+        .package(name: "Ja2en", path: "../../Ja2en"),
         .package(name: "SharedUI", path: "../../SharedUI"),
         .package(name: "SpeechToText", path: "../../SpeechToText"),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "0.1.1")),
@@ -44,6 +45,7 @@ let package = Package(
                 .product(name: "IdentifiedCollections", package: "swift-identified-collections"),
                 .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                 .product(name: "SwiftUINavigation", package: "swiftui-navigation"),
+                .product(name: "Ja2en", package: "Ja2en"),
             ]
         ),
         .testTarget(
