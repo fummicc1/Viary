@@ -2,6 +2,7 @@ import Combine
 import ComposableArchitecture
 import Dependencies
 import Entities
+import Ja2en
 import Tagged
 import Foundation
 import Repositories
@@ -15,6 +16,7 @@ public struct CreateViary: ReducerProtocol {
     @Dependency(\.speechToTextService) var speechToTextService
     @Dependency(\.emotionDetector) var emotionDetector
     @Dependency(\.uuid) var uuid
+    @Dependency(\.ja2en) var ja2en
     private var cancellables: Set<AnyCancellable> = []
 
     public init() {        
@@ -166,7 +168,18 @@ public struct CreateViary: ReducerProtocol {
                 var messages = state.messages
 
                 for (i, message) in messages.enumerated() {
-                    let newScore = await emotionDetector.infer(text: message.sentence, lang: message.lang)
+                    let sentence: String
+                    if message.lang == .ja {
+                        sentence = try! ja2en
+                            .perform(japanese: message.sentence)
+                            .joined(separator: " ")
+                    } else {
+                        sentence = message.sentence
+                    }
+                    let newScore = await emotionDetector.infer(
+                        text: sentence,
+                        lang: message.lang
+                    )
                     let emotions = Emotion.Kind.allCases.indices.compactMap { index -> Emotion? in
                         if newScore.count <= index {
                             return nil

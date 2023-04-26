@@ -1,4 +1,5 @@
 import CoreML
+import Dependencies
 import Resources
 
 public class Ja2en {
@@ -7,13 +8,13 @@ public class Ja2en {
     let tokenizer: MarianTokenizer
 
     public init() {
-        let vocabURL = try! Bundle.main.url(
+        let vocabURL = Bundle.main.url(
             forResource: "vocab_ja2en",
             withExtension: "json"
         )!
-        let vocab = try! JSONSerialization.jsonObject(
-            with: try! Data(contentsOf: vocabURL)
-        ) as! [String: Int]
+        let vocab = (try? JSONSerialization.jsonObject(
+            with: (try? Data(contentsOf: vocabURL)) ?? Data()
+        ) as? [String: Int]) ?? [:]
         tokenizer = MarianTokenizer(vocab: vocab)
         model = try! .init()
     }
@@ -43,8 +44,30 @@ public class Ja2en {
             input_encoder: inputEncoder,
             input_decoder: inputDecoder
         )
-        let ret = try! model.prediction(input: input)
-        let translation = multiArrayToArray(ret.var_1545)
-        return translation
+        do {
+            let ret = try model.prediction(input: input)
+            let translation = multiArrayToArray(ret.var_1545)
+            return translation
+        } catch {
+            print(error)
+            fatalError()
+        }
+    }
+}
+
+
+public struct Ja2enDepKey: DependencyKey {
+    public static var liveValue: Ja2en = .init()
+    public static var testValue: Ja2en = unimplemented()
+}
+
+extension DependencyValues {
+    public var ja2en: Ja2en {
+        get {
+            self[Ja2enDepKey.self]
+        }
+        set {
+            self[Ja2enDepKey.self] = newValue
+        }
     }
 }

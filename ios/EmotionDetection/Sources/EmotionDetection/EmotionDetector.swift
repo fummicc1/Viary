@@ -77,7 +77,7 @@ extension EmotionDetectorImpl: EmotionDetector {
         }
 
         // Handle the prediction result
-        let predictedEmotion = prediction.var_564
+        let predictedEmotion = prediction.inp
 
         let ret: [Double] = multiArrayToArray(predictedEmotion)
 
