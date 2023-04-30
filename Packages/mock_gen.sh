@@ -1,7 +1,14 @@
-dir=$(realpath $(dirname $0))
-echo $dir
+base=$(realpath $(dirname $0))
 
-for path in $(ls $dir); do
+dir[0]=$base/EmotionDetection/Sources/EmotionDetection
+dir[1]=$base/LocalDataStore/Sources/LocalDataStore
+dir[2]=$base/Repositories/Sources/Repositories
+dir[3]=$base/SpeechToText/Sources/SpeechToText
+
+dir[4]=$base/UseCases/ViaryUseCase/Sources/ViaryUseCase
+
+
+for path in ${dir[@]}; do
 path=$(realpath $path)
 if [ ! -d $path ];then
     continue;
