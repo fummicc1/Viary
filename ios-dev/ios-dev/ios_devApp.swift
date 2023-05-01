@@ -6,13 +6,19 @@
 //
 
 import SwiftUI
+import ComposableArchitecture
+import EmotionDetection
 import App
 
 @main
 struct ios_devApp: App {
     var body: some Scene {
         WindowGroup {
-            AppScreen()
+            withDependencies {
+                $0.emotionDetector = EmotionDetectorMock()
+            } operation: {
+                AppScreen()
+            }
         }
     }
 }
