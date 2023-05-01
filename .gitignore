@@ -31,7 +31,7 @@ doc/api/
 
 
 GoogleService-Info.plist
-!./ios-dev/ios-dev/GoogleService-Info.plist
+!ios-dev/ios-dev/GoogleService-Info.plist
 
 google-services.json
 
