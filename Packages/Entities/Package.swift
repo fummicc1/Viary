@@ -17,6 +17,7 @@ let package = Package(
         // .package(url: /* package url */, from: "1.0.0"),
         .package(url: "https://github.com/pointfreeco/swift-tagged", .upToNextMajor(from: "0.6.0")),
         .package(url: "https://github.com/pointfreeco/swift-identified-collections", .upToNextMajor(from: "0.6.0")),
+        .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "0.4.1")),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -26,6 +27,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "IdentifiedCollections", package: "swift-identified-collections"),
+                .product(name: "Dependencies", package: "swift-dependencies"),
             ]),
         .testTarget(
             name: "EntitiesTests",

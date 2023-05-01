@@ -35,12 +35,20 @@ final class ViaryListFeatureTests: XCTestCase {
     func test_create_sample() async throws {
         // MARK: Assign
         let viaryRepositoryMock = ViaryRepositoryMock()
+        let now = Date.now
         let id = UUID()
-        var sample = Viary.sample(uuid: id)
-        let listStub: IdentifiedArrayOf<Viary> = [sample]
+        let sampleGenerator = withDependencies {
+            $0.uuid = .constant(id)
+            $0.date = .constant(now)
+        } operation: {
+            ViarySampleGenerator()
+        }
+
+        let listStub: IdentifiedArrayOf<Viary> = [sampleGenerator.make()]
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock
-            $0.date = .constant(.now)
+            $0.date = .constant(now)
+            $0.viarySample = sampleGenerator
             $0.uuid = .constant(id)
         } operation: {
             ViaryList()

@@ -10,6 +10,7 @@ import Tagged
 public struct ViaryList: ReducerProtocol {
 
     @Dependency(\.viaryRepository) var viaryRepository
+    @Dependency(\.viarySample) var viarySample
 
     public init() {}
 
@@ -68,7 +69,7 @@ public struct ViaryList: ReducerProtocol {
                 return .none
             }
             return .fireAndForget {
-                let newViary = Viary.sample()
+                let newViary = viarySample.make()
                 let emotions = Dictionary(uniqueKeysWithValues: newViary.messages.map {
                     ($0.id, $0.emotions)
                 })

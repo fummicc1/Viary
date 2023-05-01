@@ -84,19 +84,6 @@ public struct Viary: Identifiable, Equatable {
     }
 }
 
-public extension Viary {
-    static func sample(uuid: UUID = UUID()) -> Viary {
-        let id: Tagged<Viary, String> = .init(uuid.uuidString)
-        return Viary(
-            id: id,
-            messages: [
-                .init(viaryID: id, id: .init(uuid.uuidString), sentence: "This is sample viary!", lang: .en)
-            ],
-            date: .now
-        )
-    }
-}
-
 private extension Tagged where RawValue == String {
     static var uuid: Self {
         Self(UUID().uuidString)
