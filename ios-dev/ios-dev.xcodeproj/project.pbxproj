@@ -25,6 +25,11 @@
 		D323E68229F9778400F5072D /* App */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = App; path = ../Packages/App; sourceTree = "<group>"; };
 		D323E68729F978EC00F5072D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D323E68829F9794D00F5072D /* vocab.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = vocab.json; path = ../Packages/Resources/Sources/Resources/vocab.json; sourceTree = "<group>"; };
+		D3945B3129FF5524005105F2 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
+		D3945B3329FF560F005105F2 /* CreateViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CreateViaryFeature; path = ../Packages/Features/CreateViaryFeature; sourceTree = "<group>"; };
+		D3945B3429FF564C005105F2 /* EditViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EditViaryFeature; path = ../Packages/Features/EditViaryFeature; sourceTree = "<group>"; };
+		D3945B3529FF5656005105F2 /* ViaryListFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryListFeature; path = ../Packages/Features/ViaryListFeature; sourceTree = "<group>"; };
+		D3945B3629FF5664005105F2 /* ViaryUseCase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryUseCase; path = ../Packages/UseCases/ViaryUseCase; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +72,7 @@
 				D323E64C29F9756C00F5072D /* Assets.xcassets */,
 				D323E64E29F9756C00F5072D /* ios_dev.entitlements */,
 				D323E64F29F9756C00F5072D /* Preview Content */,
+				D3945B3129FF5524005105F2 /* TestPlan.xctestplan */,
 			);
 			path = "ios-dev";
 			sourceTree = "<group>";
@@ -83,6 +89,10 @@
 			isa = PBXGroup;
 			children = (
 				D323E68229F9778400F5072D /* App */,
+				D3945B3329FF560F005105F2 /* CreateViaryFeature */,
+				D3945B3429FF564C005105F2 /* EditViaryFeature */,
+				D3945B3529FF5656005105F2 /* ViaryListFeature */,
+				D3945B3629FF5664005105F2 /* ViaryUseCase */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -316,6 +326,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.fummicc1.viary.ios-dev";
 				PRODUCT_NAME = "Viary-dev";
 				SDKROOT = auto;
@@ -359,6 +370,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 13.2;
 				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "dev.fummicc1.viary.ios-dev";
 				PRODUCT_NAME = "Viary-dev";
 				SDKROOT = auto;

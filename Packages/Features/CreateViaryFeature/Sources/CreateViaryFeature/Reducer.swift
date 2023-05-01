@@ -15,6 +15,7 @@ public struct CreateViary: ReducerProtocol {
     @Dependency(\.speechToTextService) var speechToTextService
     @Dependency(\.emotionDetector) var emotionDetector
     @Dependency(\.uuid) var uuid
+    @Dependency(\.date) var date
     private var cancellables: Set<AnyCancellable> = []
 
     public init() {        
@@ -80,8 +81,8 @@ public struct CreateViary: ReducerProtocol {
             self.saveStatus = saveStatus
         }
 
-        public var isValidInput: Bool {
-            !message.isEmpty && date.timeIntervalSince(Date()) < 0 && speechStatus == .idle && !saveStatus.isLoading
+        public func isValidInput(now: Date) -> Bool {
+            !message.isEmpty && date.timeIntervalSince(now) < 0 && speechStatus == .idle && !saveStatus.isLoading
         }
     }
 

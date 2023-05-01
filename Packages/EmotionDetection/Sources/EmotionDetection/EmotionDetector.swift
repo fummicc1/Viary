@@ -10,6 +10,7 @@ import CoreML
 import Entities
 import Resources
 
+/// @mockable
 public protocol EmotionDetector {
     func infer(text: String, lang: Lang) async -> [Double]
 }

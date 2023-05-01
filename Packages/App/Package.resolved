@@ -19,6 +19,15 @@
       }
     },
     {
+      "identity" : "floatingactionbutton",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fummicc1/FloatingActionButton",
+      "state" : {
+        "revision" : "3af891990e42b5288dcb60565527009e28265bd6",
+        "version" : "0.0.2"
+      }
+    },
+    {
       "identity" : "moya",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Moya/Moya.git",

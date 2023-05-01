@@ -56,6 +56,7 @@ public struct Viary: Identifiable, Equatable {
         public var sentence: String
         public var lang: Lang
         public var updatedAt: Date
+        // TODO: [Emotion] → [Emotion.Kind: Emotion]
         public var emotions: [Emotion]
 
         public init(viaryID: Tagged<Viary, String>, id: Tagged<Message, String>, sentence: String, lang: Lang, emotions: [Emotion]? = nil, updatedAt: Date = Date()) {
@@ -80,19 +81,6 @@ public struct Viary: Identifiable, Equatable {
         for i in messages.indices {
             self.messages[i].viaryID = id
         }
-    }
-}
-
-public extension Viary {
-    static func sample() -> Viary {
-        let uuid = Tagged<Viary, String>.uuid
-        return Viary(
-            id: uuid,
-            messages: [
-                .init(viaryID: uuid, id: Tagged.uuid, sentence: "This is sample viary!", lang: .en)
-            ],
-            date: .now
-        )
     }
 }
 

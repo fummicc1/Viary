@@ -8,6 +8,7 @@
 import XCTest
 import ComposableArchitecture
 import Entities
+import SpeechToText
 @testable import CreateViaryFeature
 
 final class CreateViaryInputTests: XCTestCase {
@@ -24,7 +25,12 @@ final class CreateViaryInputTests: XCTestCase {
     )
 
     override func setUpWithError() throws {
-        let reducer = CreateViary()
+        let reducer = withDependencies {
+            $0.speechToTextService = SpeechToTextServiceMock()
+        } operation: {
+            CreateViary()
+        }
+
         store = TestStore(
             initialState: initialState,
             reducer: reducer
@@ -34,11 +40,12 @@ final class CreateViaryInputTests: XCTestCase {
     func test_Message_edit() async throws {
         let expectedMessage = "This is what user inputted."
 
-        XCTAssertEqual(store.state.message, "")
+        XCTAssertEqual(store.state.currentInput.message, "")
         XCTAssertEqual(store.state.saveStatus, .idle)
         await store.send(.editMessage(expectedMessage)) {
-            $0.message = expectedMessage
+            $0.currentInput.message = expectedMessage
         }
+        // Assert that persist operation is not running.
         XCTAssertEqual(store.state.saveStatus, .idle)
     }
 
@@ -50,16 +57,18 @@ final class CreateViaryInputTests: XCTestCase {
         await store.send(.editDate(expectedDate)) {
             $0.date = expectedDate
         }
+        // Assert that persist operation is not running.
         XCTAssertEqual(store.state.saveStatus, .idle)
     }
 
     func test_Lang_edit() async throws {
         let expectedLang = Lang.ja
-        XCTAssertEqual(store.state.lang, initialState.lang)
+        XCTAssertEqual(store.state.currentLang, initialState.currentLang)
         XCTAssertEqual(store.state.saveStatus, .idle)
         await store.send(.editLang(expectedLang)) {
-            $0.lang = expectedLang
+            $0.currentLang = expectedLang
         }
+        // Assert that persist operation is not running.
         XCTAssertEqual(store.state.saveStatus, .idle)
     }
 }

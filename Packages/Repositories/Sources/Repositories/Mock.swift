@@ -19,7 +19,7 @@ public class ViaryRepositoryMock: ViaryRepository {
 
 
     public var myViaries: AnyPublisher<IdentifiedArrayOf<Viary>, Never> { return self.myViariesSubject.eraseToAnyPublisher() }
-    public private(set) var myViariesSubject = PassthroughSubject<IdentifiedArrayOf<Viary>, Never>()
+    public private(set) var myViariesSubject = CurrentValueSubject<IdentifiedArrayOf<Viary>, Never>([])
 
     public private(set) var loadCallCount = 0
     public var loadHandler: (() async throws -> (IdentifiedArrayOf<Viary>))?

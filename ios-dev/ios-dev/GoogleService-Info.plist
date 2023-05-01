@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>78068622658-ogc4gfup06lsflu8hlkq00vijf1eepk0.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.78068622658-ogc4gfup06lsflu8hlkq00vijf1eepk0</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD5ra5BECDVGKWwdHl-O6Iy6TV8zhwlRjs</string>
+	<key>GCM_SENDER_ID</key>
+	<string>78068622658</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>dev.fummicc1.viary.ios-dev</string>
+	<key>PROJECT_ID</key>
+	<string>viary-dev</string>
+	<key>STORAGE_BUCKET</key>
+	<string>viary-dev.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:78068622658:ios:edc3a50a304d1752fad4db</string>
+</dict>
+</plist>
