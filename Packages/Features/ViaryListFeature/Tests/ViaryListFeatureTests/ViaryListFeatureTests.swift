@@ -3,6 +3,7 @@ import Combine
 import Repositories
 import Entities
 import ComposableArchitecture
+import Tagged
 @testable import ViaryListFeature
 
 final class ViaryListFeatureTests: XCTestCase {
@@ -63,7 +64,7 @@ final class ViaryListFeatureTests: XCTestCase {
     func test_transit() async throws {
         // MARK: Assign
         let viaryRepositoryMock = ViaryRepositoryMock()
-        let expectedDestination = ViaryList.Destination.createViary
+        let expectedDestination = ViaryList.Destination.create
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock
         } operation: {
@@ -77,7 +78,7 @@ final class ViaryListFeatureTests: XCTestCase {
         XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
         XCTAssertEqual(store.state.viaries, [])
         XCTAssertNil(store.state.destination)
-        await store.send(.transit(expectedDestination)) {
+        await store.send(.destination(expectedDestination)) {
             $0.destination = expectedDestination
         }
     }
@@ -85,14 +86,18 @@ final class ViaryListFeatureTests: XCTestCase {
 
 private extension ViaryListFeatureTests {
     func viaryStub() -> Viary {
-        Viary(
-            id: .init(UUID().uuidString),
+        let id: Tagged<Viary, String> = .init(UUID().uuidString)
+        return Viary(
+            id: id,
             messages: [
-                Viary.Message(message: "", lang: .en)
+                Viary.Message(
+                    viaryID: id,
+                    id: .init(UUID().uuidString),
+                    sentence: "",
+                    lang: .en
+                )
             ],
-            lang: .en,
-            date: .now,
-            emotions: []
+            date: .now
         )
     }
 }
