@@ -51,14 +51,8 @@ public struct ViaryList: ReducerProtocol {
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
         case .onAppear:
-            return .run { send in
-                for await viaries in viaryRepository.myViaries.values {
-                    await send(.loaded(.success(
-                        IdentifiedArrayOf(
-                            uniqueElements: viaries.sorted(using: KeyPathComparator(\.updatedAt)).reversed()
-                        )
-                    )))
-                }
+            return EffectTask.publisher {
+                viaryRepository.myViaries.map { Action.loaded(.success($0)) }
             }
         case .loaded(let result):
             switch result {

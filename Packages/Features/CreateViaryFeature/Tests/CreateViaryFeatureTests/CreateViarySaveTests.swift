@@ -9,6 +9,7 @@ import XCTest
 import Entities
 import ComposableArchitecture
 import Repositories
+import EmotionDetection
 import Tagged
 @testable import CreateViaryFeature
 
@@ -37,7 +38,15 @@ final class CreateViarySaveTests: XCTestCase {
         let staticUUID = UUID()
         let viaryID: Tagged<Viary, String> = .init(staticUUID.uuidString)
         let messageID: Tagged<Viary.Message, String> = .init(staticUUID.uuidString)
-        let expectedViaryEmotion: [Emotion] = []
+        let expectedViaryEmotion: [Emotion] = [
+            Emotion(sentence: "expectedMessage", score: 100, kind: .anger),
+            Emotion(sentence: "expectedMessage", score: 0, kind: .disgust),
+            Emotion(sentence: "expectedMessage", score: 0, kind: .fear),
+            Emotion(sentence: "expectedMessage", score: 0, kind: .joy),
+            Emotion(sentence: "expectedMessage", score: 0, kind: .neutral),
+            Emotion(sentence: "expectedMessage", score: 0, kind: .sadness),
+            Emotion(sentence: "expectedMessage", score: 0, kind: .surprise)
+        ]
         let expectedMessage = Viary.Message(
             viaryID: viaryID,
             id: messageID,
@@ -56,11 +65,16 @@ final class CreateViarySaveTests: XCTestCase {
             date: now
         )
         let viaryRepositoryMock = ViaryRepositoryMock()
-        viaryRepositoryMock.createHandler = { viary in
+        viaryRepositoryMock.createViaryHandler = { viary, emotions in
             XCTAssertEqual(expectedViary, viary)
+        }
+        let emotionDetector = EmotionDetectorMock()
+        emotionDetector.inferHandler = { message, lang in
+            expectedViaryEmotion.map(\.score).map { Double($0) / 100 }
         }
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock
+            $0.emotionDetector = emotionDetector
             $0.uuid = .constant(staticUUID)
         } operation: {
             CreateViary()
@@ -73,7 +87,7 @@ final class CreateViarySaveTests: XCTestCase {
         // MARK: Initial state check
         XCTAssertEqual(store.state.messages, initialState.messages)
         XCTAssertEqual(store.state.date, initialState.date)
-        XCTAssertEqual(viaryRepositoryMock.createCallCount, 0)
+        XCTAssertEqual(viaryRepositoryMock.createViaryCallCount, 0)
         await store.send(.save) {
             $0.saveStatus = .loading(cache: nil)
         }
@@ -81,6 +95,6 @@ final class CreateViarySaveTests: XCTestCase {
         await store.receive(.saved(.success(true))) {
             $0.saveStatus = .success(true)
         }
-        XCTAssertEqual(viaryRepositoryMock.createCallCount, 1)
+        XCTAssertEqual(viaryRepositoryMock.createViaryCallCount, 1)
     }
 }

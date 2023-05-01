@@ -12,7 +12,7 @@ final class ViaryListFeatureTests: XCTestCase {
         // MARK: Assign
         let viaryRepositoryMock = ViaryRepositoryMock()
         let listStub: IdentifiedArrayOf<Viary> = [viaryStub()]
-        viaryRepositoryMock.loadHandler = { listStub }
+        viaryRepositoryMock.myViariesSubject.send(listStub)
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock
         } operation: {
@@ -23,41 +23,44 @@ final class ViaryListFeatureTests: XCTestCase {
             reducer: reducer
         )
         // MARK: Act, Assert
-        XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
         XCTAssertEqual(store.state.viaries, [])
         await store.send(.onAppear)
         await store.receive(.loaded(.success(listStub))) {
             $0.viaries = listStub
         }
-        XCTAssertEqual(viaryRepositoryMock.loadCallCount, 1)
+        viaryRepositoryMock.myViariesSubject.send(completion: .finished)
     }
 
     @MainActor
     func test_create_sample() async throws {
         // MARK: Assign
         let viaryRepositoryMock = ViaryRepositoryMock()
-        let listStub: IdentifiedArrayOf<Viary> = [Viary.sample()]
-        viaryRepositoryMock.loadHandler = {
-            listStub
-        }
+        let id = UUID()
+        var sample = Viary.sample(uuid: id)
+        let listStub: IdentifiedArrayOf<Viary> = [sample]
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock
+            $0.date = .constant(.now)
+            $0.uuid = .constant(id)
         } operation: {
             ViaryList()
+        }
+        viaryRepositoryMock.createViaryHandler = { viary, _ in
+            viaryRepositoryMock.myViariesSubject.send([viary])
         }
         let store = TestStore(
             initialState: ViaryList.State(),
             reducer: reducer
         )
         // MARK: Act, Assert
-        XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
         XCTAssertEqual(store.state.viaries, [])
+        await store.send(.onAppear)
+        await store.receive(.loaded(.success([])))
         await store.send(.createSample)
-        await store.receive(.onAppear)
         await store.receive(.loaded(.success(listStub))) {
             $0.viaries = listStub
         }
-        XCTAssertEqual(viaryRepositoryMock.loadCallCount, 1)
+        viaryRepositoryMock.myViariesSubject.send(completion: .finished)
     }
 
     @MainActor

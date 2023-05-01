@@ -8,6 +8,7 @@
 import XCTest
 import ComposableArchitecture
 import Entities
+import SpeechToText
 @testable import CreateViaryFeature
 
 final class CreateViaryInputTests: XCTestCase {
@@ -24,7 +25,12 @@ final class CreateViaryInputTests: XCTestCase {
     )
 
     override func setUpWithError() throws {
-        let reducer = CreateViary()
+        let reducer = withDependencies {
+            $0.speechToTextService = SpeechToTextServiceMock()
+        } operation: {
+            CreateViary()
+        }
+
         store = TestStore(
             initialState: initialState,
             reducer: reducer

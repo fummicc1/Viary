@@ -8,6 +8,7 @@ public struct CreateViaryScreen: View {
     let viewStore: ViewStoreOf<CreateViary>
     @FocusState var focus
     @Environment(\.dismiss) var dismiss
+    @Dependency(\.date) var dateGenerator
 
     public init(viewStore: ViewStoreOf<CreateViary>) {
         self.viewStore = viewStore
@@ -44,7 +45,7 @@ public struct CreateViaryScreen: View {
             }
             .navigationTitle("Create new Viary")
             .toolbar {
-                if viewStore.isValidInput {
+                if viewStore.state.isValidInput(now: dateGenerator.now) {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button {
                             viewStore.send(.save)
