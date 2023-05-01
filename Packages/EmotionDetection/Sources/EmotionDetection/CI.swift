@@ -88,7 +88,7 @@ public class emotion_english_distilroberta_base {
 
     /// URL of model assuming it was installed in the same bundle as this class
     class var urlOfModelInThisBundle : URL {
-        let bundle = Bundle.module
+        let bundle = Bundle(for: Self.self)
         return bundle.url(forResource: "emotion-english-distilroberta-base", withExtension:"mlmodelc")!
     }
 
