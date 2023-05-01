@@ -26,4 +26,4 @@ jobs:
         working-directory: ios-dev
         run: |
           set -o pipefail
-          xcodebuild -project ios-dev.xcodeproj -scheme ios-dev build -destination 'platform=iOS Simulator,name=iPhone 14' "OTHER_SWIFT_FLAGS=-D CI" | xcbeautify
+          xcodebuild -project ios-dev.xcodeproj -scheme ios-dev build test -destination 'platform=iOS Simulator,name=iPhone 14' "OTHER_SWIFT_FLAGS=-D CI" | xcbeautify
