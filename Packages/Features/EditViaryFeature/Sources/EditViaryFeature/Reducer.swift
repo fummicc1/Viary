@@ -51,7 +51,7 @@ public struct EditViary: ReducerProtocol {
         case editMessageEmotion(
             id: Tagged<Viary.Message, String>,
             emotionKind: Emotion.Kind,
-            score: Int
+            prob: Double
         )
 
         case save
@@ -68,8 +68,35 @@ public struct EditViary: ReducerProtocol {
             state.editable.messages[id: id]?.sentence = sentence
             state.resolved[id] = false
 
-        case let .editMessageEmotion(id, emotionKind, score):            
-            state.editable.messages[id: id]?.emotions[emotionKind]?.score = score
+        case let .editMessageEmotion(id, emotionKind, prob):
+            let totalExceptSelf: Double = Double(state.editable
+                .messages[id: id]?
+                .emotions
+                .filter({ $0.key != emotionKind })
+                .values
+                .map(\.score)
+                .reduce(0, { $0 + $1 }) ?? 0)
+            let newValue: Double
+            if prob == 0 {
+                newValue = 0
+            } else {
+                if totalExceptSelf == 0 {
+                    let total = Double(state.editable
+                        .messages[id: id]?
+                        .emotions
+                        .values
+                        .map(\.score)
+                        .reduce(0, { $0 + $1 }) ?? 0)
+                    if total > 0 {
+                        newValue = total * prob
+                    } else {
+                        newValue = 100 * prob
+                    }
+                } else {
+                    newValue = totalExceptSelf * prob / min(0.01, (1 - prob))
+                }
+            }
+            state.editable.messages[id: id]?.emotions[emotionKind]?.score = Int(newValue)
         case let .analyze(messageID):
             guard let message = state.editable.messages[id: messageID] else {
                 return .none
@@ -81,7 +108,7 @@ public struct EditViary: ReducerProtocol {
                         guard let i = Emotion.Kind.allCases.firstIndex(of: kind) else {
                             continue
                         }
-                        message.emotions[kind]?.score = Int(emotions[i] * 100)
+                        message.emotions[kind]?.score = Int(emotions[i])
                     }
                     return .replace(id: messageID, message: message, resolved: true)
                 }

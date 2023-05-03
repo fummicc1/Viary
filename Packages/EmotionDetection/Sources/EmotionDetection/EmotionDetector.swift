@@ -81,6 +81,7 @@ extension EmotionDetectorImpl: EmotionDetector {
         let predictedEmotion = prediction.inp
 
         let ret: [Double] = multiArrayToArray(predictedEmotion)
+            .map { $0 * 100 }
 
         #if DEBUG
         print("Predicted emotion: \(predictedEmotion)")

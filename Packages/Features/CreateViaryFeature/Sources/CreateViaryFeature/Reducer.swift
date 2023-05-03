@@ -178,7 +178,7 @@ public struct CreateViary: ReducerProtocol {
                             kind,
                             Emotion(
                                 sentence: message.sentence,
-                                score: Int(score * 100),
+                                score: Int(score),
                                 kind: kind
                             )
                         )
