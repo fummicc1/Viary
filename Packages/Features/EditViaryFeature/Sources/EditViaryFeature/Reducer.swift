@@ -69,34 +69,18 @@ public struct EditViary: ReducerProtocol {
             state.resolved[id] = false
 
         case let .editMessageEmotion(id, emotionKind, prob):
-            let totalExceptSelf: Double = Double(state.editable
-                .messages[id: id]?
-                .emotions
-                .filter({ $0.key != emotionKind })
-                .values
-                .map(\.score)
-                .reduce(0, { $0 + $1 }) ?? 0)
-            let newValue: Double
-            if prob == 0 {
-                newValue = 0
-            } else {
-                if totalExceptSelf == 0 {
-                    let total = Double(state.editable
-                        .messages[id: id]?
-                        .emotions
-                        .values
-                        .map(\.score)
-                        .reduce(0, { $0 + $1 }) ?? 0)
-                    if total > 0 {
-                        newValue = total * prob
-                    } else {
-                        newValue = 100 * prob
-                    }
-                } else {
-                    newValue = totalExceptSelf * prob / min(0.01, (1 - prob))
-                }
+            let total: Double = 100
+            let newTotal: Double = 100
+            state.editable.messages[id: id]?.emotions[emotionKind]?.score = Int(newTotal * prob)
+            let emotions = state.editable.messages[id: id]?.emotions ?? [:]
+            for (kind, emotion) in emotions {
+                let score = Double(emotion.score)
+                let prevProb: Double = score / total
+                let newScore = (
+                    prevProb - ( 1 - prob ) / Double(Emotion.Kind.allCases.count - 1)
+                ) * newTotal
+                state.editable.messages[id: id]?.emotions[kind]?.score = Int(newScore)
             }
-            state.editable.messages[id: id]?.emotions[emotionKind]?.score = Int(newValue)
         case let .analyze(messageID):
             guard let message = state.editable.messages[id: messageID] else {
                 return .none
