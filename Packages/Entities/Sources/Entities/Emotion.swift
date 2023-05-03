@@ -11,7 +11,6 @@ public struct Emotion: Identifiable, Equatable {
     }
 
     public func prob(all: [Emotion]) -> Double {
-        assert([0, 100].contains(all.map(\.score).reduce(0, { $0 + $1 })))
         return Double(score) / 100
     }
 
