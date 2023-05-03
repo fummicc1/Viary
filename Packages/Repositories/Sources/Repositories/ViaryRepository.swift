@@ -14,7 +14,7 @@ public protocol ViaryRepository {
     @discardableResult
     func load() async throws -> IdentifiedArrayOf<Viary>
     func create(viary: Viary) async throws
-    func create(viary: Viary, with emotions: [Viary.Message.ID: [Emotion]]) async throws
+    func create(viary: Viary, with emotions: [Viary.Message.ID: [Emotion.Kind: Emotion]]) async throws
     func update(id: Tagged<Viary, String>, viary: Viary) async throws
     func delete(id: Tagged<Viary, String>) async throws
 }
@@ -50,9 +50,9 @@ extension ViaryRepositoryImpl {
                         id: Tagged(storedMessage.id),
                         sentence: storedMessage.sentence,
                         lang: Lang(stringLiteral: storedMessage.lang),
-                        emotions: []
+                        emotions: [:]
                     )
-                    var emotions: [Emotion] = []
+                    var emotions: [Emotion.Kind: Emotion] = [:]
                     let storedEmotions = storedMessage.emotions
                     for storedEmotion in storedEmotions {
                         guard let kind = Emotion.Kind(rawValue: storedEmotion.kind) else {
@@ -63,7 +63,7 @@ extension ViaryRepositoryImpl {
                             score: storedEmotion.score,
                             kind: kind
                         )
-                        emotions.append(emotion)
+                        emotions[kind] = emotion
                     }
                     message.emotions = emotions
                     messages.append(message)
@@ -78,7 +78,7 @@ extension ViaryRepositoryImpl {
     }
 
     @MainActor
-    func mapDomainIntoStored(id: Tagged<Viary, String>, viary: Viary, emotions: [Viary.Message.ID: [Emotion]], canWrite: Bool = false) async throws -> StoredViary {
+    func mapDomainIntoStored(id: Tagged<Viary, String>, viary: Viary, emotions: [Viary.Message.ID: [Emotion.Kind: Emotion]], canWrite: Bool = false) async throws -> StoredViary {
         let all = try await StoredViary.fetchAll()
         let storedViary: StoredViary
         var isUpdate = false
@@ -103,16 +103,16 @@ extension ViaryRepositoryImpl {
                 }
                 storedMessage.sentence = message.sentence
                 storedMessage.lang = message.lang.id
-                let storedEmotions = emotions[message.id]?.compactMap { editedEmotion -> StoredEmotion? in
+                let storedEmotions = emotions[message.id]?.compactMap { (editedEmotionKind, editedEmotion) -> StoredEmotion? in
                     var emotion = StoredEmotion()
                     if isUpdate {
-                        guard let exisiting = storedMessage.emotions.first(where: { $0.kind == editedEmotion.kind.id }) else {
+                        guard let exisiting = storedMessage.emotions.first(where: { $0.kind == editedEmotionKind.id }) else {
                             assert(false)
                             return nil
                         }
                         emotion = exisiting
                     }
-                    emotion.kind = editedEmotion.kind.id
+                    emotion.kind = editedEmotionKind.id
                     emotion.score = editedEmotion.score
                     emotion.sentence = editedEmotion.sentence
                     return emotion
@@ -197,7 +197,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
         }.value
     }
 
-    public func create(viary: Viary, with emotions: [Viary.Message.ID: [Emotion]]) async throws {
+    public func create(viary: Viary, with emotions: [Viary.Message.ID: [Emotion.Kind: Emotion]]) async throws {
         try await Task { @MainActor in
             let new = try await mapDomainIntoStored(id: viary.id, viary: viary, emotions: emotions)
             try await new.create()
@@ -206,7 +206,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
 
     public func update(id: Tagged<Viary, String>, viary: Viary) async throws {
         try await Task { @MainActor in
-            var emotions: [Tagged<Viary.Message, String>: [Emotion]] = [:]
+            var emotions: [Tagged<Viary.Message, String>: [Emotion.Kind: Emotion]] = [:]
             for message in viary.messages {
                 emotions[message.id] = message.emotions
             }
