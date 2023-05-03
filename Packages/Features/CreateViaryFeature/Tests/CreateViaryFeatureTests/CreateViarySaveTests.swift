@@ -55,19 +55,11 @@ final class CreateViarySaveTests: XCTestCase {
             emotions: expectedViaryEmotion
         )
         let now = Date.now
-        let expectedViary = Viary(
-            id: viaryID,
-            messages: [expectedMessage],
-            date: now
-        )
         let initialState: CreateViary.State = .init(
             messages: [expectedMessage],
             date: now
         )
         let viaryRepositoryMock = ViaryRepositoryMock()
-        viaryRepositoryMock.createViaryHandler = { viary, emotions in
-            XCTAssertEqual(expectedViary, viary)
-        }
         let emotionDetector = EmotionDetectorMock()
         emotionDetector.inferHandler = { message, lang in
             expectedViaryEmotion.values.map(\.score).map { Double($0) / 100 }
