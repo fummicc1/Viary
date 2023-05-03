@@ -110,10 +110,7 @@ public struct EditViaryScreen: View {
                                 }
                             ))
                             .padding(2)
-                            let value = Int(
-                                message.emotions[kind]?
-                                    .prob(all: message.emotions.values.map { $0 }) ?? 0
-                            )
+                            let value = message.emotions[kind]?.score ?? 0
                             SelectableText("\(value)%")
                         }
                     }

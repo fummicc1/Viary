@@ -19,6 +19,18 @@ public class ViarySampleGenerator: DependencyKey {
                     id: .init(uuid().uuidString),
                     sentence: "This is sample viary!",
                     lang: .en,
+                    emotions: Dictionary(
+                        uniqueKeysWithValues: Emotion.Kind.allCases.map {
+                            (
+                                $0,
+                                Emotion(
+                                    sentence: "This is sample viary!",
+                                    score: Int(100 / Double(Emotion.Kind.allCases.count)),
+                                    kind: $0
+                                )
+                            )
+                        }
+                    ),
                     updatedAt: date.now
                 )
             ],
