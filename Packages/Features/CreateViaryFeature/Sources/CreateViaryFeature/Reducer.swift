@@ -168,18 +168,22 @@ public struct CreateViary: ReducerProtocol {
 
                 for (i, message) in messages.enumerated() {
                     let newScore = await emotionDetector.infer(text: message.sentence, lang: message.lang)
-                    let emotions = Emotion.Kind.allCases.indices.compactMap { index -> Emotion? in
+                    let emotions = Emotion.Kind.allCases.indices.compactMap { index -> (Emotion.Kind, Emotion)? in
                         if newScore.count <= index {
                             return nil
                         }
+                        let kind = Emotion.Kind.allCases[index]
                         let score = newScore[index]
-                        return Emotion(
-                            sentence: message.sentence,
-                            score: Int(score * 100),
-                            kind: Emotion.Kind.allCases[index]
+                        return (
+                            kind,
+                            Emotion(
+                                sentence: message.sentence,
+                                score: Int(score),
+                                kind: kind
+                            )
                         )
                     }
-                    messages[i].emotions = emotions
+                    messages[i].emotions = Dictionary(uniqueKeysWithValues: emotions)
                 }
 
                 let viary = Viary(
@@ -187,7 +191,7 @@ public struct CreateViary: ReducerProtocol {
                     messages: IdentifiedArray(uniqueElements: messages),
                     date: state.date
                 )
-                var emotionsPerMessage: [Viary.Message.ID: [Emotion]] = [:]
+                var emotionsPerMessage: [Viary.Message.ID: [Emotion.Kind: Emotion]] = [:]
                 for message in viary.messages {
                     emotionsPerMessage[message.id] = message.emotions
                 }

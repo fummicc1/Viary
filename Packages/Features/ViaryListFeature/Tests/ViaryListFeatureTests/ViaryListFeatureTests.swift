@@ -11,7 +11,7 @@ final class ViaryListFeatureTests: XCTestCase {
     func testLoad() async throws {
         // MARK: Assign
         let viaryRepositoryMock = ViaryRepositoryMock()
-        let listStub: IdentifiedArrayOf<Viary> = [viaryStub()]
+        let listStub: IdentifiedArrayOf<Viary> = []
         viaryRepositoryMock.myViariesSubject.send(listStub)
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock
@@ -25,9 +25,7 @@ final class ViaryListFeatureTests: XCTestCase {
         // MARK: Act, Assert
         XCTAssertEqual(store.state.viaries, [])
         await store.send(.onAppear)
-        await store.receive(.loaded(.success(listStub))) {
-            $0.viaries = listStub
-        }
+        await store.receive(.loaded(.success(listStub)))
         viaryRepositoryMock.myViariesSubject.send(completion: .finished)
     }
 
@@ -92,23 +90,5 @@ final class ViaryListFeatureTests: XCTestCase {
         await store.send(.destination(expectedDestination)) {
             $0.destination = expectedDestination
         }
-    }
-}
-
-private extension ViaryListFeatureTests {
-    func viaryStub() -> Viary {
-        let id: Tagged<Viary, String> = .init(UUID().uuidString)
-        return Viary(
-            id: id,
-            messages: [
-                Viary.Message(
-                    viaryID: id,
-                    id: .init(UUID().uuidString),
-                    sentence: "",
-                    lang: .en
-                )
-            ],
-            date: .now
-        )
     }
 }

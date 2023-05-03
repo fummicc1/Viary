@@ -14,7 +14,7 @@ public struct Viary: Identifiable, Equatable {
     public var emotions: IdentifiedArrayOf<Emotion> {
         var emotions: [Emotion.Kind: Emotion] = [:]
         for message in messages {
-            message.emotions.forEach { emotion in
+            message.emotions.values.forEach { emotion in
                 if var cur = emotions[emotion.kind] {
                     cur.score += Int(Double(emotion.score) / Double(messages.count))
                     emotions[emotion.kind] = cur
@@ -57,14 +57,19 @@ public struct Viary: Identifiable, Equatable {
         public var lang: Lang
         public var updatedAt: Date
         // TODO: [Emotion] → [Emotion.Kind: Emotion]
-        public var emotions: [Emotion]
+        public var emotions: [Emotion.Kind: Emotion]
 
-        public init(viaryID: Tagged<Viary, String>, id: Tagged<Message, String>, sentence: String, lang: Lang, emotions: [Emotion]? = nil, updatedAt: Date = Date()) {
+        public init(viaryID: Tagged<Viary, String>, id: Tagged<Message, String>, sentence: String, lang: Lang, emotions: [Emotion.Kind: Emotion]? = nil, updatedAt: Date = Date()) {
             self.viaryID = viaryID
             self.id = id
             self.sentence = sentence
             self.lang = lang
-            self.emotions = emotions ?? Emotion.Kind.allCases.map { Emotion(sentence: sentence, score: 0, kind: $0) }
+            self.emotions = emotions ?? Dictionary<Emotion.Kind, Emotion>(
+                uniqueKeysWithValues: Emotion.Kind.allCases
+                    .map {
+                        ($0, Emotion(sentence: sentence, score: 0, kind: $0))
+                    }
+            )
             self.updatedAt = updatedAt
         }
     }

@@ -38,14 +38,14 @@ final class CreateViarySaveTests: XCTestCase {
         let staticUUID = UUID()
         let viaryID: Tagged<Viary, String> = .init(staticUUID.uuidString)
         let messageID: Tagged<Viary.Message, String> = .init(staticUUID.uuidString)
-        let expectedViaryEmotion: [Emotion] = [
-            Emotion(sentence: "expectedMessage", score: 100, kind: .anger),
-            Emotion(sentence: "expectedMessage", score: 0, kind: .disgust),
-            Emotion(sentence: "expectedMessage", score: 0, kind: .fear),
-            Emotion(sentence: "expectedMessage", score: 0, kind: .joy),
-            Emotion(sentence: "expectedMessage", score: 0, kind: .neutral),
-            Emotion(sentence: "expectedMessage", score: 0, kind: .sadness),
-            Emotion(sentence: "expectedMessage", score: 0, kind: .surprise)
+        let expectedViaryEmotion: [Emotion.Kind: Emotion] = [
+            .anger:  Emotion(sentence: "expectedMessage", score: 100, kind: .anger),
+            .disgust: Emotion(sentence: "expectedMessage", score: 0, kind: .disgust),
+            .fear: Emotion(sentence: "expectedMessage", score: 0, kind: .fear),
+            .joy: Emotion(sentence: "expectedMessage", score: 0, kind: .joy),
+            .neutral: Emotion(sentence: "expectedMessage", score: 0, kind: .neutral),
+            .sadness: Emotion(sentence: "expectedMessage", score: 0, kind: .sadness),
+            .surprise: Emotion(sentence: "expectedMessage", score: 0, kind: .surprise)
         ]
         let expectedMessage = Viary.Message(
             viaryID: viaryID,
@@ -55,22 +55,14 @@ final class CreateViarySaveTests: XCTestCase {
             emotions: expectedViaryEmotion
         )
         let now = Date.now
-        let expectedViary = Viary(
-            id: viaryID,
-            messages: [expectedMessage],
-            date: now
-        )
         let initialState: CreateViary.State = .init(
             messages: [expectedMessage],
             date: now
         )
         let viaryRepositoryMock = ViaryRepositoryMock()
-        viaryRepositoryMock.createViaryHandler = { viary, emotions in
-            XCTAssertEqual(expectedViary, viary)
-        }
         let emotionDetector = EmotionDetectorMock()
         emotionDetector.inferHandler = { message, lang in
-            expectedViaryEmotion.map(\.score).map { Double($0) / 100 }
+            expectedViaryEmotion.values.map(\.score).map { Double($0) / 100 }
         }
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock

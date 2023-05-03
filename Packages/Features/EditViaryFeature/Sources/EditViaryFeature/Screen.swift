@@ -74,7 +74,7 @@ public struct EditViaryScreen: View {
                 TextEditor(
                     text: viewStore.binding(
                         get: { $0.editable.messages.first(where: { $0.id == message.id })?.sentence ?? "" },
-                        send: { .editMessage(id: message.id, sentence: $0) }
+                        send: { .editMessageSentence(id: message.id, sentence: $0) }
                     )
                 ).font(.body)
                 .focused($focused)
@@ -87,12 +87,30 @@ public struct EditViaryScreen: View {
                 Divider()
                 Spacer().frame(height: 4)
                 LazyVStack {
-                    ForEach(Emotion.Kind.allCases) { kind in
-                        let value = message.emotions.first(where: { $0.kind == kind })?.score ?? 0
+                    ForEach(Emotion.Kind.allCases, id: \.id) { kind in
                         HStack {
                             SelectableText(kind.text)
-                            ProgressView(value: Double(value) / 100)
-                                .foregroundColor(kind.color)
+                            Slider(value: viewStore.binding(
+                                get: { _ in
+                                    let score = viewStore
+                                        .editable
+                                        .messages[id: message.id]?
+                                        .emotions[kind]?
+                                        .prob(
+                                            all: message.emotions.values.map { $0 }
+                                        ) ?? 0
+                                    return Double(score)
+                                },
+                                send: { (prob: Double) in
+                                    .editMessageEmotion(
+                                        id: message.id,
+                                        emotionKind: kind,
+                                        prob: prob
+                                    )
+                                }
+                            ))
+                            .padding(2)
+                            let value = message.emotions[kind]?.score ?? 0
                             SelectableText("\(value)%")
                         }
                     }
