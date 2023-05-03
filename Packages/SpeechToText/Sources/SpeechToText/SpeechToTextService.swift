@@ -131,7 +131,15 @@ public class SpeechToTextServiceImpl {
             throw SpeechToTextError.invalidLocale(locale)
         }
         let session = AVAudioSession.sharedInstance()
-        try session.setCategory(.record, mode: .measurement, options: .duckOthers)
+        try session.setCategory(
+            .playAndRecord,
+            mode: .default,
+            options: [.duckOthers, .allowBluetooth, .defaultToSpeaker]
+        )
+        if let bleHFPInput = session.availableInputs?
+            .filter({ $0.portType == .bluetoothHFP }).first {
+            try session.setPreferredInput(bleHFPInput)
+        }
         try session.setActive(true, options: .notifyOthersOnDeactivation)
         let inputNode = engine.inputNode
 
