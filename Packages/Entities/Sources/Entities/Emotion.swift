@@ -11,11 +11,8 @@ public struct Emotion: Identifiable, Equatable {
     }
 
     public func prob(all: [Emotion]) -> Double {
-        let total = all.map(\.score).map { Double($0) }.reduce(0, { $0 + $1 })
-        if total == 0 {
-            return 0
-        }
-        return Double(score) / total * 100
+        assert(all.map(\.score).reduce(0, { $0 + $1 }) == 100)
+        return Double(score) / 100
     }
 
     public init(sentence: String, score: Int, kind: Kind) {

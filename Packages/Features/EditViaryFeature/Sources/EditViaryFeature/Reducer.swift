@@ -70,15 +70,17 @@ public struct EditViary: ReducerProtocol {
 
         case let .editMessageEmotion(id, emotionKind, prob):
             let total: Double = 100
-            let newTotal: Double = 100
-            state.editable.messages[id: id]?.emotions[emotionKind]?.score = Int(newTotal * prob)
+            state.editable.messages[id: id]?.emotions[emotionKind]?.score = Int(total * prob)
             let emotions = state.editable.messages[id: id]?.emotions ?? [:]
             for (kind, emotion) in emotions {
+                if kind == emotionKind {
+                    continue
+                }
                 let score = Double(emotion.score)
                 let prevProb: Double = score / total
                 let newScore = (
                     prevProb - ( 1 - prob ) / Double(Emotion.Kind.allCases.count - 1)
-                ) * newTotal
+                ) * total
                 state.editable.messages[id: id]?.emotions[kind]?.score = Int(newScore)
             }
         case let .analyze(messageID):
