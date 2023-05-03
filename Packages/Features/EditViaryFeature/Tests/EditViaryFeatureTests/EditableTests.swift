@@ -30,7 +30,8 @@ class EditableTests: XCTestCase {
         })
     }
 
-    func editEmotionScore() async throws {
+    @MainActor
+    func test_editEmotionScore() async throws {
         let repository = ViaryRepositoryMock()
         let target = viaryGenerator.make()
 
@@ -52,24 +53,36 @@ class EditableTests: XCTestCase {
         let editKind = Emotion.Kind.joy
 
         XCTAssertEqual(
-            testStore.state.editable.messages[id: editMessage.id]?.emotions.values.map { $0 } ?? [],
-            Emotion.Kind.allCases.map {
-                Emotion(
-                    sentence: editMessage.sentence,
-                    score: 0,
-                    kind: $0
-                )
-            }
+            testStore.state.editable.messages[id: editMessage.id]?.emotions,
+            Dictionary(
+                uniqueKeysWithValues: Emotion.Kind.allCases.map {
+                    (
+                        $0,
+                        Emotion(
+                            sentence: editMessage.sentence,
+                            score: 100 / Emotion.Kind.allCases.count,
+                            kind: $0
+                        )
+                    )
+                }
+            )
         )
 
         await testStore.send(
             .editMessageEmotion(
                 id: editMessage.id,
                 emotionKind: editKind,
-                score: 80
+                prob: 0.8
             )
         ) {
             $0.editable.messages[id: editMessage.id]?.emotions[editKind]?.score = 80
+            for kind in Emotion.Kind.allCases {
+                if kind == editKind {
+                    continue
+                }
+                $0.editable.messages[id: editMessage.id]?.emotions[kind]?.score = 20 / 6
+            }
+
         }
     }
 }
