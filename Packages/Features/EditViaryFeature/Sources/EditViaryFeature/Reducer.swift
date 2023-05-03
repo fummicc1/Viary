@@ -41,12 +41,18 @@ public struct EditViary: ReducerProtocol {
     public enum Action: Equatable {
         case analyze(messageID: Tagged<Viary.Message, String>)
 
-        case editMessage(id: Tagged<Viary.Message, String>, sentence: String)
+        case editMessageSentence(id: Tagged<Viary.Message, String>, sentence: String)
         case replace(id: Tagged<Viary.Message, String>, message: Viary.Message, resolved: Bool)
 
         case tapMessage(id: Viary.Message.ID)
         case stopEditing
         case didAdjustMessageHeight(id: Viary.Message.ID, height: CGFloat)
+
+        case editMessageEmotion(
+            id: Tagged<Viary.Message, String>,
+            emotionKind: Emotion.Kind,
+            score: Int
+        )
 
         case save
         case saved
@@ -58,9 +64,12 @@ public struct EditViary: ReducerProtocol {
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
-        case let .editMessage(id, sentence):
+        case let .editMessageSentence(id, sentence):
             state.editable.messages[id: id]?.sentence = sentence
             state.resolved[id] = false
+
+        case let .editMessageEmotion(id, emotionKind, score):            
+            state.editable.messages[id: id]?.emotions[emotionKind]?.score = score
         case let .analyze(messageID):
             guard let message = state.editable.messages[id: messageID] else {
                 return .none
@@ -68,8 +77,11 @@ public struct EditViary: ReducerProtocol {
             return .task { [state] in
                 let emotions = await emotionDetector.infer(text: message.sentence, lang: message.lang)
                 if var message = state.messages.first(where: { $0.id == messageID }) {
-                    for i in message.emotions.indices {
-                        message.emotions[i].score = Int(emotions[i] * 100)
+                    for kind in message.emotions.map(\.key) {
+                        guard let i = Emotion.Kind.allCases.firstIndex(of: kind) else {
+                            continue
+                        }
+                        message.emotions[kind]?.score = Int(emotions[i] * 100)
                     }
                     return .replace(id: messageID, message: message, resolved: true)
                 }

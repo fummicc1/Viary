@@ -19,7 +19,7 @@ public class ViaryRepositoryMock: ViaryRepository {
 
 
     public var myViaries: AnyPublisher<IdentifiedArrayOf<Viary>, Never> { return self.myViariesSubject.eraseToAnyPublisher() }
-    public private(set) var myViariesSubject = CurrentValueSubject<IdentifiedArrayOf<Viary>, Never>([])
+    public private(set) var myViariesSubject = PassthroughSubject<IdentifiedArrayOf<Viary>, Never>()
 
     public private(set) var loadCallCount = 0
     public var loadHandler: (() async throws -> (IdentifiedArrayOf<Viary>))?
@@ -42,8 +42,8 @@ public class ViaryRepositoryMock: ViaryRepository {
     }
 
     public private(set) var createViaryCallCount = 0
-    public var createViaryHandler: ((Viary, [Viary.Message.ID: [Emotion]]) async throws -> ())?
-    public func create(viary: Viary, with emotions: [Viary.Message.ID: [Emotion]]) async throws  {
+    public var createViaryHandler: ((Viary, [Viary.Message.ID: [Emotion.Kind: Emotion]]) async throws -> ())?
+    public func create(viary: Viary, with emotions: [Viary.Message.ID: [Emotion.Kind: Emotion]]) async throws  {
         createViaryCallCount += 1
         if let createViaryHandler = createViaryHandler {
             try await createViaryHandler(viary, emotions)

@@ -74,7 +74,7 @@ public struct EditViaryScreen: View {
                 TextEditor(
                     text: viewStore.binding(
                         get: { $0.editable.messages.first(where: { $0.id == message.id })?.sentence ?? "" },
-                        send: { .editMessage(id: message.id, sentence: $0) }
+                        send: { .editMessageSentence(id: message.id, sentence: $0) }
                     )
                 ).font(.body)
                 .focused($focused)
@@ -88,7 +88,7 @@ public struct EditViaryScreen: View {
                 Spacer().frame(height: 4)
                 LazyVStack {
                     ForEach(Emotion.Kind.allCases) { kind in
-                        let value = message.emotions.first(where: { $0.kind == kind })?.score ?? 0
+                        let value = message.emotions[kind]?.score ?? 0
                         HStack {
                             SelectableText(kind.text)
                             ProgressView(value: Double(value) / 100)
