@@ -79,7 +79,7 @@ public struct EditViary: ReducerProtocol {
                 let score = Double(emotion.score)
                 let prevProb: Double = score / total
                 let newScore = (
-                    min(0, prevProb - (( 1 - prob ) / (Double(Emotion.Kind.allCases.count - 1))))
+                    max(0, prevProb - (( 1 - prob ) / (Double(Emotion.Kind.allCases.count - 1))))
                 ) * total
                 state.editable.messages[id: id]?.emotions[kind]?.score = Int(newScore)
             }
