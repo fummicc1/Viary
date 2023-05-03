@@ -79,7 +79,12 @@ public struct EditViary: ReducerProtocol {
                 if kind == emotionKind {
                     continue
                 }
-                var newScore: Double = Double(emotion.score) / remaining * newRemaining
+                var newScore: Double
+                if remaining > 0 {
+                    newScore = Double(emotion.score) / remaining * newRemaining
+                } else {
+                    newScore = 0
+                }
                 let zeroCase = newRemaining / Double(Emotion.Kind.allCases.count - 1)
                 if newScore < zeroCase {
                     newScore = zeroCase
