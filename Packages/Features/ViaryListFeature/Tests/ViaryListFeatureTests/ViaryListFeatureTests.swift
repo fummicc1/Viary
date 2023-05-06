@@ -91,4 +91,17 @@ final class ViaryListFeatureTests: XCTestCase {
             $0.destination = expectedDestination
         }
     }
+
+    @MainActor
+    func test_timeline_order() async throws {
+        let viaryRepository = ViaryRepositoryMock()
+        let reducer = ViaryList().transformDependency(\.self) {
+            $0.viaryRepository = viaryRepository
+        }
+        let store = TestStore(
+            initialState: ViaryList.State(),
+            reducer: reducer
+        )
+        await store.send(.onAppear)
+    }
 }
