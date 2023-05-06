@@ -95,13 +95,64 @@ final class ViaryListFeatureTests: XCTestCase {
     @MainActor
     func test_timeline_order() async throws {
         let viaryRepository = ViaryRepositoryMock()
-        let reducer = ViaryList().transformDependency(\.self) {
+        let firstDate = Date()
+        let firstUUID = UUID()
+        let viarySampleGenerator = withDependencies {
+            $0.uuid = .constant(firstUUID)
+            $0.date = .constant(firstDate)
+        } operation: {
+            ViarySampleGenerator()
+        }
+        viaryRepository.createViaryHandler = { viary, _ in
+            viaryRepository.myViariesSubject.send(viaryRepository.myViariesSubject.value + [viary])
+        }
+
+        let reducer = withDependencies {
             $0.viaryRepository = viaryRepository
+            $0.viarySample = viarySampleGenerator
+        } operation: {
+            ViaryList()
         }
         let store = TestStore(
             initialState: ViaryList.State(),
             reducer: reducer
         )
         await store.send(.onAppear)
+        await store.receive(.loaded(.success([])))
+        await store.send(.createSample)
+        await store.receive(.loaded(.success(viaryRepository.myViariesSubject.value))) {
+            $0.viaries = viaryRepository.myViariesSubject.value
+        }
+        let newViaryID = Tagged<Viary, String>("newViary")
+        let newMessage = Viary.Message(
+            viaryID: newViaryID,
+            id: Tagged<Viary.Message, String>("newMessage"),
+            sentence: "Sentence",
+            lang: .en
+        )
+        let newViary = Viary(
+            id: newViaryID,
+            messages: [
+                newMessage
+            ],
+            date: Date()
+        )
+        try await viaryRepository.create(
+            viary: newViary,
+            with: [
+                newMessage.id: Dictionary(
+                    uniqueKeysWithValues: Emotion.Kind.allCases.map { kind in
+                        return (kind, Emotion(sentence: "newMessage", score: 100 / 7, kind: kind))
+                    }
+                )
+            ]
+        )
+        await store.receive(.loaded(.success(viaryRepository.myViariesSubject.value))) {
+            $0.viaries = viaryRepository.myViariesSubject.value
+            $0.viaries = IdentifiedArray(
+                uniqueElements: $0.viaries.sorted(using: KeyPathComparator(\.date)).reversed()
+            )
+        }
+        viaryRepository.myViariesSubject.send(completion: .finished)
     }
 }
