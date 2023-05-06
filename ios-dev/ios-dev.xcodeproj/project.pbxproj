@@ -13,6 +13,7 @@
 		D323E67B29F976EB00F5072D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D323E67A29F976EB00F5072D /* GoogleService-Info.plist */; };
 		D323E68529F977B400F5072D /* App in Frameworks */ = {isa = PBXBuildFile; productRef = D323E68429F977B400F5072D /* App */; };
 		D323E68929F9794D00F5072D /* vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = D323E68829F9794D00F5072D /* vocab.json */; };
+		D327985A2A05EC5700807FBA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D32798592A05EC5700807FBA /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,6 +26,7 @@
 		D323E68229F9778400F5072D /* App */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = App; path = ../Packages/App; sourceTree = "<group>"; };
 		D323E68729F978EC00F5072D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D323E68829F9794D00F5072D /* vocab.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = vocab.json; path = ../Packages/Resources/Sources/Resources/vocab.json; sourceTree = "<group>"; };
+		D32798592A05EC5700807FBA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		D3945B3129FF5524005105F2 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		D3945B3329FF560F005105F2 /* CreateViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CreateViaryFeature; path = ../Packages/Features/CreateViaryFeature; sourceTree = "<group>"; };
 		D3945B3429FF564C005105F2 /* EditViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EditViaryFeature; path = ../Packages/Features/EditViaryFeature; sourceTree = "<group>"; };
@@ -66,6 +68,7 @@
 		D323E64729F9756B00F5072D /* ios-dev */ = {
 			isa = PBXGroup;
 			children = (
+				D32798592A05EC5700807FBA /* Settings.bundle */,
 				D323E68729F978EC00F5072D /* Info.plist */,
 				D323E67A29F976EB00F5072D /* GoogleService-Info.plist */,
 				D323E64829F9756B00F5072D /* ios_devApp.swift */,
@@ -113,6 +116,7 @@
 			buildPhases = (
 				D323E64129F9756B00F5072D /* Sources */,
 				D323E64229F9756B00F5072D /* Frameworks */,
+				D327985B2A05EC8100807FBA /* License Plist */,
 				D323E64329F9756B00F5072D /* Resources */,
 			);
 			buildRules = (
@@ -167,12 +171,34 @@
 			files = (
 				D323E68929F9794D00F5072D /* vocab.json in Resources */,
 				D323E65129F9756C00F5072D /* Preview Assets.xcassets in Resources */,
+				D327985A2A05EC5700807FBA /* Settings.bundle in Resources */,
 				D323E64D29F9756C00F5072D /* Assets.xcassets in Resources */,
 				D323E67B29F976EB00F5072D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D327985B2A05EC8100807FBA /* License Plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "License Plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ $CONFIGURATION = \"Debug\" ]; then\nxcrun --sdk macosx /opt/homebrew/bin/mint run mono0926/LicensePlist --output-path ios-dev/Settings.bundle\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D323E64129F9756B00F5072D /* Sources */ = {

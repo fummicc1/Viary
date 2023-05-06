@@ -1,0 +1,43 @@
+name: Alamofire, nameSpecified: Alamofire, owner: Alamofire, version: 5.6.4, source: https://github.com/Alamofire/Alamofire
+
+name: combine-schedulers, nameSpecified: combine-schedulers, owner: pointfreeco, version: 0.9.2, source: https://github.com/pointfreeco/combine-schedulers
+
+name: FloatingActionButton, nameSpecified: FloatingActionButton, owner: fummicc1, version: 0.0.2, source: https://github.com/fummicc1/FloatingActionButton
+
+name: Moya, nameSpecified: Moya, owner: Moya, version: 15.0.3, source: https://github.com/Moya/Moya
+
+name: MoyaAPIClient, nameSpecified: MoyaAPIClient, owner: fummicc1, version: 1.1.0, source: https://github.com/fummicc1/MoyaAPIClient
+
+name: ReactiveSwift, nameSpecified: ReactiveSwift, owner: ReactiveCocoa, version: 6.7.0, source: https://github.com/ReactiveCocoa/ReactiveSwift
+
+name: realm-core, nameSpecified: realm-core, owner: realm, version: 13.9.3, source: https://github.com/realm/realm-core
+
+name: realm-swift, nameSpecified: realm-swift, owner: realm, version: 10.38.2, source: https://github.com/realm/realm-swift
+
+name: RxSwift, nameSpecified: RxSwift, owner: ReactiveX, version: 6.5.0, source: https://github.com/ReactiveX/RxSwift
+
+name: SFSafeSymbols, nameSpecified: SFSafeSymbols, owner: SFSafeSymbols, version: 4.1.1, source: https://github.com/SFSafeSymbols/SFSafeSymbols
+
+name: swift-case-paths, nameSpecified: swift-case-paths, owner: pointfreeco, version: 0.14.1, source: https://github.com/pointfreeco/swift-case-paths
+
+name: swift-clocks, nameSpecified: swift-clocks, owner: pointfreeco, version: 0.2.0, source: https://github.com/pointfreeco/swift-clocks
+
+name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.4, source: https://github.com/apple/swift-collections
+
+name: swift-composable-architecture, nameSpecified: swift-composable-architecture, owner: pointfreeco, version: 0.52.0, source: https://github.com/pointfreeco/swift-composable-architecture
+
+name: swift-custom-dump, nameSpecified: swift-custom-dump, owner: pointfreeco, version: 0.10.2, source: https://github.com/pointfreeco/swift-custom-dump
+
+name: swift-dependencies, nameSpecified: swift-dependencies, owner: pointfreeco, version: 0.4.1, source: https://github.com/pointfreeco/swift-dependencies
+
+name: swift-identified-collections, nameSpecified: swift-identified-collections, owner: pointfreeco, version: 0.7.1, source: https://github.com/pointfreeco/swift-identified-collections
+
+name: swift-tagged, nameSpecified: swift-tagged, owner: pointfreeco, version: 0.10.0, source: https://github.com/pointfreeco/swift-tagged
+
+name: swiftui-navigation, nameSpecified: swiftui-navigation, owner: pointfreeco, version: 0.7.1, source: https://github.com/pointfreeco/swiftui-navigation
+
+name: xctest-dynamic-overlay, nameSpecified: xctest-dynamic-overlay, owner: pointfreeco, version: 0.8.5, source: https://github.com/pointfreeco/xctest-dynamic-overlay
+
+add-version-numbers: false
+
+LicensePlist Version: 3.24.9
