@@ -58,7 +58,9 @@ public struct ViaryList: ReducerProtocol {
         case .loaded(let result):
             switch result {
             case .success(let viaries):
-                state.viaries = viaries
+                state.viaries = IdentifiedArray(
+                    uniqueElements: viaries.sorted(using: KeyPathComparator(\.date)).reversed()
+                )
             case .failure(let error):
                 state.errorMessage = "\(error)"
             }
