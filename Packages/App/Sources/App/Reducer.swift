@@ -21,6 +21,8 @@ public struct AppReducer: ReducerProtocol {
     }
 
     public enum Action: Equatable {
+        case appDelegate(AppDelegateReducer.Action)
+
         case createViary(CreateViary.Action)
         case editViary(EditViary.Action)
         case viaryList(ViaryList.Action)
