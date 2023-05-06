@@ -131,7 +131,11 @@ public class SpeechToTextServiceImpl {
             throw SpeechToTextError.invalidLocale(locale)
         }
         let session = AVAudioSession.sharedInstance()
-        try session.setCategory(.record, mode: .measurement, options: .duckOthers)
+        try session.setCategory(
+            .playAndRecord,
+            mode: .measurement,
+            options: [.duckOthers, .allowBluetooth, .defaultToSpeaker]
+        )
         try session.setActive(true, options: .notifyOthersOnDeactivation)
         let inputNode = engine.inputNode
 
@@ -185,7 +189,11 @@ public class SpeechToTextServiceImpl {
         // Configure the microphone input.
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.removeTap(onBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+        inputNode.installTap(
+            onBus: 0,
+            bufferSize: AVAudioFrameCount(recordingFormat.sampleRate),
+            format: recordingFormat
+        ) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self?.request?.append(buffer)
         }
         engine.prepare()
