@@ -8,11 +8,8 @@ public struct AppScreen: View {
 
     let store: StoreOf<AppReducer>
 
-    public init() {
-        self.store = StoreOf<AppReducer>(
-            initialState: AppReducer.State(),
-            reducer: AppReducer()
-        )
+    public init(store: StoreOf<AppReducer>) {
+        self.store = store
     }
 
     public var body: some View {

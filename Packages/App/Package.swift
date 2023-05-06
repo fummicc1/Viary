@@ -19,6 +19,10 @@ let package = Package(
         .package(name: "CreateViaryFeature", path: "../Features/CreateViaryFeature"),
         .package(name: "EditViaryFeature", path: "../Features/EditViaryFeature"),
         .package(name: "ViaryListFeature", path: "../Features/ViaryListFeature"),
+        .package(
+            url: "https://github.com/firebase/firebase-ios-sdk.git",
+            .upToNextMajor(from: "10.4.0")
+        ),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "0.1.1")),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: "0.49.0")),
         .package(url: "https://github.com/pointfreeco/swift-identified-collections", .upToNextMajor(from: "0.5.0")),
@@ -34,7 +38,8 @@ let package = Package(
                 .product(name: "CreateViaryFeature", package: "CreateViaryFeature"),
                 .product(name: "EditViaryFeature", package: "EditViaryFeature"),
                 .product(name: "ViaryListFeature", package: "ViaryListFeature"),
-                .product(name: "ComposableArchitecture", package: "swift-composable-architecture")
+                .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+                .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
             ]
         ),
         .testTarget(
