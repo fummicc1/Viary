@@ -22,6 +22,8 @@ jobs:
           xcode-version: latest-stable
       - name: "Install xcbeautify"
         run: brew install xcbeautify
+      - name: Install mint
+        run: brew install mint
       - name: "Build and Test"
         working-directory: ios-dev
         run: |
