@@ -2,6 +2,9 @@
 
 Viary is a voicy diary application with automatic sentiment analysis feature. (currently, working on only iOS.)
 
+<img src="https://user-images.githubusercontent.com/44002126/236610406-35238593-f4b3-4dd9-817d-4294bb9b06db.png" width=320>
+
+
 ## Demo
 
 
