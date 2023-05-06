@@ -10,9 +10,12 @@ import App
 
 @main
 struct ios_prodApp: App {
+
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     var body: some Scene {
         WindowGroup {
-            AppScreen()
+            AppScreen(store: appDelegate.store)
         }
     }
 }

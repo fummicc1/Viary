@@ -1,19 +1,26 @@
+//
+//  AppDelegate.swift
+//  ios-dev
+//
+//  Created by Fumiya Tanaka on 2023/05/06.
+//
+
 import Foundation
-import Firebase
+import UIKit
 import ComposableArchitecture
 
-public struct AppDelegateReducer: ReducerProtocol {
-    public struct State: Equatable {}
+public final class AppDelegate: NSObject, UIApplicationDelegate {
+    public let store = StoreOf<AppReducer>(
+        initialState: AppReducer.State(),
+        reducer: AppReducer()
+    )
 
-    public enum Action {
-        case didFinishLaunching
+    var viewStore: ViewStore<Void, AppReducer.Action> {
+        ViewStore(store.stateless)
     }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
-        switch action {
-        case .didFinishLaunching:
-            FirebaseApp.configure()
-        }
-        return .none
+    public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        viewStore.send(.appDelegate(.didFinishLaunching))
+        return true
     }
 }
