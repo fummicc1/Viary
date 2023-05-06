@@ -133,13 +133,9 @@ public class SpeechToTextServiceImpl {
         let session = AVAudioSession.sharedInstance()
         try session.setCategory(
             .playAndRecord,
-            mode: .default,
+            mode: .measurement,
             options: [.duckOthers, .allowBluetooth, .defaultToSpeaker]
         )
-        if let bleHFPInput = session.availableInputs?
-            .filter({ $0.portType == .bluetoothHFP }).first {
-            try session.setPreferredInput(bleHFPInput)
-        }
         try session.setActive(true, options: .notifyOthersOnDeactivation)
         let inputNode = engine.inputNode
 
@@ -193,7 +189,11 @@ public class SpeechToTextServiceImpl {
         // Configure the microphone input.
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.removeTap(onBus: 0)
-        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
+        inputNode.installTap(
+            onBus: 0,
+            bufferSize: AVAudioFrameCount(recordingFormat.sampleRate),
+            format: recordingFormat
+        ) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self?.request?.append(buffer)
         }
         engine.prepare()
