@@ -196,7 +196,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ $CONFIGURATION = \"Debug\" ]; then\nxcrun --sdk macosx /opt/homebrew/bin/mint run mono0926/LicensePlist --output-path ios-dev/Settings.bundle --config-path ../license_plist.yml\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ $CONFIGURATION = \"Debug\" ]; then\narch=`uname -m`\nif [ $arch == \"arm64\" ]; then\nMINT_PATH=/opt/homebrew/bin/mint\nelse\nMINT_PATH=/usr/local/bin/mint\nfi\nxcrun --sdk macosx $MINT_PATH run mono0926/LicensePlist --output-path ios-dev/Settings.bundle --config-path ../license_plist.yml\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
