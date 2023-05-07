@@ -1,0 +1,443 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D323E64929F9756B00F5072D /* ios_devApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323E64829F9756B00F5072D /* ios_devApp.swift */; };
+		D323E64D29F9756C00F5072D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D323E64C29F9756C00F5072D /* Assets.xcassets */; };
+		D323E65129F9756C00F5072D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D323E65029F9756C00F5072D /* Preview Assets.xcassets */; };
+		D323E67B29F976EB00F5072D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D323E67A29F976EB00F5072D /* GoogleService-Info.plist */; };
+		D323E68529F977B400F5072D /* App in Frameworks */ = {isa = PBXBuildFile; productRef = D323E68429F977B400F5072D /* App */; };
+		D323E68929F9794D00F5072D /* vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = D323E68829F9794D00F5072D /* vocab.json */; };
+		D327985A2A05EC5700807FBA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D32798592A05EC5700807FBA /* Settings.bundle */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		D323E64529F9756B00F5072D /* Viary-dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Viary-dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D323E64829F9756B00F5072D /* ios_devApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_devApp.swift; sourceTree = "<group>"; };
+		D323E64C29F9756C00F5072D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D323E64E29F9756C00F5072D /* ios_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ios_dev.entitlements; sourceTree = "<group>"; };
+		D323E65029F9756C00F5072D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D323E67A29F976EB00F5072D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D323E68229F9778400F5072D /* App */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = App; path = ../Packages/App; sourceTree = "<group>"; };
+		D323E68729F978EC00F5072D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D323E68829F9794D00F5072D /* vocab.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = vocab.json; path = ../Packages/Resources/Sources/Resources/vocab.json; sourceTree = "<group>"; };
+		D32798592A05EC5700807FBA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
+		D3945B3129FF5524005105F2 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
+		D3945B3329FF560F005105F2 /* CreateViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CreateViaryFeature; path = ../Packages/Features/CreateViaryFeature; sourceTree = "<group>"; };
+		D3945B3429FF564C005105F2 /* EditViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EditViaryFeature; path = ../Packages/Features/EditViaryFeature; sourceTree = "<group>"; };
+		D3945B3529FF5656005105F2 /* ViaryListFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryListFeature; path = ../Packages/Features/ViaryListFeature; sourceTree = "<group>"; };
+		D3945B3629FF5664005105F2 /* ViaryUseCase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryUseCase; path = ../Packages/UseCases/ViaryUseCase; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D323E64229F9756B00F5072D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D323E68529F977B400F5072D /* App in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D323E63C29F9756B00F5072D = {
+			isa = PBXGroup;
+			children = (
+				D323E68829F9794D00F5072D /* vocab.json */,
+				D323E67C29F976FF00F5072D /* Packages */,
+				D323E64729F9756B00F5072D /* ios-dev */,
+				D323E64629F9756B00F5072D /* Products */,
+				D323E68329F977B400F5072D /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		D323E64629F9756B00F5072D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D323E64529F9756B00F5072D /* Viary-dev.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D323E64729F9756B00F5072D /* ios-dev */ = {
+			isa = PBXGroup;
+			children = (
+				D32798592A05EC5700807FBA /* Settings.bundle */,
+				D323E68729F978EC00F5072D /* Info.plist */,
+				D323E67A29F976EB00F5072D /* GoogleService-Info.plist */,
+				D323E64829F9756B00F5072D /* ios_devApp.swift */,
+				D323E64C29F9756C00F5072D /* Assets.xcassets */,
+				D323E64E29F9756C00F5072D /* ios_dev.entitlements */,
+				D323E64F29F9756C00F5072D /* Preview Content */,
+				D3945B3129FF5524005105F2 /* TestPlan.xctestplan */,
+			);
+			path = "ios-dev";
+			sourceTree = "<group>";
+		};
+		D323E64F29F9756C00F5072D /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D323E65029F9756C00F5072D /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D323E67C29F976FF00F5072D /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				D323E68229F9778400F5072D /* App */,
+				D3945B3329FF560F005105F2 /* CreateViaryFeature */,
+				D3945B3429FF564C005105F2 /* EditViaryFeature */,
+				D3945B3529FF5656005105F2 /* ViaryListFeature */,
+				D3945B3629FF5664005105F2 /* ViaryUseCase */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		D323E68329F977B400F5072D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D323E64429F9756B00F5072D /* ios-dev */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D323E65429F9756C00F5072D /* Build configuration list for PBXNativeTarget "ios-dev" */;
+			buildPhases = (
+				D323E64129F9756B00F5072D /* Sources */,
+				D323E64229F9756B00F5072D /* Frameworks */,
+				D327985B2A05EC8100807FBA /* License Plist */,
+				D323E64329F9756B00F5072D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ios-dev";
+			packageProductDependencies = (
+				D323E68429F977B400F5072D /* App */,
+			);
+			productName = "ios-dev";
+			productReference = D323E64529F9756B00F5072D /* Viary-dev.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D323E63D29F9756B00F5072D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					D323E64429F9756B00F5072D = {
+						CreatedOnToolsVersion = 14.3;
+					};
+				};
+			};
+			buildConfigurationList = D323E64029F9756B00F5072D /* Build configuration list for PBXProject "ios-dev" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D323E63C29F9756B00F5072D;
+			productRefGroup = D323E64629F9756B00F5072D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D323E64429F9756B00F5072D /* ios-dev */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D323E64329F9756B00F5072D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D323E68929F9794D00F5072D /* vocab.json in Resources */,
+				D323E65129F9756C00F5072D /* Preview Assets.xcassets in Resources */,
+				D327985A2A05EC5700807FBA /* Settings.bundle in Resources */,
+				D323E64D29F9756C00F5072D /* Assets.xcassets in Resources */,
+				D323E67B29F976EB00F5072D /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D327985B2A05EC8100807FBA /* License Plist */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "License Plist";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ $CONFIGURATION = \"Debug\" ]; then\narch=`uname -m`\nif [ $arch == \"arm64\" ]; then\nMINT_PATH=/opt/homebrew/bin/mint\nelse\nMINT_PATH=/usr/local/bin/mint\nfi\nxcrun --sdk macosx $MINT_PATH run mono0926/LicensePlist --output-path ios-dev/Settings.bundle --config-path ../license_plist.yml\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D323E64129F9756B00F5072D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D323E64929F9756B00F5072D /* ios_devApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		D323E65229F9756C00F5072D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D323E65329F9756C00F5072D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		D323E65529F9756C00F5072D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ios-dev/ios_dev.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ios-dev/Preview Content\"";
+				DEVELOPMENT_TEAM = S8WBNKMKYU;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ios-dev/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクの許可をすると声で日記を記録することが可能になります。";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "音声認識を許可すると声で日記を記録することが可能になります。";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.fummicc1.viary.ios-dev";
+				PRODUCT_NAME = "Viary-dev";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D323E65629F9756C00F5072D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "ios-dev/ios_dev.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ios-dev/Preview Content\"";
+				DEVELOPMENT_TEAM = S8WBNKMKYU;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "ios-dev/Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクの許可をすると声で日記を記録することが可能になります。";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "音声認識を許可すると声で日記を記録することが可能になります。";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 13.2;
+				MARKETING_VERSION = 1.0;
+				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "dev.fummicc1.viary.ios-dev";
+				PRODUCT_NAME = "Viary-dev";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D323E64029F9756B00F5072D /* Build configuration list for PBXProject "ios-dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D323E65229F9756C00F5072D /* Debug */,
+				D323E65329F9756C00F5072D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D323E65429F9756C00F5072D /* Build configuration list for PBXNativeTarget "ios-dev" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D323E65529F9756C00F5072D /* Debug */,
+				D323E65629F9756C00F5072D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D323E68429F977B400F5072D /* App */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = App;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D323E63D29F9756B00F5072D /* Project object */;
+}
