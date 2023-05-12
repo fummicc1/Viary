@@ -18,8 +18,12 @@ public class ViaryRepositoryMock: ViaryRepository {
     public init() { }
 
 
-    public var myViaries: AnyPublisher<IdentifiedArrayOf<Viary>, Never> { return self.myViariesSubject.eraseToAnyPublisher() }
-    public private(set) var myViariesSubject = CurrentValueSubject<IdentifiedArrayOf<Viary>, Never>([])
+    public private(set) var myViariesSetCallCount = 0
+    private var _myViaries: AnyPublisher<IdentifiedArrayOf<Viary>, Never>!  { didSet { myViariesSetCallCount += 1 } }
+    public var myViaries: AnyPublisher<IdentifiedArrayOf<Viary>, Never> {
+        get { return _myViaries }
+        set { _myViaries = newValue }
+    }
 
     public private(set) var loadCallCount = 0
     public var loadHandler: (() async throws -> (IdentifiedArrayOf<Viary>))?

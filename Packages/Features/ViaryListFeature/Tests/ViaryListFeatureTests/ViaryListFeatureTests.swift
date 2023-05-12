@@ -12,7 +12,8 @@ final class ViaryListFeatureTests: XCTestCase {
         // MARK: Assign
         let viaryRepositoryMock = ViaryRepositoryMock()
         let listStub: IdentifiedArrayOf<Viary> = []
-        viaryRepositoryMock.myViariesSubject.send(listStub)
+        let myViariesSubject = CurrentValueSubject<IdentifiedArrayOf<Viary>, Never>(listStub)
+        viaryRepositoryMock.myViaries = myViariesSubject.eraseToAnyPublisher()
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock
         } operation: {
@@ -26,7 +27,7 @@ final class ViaryListFeatureTests: XCTestCase {
         XCTAssertEqual(store.state.viaries, [])
         await store.send(.onAppear)
         await store.receive(.loaded(.success(listStub)))
-        viaryRepositoryMock.myViariesSubject.send(completion: .finished)
+        myViariesSubject.send(completion: .finished)
     }
 
     @MainActor
@@ -43,6 +44,8 @@ final class ViaryListFeatureTests: XCTestCase {
         }
 
         let listStub: IdentifiedArrayOf<Viary> = [sampleGenerator.make()]
+        let myViariesSubject = CurrentValueSubject<IdentifiedArrayOf<Viary>, Never>([])
+        viaryRepositoryMock.myViaries = myViariesSubject.eraseToAnyPublisher()
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock
             $0.date = .constant(now)
@@ -52,7 +55,7 @@ final class ViaryListFeatureTests: XCTestCase {
             ViaryList()
         }
         viaryRepositoryMock.createViaryHandler = { viary, _ in
-            viaryRepositoryMock.myViariesSubject.send([viary])
+            myViariesSubject.send([viary])
         }
         let store = TestStore(
             initialState: ViaryList.State(),
@@ -66,7 +69,7 @@ final class ViaryListFeatureTests: XCTestCase {
         await store.receive(.loaded(.success(listStub))) {
             $0.viaries = listStub
         }
-        viaryRepositoryMock.myViariesSubject.send(completion: .finished)
+        myViariesSubject.send(completion: .finished)
     }
 
     @MainActor
@@ -95,6 +98,8 @@ final class ViaryListFeatureTests: XCTestCase {
     @MainActor
     func test_timeline_order() async throws {
         let viaryRepository = ViaryRepositoryMock()
+        let myViariesSubject = CurrentValueSubject<IdentifiedArrayOf<Viary>, Never>([])
+        viaryRepository.myViaries = myViariesSubject.eraseToAnyPublisher()
         let firstDate = Date()
         let firstUUID = UUID()
         let viarySampleGenerator = withDependencies {
@@ -104,7 +109,7 @@ final class ViaryListFeatureTests: XCTestCase {
             ViarySampleGenerator()
         }
         viaryRepository.createViaryHandler = { viary, _ in
-            viaryRepository.myViariesSubject.send(viaryRepository.myViariesSubject.value + [viary])
+            myViariesSubject.send(myViariesSubject.value + [viary])
         }
 
         let reducer = withDependencies {
@@ -120,8 +125,8 @@ final class ViaryListFeatureTests: XCTestCase {
         await store.send(.onAppear)
         await store.receive(.loaded(.success([])))
         await store.send(.createSample)
-        await store.receive(.loaded(.success(viaryRepository.myViariesSubject.value))) {
-            $0.viaries = viaryRepository.myViariesSubject.value
+        await store.receive(.loaded(.success(myViariesSubject.value))) {
+            $0.viaries = myViariesSubject.value
         }
         let newViaryID = Tagged<Viary, String>("newViary")
         let newMessage = Viary.Message(
@@ -147,12 +152,12 @@ final class ViaryListFeatureTests: XCTestCase {
                 )
             ]
         )
-        await store.receive(.loaded(.success(viaryRepository.myViariesSubject.value))) {
-            $0.viaries = viaryRepository.myViariesSubject.value
+        await store.receive(.loaded(.success(myViariesSubject.value))) {
+            $0.viaries = myViariesSubject.value
             $0.viaries = IdentifiedArray(
                 uniqueElements: $0.viaries.sorted(using: KeyPathComparator(\.date)).reversed()
             )
         }
-        viaryRepository.myViariesSubject.send(completion: .finished)
+        myViariesSubject.send(completion: .finished)
     }
 }

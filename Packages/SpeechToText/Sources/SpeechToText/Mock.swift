@@ -14,17 +14,33 @@ public class SpeechToTextServiceMock: SpeechToTextService {
     public init() { }
 
 
-    public var onTextUpdate: AnyPublisher<SpeechToTextModel, Never> { return self.onTextUpdateSubject.eraseToAnyPublisher() }
-    public private(set) var onTextUpdateSubject = PassthroughSubject<SpeechToTextModel, Never>()
+    public private(set) var onTextUpdateSetCallCount = 0
+    private var _onTextUpdate: AnyPublisher<SpeechToTextModel, Never>!  { didSet { onTextUpdateSetCallCount += 1 } }
+    public var onTextUpdate: AnyPublisher<SpeechToTextModel, Never> {
+        get { return _onTextUpdate }
+        set { _onTextUpdate = newValue }
+    }
 
-    public var permission: AnyPublisher<SpeechPermission, Never> { return self.permissionSubject.eraseToAnyPublisher() }
-    public private(set) var permissionSubject = PassthroughSubject<SpeechPermission, Never>()
+    public private(set) var permissionSetCallCount = 0
+    private var _permission: AnyPublisher<SpeechPermission, Never>!  { didSet { permissionSetCallCount += 1 } }
+    public var permission: AnyPublisher<SpeechPermission, Never> {
+        get { return _permission }
+        set { _permission = newValue }
+    }
 
-    public var error: AnyPublisher<SpeechToTextError, Never> { return self.errorSubject.eraseToAnyPublisher() }
-    public private(set) var errorSubject = PassthroughSubject<SpeechToTextError, Never>()
+    public private(set) var errorSetCallCount = 0
+    private var _error: AnyPublisher<SpeechToTextError, Never>!  { didSet { errorSetCallCount += 1 } }
+    public var error: AnyPublisher<SpeechToTextError, Never> {
+        get { return _error }
+        set { _error = newValue }
+    }
 
-    public var speechStatus: AnyPublisher<SpeechStatus, Never> { return self.speechStatusSubject.eraseToAnyPublisher() }
-    public private(set) var speechStatusSubject = PassthroughSubject<SpeechStatus, Never>()
+    public private(set) var speechStatusSetCallCount = 0
+    private var _speechStatus: AnyPublisher<SpeechStatus, Never>!  { didSet { speechStatusSetCallCount += 1 } }
+    public var speechStatus: AnyPublisher<SpeechStatus, Never> {
+        get { return _speechStatus }
+        set { _speechStatus = newValue }
+    }
 
     public private(set) var changeCallCount = 0
     public var changeHandler: ((Locale) -> ())?
