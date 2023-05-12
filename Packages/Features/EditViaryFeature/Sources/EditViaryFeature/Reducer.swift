@@ -41,9 +41,9 @@ public struct EditViary: ReducerProtocol {
             mode == .edit
         }
 
-        public init(original: Viary, editable: Viary) {
+        public init(original: Viary) {
             self.original = original
-            self.editable = editable
+            self.editable = original.asDummy()
             self.resolved = Dictionary(uniqueKeysWithValues: editable.messages.map(\.id).map { ($0, true) })
         }
     }

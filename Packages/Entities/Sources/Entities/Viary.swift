@@ -88,9 +88,3 @@ public struct Viary: Identifiable, Equatable {
         }
     }
 }
-
-private extension Tagged where RawValue == String {
-    static var uuid: Self {
-        Self(UUID().uuidString)
-    }
-}

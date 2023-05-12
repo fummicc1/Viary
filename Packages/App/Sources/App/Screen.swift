@@ -31,10 +31,7 @@ public struct AppScreen: View {
                                 let viary = destination.wrappedValue
                                 EditViaryScreen(
                                     store: StoreOf<EditViary>(
-                                        initialState: EditViary.State(
-                                            original: viary,
-                                            editable: viary.asDummy()
-                                        ),
+                                        initialState: EditViary.State(original: viary),
                                         reducer: EditViary()
                                     )
                                 )

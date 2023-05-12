@@ -37,8 +37,7 @@ class EditableTests: XCTestCase {
 
         let testStore = TestStore(
             initialState: EditViary.State(
-                original: target,
-                editable: target.asDummy()
+                original: target
             ),
             reducer: withDependencies({
                 $0.viaryRepository = repository
@@ -67,6 +66,10 @@ class EditableTests: XCTestCase {
                 }
             )
         )
+
+        await testStore.send(.toggleMode) {
+            $0.mode = .edit
+        }
 
         await testStore.send(
             .editMessageEmotion(

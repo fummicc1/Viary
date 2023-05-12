@@ -1,6 +1,6 @@
 name: abseil-cpp-binary, nameSpecified: abseil, owner: google, version: 1.2021110200.0, source: https://github.com/google/abseil-cpp-binary
 
-name: Alamofire, nameSpecified: Alamofire, owner: Alamofire, version: 5.6.4, source: https://github.com/Alamofire/Alamofire
+name: Alamofire, nameSpecified: Alamofire, owner: Alamofire, version: 5.7.1, source: https://github.com/Alamofire/Alamofire
 
 name: combine-schedulers, nameSpecified: combine-schedulers, owner: pointfreeco, version: 0.10.0, source: https://github.com/pointfreeco/combine-schedulers
 
@@ -30,13 +30,15 @@ name: promises, nameSpecified: Promises, owner: google, version: 2.2.0, source: 
 
 name: ReactiveSwift, nameSpecified: ReactiveSwift, owner: ReactiveCocoa, version: 6.7.0, source: https://github.com/ReactiveCocoa/ReactiveSwift
 
-name: realm-core, nameSpecified: realm-core, owner: realm, version: 13.9.4, source: https://github.com/realm/realm-core
+name: realm-core, nameSpecified: realm-core, owner: realm, version: 13.10.1, source: https://github.com/realm/realm-core
 
-name: realm-swift, nameSpecified: realm-swift, owner: realm, version: 10.38.3, source: https://github.com/realm/realm-swift
+name: realm-swift, nameSpecified: realm-swift, owner: realm, version: 10.39.1, source: https://github.com/realm/realm-swift
 
-name: RxSwift, nameSpecified: RxSwift, owner: ReactiveX, version: 6.5.0, source: https://github.com/ReactiveX/RxSwift
+name: RxSwift, nameSpecified: RxSwift, owner: ReactiveX, version: 6.6.0, source: https://github.com/ReactiveX/RxSwift
 
 name: SFSafeSymbols, nameSpecified: SFSafeSymbols, owner: SFSafeSymbols, version: 4.1.1, source: https://github.com/SFSafeSymbols/SFSafeSymbols
+
+name: StubKit, nameSpecified: StubKit, owner: kateinoigakukun, version: 0.1.7, source: https://github.com/kateinoigakukun/StubKit
 
 name: swift-case-paths, nameSpecified: swift-case-paths, owner: pointfreeco, version: 0.14.1, source: https://github.com/pointfreeco/swift-case-paths
 
@@ -44,11 +46,11 @@ name: swift-clocks, nameSpecified: swift-clocks, owner: pointfreeco, version: 0.
 
 name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.4, source: https://github.com/apple/swift-collections
 
-name: swift-composable-architecture, nameSpecified: swift-composable-architecture, owner: pointfreeco, version: 0.52.0, source: https://github.com/pointfreeco/swift-composable-architecture
+name: swift-composable-architecture, nameSpecified: swift-composable-architecture, owner: pointfreeco, version: 0.53.0, source: https://github.com/pointfreeco/swift-composable-architecture
 
-name: swift-custom-dump, nameSpecified: swift-custom-dump, owner: pointfreeco, version: 0.10.2, source: https://github.com/pointfreeco/swift-custom-dump
+name: swift-custom-dump, nameSpecified: swift-custom-dump, owner: pointfreeco, version: 0.10.3, source: https://github.com/pointfreeco/swift-custom-dump
 
-name: swift-dependencies, nameSpecified: swift-dependencies, owner: pointfreeco, version: 0.4.1, source: https://github.com/pointfreeco/swift-dependencies
+name: swift-dependencies, nameSpecified: swift-dependencies, owner: pointfreeco, version: 0.5.0, source: https://github.com/pointfreeco/swift-dependencies
 
 name: swift-identified-collections, nameSpecified: swift-identified-collections, owner: pointfreeco, version: 0.7.1, source: https://github.com/pointfreeco/swift-identified-collections
 
@@ -59,9 +61,6 @@ name: swift-tagged, nameSpecified: swift-tagged, owner: pointfreeco, version: 0.
 name: swiftui-navigation, nameSpecified: swiftui-navigation, owner: pointfreeco, version: 0.7.1, source: https://github.com/pointfreeco/swiftui-navigation
 
 name: xctest-dynamic-overlay, nameSpecified: xctest-dynamic-overlay, owner: pointfreeco, version: 0.8.5, source: https://github.com/pointfreeco/xctest-dynamic-overlay
-
-name: emotion-english-distilroberta-base, nameSpecified: , version: 
-body: Though I've mailed t…
 
 name: swift-coreml-transformers, nameSpecified: , version: 
 body:                     …
