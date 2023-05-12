@@ -40,6 +40,12 @@ public struct EditViaryScreen: View {
                 }
                 .toolbar {
                     ToolbarItem {
+                        let text = viewStore.canEditable ? "View" : "Edit"
+                        Button(text) {
+                            viewStore.send(.toggleMode)
+                        }
+                    }
+                    ToolbarItem {
                         Button("Save") {
                             viewStore.send(.save)
                         }
@@ -90,26 +96,29 @@ public struct EditViaryScreen: View {
                     ForEach(Emotion.Kind.allCases, id: \.id) { kind in
                         HStack {
                             SelectableText(kind.text)
-                            Slider(value: viewStore.binding(
-                                get: { _ in
-                                    let score = viewStore
-                                        .editable
-                                        .messages[id: message.id]?
-                                        .emotions[kind]?
-                                        .prob(
-                                            all: message.emotions.values.map { $0 }
-                                        ) ?? 0
-                                    return Double(score)
-                                },
-                                send: { (prob: Double) in
-                                    .editMessageEmotion(
-                                        id: message.id,
-                                        emotionKind: kind,
-                                        prob: prob
-                                    )
+                            let score = viewStore
+                                .editable
+                                .messages[id: message.id]?
+                                .emotions[kind]?
+                                .prob(
+                                    all: message.emotions.values.map { $0 }
+                                ) ?? 0
+                            Group {
+                                if viewStore.canEditable {
+                                    Slider(value: viewStore.binding(
+                                        get: { _ in score },
+                                        send: { (prob: Double) in
+                                            .editMessageEmotion(
+                                                id: message.id,
+                                                emotionKind: kind,
+                                                prob: prob
+                                            )
+                                        }
+                                    ))
+                                } else {
+                                    ProgressView(value: score)
                                 }
-                            ))
-                            .padding(2)
+                            }.padding(2)
                             let value = message.emotions[kind]?.score ?? 0
                             SelectableText("\(value)%")
                         }
