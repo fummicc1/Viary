@@ -14,5 +14,5 @@ if [ ! -d $path ];then
     continue;
 fi
 echo "$path"
-mockolo -s $path -d $path/Mock.swift
+mockolo -s $path -d $path/Mock.swift --disable-combine-default-values
 done
