@@ -15,6 +15,11 @@ public struct EditViary: ReducerProtocol {
     public init() {
     }
 
+    public enum Mode: Equatable {
+        case edit
+        case view
+    }
+
     public struct State: Equatable {
         public var original: Viary
         public var editable: Viary
@@ -22,6 +27,7 @@ public struct EditViary: ReducerProtocol {
         public var saveStatus: AsyncStatus<Int> = .idle
         public var scrollContentHeight: [Viary.Message.ID: CGFloat] = [:]
         public var focusedMessage: Viary.Message?
+        public var mode: Mode = .view
 
         var messages: [Viary.Message] {
             editable.messages.elements
@@ -31,9 +37,13 @@ public struct EditViary: ReducerProtocol {
             editable.message
         }
 
-        public init(original: Viary, editable: Viary) {
+        var canEditable: Bool {
+            mode == .edit
+        }
+
+        public init(original: Viary) {
             self.original = original
-            self.editable = editable
+            self.editable = original.asDummy()
             self.resolved = Dictionary(uniqueKeysWithValues: editable.messages.map(\.id).map { ($0, true) })
         }
     }
@@ -47,6 +57,7 @@ public struct EditViary: ReducerProtocol {
         case tapMessage(id: Viary.Message.ID)
         case stopEditing
         case didAdjustMessageHeight(id: Viary.Message.ID, height: CGFloat)
+        case toggleMode
 
         case editMessageEmotion(
             id: Tagged<Viary.Message, String>,
@@ -65,10 +76,16 @@ public struct EditViary: ReducerProtocol {
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
         case let .editMessageSentence(id, sentence):
+            guard state.canEditable else {
+                return .none
+            }
             state.editable.messages[id: id]?.sentence = sentence
             state.resolved[id] = false
 
         case let .editMessageEmotion(id, emotionKind, prob):
+            guard state.canEditable else {
+                return .none
+            }
             let total: Double = 100
             let prevScore = Double(state.editable.messages[id: id]?.emotions[emotionKind]?.score ?? 0)
             state.editable.messages[id: id]?.emotions[emotionKind]?.score = Int(total * prob)
@@ -109,6 +126,9 @@ public struct EditViary: ReducerProtocol {
                 throw Error.messageNotFound(id: messageID)
             }
         case let .replace(id, message, resolved):
+            guard state.canEditable else {
+                return .none
+            }
             guard state.editable.messages.map(\.id).contains(id) else {
                 return .none
             }
@@ -116,10 +136,18 @@ public struct EditViary: ReducerProtocol {
             state.resolved[id] = resolved
 
         case let .tapMessage(id):
+            state.mode = .edit
             state.focusedMessage = state.messages.first(where: { $0.id == id })
 
         case .stopEditing:
             state.focusedMessage = nil
+            state.mode = .view
+
+        case .toggleMode:
+            state.mode = state.mode == .edit ? .view : .edit
+            if state.mode == .view {
+                state.focusedMessage = nil
+            }
 
         case let .didAdjustMessageHeight(id, height):
             state.scrollContentHeight[id] = height

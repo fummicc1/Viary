@@ -1,7 +1,4 @@
 manual:
   - source: https://github.com/huggingface/swift-coreml-transformers
     name: swift-coreml-transformers
-    file: OTHER_LICENSES/swift-coreml-transformers
-  - source: https://huggingface.co/j-hartmann/emotion-english-distilroberta-base
-    name: emotion-english-distilroberta-base
-    body: Though I've mailed to the owner, the license is still unclear. I believe most of model license on HuggingFace might be Apache-2.0.
+    file: OTHER_LICENSES/swift-coreml-transformers  

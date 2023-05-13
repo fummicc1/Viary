@@ -54,10 +54,7 @@ public struct AppReducer: ReducerProtocol {
                 case .didTapCreateButton:
                     state.createViary = .init()
                 case let .didTap(viary):
-                    state.editViary = .init(
-                        original: viary,
-                        editable: viary.asDummy()
-                    )
+                    state.editViary = .init(original: viary)
                 default:
                     break
                 }

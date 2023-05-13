@@ -3,6 +3,7 @@ import ComposableArchitecture
 import SharedUI
 import SwiftUI
 import Entities
+import SFSafeSymbols
 
 public struct EditViaryScreen: View {
 
@@ -20,47 +21,70 @@ public struct EditViaryScreen: View {
             store,
             observe: { $0 }
         ) { viewStore in
-            ScrollViewReader { reader in
-                ScrollView {
-                    LazyVStack {
-                        ForEach(viewStore.messages) { message in
-                            item(viewStore: viewStore, message: message)
-                                .id(message.id)
-                            Divider()
+            ZStack {
+                ScrollViewReader { reader in
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(viewStore.messages) { message in
+                                item(viewStore: viewStore, message: message)
+                                    .id(message.id)
+                                Divider()
+                            }
+                        }
+                    }
+                    .padding()
+                    .toolbar {
+                        ToolbarItem(placement: .keyboard) {
+                            Button("Close") {
+                                focused = false
+                            }
+                        }
+                    }
+                    .toolbar {
+                        ToolbarItem {
+                            Button("Save") {
+                                viewStore.send(.save)
+                            }
+                        }
+                    }
+                    .onChange(of: viewStore.saveStatus.response) {
+                        if $0 != nil {
+                            dismiss()
+                        }
+                    }
+                    .onChange(of: viewStore.focusedMessage) { message in
+                        if let message {
+                            withAnimation {
+                                reader.scrollTo(message.id, anchor: .center)
+                            }
+                        }
+                    }
+                    .onChange(of: focused) {
+                        if !$0 {
+                            viewStore.send(.stopEditing)
                         }
                     }
                 }
-                .padding()
-                .toolbar {
-                    ToolbarItem(placement: .keyboard) {
-                        Button("Close") {
-                            focused = false
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        HStack(spacing: 16) {
+                            let text = viewStore.canEditable ? "View" : "Edit"
+                            Button {
+                                viewStore.send(.toggleMode)
+                            } label: {
+                                HStack(spacing: 8) {
+                                    Text(text)
+                                    Image(systemSymbol: viewStore.canEditable ? .pencilSlash : .pencil)
+                                }
+                            }
                         }
+                        .padding()
+                        .background(Color.secondaryBackgroundColor)
+                        .cornerRadius(12)
                     }
-                }
-                .toolbar {
-                    ToolbarItem {
-                        Button("Save") {
-                            viewStore.send(.save)
-                        }
-                    }
-                }
-                .onChange(of: viewStore.saveStatus.response) {
-                    if $0 != nil {
-                        dismiss()
-                    }
-                }
-                .onChange(of: viewStore.focusedMessage) { message in
-                    if let message {
-                        withAnimation {
-                            reader.scrollTo(message.id, anchor: .center)
-                        }
-                    }
-                }
-                .onChange(of: focused) {
-                    if !$0 {
-                        viewStore.send(.stopEditing)
-                    }
+                    .padding()
                 }
             }
             .navigationTitle(viewStore.editable.date.formatted())
@@ -90,38 +114,43 @@ public struct EditViaryScreen: View {
                     ForEach(Emotion.Kind.allCases, id: \.id) { kind in
                         HStack {
                             SelectableText(kind.text)
-                            Slider(value: viewStore.binding(
-                                get: { _ in
-                                    let score = viewStore
-                                        .editable
-                                        .messages[id: message.id]?
-                                        .emotions[kind]?
-                                        .prob(
-                                            all: message.emotions.values.map { $0 }
-                                        ) ?? 0
-                                    return Double(score)
-                                },
-                                send: { (prob: Double) in
-                                    .editMessageEmotion(
-                                        id: message.id,
-                                        emotionKind: kind,
-                                        prob: prob
-                                    )
+                            let score = viewStore
+                                .editable
+                                .messages[id: message.id]?
+                                .emotions[kind]?
+                                .prob(
+                                    all: message.emotions.values.map { $0 }
+                                ) ?? 0
+                            Group {
+                                if viewStore.canEditable {
+                                    Slider(value: viewStore.binding(
+                                        get: { _ in score },
+                                        send: { (prob: Double) in
+                                            .editMessageEmotion(
+                                                id: message.id,
+                                                emotionKind: kind,
+                                                prob: prob
+                                            )
+                                        }
+                                    ))
+                                } else {
+                                    ProgressView(value: score)
                                 }
-                            ))
-                            .padding(2)
+                            }.padding(2)
                             let value = message.emotions[kind]?.score ?? 0
                             SelectableText("\(value)%")
                         }
                     }
                 }
             }
-            let resolvedAnalysis = viewStore.resolved[message.id] ?? false
-            Button("Analyze") {
-                viewStore.send(.analyze(messageID: message.id))
+            if viewStore.canEditable {
+                let resolvedAnalysis = viewStore.resolved[message.id] ?? false
+                Button("Analyze") {
+                    viewStore.send(.analyze(messageID: message.id))
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(resolvedAnalysis)
             }
-            .buttonStyle(.borderedProminent)
-            .disabled(resolvedAnalysis)
         }
         .onFrameDidChange { data in
             guard let frame = data.last?.bounds else {
