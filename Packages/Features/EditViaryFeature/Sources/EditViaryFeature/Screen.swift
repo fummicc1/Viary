@@ -3,6 +3,7 @@ import ComposableArchitecture
 import SharedUI
 import SwiftUI
 import Entities
+import SFSafeSymbols
 
 public struct EditViaryScreen: View {
 
@@ -20,53 +21,70 @@ public struct EditViaryScreen: View {
             store,
             observe: { $0 }
         ) { viewStore in
-            ScrollViewReader { reader in
-                ScrollView {
-                    LazyVStack {
-                        ForEach(viewStore.messages) { message in
-                            item(viewStore: viewStore, message: message)
-                                .id(message.id)
-                            Divider()
+            ZStack {
+                ScrollViewReader { reader in
+                    ScrollView {
+                        LazyVStack {
+                            ForEach(viewStore.messages) { message in
+                                item(viewStore: viewStore, message: message)
+                                    .id(message.id)
+                                Divider()
+                            }
+                        }
+                    }
+                    .padding()
+                    .toolbar {
+                        ToolbarItem(placement: .keyboard) {
+                            Button("Close") {
+                                focused = false
+                            }
+                        }
+                    }
+                    .toolbar {
+                        ToolbarItem {
+                            Button("Save") {
+                                viewStore.send(.save)
+                            }
+                        }
+                    }
+                    .onChange(of: viewStore.saveStatus.response) {
+                        if $0 != nil {
+                            dismiss()
+                        }
+                    }
+                    .onChange(of: viewStore.focusedMessage) { message in
+                        if let message {
+                            withAnimation {
+                                reader.scrollTo(message.id, anchor: .center)
+                            }
+                        }
+                    }
+                    .onChange(of: focused) {
+                        if !$0 {
+                            viewStore.send(.stopEditing)
                         }
                     }
                 }
-                .padding()
-                .toolbar {
-                    ToolbarItem(placement: .keyboard) {
-                        Button("Close") {
-                            focused = false
+                VStack {
+                    Spacer()
+                    HStack {
+                        Spacer()
+                        HStack(spacing: 16) {
+                            let text = viewStore.canEditable ? "View" : "Edit"
+                            Button {
+                                viewStore.send(.toggleMode)
+                            } label: {
+                                HStack(spacing: 8) {
+                                    Text(text)
+                                    Image(systemSymbol: viewStore.canEditable ? .pencilSlash : .pencil)
+                                }
+                            }
                         }
+                        .padding()
+                        .background(Color.secondaryBackgroundColor)
+                        .cornerRadius(12)
                     }
-                }
-                .toolbar {
-                    ToolbarItem {
-                        let text = viewStore.canEditable ? "View" : "Edit"
-                        Button(text) {
-                            viewStore.send(.toggleMode)
-                        }
-                    }
-                    ToolbarItem {
-                        Button("Save") {
-                            viewStore.send(.save)
-                        }
-                    }
-                }
-                .onChange(of: viewStore.saveStatus.response) {
-                    if $0 != nil {
-                        dismiss()
-                    }
-                }
-                .onChange(of: viewStore.focusedMessage) { message in
-                    if let message {
-                        withAnimation {
-                            reader.scrollTo(message.id, anchor: .center)
-                        }
-                    }
-                }
-                .onChange(of: focused) {
-                    if !$0 {
-                        viewStore.send(.stopEditing)
-                    }
+                    .padding()
                 }
             }
             .navigationTitle(viewStore.editable.date.formatted())
@@ -125,12 +143,14 @@ public struct EditViaryScreen: View {
                     }
                 }
             }
-            let resolvedAnalysis = viewStore.resolved[message.id] ?? false
-            Button("Analyze") {
-                viewStore.send(.analyze(messageID: message.id))
+            if viewStore.canEditable {
+                let resolvedAnalysis = viewStore.resolved[message.id] ?? false
+                Button("Analyze") {
+                    viewStore.send(.analyze(messageID: message.id))
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(resolvedAnalysis)
             }
-            .buttonStyle(.borderedProminent)
-            .disabled(resolvedAnalysis)
         }
         .onFrameDidChange { data in
             guard let frame = data.last?.bounds else {
