@@ -56,7 +56,6 @@ public struct Viary: Identifiable, Equatable {
         public var sentence: String
         public var lang: Lang
         public var updatedAt: Date
-        // TODO: [Emotion] → [Emotion.Kind: Emotion]
         public var emotions: [Emotion.Kind: Emotion]
 
         public init(viaryID: Tagged<Viary, String>, id: Tagged<Message, String>, sentence: String, lang: Lang, emotions: [Emotion.Kind: Emotion]? = nil, updatedAt: Date = Date()) {
@@ -67,7 +66,7 @@ public struct Viary: Identifiable, Equatable {
             self.emotions = emotions ?? Dictionary<Emotion.Kind, Emotion>(
                 uniqueKeysWithValues: Emotion.Kind.allCases
                     .map {
-                        ($0, Emotion(sentence: sentence, score: 0, kind: $0))
+                        ($0, Emotion(sentence: sentence, score: 100 / Emotion.Kind.allCases.count, kind: $0))
                     }
             )
             self.updatedAt = updatedAt
