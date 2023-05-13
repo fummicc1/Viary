@@ -45,8 +45,4 @@ public typealias Ja2EnResponse = Array<Ja2EnResponseElement>
 
 public struct Ja2EnResponseElement: Decodable {
     public var translationText: String
-
-    public enum CodingKeys: String, CodingKey {
-        case translationText = "translation_text"
-    }
 }
