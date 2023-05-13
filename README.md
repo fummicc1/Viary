@@ -25,10 +25,6 @@ https://user-images.githubusercontent.com/44002126/233632663-9e384b7d-149e-463f-
 
 - you can edit message in your diary and recorded sentiment amount as well
 
-| Edit Mode| View Mode |
-|---|---|
-|<img src="https://github.com/fummicc1/Viary/assets/44002126/86d6be22-fea9-464c-9e9b-161b16e4be44" width=320>| <img src="https://github.com/fummicc1/Viary/assets/44002126/112fafc8-df32-4d92-91c3-63df3b2b6693" width=320>|
-
 
 
 ## Tech
