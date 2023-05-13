@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "78424be314842833c04bc3bef5b72e85fff99204",
-        "version" : "5.6.4"
+        "revision" : "bc268c28fb170f494de9e9927c371b8342979ece",
+        "version" : "5.7.1"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/combine-schedulers",
       "state" : {
-        "revision" : "a239970dade6a147f4cfb6ce3144c7dd84bff794",
-        "version" : "0.9.2"
+        "revision" : "0625932976b3ae23949f6b816d13bd97f3b40b7c",
+        "version" : "0.10.0"
       }
     },
     {
@@ -149,8 +149,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
-        "revision" : "27cc7f4a1d60299e69a08221d807a3563d0ecc8c",
-        "version" : "13.9.3"
+        "revision" : "72226e2fd84f3a3a8ab3cffc2890c7951f1351d5",
+        "version" : "13.10.1"
       }
     },
     {
@@ -158,8 +158,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-swift",
       "state" : {
-        "revision" : "933294d98787d1b85d6a9d6b3e8a4b8eecc83f08",
-        "version" : "10.38.2"
+        "revision" : "08ee98e7f52a5fb11b10b7430e6f84adbb7433a4",
+        "version" : "10.39.1"
       }
     },
     {
@@ -167,8 +167,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
       "state" : {
-        "revision" : "b4307ba0b6425c0ba4178e138799946c3da594f8",
-        "version" : "6.5.0"
+        "revision" : "9dcaa4b333db437b0fbfaf453fad29069044a8b4",
+        "version" : "6.6.0"
       }
     },
     {
@@ -178,6 +178,15 @@
       "state" : {
         "revision" : "7cca2d60925876b5953a2cf7341cd80fbeac983c",
         "version" : "4.1.1"
+      }
+    },
+    {
+      "identity" : "stubkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kateinoigakukun/StubKit.git",
+      "state" : {
+        "revision" : "6d3c5d8dec873b8b0c4e4ae5832cb91218b8f858",
+        "version" : "0.1.7"
       }
     },
     {
@@ -194,8 +203,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-clocks",
       "state" : {
-        "revision" : "20b25ca0dd88ebfb9111ec937814ddc5a8880172",
-        "version" : "0.2.0"
+        "revision" : "f9acfa1a45f4483fe0f2c434a74e6f68f865d12d",
+        "version" : "0.3.0"
       }
     },
     {
@@ -212,8 +221,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-composable-architecture",
       "state" : {
-        "revision" : "3e8eee1efe99d06e99426d421733b858b332186b",
-        "version" : "0.52.0"
+        "revision" : "79307e939fd5a99304f44bae4cf42cdc430f9480",
+        "version" : "0.53.0"
       }
     },
     {
@@ -221,8 +230,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-custom-dump",
       "state" : {
-        "revision" : "84b30e1af72e0ffe6dfbfe39d53b8173caacf224",
-        "version" : "0.10.2"
+        "revision" : "505aa98716275fbd045d8f934fee3337c82ffbd3",
+        "version" : "0.10.3"
       }
     },
     {
@@ -230,8 +239,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-dependencies",
       "state" : {
-        "revision" : "98650d886ec950b587d671261f06d6b59dec4052",
-        "version" : "0.4.1"
+        "revision" : "25c9b6789b4b7ada649a3808e6d8de1489082a33",
+        "version" : "0.5.0"
       }
     },
     {
