@@ -3,7 +3,9 @@ import Firebase
 import ComposableArchitecture
 
 public struct AppDelegateReducer: ReducerProtocol {
-    public struct State: Equatable {}
+    public struct State: Equatable {
+        public init() {}
+    }
 
     public enum Action {
         case didFinishLaunching
