@@ -19,15 +19,26 @@ public struct SpeechStatusView: View {
     @State private var opacity: Double = 0
 
     public var body: some View {
-        switch status {
-        case .idle:
-            idleView
-        case .started:
-            speechingView(model: SpeechToTextModel(text: "", isFinal: false))
-        case .speeching(let speechToTextModel):
-            speechingView(model: speechToTextModel)
-        case .stopped(let speechToTextModel):
-            stoppedView(model: speechToTextModel)
+        VStack(alignment: .leading) {
+            switch status {
+            case .idle:
+                idleView
+            case .started:
+                speechingView(model: SpeechToTextModel(text: "", isFinal: false))
+            case .speeching(let speechToTextModel):
+                speechingView(model: speechToTextModel)
+            case .stopped(let speechToTextModel):
+                stoppedView(model: speechToTextModel)
+            }
+            HStack {
+                Spacer()
+                Toggle(isOn: viewStore.binding(get: \.isUsingEnglish, send: {
+                    .editLang($0 ? .en : .ja)
+                })) {
+                    Text(viewStore.isUsingEnglish ? "English" : "Japanese")
+                }
+                .toggleStyle(.button)
+            }
         }
     }
 

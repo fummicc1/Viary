@@ -12,7 +12,7 @@ public protocol Ja2EnService {
 
 public class Ja2EnServiceImpl: Ja2EnService, DependencyKey {
 
-    public static var liveValue: Ja2EnServiceImpl = .init()
+    public static var liveValue: any Ja2EnService = Ja2EnServiceImpl()
 
     public func translate(message: String) async throws -> String {
         let request = Ja2EnRequest.translate(inputs: message)
@@ -21,5 +21,15 @@ public class Ja2EnServiceImpl: Ja2EnService, DependencyKey {
             throw Ja2EnServiceError.noResult(response: response)
         }
         return translationText
+    }
+}
+
+extension DependencyValues {
+    public var ja2En: any Ja2EnService {
+        get {
+            self[Ja2EnServiceImpl.self]
+        } set {
+            self[Ja2EnServiceImpl.self] = newValue
+        }
     }
 }
