@@ -8,12 +8,14 @@ import Repositories
 import EmotionDetection
 import SpeechToText
 import Utils
+import Ja2En
 
 public struct CreateViary: ReducerProtocol {
 
     @Dependency(\.viaryRepository) var viaryRepository
     @Dependency(\.speechToTextService) var speechToTextService
     @Dependency(\.emotionDetector) var emotionDetector
+    @Dependency(\.ja2En) var ja2EnService
     @Dependency(\.uuid) var uuid
     @Dependency(\.date) var date
     private var cancellables: Set<AnyCancellable> = []
@@ -60,6 +62,10 @@ public struct CreateViary: ReducerProtocol {
         public var speechStatus: SpeechStatus
         public var date: Date
         public var saveStatus: AsyncStatus<Bool>
+
+        public var isUsingEnglish: Bool {
+            currentLang == .en
+        }
 
         public var message: String {
             messages.map(\.sentence).joined(separator: "\n")
@@ -167,7 +173,13 @@ public struct CreateViary: ReducerProtocol {
                 var messages = state.messages
 
                 for (i, message) in messages.enumerated() {
-                    let newScore = await emotionDetector.infer(text: message.sentence, lang: message.lang)
+                    var sentence: String = message.sentence
+                    var lang: Lang = message.lang
+                    if message.lang == .ja {
+                        sentence = try await ja2EnService.translate(message: sentence)
+                        lang = .en
+                    }
+                    let newScore = await emotionDetector.infer(text: sentence, lang: lang)
                     let emotions = Emotion.Kind.allCases.indices.compactMap { index -> (Emotion.Kind, Emotion)? in
                         if newScore.count <= index {
                             return nil

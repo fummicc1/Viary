@@ -5,12 +5,14 @@ import SwiftUI
 import EmotionDetection
 import Repositories
 import Utils
+import Ja2En
 
 
 public struct EditViary: ReducerProtocol {
 
     @Dependency(\.emotionDetector) var emotionDetector
     @Dependency(\.viaryRepository) var viaryRepository
+    @Dependency(\.ja2En) var ja2EnService
 
     public init() {
     }
@@ -113,7 +115,13 @@ public struct EditViary: ReducerProtocol {
                 return .none
             }
             return .task { [state] in
-                let emotions = await emotionDetector.infer(text: message.sentence, lang: message.lang)
+                var sentence: String = message.sentence
+                var lang: Lang = message.lang
+                if message.lang == .ja {
+                    sentence = try await ja2EnService.translate(message: sentence)
+                    lang = .en
+                }
+                let emotions = await emotionDetector.infer(text: sentence, lang: lang)
                 if var message = state.messages.first(where: { $0.id == messageID }) {
                     for kind in message.emotions.map(\.key) {
                         guard let i = Emotion.Kind.allCases.firstIndex(of: kind) else {
