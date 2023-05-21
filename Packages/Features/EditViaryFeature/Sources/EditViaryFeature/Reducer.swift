@@ -57,7 +57,7 @@ public struct EditViary: ReducerProtocol {
         case replace(id: Tagged<Viary.Message, String>, message: Viary.Message, resolved: Bool)
 
         case tapMessage(id: Viary.Message.ID)
-        case stopEditing
+        case closeKeyboard
         case didAdjustMessageHeight(id: Viary.Message.ID, height: CGFloat)
         case toggleMode
 
@@ -151,9 +151,8 @@ public struct EditViary: ReducerProtocol {
             state.mode = .edit
             state.focusedMessage = state.messages.first(where: { $0.id == id })
 
-        case .stopEditing:
+        case .closeKeyboard:
             state.focusedMessage = nil
-            state.mode = .view
 
         case .toggleMode:
             state.mode = state.mode == .edit ? .view : .edit
