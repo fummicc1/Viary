@@ -2,7 +2,7 @@ import Foundation
 import Dependencies
 
 public enum SpeechToTextServiceKey: DependencyKey {
-    public static var liveValue: SpeechToTextService = SpeechToTextServiceImpl(locale: Locale.autoupdatingCurrent)
+    public static var liveValue: SpeechToTextService = SpeechToTextServiceImpl(locale: Locale(identifier: "en-US"))
 }
 
 public extension DependencyValues {

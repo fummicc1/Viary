@@ -32,9 +32,7 @@ public struct SpeechStatusView: View {
             }
             HStack {
                 Spacer()
-                Toggle(isOn: viewStore.binding(get: \.isUsingEnglish, send: {
-                    .editLang($0 ? .en : .ja)
-                })) {
+                Toggle(isOn: viewStore.binding(get: \.isUsingEnglish, send: { _ in .didTapLang })) {
                     Text(viewStore.isUsingEnglish ? "English" : "Japanese")
                 }
                 .toggleStyle(.button)

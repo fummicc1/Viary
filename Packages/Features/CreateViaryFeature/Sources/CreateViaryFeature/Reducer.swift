@@ -97,6 +97,7 @@ public struct CreateViary: ReducerProtocol {
         case editMessage(String)
         case endEditing(String)
         case editLang(Lang)
+        case didTapLang
         case editInputType(InputType)
         case startRecording
         case stopRecording
@@ -136,8 +137,12 @@ public struct CreateViary: ReducerProtocol {
 
         case .editLang(let lang):
             state.currentLang = lang
-            return .fireAndForget {
-                self.speechToTextService.change(locale: lang.locale)
+
+        case .didTapLang:
+            let lang = state.currentLang
+            return .run {
+                try await self.speechToTextService.change(locale: lang.next().locale)
+                await $0.send(.editLang(lang.next()))
             }
 
         case .startRecording:

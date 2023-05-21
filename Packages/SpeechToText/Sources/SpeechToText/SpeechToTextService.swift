@@ -11,7 +11,7 @@ public protocol SpeechToTextService {
     var error: AnyPublisher<SpeechToTextError, Never> { get }
     var speechStatus: AnyPublisher<SpeechStatus, Never> { get }
 
-    func change(locale: Locale)
+    func change(locale: Locale) async throws
     func start() async throws
     func stop() async throws
 }
@@ -20,6 +20,7 @@ public enum SpeechToTextError: LocalizedError {
     case invalidLocale(Locale)
     case missingPermission(SpeechPermission)
     case failedPreparation
+    case unSupportedLocale(Locale)
 }
 
 public enum SpeechStatus: Hashable, Equatable {
@@ -130,14 +131,23 @@ public class SpeechToTextServiceImpl {
         guard let speechRecognizer else {
             throw SpeechToTextError.invalidLocale(locale)
         }
+        guard SFSpeechRecognizer.supportedLocales().contains(locale) else {
+            throw SpeechToTextError.unSupportedLocale(locale)
+        }
         let session = AVAudioSession.sharedInstance()
         try session.setCategory(
             .playAndRecord,
             mode: .measurement,
-            options: [.duckOthers, .allowBluetooth, .defaultToSpeaker]
+            options: [.duckOthers, .allowBluetooth, .allowBluetoothA2DP, .defaultToSpeaker]
         )
         try session.setActive(true, options: .notifyOthersOnDeactivation)
         let inputNode = engine.inputNode
+
+        speechStatusSubject.send(.started)
+
+        if task != nil {
+            stop()
+        }
 
         // Create and configure the speech recognition request.
         request = SFSpeechAudioBufferRecognitionRequest()
@@ -145,14 +155,7 @@ public class SpeechToTextServiceImpl {
             throw SpeechToTextError.failedPreparation
         }
         request.shouldReportPartialResults = true
-        // Keep speech recognition data on device
         request.requiresOnDeviceRecognition = false
-
-        speechStatusSubject.send(.started)
-
-        if task != nil {
-            try await stop()
-        }
 
         // Create a recognition task for the speech recognition session.
         // Keep a reference to the task so that it can be canceled.
@@ -160,7 +163,6 @@ public class SpeechToTextServiceImpl {
             guard let self = self else {
                 return
             }
-            var isFinal = false
 
             if let result = result {
                 // Update the text with the results.
@@ -170,34 +172,34 @@ public class SpeechToTextServiceImpl {
                 )
                 self.onTextUpdateSubject.send(new)
                 self.speechStatusSubject.send(.speeching(new))
-                isFinal = result.isFinal
             }
 
-            if error != nil || isFinal {
+            if error != nil {
                 // Stop recognizing speech if there is a problem.
-                self.engine.stop()
-                inputNode.removeTap(onBus: 0)
-                
-                self.request = nil
-                self.task = nil
-                
-                self.speechStatusSubject.send(.stopped(self.onTextUpdateSubject.value))
-                self.speechStatusSubject.send(.idle)
+                stop()
             }
         })
 
-        // Configure the microphone input.
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.removeTap(onBus: 0)
         inputNode.installTap(
             onBus: 0,
-            bufferSize: AVAudioFrameCount(recordingFormat.sampleRate),
+            bufferSize: 2048,
             format: recordingFormat
         ) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self?.request?.append(buffer)
         }
         engine.prepare()
         try engine.start()
+    }
+
+    func stopIfNeeded() {
+        switch task?.state {
+        case .starting, .running:
+            stop()
+        default:
+            break
+        }
     }
 }
 
@@ -219,7 +221,8 @@ extension SpeechToTextServiceImpl: SpeechToTextService {
         speechStatusSubject.eraseToAnyPublisher()
     }
 
-    public func change(locale: Locale) {
+    public func change(locale: Locale) async throws {
+        stopIfNeeded()
         self.locale = locale
         speechRecognizer = SFSpeechRecognizer(locale: locale)
     }
@@ -229,14 +232,16 @@ extension SpeechToTextServiceImpl: SpeechToTextService {
         if permission != [.mic, .recognition] {
             try await requestPermission()
         }
+        stopIfNeeded()
         try await stream()
     }
 
-    public func stop() async throws {
+    public func stop() {
         // Stop recognizing speech
         engine.stop()
         engine.inputNode.removeTap(onBus: 0)
         task?.cancel()
+        task?.finish()
 
         request = nil
         task = nil

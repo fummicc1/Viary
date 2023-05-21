@@ -337,6 +337,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-dev/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクの許可をすると声で日記を記録することが可能になります。";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "音声認識を許可すると声で日記を記録することが可能になります。";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -382,6 +383,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ios-dev/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "マイクの許可をすると声で日記を記録することが可能になります。";
 				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "音声認識を許可すると声で日記を記録することが可能になります。";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
