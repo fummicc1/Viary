@@ -118,8 +118,12 @@ public struct EditViary: ReducerProtocol {
                 var sentence: String = message.sentence
                 var lang: Lang = message.lang
                 if message.lang == .ja {
-                    sentence = try await ja2EnService.translate(message: sentence)
-                    lang = .en
+                    do {
+                        sentence = try await ja2EnService.translate(message: sentence)
+                        lang = .en
+                    } catch {
+                        // TODO: Error Handling
+                    }
                 }
                 let emotions = await emotionDetector.infer(text: sentence, lang: lang)
                 if var message = state.messages.first(where: { $0.id == messageID }) {

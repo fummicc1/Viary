@@ -181,8 +181,12 @@ public struct CreateViary: ReducerProtocol {
                     var sentence: String = message.sentence
                     var lang: Lang = message.lang
                     if message.lang == .ja {
-                        sentence = try await ja2EnService.translate(message: sentence)
-                        lang = .en
+                        do {
+                            sentence = try await ja2EnService.translate(message: sentence)
+                            lang = .en
+                        } catch {
+                            // TODO: Error Handling
+                        }
                     }
                     let newScore = await emotionDetector.infer(text: sentence, lang: lang)
                     let emotions = Emotion.Kind.allCases.indices.compactMap { index -> (Emotion.Kind, Emotion)? in

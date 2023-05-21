@@ -189,8 +189,10 @@ public class SpeechToTextServiceImpl {
         ) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self?.request?.append(buffer)
         }
-        engine.prepare()
-        try engine.start()
+        if !engine.isRunning {
+            engine.prepare()
+            try engine.start()
+        }
     }
 
     func stopIfNeeded() {
