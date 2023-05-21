@@ -65,7 +65,8 @@ final class CreateViaryInputTests: XCTestCase {
         let expectedLang = Lang.ja
         XCTAssertEqual(store.state.currentLang, initialState.currentLang)
         XCTAssertEqual(store.state.saveStatus, .idle)
-        await store.send(.editLang(expectedLang)) {
+        await store.send(.didTapLang)
+        await store.receive(.editLang(expectedLang)) {
             $0.currentLang = expectedLang
         }
         // Assert that persist operation is not running.

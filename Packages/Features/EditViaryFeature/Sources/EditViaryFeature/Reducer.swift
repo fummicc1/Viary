@@ -57,7 +57,7 @@ public struct EditViary: ReducerProtocol {
         case replace(id: Tagged<Viary.Message, String>, message: Viary.Message, resolved: Bool)
 
         case tapMessage(id: Viary.Message.ID)
-        case stopEditing
+        case closeKeyboard
         case didAdjustMessageHeight(id: Viary.Message.ID, height: CGFloat)
         case toggleMode
 
@@ -118,8 +118,12 @@ public struct EditViary: ReducerProtocol {
                 var sentence: String = message.sentence
                 var lang: Lang = message.lang
                 if message.lang == .ja {
-                    sentence = try await ja2EnService.translate(message: sentence)
-                    lang = .en
+                    do {
+                        sentence = try await ja2EnService.translate(message: sentence)
+                        lang = .en
+                    } catch {
+                        // TODO: Error Handling
+                    }
                 }
                 let emotions = await emotionDetector.infer(text: sentence, lang: lang)
                 if var message = state.messages.first(where: { $0.id == messageID }) {
@@ -147,9 +151,8 @@ public struct EditViary: ReducerProtocol {
             state.mode = .edit
             state.focusedMessage = state.messages.first(where: { $0.id == id })
 
-        case .stopEditing:
+        case .closeKeyboard:
             state.focusedMessage = nil
-            state.mode = .view
 
         case .toggleMode:
             state.mode = state.mode == .edit ? .view : .edit

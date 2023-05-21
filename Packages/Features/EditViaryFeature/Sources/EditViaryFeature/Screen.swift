@@ -55,13 +55,13 @@ public struct EditViaryScreen: View {
                     .onChange(of: viewStore.focusedMessage) { message in
                         if let message {
                             withAnimation {
-                                reader.scrollTo(message.id, anchor: .center)
+                                reader.scrollTo(message.id, anchor: .top)
                             }
                         }
                     }
                     .onChange(of: focused) {
                         if !$0 {
-                            viewStore.send(.stopEditing)
+                            viewStore.send(.closeKeyboard)
                         }
                     }
                 }

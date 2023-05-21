@@ -37,7 +37,6 @@ public class EmotionDetectorImpl {
 
 extension EmotionDetectorImpl: EmotionDetector {
     public func infer(text: String, lang: Lang) async -> [Double] {
-        assert(lang == .en)
         return await Task {
             await predictEmotion(text: text)
         }.value

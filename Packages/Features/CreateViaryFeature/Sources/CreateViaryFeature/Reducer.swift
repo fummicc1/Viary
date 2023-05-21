@@ -97,6 +97,7 @@ public struct CreateViary: ReducerProtocol {
         case editMessage(String)
         case endEditing(String)
         case editLang(Lang)
+        case didTapLang
         case editInputType(InputType)
         case startRecording
         case stopRecording
@@ -136,8 +137,12 @@ public struct CreateViary: ReducerProtocol {
 
         case .editLang(let lang):
             state.currentLang = lang
-            return .fireAndForget {
-                self.speechToTextService.change(locale: lang.locale)
+
+        case .didTapLang:
+            let lang = state.currentLang
+            return .run {
+                try await self.speechToTextService.change(locale: lang.next().locale)
+                await $0.send(.editLang(lang.next()))
             }
 
         case .startRecording:
@@ -176,8 +181,12 @@ public struct CreateViary: ReducerProtocol {
                     var sentence: String = message.sentence
                     var lang: Lang = message.lang
                     if message.lang == .ja {
-                        sentence = try await ja2EnService.translate(message: sentence)
-                        lang = .en
+                        do {
+                            sentence = try await ja2EnService.translate(message: sentence)
+                            lang = .en
+                        } catch {
+                            // TODO: Error Handling
+                        }
                     }
                     let newScore = await emotionDetector.infer(text: sentence, lang: lang)
                     let emotions = Emotion.Kind.allCases.indices.compactMap { index -> (Emotion.Kind, Emotion)? in

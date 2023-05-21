@@ -7,16 +7,142 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "845ED5BB-F3D1-47F5-B97B-A3029F72412C"
+            uuid = "73469954-104D-44AA-BC75-7B68D119806A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../Packages/Features/CreateViaryFeature/Sources/CreateViaryFeature/Reducer.swift"
+            filePath = "../Packages/SpeechToText/Sources/SpeechToText/SpeechToTextService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "223"
-            endingLineNumber = "223"
-            landmarkName = "reduce(into:action:)"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
+            landmarkName = "stream()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "73469954-104D-44AA-BC75-7B68D119806A - 4340bb789ea08581"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for SpeechToText.SpeechToTextServiceImpl.stream() async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/Packages/SpeechToText/Sources/SpeechToText/SpeechToTextService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "3700">
+               </Location>
+               <Location
+                  uuid = "73469954-104D-44AA-BC75-7B68D119806A - 4340bb789ea08581"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for SpeechToText.SpeechToTextServiceImpl.stream() async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/Packages/SpeechToText/Sources/SpeechToText/SpeechToTextService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "3000">
+               </Location>
+               <Location
+                  uuid = "73469954-104D-44AA-BC75-7B68D119806A - 4340bb789ea08581"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for SpeechToText.SpeechToTextServiceImpl.stream() async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/Packages/SpeechToText/Sources/SpeechToText/SpeechToTextService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "2984">
+               </Location>
+               <Location
+                  uuid = "73469954-104D-44AA-BC75-7B68D119806A - 4340bb789ea08581"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for SpeechToText.SpeechToTextServiceImpl.stream() async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/Packages/SpeechToText/Sources/SpeechToText/SpeechToTextService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "135"
+                  endingLineNumber = "135"
+                  offsetFromSymbolStart = "3156">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "99824C83-DC4C-4D32-9DF1-E918015A044F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../Library/Developer/Xcode/DerivedData/ios-dev-cfphmhbttzpgcefpvulmihjipwne/SourcePackages/checkouts/MoyaAPIClient/Sources/MoyaAPIClient/APIClientType.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "52"
+            endingLineNumber = "52"
+            landmarkName = "send(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3009D348-4A39-48DE-AFC5-21352171F3B0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../Library/Developer/Xcode/DerivedData/ios-dev-cfphmhbttzpgcefpvulmihjipwne/SourcePackages/checkouts/MoyaAPIClient/Sources/MoyaAPIClient/APIClientType.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "send(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9A03ED0E-E625-4FDA-8556-CE49BFA9F32F"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../Library/Developer/Xcode/DerivedData/ios-dev-cfphmhbttzpgcefpvulmihjipwne/SourcePackages/checkouts/MoyaAPIClient/Sources/MoyaAPIClient/APIClientType.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "send(with:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A74121E8-A432-42D0-8760-BD294C17FBCA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../../../../Library/Developer/Xcode/DerivedData/ios-dev-cfphmhbttzpgcefpvulmihjipwne/SourcePackages/checkouts/MoyaAPIClient/Sources/MoyaAPIClient/APIClientType.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "send(with:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

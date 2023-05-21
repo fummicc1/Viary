@@ -43,11 +43,11 @@ public class SpeechToTextServiceMock: SpeechToTextService {
     }
 
     public private(set) var changeCallCount = 0
-    public var changeHandler: ((Locale) -> ())?
-    public func change(locale: Locale)  {
+    public var changeHandler: ((Locale) async throws -> ())?
+    public func change(locale: Locale) async throws  {
         changeCallCount += 1
         if let changeHandler = changeHandler {
-            changeHandler(locale)
+            try await changeHandler(locale)
         }
         
     }
