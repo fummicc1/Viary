@@ -94,8 +94,8 @@ extension Package {
                 name: "Resources",
                 dependencies: [],
                 resources: [
-                    .process("Sources/Resources/Resources/emotion-english-distilroberta-base.mlpackage"),
-                    .process("Sources/Resources/Resources/vocab.json"),
+                    .process("Resources/emotion-english-distilroberta-base.mlpackage"),
+                    .process("Resources/vocab.json"),
                 ]
             ),
             .testTarget(name: "ResourcesTests", dependencies: ["Resources"])

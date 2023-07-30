@@ -15,7 +15,10 @@ class BertTokenizer {
     private let ids_to_tokens: [Int: String]
 
     init() {
-        let url = Bundle.main.url(forResource: "vocab", withExtension: "json")!
+        guard let bundle = Bundle.allBundles.first(where: { $0.bundleIdentifier == "Viary-Resources-resources" }) else {
+            fatalError("Bundle (Viary-Resources-resources) does not exist.")
+        }
+        let url = bundle.url(forResource: "vocab", withExtension: "json")!
         let data = try! Data(contentsOf: url)
         let vocab = try! JSONSerialization.jsonObject(with: data) as! [String: Int]
         var ids_to_tokens: [Int: String] = [:]
