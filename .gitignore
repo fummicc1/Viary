@@ -38,4 +38,3 @@ google-services.json
 *.mlpackage
 
 .build/
-.swiftpm/
