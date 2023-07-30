@@ -3,7 +3,7 @@ import Foundation
 import Moya
 import MoyaAPIClient
 
-public enum APIRequest {
+public enum APIRequest: Sendable {
     case text2emotion(text: String, lang: Lang)
 }
 

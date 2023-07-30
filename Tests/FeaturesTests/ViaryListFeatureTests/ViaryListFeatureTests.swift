@@ -21,7 +21,7 @@ final class ViaryListFeatureTests: XCTestCase {
         }
         let store = TestStore(
             initialState: ViaryList.State(),
-            reducer: reducer
+            reducer: { reducer }
         )
         // MARK: Act, Assert
         XCTAssertEqual(store.state.viaries, [])
@@ -59,7 +59,7 @@ final class ViaryListFeatureTests: XCTestCase {
         }
         let store = TestStore(
             initialState: ViaryList.State(),
-            reducer: reducer
+            reducer: { reducer }
         )
         // MARK: Act, Assert
         XCTAssertEqual(store.state.viaries, [])
@@ -84,7 +84,7 @@ final class ViaryListFeatureTests: XCTestCase {
         }
         let store = TestStore(
             initialState: ViaryList.State(),
-            reducer: reducer
+            reducer: { reducer }
         )
         // MARK: Act, Assert
         XCTAssertEqual(viaryRepositoryMock.loadCallCount, 0)
@@ -120,7 +120,7 @@ final class ViaryListFeatureTests: XCTestCase {
         }
         let store = TestStore(
             initialState: ViaryList.State(),
-            reducer: reducer
+            reducer: { reducer }
         )
         await store.send(.onAppear)
         await store.receive(.loaded(.success([])))

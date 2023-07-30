@@ -15,9 +15,8 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            name: "Firebase",
             url: "https://github.com/firebase/firebase-ios-sdk.git",
-            .upToNextMajor(from: "10.4.0")
+            .upToNextMajor(from: "10.12.0")
         ),
         .package(url: "https://github.com/pointfreeco/swift-dependencies", .upToNextMajor(from: "0.1.1")),
         .package(url: "https://github.com/pointfreeco/swift-composable-architecture", .upToNextMajor(from: "0.49.0")),
@@ -44,8 +43,8 @@ extension Package {
                     .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
                     .product(name: "Dependencies", package: "swift-dependencies"),
                     .product(name: "SwiftUINavigation", package: "swiftui-navigation"),
-                    .product(name: "FirebaseAnalytics", package: "Firebase"),
-                    
+                    .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
+
                     "CreateViaryFeature",
                     "EditViaryFeature",
                     "ViaryListFeature",
@@ -207,7 +206,6 @@ extension Package {
                     "Ja2En",
                     "Repositories",
                     "EmotionDetection",
-                    "SharedUI",
                 ],
                 path: "Sources/Features/EditViaryFeature"
             ),
@@ -234,7 +232,6 @@ extension Package {
                     "Ja2En",
                     "Repositories",
                     "EmotionDetection",
-                    "SharedUI",
                 ],
                 path: "Sources/Features/ViaryListFeature"
             ),
