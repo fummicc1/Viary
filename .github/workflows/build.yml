@@ -28,7 +28,7 @@ jobs:
         run: |
           set -e
           set -o pipefail
-          xcodebuild -scheme Viary test -destination "name=iPhone 14" | xcbeautify
+          xcodebuild -scheme Viary test -destination "name=iPhone 14" "OTHER_SWIFT_FLAGS=-D CI" | xcbeautify
       - name: "Build dev project"
         working-directory: ios-dev
         run: |
