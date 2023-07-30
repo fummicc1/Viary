@@ -79,6 +79,21 @@
                   endingLineNumber = "135"
                   offsetFromSymbolStart = "3156">
                </Location>
+               <Location
+                  uuid = "73469954-104D-44AA-BC75-7B68D119806A - 5a18a2c9d9daa8ff"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.SFSpeechRecognizerAuthorizationStatus) -&gt; () in closure #1 (Swift.CheckedContinuation&lt;SpeechToText.SpeechPermission, Swift.Error&gt;) -&gt; () in SpeechToText.SpeechToTextServiceImpl.requestPermission() async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/Packages/SpeechToText/Sources/SpeechToText/SpeechToTextService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "136"
+                  endingLineNumber = "136"
+                  offsetFromSymbolStart = "356">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>

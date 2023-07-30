@@ -181,6 +181,15 @@
       }
     },
     {
+      "identity" : "stubkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kateinoigakukun/StubKit.git",
+      "state" : {
+        "revision" : "6d3c5d8dec873b8b0c4e4ae5832cb91218b8f858",
+        "version" : "0.1.7"
+      }
+    },
+    {
       "identity" : "swift-case-paths",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-case-paths",
