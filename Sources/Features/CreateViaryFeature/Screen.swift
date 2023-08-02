@@ -74,6 +74,7 @@ public struct CreateViaryScreen: View {
         }
     }
 
+    @MainActor
     var currentStatus: some View {
         VStack(alignment: .leading) {
             SpeechStatusView(
@@ -84,6 +85,7 @@ public struct CreateViaryScreen: View {
 
     }
 
+    @MainActor
     var note: some View {
         List {
             ForEach(viewStore.messages) { message in
@@ -113,6 +115,7 @@ public struct CreateViaryScreen: View {
         }
     }
 
+    @MainActor
     var date: some View {
         DateSelectionView(
             selectedDate: viewStore.binding(get: \.date, send: { .editDate($0) })

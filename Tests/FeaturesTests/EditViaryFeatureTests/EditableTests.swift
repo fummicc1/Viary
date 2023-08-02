@@ -39,11 +39,13 @@ class EditableTests: XCTestCase {
             initialState: EditViary.State(
                 original: target
             ),
-            reducer: withDependencies({
-                $0.viaryRepository = repository
-            }, operation: {
-                EditViary()
-            })
+            reducer: {
+                withDependencies({
+                    $0.viaryRepository = repository
+                }, operation: {
+                    EditViary()
+                })
+            }
         )
 
         guard let editMessage = target.messages.first else {

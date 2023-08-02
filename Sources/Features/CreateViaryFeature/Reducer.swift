@@ -1,4 +1,3 @@
-import Combine
 import ComposableArchitecture
 import Dependencies
 import Entities
@@ -10,7 +9,7 @@ import SpeechToText
 import Utils
 import Ja2En
 
-public struct CreateViary: ReducerProtocol {
+public struct CreateViary: ReducerProtocol, Sendable {
 
     @Dependency(\.viaryRepository) var viaryRepository
     @Dependency(\.speechToTextService) var speechToTextService
@@ -18,7 +17,6 @@ public struct CreateViary: ReducerProtocol {
     @Dependency(\.ja2En) var ja2EnService
     @Dependency(\.uuid) var uuid
     @Dependency(\.date) var date
-    private var cancellables: Set<AnyCancellable> = []
 
     public init() {
     }
@@ -113,7 +111,7 @@ public struct CreateViary: ReducerProtocol {
         switch action {
         case .onAppear:
             return EffectTask.run { send in
-                for await speechStatus in speechToTextService.speechStatus.values {
+                for await speechStatus in await speechToTextService.speechStatus {
                     await send(.updateSpeechStatus(speechStatus))
                 }
             }

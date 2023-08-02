@@ -22,6 +22,7 @@ public struct ViaryListScreen: View {
             }
     }
 
+    @MainActor
     func content(_ viewStore: ViewStoreOf<ViaryList>) -> some View {
         VStack {
             let viaries = viewStore.viaries
@@ -45,6 +46,7 @@ public struct ViaryListScreen: View {
         }
     }
 
+    @MainActor
     func list(viewStore: ViewStoreOf<ViaryList>) -> some View {
         List {
             ForEach(viewStore.viaries) { viary in

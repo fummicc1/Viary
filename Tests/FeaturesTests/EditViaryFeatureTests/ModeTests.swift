@@ -47,12 +47,14 @@ final class ModeTests: XCTestCase {
             initialState: EditViary.State(
                 original: baseViary
             ),
-            reducer: withDependencies({
-                $0.uuid = .constant(uuid)
-                $0.date = .constant(date)
-            }, operation: {
-                EditViary()
-            })
+            reducer: {
+                withDependencies({
+                    $0.uuid = .constant(uuid)
+                    $0.date = .constant(date)
+                }, operation: {
+                    EditViary()
+                })
+            }
         )
         XCTAssertEqual(store.state.mode, EditViary.Mode.view)
         await store.send(

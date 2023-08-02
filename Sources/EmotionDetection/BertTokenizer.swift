@@ -6,7 +6,7 @@ enum TokenizerError: Error {
     case tooLong(String)
 }
 
-class BertTokenizer {
+final class BertTokenizer: Sendable {
     private let basicTokenizer = BasicTokenizer()
     private let wordpieceTokenizer: WordpieceTokenizer
     private let maxLen = 512
@@ -96,7 +96,7 @@ class BertTokenizer {
 
 
 
-class BasicTokenizer {
+final class BasicTokenizer: Sendable {
     let neverSplit = [
         "<unk>", "<s>", "<pad>", "</s>"
     ]
@@ -141,7 +141,7 @@ class BasicTokenizer {
 }
 
 
-class WordpieceTokenizer {
+final class WordpieceTokenizer: Sendable {
     private let unkToken = "<unk>"
     private let maxInputCharsPerWord = 100
     private let vocab: [String: Int]

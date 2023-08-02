@@ -43,6 +43,6 @@ public enum Ja2EnRequest: APITarget {
 
 public typealias Ja2EnResponse = Array<Ja2EnResponseElement>
 
-public struct Ja2EnResponseElement: Decodable {
+public struct Ja2EnResponseElement: Sendable, Decodable {
     public var translationText: String
 }

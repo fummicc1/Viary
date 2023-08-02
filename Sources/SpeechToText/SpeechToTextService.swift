@@ -2,28 +2,29 @@ import Combine
 import AVFoundation
 import Foundation
 import Speech
+import AsyncExtensions
 
 /// @mockable
-public protocol SpeechToTextService {
+public protocol SpeechToTextService: Actor {
 
-    var onTextUpdate: AnyPublisher<SpeechToTextModel, Never> { get }
-    var permission: AnyPublisher<SpeechPermission, Never> { get }
-    var error: AnyPublisher<SpeechToTextError, Never> { get }
-    var speechStatus: AnyPublisher<SpeechStatus, Never> { get }
+    var onTextUpdate: AsyncStream<SpeechToTextModel> { get }
+    var permission: AsyncStream<SpeechPermission> { get }
+    var error: AsyncStream<SpeechToTextError> { get }
+    var speechStatus: AsyncStream<SpeechStatus> { get }
 
     func change(locale: Locale) async throws
     func start() async throws
     func stop() async throws
 }
 
-public enum SpeechToTextError: LocalizedError {
+public enum SpeechToTextError: Sendable, LocalizedError {
     case invalidLocale(Locale)
     case missingPermission(SpeechPermission)
     case failedPreparation
     case unSupportedLocale(Locale)
 }
 
-public enum SpeechStatus: Hashable, Equatable {
+public enum SpeechStatus: Sendable, Hashable, Equatable {
     case idle
     case started
     case speeching(SpeechToTextModel)
@@ -41,7 +42,7 @@ public enum SpeechStatus: Hashable, Equatable {
     }
 }
 
-public struct SpeechPermission: OptionSet {
+public struct SpeechPermission: Sendable, OptionSet {
 
     public typealias RawValue = UInt
 
@@ -55,7 +56,7 @@ public struct SpeechPermission: OptionSet {
     }
 }
 
-public struct SpeechToTextModel: Equatable, Hashable {
+public struct SpeechToTextModel: Sendable, Equatable, Hashable {
     public var text: String
     public var isFinal: Bool
 
@@ -65,11 +66,11 @@ public struct SpeechToTextModel: Equatable, Hashable {
     }
 }
 
-public class SpeechToTextServiceImpl {
-    let onTextUpdateSubject: CurrentValueSubject<SpeechToTextModel, Never> = .init(SpeechToTextModel(text: "", isFinal: false))
-    let permissionSubject: CurrentValueSubject<SpeechPermission, Never> = .init([])
-    let errorSubject: PassthroughSubject<SpeechToTextError, Never> = .init()
-    let speechStatusSubject: CurrentValueSubject<SpeechStatus, Never> = .init(.idle)
+public final actor SpeechToTextServiceImpl {
+    let onTextUpdateSubject: AsyncCurrentValueSubject<SpeechToTextModel> = .init(SpeechToTextModel(text: "", isFinal: false))
+    let permissionSubject: AsyncCurrentValueSubject<SpeechPermission> = .init([])
+    let errorSubject: AsyncPassthroughSubject<SpeechToTextError> = .init()
+    let speechStatusSubject: AsyncCurrentValueSubject<SpeechStatus> = .init(.idle)
 
     private var locale: Locale
     private var speechRecognizer: SFSpeechRecognizer?
@@ -207,20 +208,20 @@ public class SpeechToTextServiceImpl {
 
 extension SpeechToTextServiceImpl: SpeechToTextService {
 
-    public var onTextUpdate: AnyPublisher<SpeechToTextModel, Never> {
-        onTextUpdateSubject.eraseToAnyPublisher()
+    public var onTextUpdate: AsyncStream<SpeechToTextModel> {
+        onTextUpdateSubject.eraseToStream()
     }
 
-    public var permission: AnyPublisher<SpeechPermission, Never> {
-        permissionSubject.eraseToAnyPublisher()
+    public var permission: AsyncStream<SpeechPermission> {
+        permissionSubject.eraseToStream()
     }
 
-    public var error: AnyPublisher<SpeechToTextError, Never> {
-        errorSubject.eraseToAnyPublisher()
+    public var error: AsyncStream<SpeechToTextError> {
+        errorSubject.eraseToStream()
     }
 
-    public var speechStatus: AnyPublisher<SpeechStatus, Never> {
-        speechStatusSubject.eraseToAnyPublisher()
+    public var speechStatus: AsyncStream<SpeechStatus> {
+        speechStatusSubject.eraseToStream()
     }
 
     public func change(locale: Locale) async throws {

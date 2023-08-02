@@ -29,7 +29,7 @@ final class CreateViarySaveTests: XCTestCase {
         let reducer = CreateViary()
         store = TestStore(
             initialState: initialState,
-            reducer: reducer
+            reducer: { reducer }
         )
     }
 
@@ -61,9 +61,9 @@ final class CreateViarySaveTests: XCTestCase {
         )
         let viaryRepositoryMock = ViaryRepositoryMock()
         let emotionDetector = EmotionDetectorMock()
-        emotionDetector.inferHandler = { message, lang in
+        await emotionDetector.updateInferHandler(handler: { message, lang in
             expectedViaryEmotion.values.map(\.score).map { Double($0) / 100 }
-        }
+        })
         let reducer = withDependencies {
             $0.viaryRepository = viaryRepositoryMock
             $0.emotionDetector = emotionDetector
@@ -73,7 +73,7 @@ final class CreateViarySaveTests: XCTestCase {
         }
         store = TestStore(
             initialState: initialState,
-            reducer: reducer
+            reducer: { reducer }
         )
         // MARK: Act, Assert
         // MARK: Initial state check

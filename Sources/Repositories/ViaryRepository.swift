@@ -8,7 +8,7 @@ import MoyaAPIClient
 import Tagged
 
 /// @mockable
-public protocol ViaryRepository {
+public protocol ViaryRepository: Sendable {
     var myViaries: AnyPublisher<IdentifiedArrayOf<Viary>, Never> { get }
 
     @discardableResult
@@ -21,7 +21,7 @@ public protocol ViaryRepository {
 
 public typealias AppAPIClient = APIClient<APIRequest>
 
-public class ViaryRepositoryImpl {
+public final class ViaryRepositoryImpl {
     private let myViariesSubject: CurrentValueSubject<IdentifiedArrayOf<Viary>, Never> = .init([])
     private let apiClient: AppAPIClient
     private var cancellables: Set<AnyCancellable> = []
