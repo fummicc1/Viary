@@ -14,13 +14,18 @@ public struct AppScreen: View {
 
     public var body: some View {
         Group {
-            WithViewStore(store, removeDuplicates: { $0 != $1 }) { viewStore in
+            WithViewStore(
+                store,
+                observe: { $0 },
+                removeDuplicates: { $0 != $1 }
+            ) { viewStore in
                 NavigationStack {
                     WithViewStore(
                         store.scope(
                             state: \.viaryList,
                             action: AppReducer.Action.viaryList
-                        )
+                        ),
+                        observe: { $0 }
                     ) { viewStore in
                         ViaryListScreen(
                             viewStore: viewStore
@@ -39,7 +44,11 @@ public struct AppScreen: View {
                     }
                     .background(
                         WithViewStore(
-                            store.scope(state: \.createViary),
+                            store.scope(
+                                state: \.createViary,
+                                action: { $0 }
+                            ),
+                            observe: { $0 },
                             content: { viewStore in
                                 EmptyView()
                                     .sheet(
@@ -51,7 +60,12 @@ public struct AppScreen: View {
                                                 action: AppReducer.Action.createViary
                                             )
                                         ) { store in
-                                            CreateViaryScreen(viewStore: ViewStoreOf<CreateViary>(store))
+                                            CreateViaryScreen(
+                                                viewStore: ViewStoreOf<CreateViary>(
+                                                    store,
+                                                    observe: { $0 }
+                                                )
+                                            )
                                         }
                                     }
                             }

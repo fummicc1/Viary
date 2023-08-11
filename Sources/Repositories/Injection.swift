@@ -2,7 +2,7 @@ import Dependencies
 import MoyaAPIClient
 import XCTestDynamicOverlay
 
-public enum ViaryRepositoryKey: DependencyKey {
+public enum ViaryRepositoryKey: DependencyKey, Sendable {
     public static let liveValue: ViaryRepository = ViaryRepositoryImpl(apiClient: AppAPIClient())
     public static var testValue: ViaryRepository = unimplemented()
 }

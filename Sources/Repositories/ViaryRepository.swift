@@ -1,4 +1,3 @@
-import Combine
 import Dependencies
 import Entities
 import Foundation
@@ -6,10 +5,11 @@ import IdentifiedCollections
 import LocalDataStore
 import MoyaAPIClient
 import Tagged
+import AsyncExtensions
 
 /// @mockable
 public protocol ViaryRepository: Sendable {
-    var myViaries: AnyPublisher<IdentifiedArrayOf<Viary>, Never> { get }
+    var myViaries: AsyncStream<IdentifiedArrayOf<Viary>> { get }
 
     @discardableResult
     func load() async throws -> IdentifiedArrayOf<Viary>
@@ -22,9 +22,8 @@ public protocol ViaryRepository: Sendable {
 public typealias AppAPIClient = APIClient<APIRequest>
 
 public final class ViaryRepositoryImpl {
-    private let myViariesSubject: CurrentValueSubject<IdentifiedArrayOf<Viary>, Never> = .init([])
+    private let myViariesSubject: AsyncCurrentValueSubject<IdentifiedArrayOf<Viary>> = .init([])
     private let apiClient: AppAPIClient
-    private var cancellables: Set<AnyCancellable> = []
 
     public init(apiClient: AppAPIClient) {
         self.apiClient = apiClient
@@ -144,8 +143,8 @@ extension ViaryRepositoryImpl {
 }
 
 extension ViaryRepositoryImpl: ViaryRepository {
-    public var myViaries: AnyPublisher<IdentifiedCollections.IdentifiedArrayOf<Entities.Viary>, Never> {
-        myViariesSubject.eraseToAnyPublisher()
+    public var myViaries: AsyncStream<IdentifiedCollections.IdentifiedArrayOf<Entities.Viary>> {
+        myViariesSubject.eraseToStream()
     }
 
     @discardableResult

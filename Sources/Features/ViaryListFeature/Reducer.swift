@@ -7,7 +7,7 @@ import Repositories
 import IdentifiedCollections
 import Tagged
 
-public struct ViaryList: ReducerProtocol {
+public struct ViaryList: ReducerProtocol, Sendable {
 
     @Dependency(\.viaryRepository) var viaryRepository
     @Dependency(\.viarySample) var viarySample
@@ -34,7 +34,7 @@ public struct ViaryList: ReducerProtocol {
         }
     }
 
-    public enum Action: Equatable {
+    public enum Action: Equatable, Sendable {
         case onAppear
         case loaded(TaskResult<IdentifiedArrayOf<Viary>>)
         case createSample
@@ -44,7 +44,7 @@ public struct ViaryList: ReducerProtocol {
         case destination(Destination?)
     }
 
-    public enum Destination: Equatable {
+    public enum Destination: Equatable, Sendable {
         case detail(Viary)
         case create
     }
@@ -52,8 +52,10 @@ public struct ViaryList: ReducerProtocol {
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
         case .onAppear:
-            return EffectTask.publisher {
-                viaryRepository.myViaries.map { Action.loaded(.success($0)) }
+            return EffectTask.run { send in
+                for await viaries in viaryRepository.myViaries {
+                    await send(.loaded(.success(viaries)))
+                }
             }
         case .loaded(let result):
             switch result {
