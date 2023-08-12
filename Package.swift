@@ -65,7 +65,7 @@ extension Package {
                 name: "Utils",
                 dependencies: [],
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(name: "UtilsTests", dependencies: ["Utils"]),
@@ -81,7 +81,7 @@ extension Package {
                     .product(name: "AsyncExtensions", package: "AsyncExtensions"),
                 ],
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(name: "SpeechToTextTests", dependencies: ["SpeechToText"]),
@@ -96,7 +96,7 @@ extension Package {
                     .product(name: "SFSafeSymbols", package: "SFSafeSymbols"),
                 ],
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(name: "SharedUITests", dependencies: ["SharedUI"]),
@@ -113,7 +113,7 @@ extension Package {
                     .process("Resources/vocab.json"),
                 ],
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(name: "ResourcesTests", dependencies: ["Resources"])
@@ -135,7 +135,7 @@ extension Package {
                     "Entities",
                 ],
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(
@@ -155,7 +155,7 @@ extension Package {
                     .product(name: "RealmSwift", package: "realm-swift"),
                 ],
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(
@@ -177,7 +177,7 @@ extension Package {
                     .product(name: "Dependencies", package: "swift-dependencies"),
                 ],
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(
@@ -210,7 +210,7 @@ extension Package {
                 ],
                 path: "Sources/Features/CreateViaryFeature",
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(
@@ -239,7 +239,7 @@ extension Package {
                 ],
                 path: "Sources/Features/EditViaryFeature",
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(
@@ -268,7 +268,7 @@ extension Package {
                 ],
                 path: "Sources/Features/ViaryListFeature",
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(
@@ -291,7 +291,7 @@ extension Package {
                     .product(name: "Tagged", package: "swift-tagged"),
                 ],
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(
@@ -314,7 +314,7 @@ extension Package {
                     "Resources",
                 ],
                 swiftSettings: [
-                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+//                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
                 ]
             ),
             .testTarget(

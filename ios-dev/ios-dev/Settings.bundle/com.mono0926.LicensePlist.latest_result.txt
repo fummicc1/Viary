@@ -2,17 +2,19 @@ name: abseil-cpp-binary, nameSpecified: abseil, owner: google, version: 1.202206
 
 name: Alamofire, nameSpecified: Alamofire, owner: Alamofire, version: 5.7.1, source: https://github.com/Alamofire/Alamofire
 
+name: AsyncExtensions, nameSpecified: AsyncExtensions, owner: sideeffect-io, version: 0.5.2, source: https://github.com/sideeffect-io/AsyncExtensions
+
 name: combine-schedulers, nameSpecified: combine-schedulers, owner: pointfreeco, version: 0.11.0, source: https://github.com/pointfreeco/combine-schedulers
 
-name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 10.12.0, source: https://github.com/firebase/firebase-ios-sdk
+name: firebase-ios-sdk, nameSpecified: Firebase, owner: firebase, version: 10.13.0, source: https://github.com/firebase/firebase-ios-sdk
 
 name: FloatingActionButton, nameSpecified: FloatingActionButton, owner: fummicc1, version: 0.0.2, source: https://github.com/fummicc1/FloatingActionButton
 
-name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 10.12.0, source: https://github.com/google/GoogleAppMeasurement
+name: GoogleAppMeasurement, nameSpecified: GoogleAppMeasurement, owner: google, version: 10.13.0, source: https://github.com/google/GoogleAppMeasurement
 
-name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.2.4, source: https://github.com/google/GoogleDataTransport
+name: GoogleDataTransport, nameSpecified: GoogleDataTransport, owner: google, version: 9.2.5, source: https://github.com/google/GoogleDataTransport
 
-name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.11.4, source: https://github.com/google/GoogleUtilities
+name: GoogleUtilities, nameSpecified: GoogleUtilities, owner: google, version: 7.11.5, source: https://github.com/google/GoogleUtilities
 
 name: grpc-binary, nameSpecified: gRPC, owner: google, version: 1.50.2, source: https://github.com/google/grpc-binary
 
@@ -30,9 +32,9 @@ name: promises, nameSpecified: Promises, owner: google, version: 2.3.1, source: 
 
 name: ReactiveSwift, nameSpecified: ReactiveSwift, owner: ReactiveCocoa, version: 6.7.0, source: https://github.com/ReactiveCocoa/ReactiveSwift
 
-name: realm-core, nameSpecified: realm-core, owner: realm, version: 13.17.0, source: https://github.com/realm/realm-core
+name: realm-core, nameSpecified: realm-core, owner: realm, version: 13.17.1, source: https://github.com/realm/realm-core
 
-name: realm-swift, nameSpecified: realm-swift, owner: realm, version: 10.41.1, source: https://github.com/realm/realm-swift
+name: realm-swift, nameSpecified: realm-swift, owner: realm, version: 10.42.0, source: https://github.com/realm/realm-swift
 
 name: RxSwift, nameSpecified: RxSwift, owner: ReactiveX, version: 6.6.0, source: https://github.com/ReactiveX/RxSwift
 
@@ -44,7 +46,7 @@ name: swift-clocks, nameSpecified: swift-clocks, owner: pointfreeco, version: 0.
 
 name: swift-collections, nameSpecified: swift-collections, owner: apple, version: 1.0.4, source: https://github.com/apple/swift-collections
 
-name: swift-composable-architecture, nameSpecified: swift-composable-architecture, owner: pointfreeco, version: 0.57.0, source: https://github.com/pointfreeco/swift-composable-architecture
+name: swift-composable-architecture, nameSpecified: swift-composable-architecture, owner: pointfreeco, version: 0.58.0, source: https://github.com/pointfreeco/swift-composable-architecture
 
 name: swift-concurrency-extras, nameSpecified: swift-concurrency-extras, owner: pointfreeco, version: 0.1.1, source: https://github.com/pointfreeco/swift-concurrency-extras
 

@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import ComposableArchitecture
 import Dependencies
 import Entities
@@ -22,8 +21,6 @@ public struct ViaryList: ReducerProtocol, Sendable {
         public var viaries: IdentifiedArrayOf<Viary> = []
         public var destination: Destination? = nil
         public var errorMessage: String?
-
-        var streamCancellable: AnyCancellable?
 
         public init(
             viaries: IdentifiedArrayOf<Viary> = [],
