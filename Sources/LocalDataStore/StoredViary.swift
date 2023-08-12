@@ -16,9 +16,10 @@ public class StoredViary: Object, ObjectWithList {
 
 @MainActor
 public extension StoredViary {
-    static func observeAll() throws -> AnyPublisher<[StoredViary], Never> {
+    static func observeAll() async throws -> AsyncStream<[StoredViary]> {
         let realm = try  Realm()
-        return realm.objects(StoredViary.self)
+        let list = await realm.objects(StoredViary.self)
+
             .collectionPublisher
             .map { Array($0) }
             .replaceError(with: [])
