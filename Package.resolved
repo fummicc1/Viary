@@ -172,6 +172,15 @@
       }
     },
     {
+      "identity" : "realmswiftmacro",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fummicc1/RealmSwiftMacro",
+      "state" : {
+        "revision" : "a41c8dd69097805329d2623a97ab2defccaa0d13",
+        "version" : "0.0.3"
+      }
+    },
+    {
       "identity" : "rxswift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/ReactiveX/RxSwift.git",
@@ -286,6 +295,15 @@
       "state" : {
         "revision" : "ce20dc083ee485524b802669890291c0d8090170",
         "version" : "1.22.1"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax.git",
+      "state" : {
+        "revision" : "2e3c42cf38defd998c87ecfe8df138f925d22736",
+        "version" : "509.0.0-swift-DEVELOPMENT-SNAPSHOT-2023-08-15-a"
       }
     },
     {
