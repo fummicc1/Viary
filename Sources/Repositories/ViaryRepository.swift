@@ -94,8 +94,7 @@ extension ViaryRepositoryImpl {
     @MainActor
     func mapDomainIntoStored(
         id: Tagged<Viary, String>,
-        viary: Viary,
-        emotions: [Viary.Message.ID: [Emotion.Kind: Emotion]]
+        viary: Viary
     ) async throws -> StoredViary {
         let all = try await StoredViary.list()
         return all.first(where: { $0.id == id.rawValue }) ?? StoredViary()
@@ -118,7 +117,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
         let messages = viary.messages
         let updatedAt = viary.updatedAt
         let date = viary.date
-        let storedMessages = try await Task { @MainActor in
+        let storedMessages = await Task { @MainActor in
             let list = List<StoredMessage>()
             for message in messages {
                 let storedMessage = StoredMessage()
@@ -145,27 +144,40 @@ extension ViaryRepositoryImpl: ViaryRepository {
         )
     }
 
+    @MainActor
     public func update(id: Tagged<Viary, String>, viary: Viary) async throws {
-        try await Task { @MainActor in
-            var emotions: [Tagged<Viary.Message, String>: [Emotion.Kind: Emotion]] = [:]
-            for message in viary.messages {
-                emotions[message.id] = message.emotions
+        let stored = try await StoredViary.list().first(where: { $0.id == id.rawValue })
+        guard let stored else {
+            return
+        }
+        try await stored.update(
+            date: viary.date,
+            updatedAt: viary.updatedAt
+        )
+        for message in viary.messages {
+            guard let storedMessage = try await StoredMessage.list().first(where: { $0.id == message.id.rawValue }) else {
+                continue
             }
-            let stored = try await mapDomainIntoStored(
-                id: id,
-                viary: viary,
-                emotions: emotions
+            try await storedMessage.update(
+                sentence: message.sentence,
+                lang: message.lang.id
             )
-            try await stored.update(
-                messages: viary.messages,
-                date: <#T##Date?#>
-            )
-        }.value
+            for (kind, emotion) in message.emotions {
+                guard let storedEmotion = storedMessage.emotions.first(where: { $0.kind == kind.id }) else {
+                    continue
+                }
+                try await storedEmotion.update(
+                    sentence: message.sentence,
+                    score: emotion.score,
+                    kind: kind.id
+                )
+            }
+        }
     }
 
+    @MainActor
     public func delete(id: Tagged<Viary, String>) async throws {
-        let predicate = NSPredicate(format: "id = %@", id.rawValue)
-        let viary = try await StoredViary.fetch(by: predicate).first
+        let viary = try await StoredViary.list().first(where: { $0.id == id.rawValue })
         try await viary?.delete()
     }
 }

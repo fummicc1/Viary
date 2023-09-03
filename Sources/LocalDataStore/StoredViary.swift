@@ -1,11 +1,10 @@
 import Foundation
 import RealmSwift
-import Combine
 import RealmSwiftMacro
 
 @MainActor
 @GenCrud
-public class StoredViary: Object, ObjectWithList {
+public final class StoredViary: Object, ObjectWithList, Sendable {
     @Persisted(primaryKey: true) public var id: String = UUID().uuidString
     @Persisted public var messages: List<StoredMessage> = .init()
     @Persisted public var date: Date = Date()
