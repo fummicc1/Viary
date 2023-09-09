@@ -155,7 +155,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
         }
         try await stored.update(
             date: viary.date,
-            updatedAt: Date()
+            updatedAt: viary.updatedAt
         )
         for message in viary.messages {
             guard let storedMessage = try await StoredMessage.list().first(where: { $0.id == message.id.rawValue }) else {
