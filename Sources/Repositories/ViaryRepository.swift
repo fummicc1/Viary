@@ -29,6 +29,9 @@ public final class ViaryRepositoryImpl {
         self.apiClient = apiClient
 
         Task { @MainActor in
+            let initialEntities = try await StoredViary.list()
+            let initialDomain = await mapStoredIntoDomain(stored: initialEntities.map { $0 })
+            myViariesSubject.send(IdentifiedArrayOf(uniqueElements: initialDomain))
             let stream = try await StoredViary.observe()
             var domainViaries: [Viary] = []
             for await changes in stream {
@@ -152,7 +155,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
         }
         try await stored.update(
             date: viary.date,
-            updatedAt: viary.updatedAt
+            updatedAt: Date()
         )
         for message in viary.messages {
             guard let storedMessage = try await StoredMessage.list().first(where: { $0.id == message.id.rawValue }) else {

@@ -60,6 +60,9 @@ public struct ViaryList: ReducerProtocol, Sendable {
                 state.viaries = IdentifiedArray(
                     uniqueElements: viaries.sorted(using: KeyPathComparator(\.date)).reversed()
                 )
+                if state.viaries.isEmpty {
+                    return .send(.createSample)
+                }
             case .failure(let error):
                 state.errorMessage = "\(error)"
             }

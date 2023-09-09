@@ -122,7 +122,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fummicc1/MoyaAPIClient",
       "state" : {
-        "revision" : "b3f23657d9004d1314351eabb9c5e4dc737058db",
+        "revision" : "49f00a0fcaa64bac86aa19e51c291da00430be5d",
         "version" : "1.1.1"
       }
     },
@@ -169,6 +169,15 @@
       "state" : {
         "revision" : "933abaa8076966e237e66497def74df84c6adbb4",
         "version" : "10.42.0"
+      }
+    },
+    {
+      "identity" : "realmswiftmacro",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/fummicc1/RealmSwiftMacro",
+      "state" : {
+        "revision" : "a41c8dd69097805329d2623a97ab2defccaa0d13",
+        "version" : "0.0.3"
       }
     },
     {
@@ -268,6 +277,15 @@
       "state" : {
         "revision" : "ce20dc083ee485524b802669890291c0d8090170",
         "version" : "1.22.1"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax.git",
+      "state" : {
+        "revision" : "7bb5231dad28c6dceabf7a439867f39d2c105e4f",
+        "version" : "509.0.0-swift-DEVELOPMENT-SNAPSHOT-2023-09-05-a"
       }
     },
     {
