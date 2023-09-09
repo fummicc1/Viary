@@ -35,7 +35,7 @@ let package = Package(
         .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", .upToNextMajor(from: "4.1.1")),
         .package(url: "https://github.com/sideeffect-io/AsyncExtensions", .upToNextMajor(from: "0.5.2")),
         .package(url: "https://github.com/apple/swift-async-algorithms", .upToNextMajor(from: "0.1.0")),
-        .package(url: "https://github.com/fummicc1/RealmSwiftMacro", .upToNextMajor(from: "0.0.1")),
+        .package(url: "https://github.com/fummicc1/RealmSwiftMacro", .upToNextMajor(from: "0.0.4")),
     ],
     targets: Package.appTargets + Package.utils + Package.speechToText + Package.sharedUI + Package.resources + Package.repositories + Package.localDataStore + Package.ja2En + Package.features + Package.entities + Package.emotionDetection
 )

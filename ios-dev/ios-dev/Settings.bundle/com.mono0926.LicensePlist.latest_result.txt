@@ -36,7 +36,7 @@ name: realm-core, nameSpecified: realm-core, owner: realm, version: 13.17.1, sou
 
 name: realm-swift, nameSpecified: realm-swift, owner: realm, version: 10.42.0, source: https://github.com/realm/realm-swift
 
-name: RealmSwiftMacro, nameSpecified: RealmSwiftMacro, owner: fummicc1, version: 0.0.3, source: https://github.com/fummicc1/RealmSwiftMacro
+name: RealmSwiftMacro, nameSpecified: RealmSwiftMacro, owner: fummicc1, version: 0.0.4, source: https://github.com/fummicc1/RealmSwiftMacro
 
 name: RxSwift, nameSpecified: RxSwift, owner: ReactiveX, version: 6.6.0, source: https://github.com/ReactiveX/RxSwift
 
