@@ -1,4 +1,6 @@
 import SwiftUI
+import RealmSwift
+import LocalDataStore
 import ViaryListFeature
 import CreateViaryFeature
 import EditViaryFeature
@@ -7,6 +9,8 @@ import ComposableArchitecture
 public struct AppScreen: View {
 
     let store: StoreOf<AppReducer>
+
+    @Dependency(\.realmMigrationManager) var realmMigrationManager
 
     public init(store: StoreOf<AppReducer>) {
         self.store = store
@@ -74,5 +78,18 @@ public struct AppScreen: View {
                 }
             }
         }
+        .environment(
+            \.realmConfiguration,
+             Realm.Configuration(
+                schemaVersion: 1,
+                migrationBlock: {
+                    realmMigrationManager.migrationMethod(
+                        migration: $0,
+                        schemaVersion: 1,
+                        oldSchemaVersion: $1
+                    )
+                }
+             )
+        )
     }
 }
