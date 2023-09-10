@@ -25,8 +25,13 @@ public final class ViaryRepositoryImpl {
     private let myViariesSubject: AsyncCurrentValueSubject<IdentifiedArrayOf<Viary>> = .init([])
     private let apiClient: AppAPIClient
 
+    @Dependency(\.realmMigrationManager) var realmMigrationManager
+
     public init(apiClient: AppAPIClient) {
         self.apiClient = apiClient
+
+        // TODO: Store schemaVersion in more suitable place
+        realmMigrationManager.configureIfNeeded(schemaVersion: 1)
 
         Task { @MainActor in
             let initialEntities = try await StoredViary.list()
@@ -139,12 +144,18 @@ extension ViaryRepositoryImpl: ViaryRepository {
             }
             return list
         }.value
-        _ = try await StoredViary.create(
-            id: viary.id.rawValue,
-            messages: storedMessages,
-            date: date,
-            updatedAt: updatedAt
-        )
+        do {
+            _ = try await StoredViary.create(
+                id: viary.id.rawValue,
+                messages: storedMessages,
+                date: date,
+                updatedAt: updatedAt
+            )
+        } catch {
+            #if DEBUG
+            print(error)
+            #endif
+        }
     }
 
     @MainActor

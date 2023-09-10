@@ -171,10 +171,42 @@
             filePath = "../Sources/Repositories/ViaryRepository.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "update(id:viary:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D879D985-52A2-4E13-9653-571065483915 - 6b2835d759e24b81"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(8) suspend resume partial function for Repositories.ViaryRepositoryImpl.update(id: Tagged.Tagged&lt;Entities.Viary, Swift.String&gt;, viary: Entities.Viary) async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/Sources/Repositories/ViaryRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "1100">
+               </Location>
+               <Location
+                  uuid = "D879D985-52A2-4E13-9653-571065483915 - facd854243d6a97e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(10) suspend resume partial function for Repositories.ViaryRepositoryImpl.update(id: Tagged.Tagged&lt;Entities.Viary, Swift.String&gt;, viary: Entities.Viary) async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/Sources/Repositories/ViaryRepository.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "1040">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -187,8 +219,8 @@
             filePath = "../Sources/Repositories/ViaryRepository.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "173"
+            endingLineNumber = "173"
             landmarkName = "update(id:viary:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -203,8 +235,8 @@
             filePath = "../Sources/Repositories/ViaryRepository.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
             landmarkName = "update(id:viary:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -392,6 +424,51 @@
                   endingLineNumber = "24"
                   offsetFromSymbolStart = "456">
                </Location>
+               <Location
+                  uuid = "2BFBD343-3D19-4E82-9C31-F5754C62100B - 82d6c6fc1fcf2bc9"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for LocalDataStore.StoredViary.update(id: Swift.Optional&lt;Swift.String&gt;, messages: Swift.Optional&lt;RealmSwift.List&lt;LocalDataStore.StoredMessage&gt;&gt;, date: Swift.Optional&lt;Foundation.Date&gt;, updatedAt: Swift.Optional&lt;Foundation.Date&gt;) async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/xx/hz45g4md3z35fc26ksxf7qpr0000gn/T/swift-generated-sources/@__swiftmacro_14LocalDataStore11StoredViary7GenCrudfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "468">
+               </Location>
+               <Location
+                  uuid = "2BFBD343-3D19-4E82-9C31-F5754C62100B - 59645e0f8211e7cf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(3) suspend resume partial function for LocalDataStore.StoredViary.update(id: Swift.Optional&lt;Swift.String&gt;, messages: Swift.Optional&lt;RealmSwift.List&lt;LocalDataStore.StoredMessage&gt;&gt;, date: Swift.Optional&lt;Foundation.Date&gt;, updatedAt: Swift.Optional&lt;Foundation.Date&gt;) async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/xx/hz45g4md3z35fc26ksxf7qpr0000gn/T/swift-generated-sources/@__swiftmacro_14LocalDataStore11StoredViary7GenCrudfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "344">
+               </Location>
+               <Location
+                  uuid = "2BFBD343-3D19-4E82-9C31-F5754C62100B - 56cb2712c1b33690"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in LocalDataStore.StoredViary.update(id: Swift.Optional&lt;Swift.String&gt;, messages: Swift.Optional&lt;RealmSwift.List&lt;LocalDataStore.StoredMessage&gt;&gt;, date: Swift.Optional&lt;Foundation.Date&gt;, updatedAt: Swift.Optional&lt;Foundation.Date&gt;) async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///var/folders/xx/hz45g4md3z35fc26ksxf7qpr0000gn/T/swift-generated-sources/@__swiftmacro_14LocalDataStore11StoredViary7GenCrudfMm_.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "412">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -457,6 +534,54 @@
             endingLineNumber = "34"
             landmarkName = "unknown"
             landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "15E23C1C-2894-4AC5-8F49-40A7DA657409"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Sources/LocalDataStore/RealmMigrationManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "configureIfNeeded(schemaVersion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "07DE39C5-518C-423D-AC72-A01AD608093C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Sources/LocalDataStore/RealmMigrationManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "configureIfNeeded(schemaVersion:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "71093373-188D-4844-AD7B-A2DE7842D0B5"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../Sources/LocalDataStore/RealmMigrationManager.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "configureIfNeeded(schemaVersion:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

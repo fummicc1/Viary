@@ -158,6 +158,7 @@ extension Package {
                 dependencies: [
                     .product(name: "RealmSwift", package: "realm-swift"),
                     .product(name: "RealmSwiftMacro", package: "RealmSwiftMacro"),
+                    .product(name: "Dependencies", package: "swift-dependencies"),
 
                 ],
                 swiftSettings: useUnsafeFlag ?  [
