@@ -1,3 +1,4 @@
+import Foundation
 import RealmSwift
 import Dependencies
 
@@ -12,7 +13,7 @@ public final class RealmMigrationManagerImpl: RealmMigrationManager {
             migration.enumerateObjects(ofType: StoredEmotion.className()) { oldObject, newObject in
                 // if id does not exist, assign new id.
                 guard let _ = newObject?["id"] as? String else {
-                    newObject?["id"] = ObjectId.generate().stringValue
+                    newObject?["id"] = UUID().uuidString
                     return
                 }
             }

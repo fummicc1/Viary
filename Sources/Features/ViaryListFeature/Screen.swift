@@ -27,12 +27,8 @@ public struct ViaryListScreen: View {
         VStack {
             let viaries = viewStore.viaries
             if viaries.isEmpty {
-                Button {
-                    viewStore.send(.createSample)
-                } label: {
-                    SelectableText("Create")
-                }
-                .buttonStyle(.borderedProminent)
+                ProgressView()
+                    .progressViewStyle(.circular)
             } else {
                 FloatingActionable(
                     .bottomTrailing,

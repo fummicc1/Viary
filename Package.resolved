@@ -176,8 +176,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/fummicc1/RealmSwiftMacro",
       "state" : {
-        "revision" : "a41c8dd69097805329d2623a97ab2defccaa0d13",
-        "version" : "0.0.3"
+        "revision" : "22e103508bad757350a42477cfe74766181af965",
+        "version" : "0.0.4"
       }
     },
     {

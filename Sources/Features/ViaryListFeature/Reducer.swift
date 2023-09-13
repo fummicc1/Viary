@@ -72,7 +72,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
                 state.errorMessage = Error.failedToCreateSample.localizedDescription
                 return .none
             }
-            return .fireAndForget {
+            return .run { _ in
                 let newViary = viarySample.make()
                 let emotions = Dictionary(uniqueKeysWithValues: newViary.messages.map {
                     ($0.id, $0.emotions)

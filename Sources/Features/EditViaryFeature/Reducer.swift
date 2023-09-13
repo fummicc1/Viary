@@ -26,7 +26,7 @@ public struct EditViary: ReducerProtocol {
         public var original: Viary
         public var editable: Viary
         public var resolved: [Viary.Message.ID: Bool]
-        public var saveStatus: AsyncStatus<Int> = .idle
+        public var saveStatus: AsyncStatus<EquatableEmpty> = .idle
         public var scrollContentHeight: [Viary.Message.ID: CGFloat] = [:]
         public var focusedMessage: Viary.Message?
         public var mode: Mode = .view
@@ -114,7 +114,7 @@ public struct EditViary: ReducerProtocol {
             guard let message = state.editable.messages[id: messageID] else {
                 return .none
             }
-            return .task { [state] in
+            return .run { [state] send in
                 var sentence: String = message.sentence
                 var lang: Lang = message.lang
                 if message.lang == .ja {
@@ -133,7 +133,7 @@ public struct EditViary: ReducerProtocol {
                         }
                         message.emotions[kind]?.score = Int(emotions[i])
                     }
-                    return .replace(id: messageID, message: message, resolved: true)
+                    await send(.replace(id: messageID, message: message, resolved: true))
                 }
                 throw Error.messageNotFound(id: messageID)
             }
@@ -168,12 +168,12 @@ public struct EditViary: ReducerProtocol {
                 return .none
             }
             state.saveStatus.start()
-            return .task { [state] in
+            return .run { [state] send in
                 try await viaryRepository.update(id: state.original.id, viary: state.editable)
-                return .saved
+                await send(.saved)
             }
         case .saved:
-            state.saveStatus = .success(0)
+            state.saveStatus = .success(.init())
         }
         return .none
     }
