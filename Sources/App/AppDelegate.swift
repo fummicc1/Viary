@@ -12,7 +12,7 @@ import ComposableArchitecture
 public final class AppDelegate: NSObject, UIApplicationDelegate {
     public let store = StoreOf<AppReducer>(
         initialState: AppReducer.State(),
-        reducer: AppReducer()
+        reducer: { AppReducer() }
     )
 
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {

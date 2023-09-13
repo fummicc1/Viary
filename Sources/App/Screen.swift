@@ -36,15 +36,22 @@ public struct AppScreen: View {
                         )
                         .navigationDestination(
                             unwrapping: viewStore.binding(get: \.destination, send: { .destination($0) }),
-                            case: /ViaryList.Destination.detail) { destination in
-                                let viary = destination.wrappedValue
-                                EditViaryScreen(
-                                    store: StoreOf<EditViary>(
-                                        initialState: EditViary.State(original: viary),
-                                        reducer: EditViary()
-                                    )
-                                )
+                            case: /ViaryList.Destination.detail
+                        ) { destination -> EditViaryScreen in
+                            let viaryId = destination.wrappedValue
+                            let state: EditViary.State
+                            if let viary = viewStore.state.viaries[id: viaryId] {
+                                state = .init(original: viary)
+                            } else {
+                                state = .init(originalId: viaryId)
                             }
+                            return EditViaryScreen(
+                                store: StoreOf<EditViary>(
+                                    initialState: state,
+                                    reducer: { EditViary() }
+                                )
+                            )
+                        }
                     }
                     .background(
                         WithViewStore(

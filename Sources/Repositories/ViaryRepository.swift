@@ -12,7 +12,6 @@ import RealmSwift
 public protocol ViaryRepository: Sendable {
     var myViaries: AsyncStream<IdentifiedArrayOf<Viary>> { get }
 
-    @discardableResult
     func load() async throws -> IdentifiedArrayOf<Viary>
     func load(id: Viary.ID) async throws -> Viary
     func create(viary: Viary, with emotions: [Viary.Message.ID: [Emotion.Kind: Emotion]]) async throws
@@ -107,7 +106,6 @@ extension ViaryRepositoryImpl: ViaryRepository {
         myViariesSubject.dropFirst().eraseToStream()
     }
 
-    @discardableResult
     public func load() async throws -> IdentifiedArrayOf<Viary> {
         let latest = try await StoredViary.list()
         let viaries = mapStoredIntoDomain(stored: latest.map { $0 })

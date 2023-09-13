@@ -25,6 +25,7 @@ public struct EditViary: ReducerProtocol {
     public struct State: Equatable {
         public var original: Viary
         public var editable: Viary
+        public var needToFetch: Bool = false
         public var resolved: [Viary.Message.ID: Bool]
         public var saveStatus: AsyncStatus<EquatableEmpty> = .idle
         public var scrollContentHeight: [Viary.Message.ID: CGFloat] = [:]
@@ -48,9 +49,23 @@ public struct EditViary: ReducerProtocol {
             self.editable = original.asDummy()
             self.resolved = Dictionary(uniqueKeysWithValues: editable.messages.map(\.id).map { ($0, true) })
         }
+
+        public init(originalId: Viary.ID) {
+            self.original = Viary(
+                id: originalId,
+                messages: [],
+                date: Date()
+            )
+            self.editable = original.asDummy()
+            self.resolved = Dictionary(uniqueKeysWithValues: editable.messages.map(\.id).map { ($0, true) })
+            self.needToFetch = true
+        }
     }
 
     public enum Action: Equatable {
+        case onAppear
+        case set(original: Viary)
+
         case analyze(messageID: Tagged<Viary.Message, String>)
 
         case editMessageSentence(id: Tagged<Viary.Message, String>, sentence: String)
@@ -77,6 +92,16 @@ public struct EditViary: ReducerProtocol {
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
+        case .onAppear:
+            if state.needToFetch {
+                let id = state.original.id
+                return .run { send in
+                    let latest = try await viaryRepository.load(id: id)
+                    await send(.set(original: latest))
+                }
+            }
+        case .set(let original):
+            state.original = original
         case let .editMessageSentence(id, sentence):
             guard state.canEditable else {
                 return .none

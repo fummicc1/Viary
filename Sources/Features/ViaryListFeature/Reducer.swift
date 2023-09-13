@@ -42,7 +42,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
     }
 
     public enum Destination: Equatable, Sendable {
-        case detail(Viary)
+        case detail(Viary.ID)
         case create
     }
 
@@ -84,7 +84,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
             return .send(.destination(.create))
 
         case let .didTap(viary):
-            return .send(.destination(.detail(viary)))
+            return .send(.destination(.detail(viary.id)))
 
         case .destination(let destination):
             state.destination = destination

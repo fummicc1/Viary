@@ -87,6 +87,9 @@ public struct EditViaryScreen: View {
                     .padding()
                 }
             }
+            .onAppear {
+                viewStore.send(.onAppear)
+            }
             .navigationTitle(viewStore.editable.date.formatted())
             .navigationBarTitleDisplayMode(.inline)
         }
