@@ -10,10 +10,10 @@ import Foundation
 import Resources
 
 
-public class EmotionDetectorMock: EmotionDetector {
+public final actor EmotionDetectorMock: EmotionDetector {
     public init() { }
-
-
+    
+    
     public private(set) var inferCallCount = 0
     public var inferHandler: ((String, Lang) async -> ([Double]))?
     public func infer(text: String, lang: Lang) async -> [Double] {
@@ -22,6 +22,10 @@ public class EmotionDetectorMock: EmotionDetector {
             return await inferHandler(text, lang)
         }
         return [Double]()
+    }
+    
+    public func updateInferHandler(handler: ((String, Lang) async -> ([Double]))?) {
+        self.inferHandler = handler
     }
 }
 

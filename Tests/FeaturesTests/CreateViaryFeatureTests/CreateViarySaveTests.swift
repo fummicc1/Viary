@@ -29,7 +29,7 @@ final class CreateViarySaveTests: XCTestCase {
         let reducer = CreateViary()
         store = TestStore(
             initialState: initialState,
-            reducer: reducer
+            reducer: { reducer }
         )
     }
 
@@ -59,13 +59,14 @@ final class CreateViarySaveTests: XCTestCase {
             messages: [expectedMessage],
             date: now
         )
-        let viaryRepositoryMock = ViaryRepositoryMock()
+//        let viaryRepositoryMock = ViaryRepositoryMock()
+        fatalError()
         let emotionDetector = EmotionDetectorMock()
-        emotionDetector.inferHandler = { message, lang in
+        await emotionDetector.updateInferHandler(handler: { message, lang in
             expectedViaryEmotion.values.map(\.score).map { Double($0) / 100 }
-        }
+        })
         let reducer = withDependencies {
-            $0.viaryRepository = viaryRepositoryMock
+//            $0.viaryRepository = viaryRepositoryMock
             $0.emotionDetector = emotionDetector
             $0.uuid = .constant(staticUUID)
         } operation: {
@@ -73,13 +74,13 @@ final class CreateViarySaveTests: XCTestCase {
         }
         store = TestStore(
             initialState: initialState,
-            reducer: reducer
+            reducer: { reducer }
         )
         // MARK: Act, Assert
         // MARK: Initial state check
         XCTAssertEqual(store.state.messages, initialState.messages)
         XCTAssertEqual(store.state.date, initialState.date)
-        XCTAssertEqual(viaryRepositoryMock.createViaryCallCount, 0)
+//        XCTAssertEqual(viaryRepositoryMock.createViaryCallCount, 0)
         await store.send(.save) {
             $0.saveStatus = .loading(cache: nil)
         }
@@ -87,6 +88,6 @@ final class CreateViarySaveTests: XCTestCase {
         await store.receive(.saved(.success(true))) {
             $0.saveStatus = .success(true)
         }
-        XCTAssertEqual(viaryRepositoryMock.createViaryCallCount, 1)
+//        XCTAssertEqual(viaryRepositoryMock.createViaryCallCount, 1)
     }
 }

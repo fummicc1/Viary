@@ -28,7 +28,7 @@ final class ModeTests: XCTestCase {
     func test_viewMode() async throws {
         let uuid = UUID()
         let date = Date.now
-        let repository = ViaryRepositoryMock()
+//        let repository = ViaryRepositoryMock()
         let baseViary = Viary(
             id: Tagged<Viary, String>(uuid.uuidString),
             messages: [
@@ -42,17 +42,19 @@ final class ModeTests: XCTestCase {
             date: date
         )
         myViaries = .init([baseViary])
-        repository.myViaries = myViaries.eraseToAnyPublisher()
+//        repository.myViaries = myViaries.eraseToAnyPublisher()
         let store = TestStore(
             initialState: EditViary.State(
                 original: baseViary
             ),
-            reducer: withDependencies({
-                $0.uuid = .constant(uuid)
-                $0.date = .constant(date)
-            }, operation: {
-                EditViary()
-            })
+            reducer: {
+                withDependencies({
+                    $0.uuid = .constant(uuid)
+                    $0.date = .constant(date)
+                }, operation: {
+                    EditViary()
+                })
+            }
         )
         XCTAssertEqual(store.state.mode, EditViary.Mode.view)
         await store.send(

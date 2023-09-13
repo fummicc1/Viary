@@ -2,6 +2,9 @@
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
+import Foundation
+
+let useUnsafeFlag = ProcessInfo.processInfo.environment["USE_UNSAFE_FLAG"]?.isEmpty == false
 
 let package = Package(
     name: "Viary",
@@ -30,6 +33,9 @@ let package = Package(
         .package(url: "https://github.com/Moya/Moya.git", .upToNextMajor(from: "15.0.0")),
         .package(url: "https://github.com/realm/realm-swift", .upToNextMajor(from: "10.33.0")),
         .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", .upToNextMajor(from: "4.1.1")),
+        .package(url: "https://github.com/sideeffect-io/AsyncExtensions", .upToNextMajor(from: "0.5.2")),
+        .package(url: "https://github.com/apple/swift-async-algorithms", .upToNextMajor(from: "0.1.0")),
+        .package(url: "https://github.com/fummicc1/RealmSwiftMacro", .upToNextMajor(from: "0.0.4")),
     ],
     targets: Package.appTargets + Package.utils + Package.speechToText + Package.sharedUI + Package.resources + Package.repositories + Package.localDataStore + Package.ja2En + Package.features + Package.entities + Package.emotionDetection
 )
@@ -59,7 +65,13 @@ extension Package {
 
     static var utils: [Target] {
         [
-            .target(name: "Utils", dependencies: []),
+            .target(
+                name: "Utils",
+                dependencies: [],
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
+            ),
             .testTarget(name: "UtilsTests", dependencies: ["Utils"]),
         ]
     }
@@ -70,7 +82,11 @@ extension Package {
                 name: "SpeechToText",
                 dependencies: [
                     .product(name: "Dependencies", package: "swift-dependencies"),
-                ]
+                    .product(name: "AsyncExtensions", package: "AsyncExtensions"),
+                ],
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(name: "SpeechToTextTests", dependencies: ["SpeechToText"]),
         ]
@@ -82,7 +98,10 @@ extension Package {
                 name: "SharedUI",
                 dependencies: [
                     .product(name: "SFSafeSymbols", package: "SFSafeSymbols"),
-                ]
+                ],
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(name: "SharedUITests", dependencies: ["SharedUI"]),
         ]
@@ -96,7 +115,10 @@ extension Package {
                 resources: [
                     .process("Resources/emotion-english-distilroberta-base.mlpackage"),
                     .process("Resources/vocab.json"),
-                ]
+                ],
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(name: "ResourcesTests", dependencies: ["Resources"])
         ]
@@ -115,7 +137,10 @@ extension Package {
                     .product(name: "XCTestDynamicOverlay", package: "xctest-dynamic-overlay"),
                     "LocalDataStore",
                     "Entities",
-                ]
+                ],
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(
                 name: "RepositoriesTests",
@@ -132,7 +157,13 @@ extension Package {
                 name: "LocalDataStore",
                 dependencies: [
                     .product(name: "RealmSwift", package: "realm-swift"),
-                ]
+                    .product(name: "RealmSwiftMacro", package: "RealmSwiftMacro"),
+                    .product(name: "Dependencies", package: "swift-dependencies"),
+
+                ],
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(
                 name: "LocalDataStoreTests",
@@ -151,7 +182,10 @@ extension Package {
                     .product(name: "MoyaAPIClient", package: "MoyaAPIClient"),
                     .product(name: "Moya", package: "Moya"),
                     .product(name: "Dependencies", package: "swift-dependencies"),
-                ]
+                ],
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(
                 name: "Ja2EnTests",
@@ -181,7 +215,10 @@ extension Package {
                     "EmotionDetection",
                     "SpeechToText",
                 ],
-                path: "Sources/Features/CreateViaryFeature"
+                path: "Sources/Features/CreateViaryFeature",
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(
                 name: "CreateViaryFeatureTests",
@@ -207,7 +244,10 @@ extension Package {
                     "Repositories",
                     "EmotionDetection",
                 ],
-                path: "Sources/Features/EditViaryFeature"
+                path: "Sources/Features/EditViaryFeature",
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(
                 name: "EditViaryFeatureTests",
@@ -233,7 +273,10 @@ extension Package {
                     "Repositories",
                     "EmotionDetection",
                 ],
-                path: "Sources/Features/ViaryListFeature"
+                path: "Sources/Features/ViaryListFeature",
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(
                 name: "ViaryListFeatureTests",
@@ -253,7 +296,10 @@ extension Package {
                     .product(name: "Dependencies", package: "swift-dependencies"),
                     .product(name: "IdentifiedCollections", package: "swift-identified-collections"),
                     .product(name: "Tagged", package: "swift-tagged"),
-                ]
+                ],
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(
                 name: "EntitiesTests",
@@ -273,7 +319,10 @@ extension Package {
 
                     "Entities",
                     "Resources",
-                ]
+                ],
+                swiftSettings: useUnsafeFlag ?  [
+                    .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
+                ] : []
             ),
             .testTarget(
                 name: "EmotionDetectionTests",

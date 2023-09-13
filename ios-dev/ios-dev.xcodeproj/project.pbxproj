@@ -11,8 +11,8 @@
 		D323E64D29F9756C00F5072D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D323E64C29F9756C00F5072D /* Assets.xcassets */; };
 		D323E65129F9756C00F5072D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D323E65029F9756C00F5072D /* Preview Assets.xcassets */; };
 		D323E67B29F976EB00F5072D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D323E67A29F976EB00F5072D /* GoogleService-Info.plist */; };
-		D323E68529F977B400F5072D /* App in Frameworks */ = {isa = PBXBuildFile; productRef = D323E68429F977B400F5072D /* App */; };
 		D327985A2A05EC5700807FBA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D32798592A05EC5700807FBA /* Settings.bundle */; };
+		D3CD36CA2A870005003C3C6C /* App in Frameworks */ = {isa = PBXBuildFile; productRef = D3CD36C92A870005003C3C6C /* App */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D323E68529F977B400F5072D /* App in Frameworks */,
+				D3CD36CA2A870005003C3C6C /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +102,7 @@
 			);
 			name = "ios-dev";
 			packageProductDependencies = (
-				D323E68429F977B400F5072D /* App */,
+				D3CD36C92A870005003C3C6C /* App */,
 			);
 			productName = "ios-dev";
 			productReference = D323E64529F9756B00F5072D /* Viary-dev.app */;
@@ -133,7 +133,7 @@
 			);
 			mainGroup = D323E63C29F9756B00F5072D;
 			packageReferences = (
-				D3E7283A2A75FC22000892E9 /* XCLocalSwiftPackageReference ".." */,
+				D3CD36C82A870005003C3C6C /* XCLocalSwiftPackageReference ".." */,
 			);
 			productRefGroup = D323E64629F9756B00F5072D /* Products */;
 			projectDirPath = "";
@@ -415,14 +415,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		D3E7283A2A75FC22000892E9 /* XCLocalSwiftPackageReference ".." */ = {
+		D3CD36C82A870005003C3C6C /* XCLocalSwiftPackageReference ".." */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ..;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		D323E68429F977B400F5072D /* App */ = {
+		D3CD36C92A870005003C3C6C /* App */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = App;
 		};

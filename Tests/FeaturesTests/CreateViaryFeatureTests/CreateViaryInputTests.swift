@@ -25,15 +25,16 @@ final class CreateViaryInputTests: XCTestCase {
     )
 
     override func setUpWithError() throws {
-        let reducer = withDependencies {
-            $0.speechToTextService = SpeechToTextServiceMock()
+        let reducer = withDependencies { _ in
+//            $0.speechToTextService = SpeechToTextServiceMock()
+            fatalError()
         } operation: {
             CreateViary()
         }
 
         store = TestStore(
             initialState: initialState,
-            reducer: reducer
+            reducer: { reducer }
         )
     }
 

@@ -12,15 +12,11 @@ import ComposableArchitecture
 public final class AppDelegate: NSObject, UIApplicationDelegate {
     public let store = StoreOf<AppReducer>(
         initialState: AppReducer.State(),
-        reducer: AppReducer()
+        reducer: { AppReducer() }
     )
 
-    var viewStore: ViewStore<Void, AppReducer.Action> {
-        ViewStore(store.stateless)
-    }
-
     public func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-        viewStore.send(.appDelegate(.didFinishLaunching))
+        store.send(.appDelegate(.didFinishLaunching))
         return true
     }
 }

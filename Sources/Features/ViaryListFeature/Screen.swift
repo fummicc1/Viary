@@ -22,16 +22,13 @@ public struct ViaryListScreen: View {
             }
     }
 
+    @MainActor
     func content(_ viewStore: ViewStoreOf<ViaryList>) -> some View {
         VStack {
             let viaries = viewStore.viaries
             if viaries.isEmpty {
-                Button {
-                    viewStore.send(.createSample)
-                } label: {
-                    SelectableText("Create")
-                }
-                .buttonStyle(.borderedProminent)
+                ProgressView()
+                    .progressViewStyle(.circular)
             } else {
                 FloatingActionable(
                     .bottomTrailing,
@@ -45,6 +42,7 @@ public struct ViaryListScreen: View {
         }
     }
 
+    @MainActor
     func list(viewStore: ViewStoreOf<ViaryList>) -> some View {
         List {
             ForEach(viewStore.viaries) { viary in

@@ -32,18 +32,21 @@ class EditableTests: XCTestCase {
 
     @MainActor
     func test_editEmotionScore() async throws {
-        let repository = ViaryRepositoryMock()
+//        let repository = ViaryRepositoryMock()
         let target = viaryGenerator.make()
 
         let testStore = TestStore(
             initialState: EditViary.State(
                 original: target
             ),
-            reducer: withDependencies({
-                $0.viaryRepository = repository
-            }, operation: {
-                EditViary()
-            })
+            reducer: {
+                withDependencies({ _ in
+//                    $0.viaryRepository = repository
+                    fatalError()
+                }, operation: {
+                    EditViary()
+                })
+            }
         )
 
         guard let editMessage = target.messages.first else {

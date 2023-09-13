@@ -11,11 +11,11 @@ import Entities
 import Resources
 
 /// @mockable
-public protocol EmotionDetector {
+public protocol EmotionDetector: Actor {
     func infer(text: String, lang: Lang) async -> [Double]
 }
 
-public class EmotionDetectorImpl {
+public actor EmotionDetectorImpl: Sendable {
 
     private let model: emotion_english_distilroberta_base
     private let tokenizer: BertTokenizer
@@ -88,3 +88,5 @@ extension EmotionDetectorImpl: EmotionDetector {
         return ret
     }
 }
+
+extension emotion_english_distilroberta_base: @unchecked Sendable {}

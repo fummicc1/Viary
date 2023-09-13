@@ -1,8 +1,9 @@
 import Foundation
 import RealmSwift
+import RealmSwiftMacro
 
-@MainActor
-public class StoredMessage: Object, ObjectWithList {
+@GenCrud
+public final class StoredMessage: Object, ObjectWithList {
     @Persisted(primaryKey: true) public var id: String = UUID().uuidString
     @Persisted public var sentence: String = ""
     @Persisted public var lang: String = "en"

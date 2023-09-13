@@ -1,5 +1,4 @@
 import SwiftUI
-import Combine
 import ComposableArchitecture
 import Dependencies
 import Entities
@@ -7,7 +6,7 @@ import Repositories
 import IdentifiedCollections
 import Tagged
 
-public struct ViaryList: ReducerProtocol {
+public struct ViaryList: ReducerProtocol, Sendable {
 
     @Dependency(\.viaryRepository) var viaryRepository
     @Dependency(\.viarySample) var viarySample
@@ -23,8 +22,6 @@ public struct ViaryList: ReducerProtocol {
         public var destination: Destination? = nil
         public var errorMessage: String?
 
-        var streamCancellable: AnyCancellable?
-
         public init(
             viaries: IdentifiedArrayOf<Viary> = [],
             errorMessage: String? = nil
@@ -34,7 +31,7 @@ public struct ViaryList: ReducerProtocol {
         }
     }
 
-    public enum Action: Equatable {
+    public enum Action: Equatable, Sendable {
         case onAppear
         case loaded(TaskResult<IdentifiedArrayOf<Viary>>)
         case createSample
@@ -44,16 +41,18 @@ public struct ViaryList: ReducerProtocol {
         case destination(Destination?)
     }
 
-    public enum Destination: Equatable {
-        case detail(Viary)
+    public enum Destination: Equatable, Sendable {
+        case detail(Viary.ID)
         case create
     }
 
     public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
         switch action {
         case .onAppear:
-            return EffectTask.publisher {
-                viaryRepository.myViaries.map { Action.loaded(.success($0)) }
+            return EffectTask.run { send in
+                for await viaries in viaryRepository.myViaries {
+                    await send(.loaded(.success(viaries)))
+                }
             }
         case .loaded(let result):
             switch result {
@@ -61,6 +60,9 @@ public struct ViaryList: ReducerProtocol {
                 state.viaries = IdentifiedArray(
                     uniqueElements: viaries.sorted(using: KeyPathComparator(\.date)).reversed()
                 )
+                if state.viaries.isEmpty {
+                    return .send(.createSample)
+                }
             case .failure(let error):
                 state.errorMessage = "\(error)"
             }
@@ -70,7 +72,7 @@ public struct ViaryList: ReducerProtocol {
                 state.errorMessage = Error.failedToCreateSample.localizedDescription
                 return .none
             }
-            return .fireAndForget {
+            return .run { _ in
                 let newViary = viarySample.make()
                 let emotions = Dictionary(uniqueKeysWithValues: newViary.messages.map {
                     ($0.id, $0.emotions)
@@ -82,7 +84,7 @@ public struct ViaryList: ReducerProtocol {
             return .send(.destination(.create))
 
         case let .didTap(viary):
-            return .send(.destination(.detail(viary)))
+            return .send(.destination(.detail(viary.id)))
 
         case .destination(let destination):
             state.destination = destination
