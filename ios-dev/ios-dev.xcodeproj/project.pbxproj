@@ -12,7 +12,6 @@
 		D323E65129F9756C00F5072D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D323E65029F9756C00F5072D /* Preview Assets.xcassets */; };
 		D323E67B29F976EB00F5072D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D323E67A29F976EB00F5072D /* GoogleService-Info.plist */; };
 		D327985A2A05EC5700807FBA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D32798592A05EC5700807FBA /* Settings.bundle */; };
-		D3CD36CA2A870005003C3C6C /* App in Frameworks */ = {isa = PBXBuildFile; productRef = D3CD36C92A870005003C3C6C /* App */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,7 +30,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3CD36CA2A870005003C3C6C /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -102,7 +100,6 @@
 			);
 			name = "ios-dev";
 			packageProductDependencies = (
-				D3CD36C92A870005003C3C6C /* App */,
 			);
 			productName = "ios-dev";
 			productReference = D323E64529F9756B00F5072D /* Viary-dev.app */;
@@ -420,13 +417,6 @@
 			relativePath = ..;
 		};
 /* End XCLocalSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		D3CD36C92A870005003C3C6C /* App */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = App;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D323E63D29F9756B00F5072D /* Project object */;
 }

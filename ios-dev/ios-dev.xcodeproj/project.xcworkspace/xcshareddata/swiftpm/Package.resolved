@@ -14,6 +14,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
+<<<<<<< Updated upstream
         "revision" : "b2fa556e4e48cbf06cf8c63def138c98f4b811fa",
         "version" : "5.8.0"
       }
@@ -25,6 +26,10 @@
       "state" : {
         "revision" : "1f0729e4f1f6c7166acfac3cec43b3cbe83be0e6",
         "version" : "0.5.2"
+=======
+        "revision" : "3dc6a42c7727c49bf26508e29b0a0b35f9c7e1ad",
+        "version" : "5.8.1"
+>>>>>>> Stashed changes
       }
     },
     {
@@ -167,8 +172,13 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core.git",
       "state" : {
+<<<<<<< Updated upstream
         "revision" : "c04f5e401a1ec682e6b08b1ee157e19a0f834a5f",
         "version" : "13.17.1"
+=======
+        "revision" : "c569bec4d04da84030d94f376437bc4efda3686b",
+        "version" : "13.23.1"
+>>>>>>> Stashed changes
       }
     },
     {
@@ -176,6 +186,7 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-swift",
       "state" : {
+<<<<<<< Updated upstream
         "revision" : "330a239712af77a3b0926b9ffa9582302a0b9923",
         "version" : "10.42.1"
       }
@@ -187,6 +198,10 @@
       "state" : {
         "revision" : "803b20c4665f3783b2c665aa50de96a9b3bdb3de",
         "version" : "0.0.5"
+=======
+        "revision" : "fd199ce07edb4db69e862f74151b95602aad3b43",
+        "version" : "10.44.0"
+>>>>>>> Stashed changes
       }
     },
     {
@@ -286,6 +301,7 @@
       "state" : {
         "revision" : "cf62cdaea48b77f1a631e5cb3aeda6047c2cba1d",
         "version" : "1.23.0"
+<<<<<<< Updated upstream
       }
     },
     {
@@ -295,6 +311,8 @@
       "state" : {
         "revision" : "7bb5231dad28c6dceabf7a439867f39d2c105e4f",
         "version" : "509.0.0-swift-DEVELOPMENT-SNAPSHOT-2023-09-05-a"
+=======
+>>>>>>> Stashed changes
       }
     },
     {

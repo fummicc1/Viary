@@ -1,10 +1,13 @@
-// swift-tools-version: 5.8
+// swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 import Foundation
 
 let useUnsafeFlag = ProcessInfo.processInfo.environment["USE_UNSAFE_FLAG"]?.isEmpty == false
+let settings: [SwiftSetting] = [
+  .enableExperimentalFeature("StrictConcurrency")
+]
 
 let package = Package(
     name: "Viary",
@@ -54,7 +57,8 @@ extension Package {
                     "CreateViaryFeature",
                     "EditViaryFeature",
                     "ViaryListFeature",
-                ]
+                ],
+				swiftSettings: settings
             ),
             .testTarget(
                 name: "AppTests",
@@ -70,7 +74,7 @@ extension Package {
                 dependencies: [],
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(name: "UtilsTests", dependencies: ["Utils"]),
         ]
@@ -86,7 +90,7 @@ extension Package {
                 ],
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(name: "SpeechToTextTests", dependencies: ["SpeechToText"]),
         ]
@@ -101,7 +105,7 @@ extension Package {
                 ],
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(name: "SharedUITests", dependencies: ["SharedUI"]),
         ]
@@ -118,7 +122,7 @@ extension Package {
                 ],
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(name: "ResourcesTests", dependencies: ["Resources"])
         ]
@@ -140,7 +144,7 @@ extension Package {
                 ],
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(
                 name: "RepositoriesTests",
@@ -163,7 +167,7 @@ extension Package {
                 ],
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(
                 name: "LocalDataStoreTests",
@@ -185,7 +189,7 @@ extension Package {
                 ],
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(
                 name: "Ja2EnTests",
@@ -218,7 +222,7 @@ extension Package {
                 path: "Sources/Features/CreateViaryFeature",
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(
                 name: "CreateViaryFeatureTests",
@@ -247,7 +251,7 @@ extension Package {
                 path: "Sources/Features/EditViaryFeature",
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(
                 name: "EditViaryFeatureTests",
@@ -276,7 +280,7 @@ extension Package {
                 path: "Sources/Features/ViaryListFeature",
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(
                 name: "ViaryListFeatureTests",
@@ -299,7 +303,7 @@ extension Package {
                 ],
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(
                 name: "EntitiesTests",
@@ -322,7 +326,7 @@ extension Package {
                 ],
                 swiftSettings: useUnsafeFlag ?  [
                     .unsafeFlags(["-Xfrontend", "-strict-concurrency=complete"]),
-                ] : []
+                ] : settings
             ),
             .testTarget(
                 name: "EmotionDetectionTests",
