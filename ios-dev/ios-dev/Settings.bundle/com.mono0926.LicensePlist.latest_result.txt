@@ -75,4 +75,4 @@ body:                     …
 
 add-version-numbers: false
 
-LicensePlist Version: 3.24.11
+LicensePlist Version: 3.25.1

@@ -6,11 +6,11 @@ public enum Ja2EnServiceError: LocalizedError {
     case noResult(response: Ja2EnResponse)
 }
 
-public protocol Ja2EnService {
+public protocol Ja2EnService: Sendable {
     func translate(message: String) async throws -> String
 }
 
-public class Ja2EnServiceImpl: Ja2EnService, DependencyKey {
+public final class Ja2EnServiceImpl: Ja2EnService, DependencyKey {
 
     public static var liveValue: any Ja2EnService = Ja2EnServiceImpl()
 
