@@ -34,8 +34,8 @@ public actor ViaryRepositoryImpl {
     public init(apiClient: AppAPIClient) {
         self.apiClient = apiClient
 
-        Task {
-            let (token, stream) = try await StoredViary.observe(actor: self)
+        Task { @MainActor in
+            let (token, stream) = try await StoredViary.observe()
             await add(token: token)
             var domainViaries: [Viary] = []
             for await changes in stream {
@@ -65,6 +65,7 @@ public actor ViaryRepositoryImpl {
 }
 
 extension ViaryRepositoryImpl {
+    @MainActor
     func mapStoredIntoDomain(stored: [StoredViary]) -> [Viary] {
         stored.map { storedViary in
             var messages: [Viary.Message] = []
@@ -106,22 +107,25 @@ extension ViaryRepositoryImpl: ViaryRepository {
         myViariesSubject.dropFirst().eraseToStream()
     }
 
+    @MainActor
     public func load() async throws -> IdentifiedArrayOf<Viary> {
         let latest = try await StoredViary.list()
-        let viaries = mapStoredIntoDomain(stored: latest.map { $0 })
+        let viaries = await mapStoredIntoDomain(stored: latest.map { $0 })
         return IdentifiedArrayOf(uniqueElements: viaries)
     }
 
+    @MainActor
     public func load(id: Viary.ID) async throws -> Viary {
         guard
             let target = try await StoredViary.list().first(where: { $0.id == id.rawValue }),
-            let viary = mapStoredIntoDomain(stored: [target]).first else {
+            let viary = await mapStoredIntoDomain(stored: [target]).first else {
             assertionFailure()
             throw ViaryRepositoryError.didNotFindStored(viaryId: id)
         }
         return viary
     }
 
+    @MainActor
     public func create(viary: Viary, with emotions: [Viary.Message.ID: [Emotion.Kind: Emotion]]) async throws {
         let messages = viary.messages
         let updatedAt = viary.updatedAt
@@ -159,6 +163,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
         }
     }
 
+    @MainActor
     public func update(id: Tagged<Viary, String>, viary: Viary) async throws {
         guard let entity = try await StoredViary.list().first(where: { $0.id == id.rawValue }) else {
             assertionFailure()
@@ -188,6 +193,7 @@ extension ViaryRepositoryImpl: ViaryRepository {
         })
     }
 
+    @MainActor
     public func delete(id: Tagged<Viary, String>) async throws {
         let viary = try await StoredViary.list().first(where: { $0.id == id.rawValue })
         try await viary?.delete()

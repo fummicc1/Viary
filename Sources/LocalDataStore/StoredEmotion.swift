@@ -2,6 +2,7 @@ import Foundation
 import RealmSwift
 import RealmSwiftMacro
 
+@MainActor
 @GenCrud
 public final class StoredEmotion: Object {
     @Persisted(primaryKey: true) public var id: String = UUID().uuidString

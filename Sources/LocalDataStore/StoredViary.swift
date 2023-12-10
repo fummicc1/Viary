@@ -3,6 +3,7 @@ import RealmSwift
 import RealmSwiftMacro
 
 
+@MainActor
 @GenCrud
 public final class StoredViary: Object, ObjectWithList {
     @Persisted(primaryKey: true) public var id: String = UUID().uuidString
