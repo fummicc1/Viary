@@ -2,7 +2,7 @@ import Foundation
 import IdentifiedCollections
 import Tagged
 
-public struct Viary: Identifiable, Equatable, Sendable {
+public struct Viary: Identifiable, Hashable, Sendable {
     public private(set) var id: Tagged<Self, String>
     public var messages: IdentifiedArrayOf<Message>
     public var date: Date
@@ -50,7 +50,7 @@ public struct Viary: Identifiable, Equatable, Sendable {
         )
     }
 
-    public struct Message: Identifiable, Equatable, Sendable {
+    public struct Message: Identifiable, Hashable, Sendable {
         public var viaryID: Tagged<Viary, String>
         public var id: Tagged<Message, String>
         public var sentence: String

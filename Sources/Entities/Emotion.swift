@@ -1,7 +1,7 @@
 import Foundation
 import SwiftUI
 
-public struct Emotion: Identifiable, Equatable, Sendable {
+public struct Emotion: Identifiable, Hashable, Sendable {
     public var sentence: String
     public var score: Int
     public var kind: Kind
@@ -22,7 +22,7 @@ public struct Emotion: Identifiable, Equatable, Sendable {
 }
 
 public extension Emotion {
-    enum Kind: String, Equatable, Identifiable, CaseIterable, Sendable {
+    enum Kind: String, Hashable, Identifiable, CaseIterable, Sendable {
         case anger
         case disgust
         case fear

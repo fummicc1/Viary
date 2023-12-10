@@ -40,7 +40,7 @@ public struct AppScreen: View {
                         ) { destination -> EditViaryScreen in
                             let viaryId = destination.wrappedValue
                             let state: EditViary.State
-                            if let viary = viewStore.state.viaries[id: viaryId] {
+                            if let viary = viewStore.state.viaries.values.flatMap({ $0 }).first(where: { $0.id == viaryId }) {
                                 state = .init(original: viary)
                             } else {
                                 state = .init(originalId: viaryId)
