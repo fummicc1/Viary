@@ -7,22 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "856F2876-E6FB-4426-9C54-C91D63FED675"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../Sources/LocalDataStore/RealmMigrationManager.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
-            landmarkName = "migrationMethod(migration:schemaVersion:oldSchemaVersion:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "8ADBFAFD-A94B-4DAC-B10E-1E7D86DB56A7"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -73,23 +57,70 @@
                   endingLineNumber = "71"
                   offsetFromSymbolStart = "2636">
                </Location>
+               <Location
+                  uuid = "8ADBFAFD-A94B-4DAC-B10E-1E7D86DB56A7 - ace18b569d042728"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ViaryListFeature.ViaryList.reduce(into: inout ViaryListFeature.ViaryList.State, action: ViaryListFeature.ViaryList.Action) -&gt; ComposableArchitecture.EffectPublisher&lt;ViaryListFeature.ViaryList.Action, Swift.Never&gt;"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/Viary-iOS/Sources/Features/ViaryListFeature/Reducer.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "71"
+                  endingLineNumber = "71"
+                  offsetFromSymbolStart = "2436">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "998D5A6D-3F1C-4019-9817-5264B3CA1950"
+            uuid = "9D123FF8-D250-4DE2-AA39-85224790824D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../Sources/App/Screen.swift"
+            filePath = "../Sources/SpeechToText/SpeechToTextService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "41"
-            endingLineNumber = "41"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "stream()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9D123FF8-D250-4DE2-AA39-85224790824D - 3a62575d9ea6a17b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for SpeechToText.SpeechToTextServiceImpl.stream() async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/Viary-iOS/Sources/SpeechToText/SpeechToTextService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "132"
+                  endingLineNumber = "132"
+                  offsetFromSymbolStart = "3364">
+               </Location>
+               <Location
+                  uuid = "9D123FF8-D250-4DE2-AA39-85224790824D - 3a62575d9ea6a17b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "(1) suspend resume partial function for SpeechToText.SpeechToTextServiceImpl.stream() async throws -&gt; ()"
+                  moduleName = "Viary-dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fumiyatanaka/Work/Apps/Viary/Viary-iOS/Sources/SpeechToText/SpeechToTextService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "132"
+                  endingLineNumber = "132"
+                  offsetFromSymbolStart = "3956">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

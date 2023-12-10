@@ -184,7 +184,7 @@ public final actor SpeechToTextServiceImpl {
         inputNode.removeTap(onBus: 0)
         inputNode.installTap(
             onBus: 0,
-            bufferSize: 2048,
+            bufferSize: AVAudioFrameCount(recordingFormat.sampleRate),
             format: recordingFormat
         ) { [weak self] (buffer: AVAudioPCMBuffer, when: AVAudioTime) in
             self?.request?.append(buffer)
