@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Lang: String, Identifiable, Equatable, ExpressibleByStringLiteral, CaseIterable, Sendable {
+public enum Lang: String, Identifiable, Hashable, ExpressibleByStringLiteral, CaseIterable, Sendable {
     case ja
     case en
 

@@ -45,30 +45,95 @@ public struct ViaryListScreen: View {
     @MainActor
     func list(viewStore: ViewStoreOf<ViaryList>) -> some View {
         List {
-            ForEach(viewStore.viaries) { viary in
-                VStack(alignment: .leading) {
-                    SelectableText(viary.message)
-                    LazyVStack {
-                        ForEach(Emotion.Kind.allCases) { kind in
-                            let value = viary.score(of: kind)
-                            HStack {
-                                SelectableText(kind.text)
-                                ProgressView(value: Double(value) / 100)
-                                    .foregroundColor(kind.color)
-                                SelectableText("\(value)%")
-                            }
-                        }
+            ForEach(viewStore.viaries.keys.map { $0 }) { (key: String) in
+                Section {
+                    ForEach(viewStore.viaries[key] ?? [], id: \.self) { (viary: Viary) in
+                        listItem(viary: viary)
                     }
-                    HStack {
-                        Text(viary.date, style: .relative)
-                            .foregroundColor(.secondary)
-                        Spacer()
-                    }
-                }
-                .onTapGesture {
-                    viewStore.send(.didTap(viary: viary))
+                } header: {
+                    Text(key).bold().font(.title3)
                 }
             }
         }
+    }
+
+    @MainActor
+    func listItem(viary: Viary) -> some View {
+        HStack {
+            VStack(spacing: 4) {
+                Text(viary.date.weekDay)
+                    .bold()
+                    .foregroundStyle(Color.accentColor)
+                Text(viary.date.day)
+                    .bold()
+                    .font(.title3)
+                    .foregroundStyle(Color.accentColor)
+                Text(viary.date.formatted(date: .omitted, time: .shortened))
+                    .foregroundStyle(Color.accentColor)
+            }
+            .padding(4)
+            VStack(alignment: .leading) {
+                SelectableText(viary.message)
+                LazyVStack {
+                    ForEach(Emotion.Kind.allCases) { kind in
+                        let value = viary.score(of: kind)
+                        HStack {
+                            SelectableText(kind.text)
+                            ProgressView(value: Double(value) / 100)
+                                .foregroundColor(kind.color)
+                            SelectableText("\(value)%")
+                        }
+                    }
+                }
+            }
+        }
+        .onTapGesture {
+            viewStore.send(.didTap(viary: viary))
+        }
+    }
+}
+
+private extension Date {
+    var weekDay: String {
+        let calender = Calendar.autoupdatingCurrent
+        let component = calender.component(.weekday, from: self)
+        switch component {
+        case 1:
+            return "SUN"
+        case 2:
+            return "MON"
+        case 3:
+            return "TUE"
+        case 4:
+            return "WED"
+        case 5:
+            return "THU"
+        case 6:
+            return "FRI"
+        case 7:
+            return "SAT"
+        default:
+            return ""
+        }
+
+    }
+
+    var month: String {
+        let calender = Calendar.autoupdatingCurrent
+        let component = calender.component(.month, from: self)
+        return "\(component)月"
+    }
+
+
+    var day: String {
+        let calender = Calendar.autoupdatingCurrent
+        let component = calender.component(.day, from: self)
+        return "\(component)"
+    }
+}
+
+extension String: Identifiable {
+    public var id: String {
+        self
     }
 }

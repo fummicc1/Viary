@@ -18,7 +18,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
     }
 
     public struct State: Equatable {
-        public var viaries: IdentifiedArrayOf<Viary> = []
+        public var viaries: Dictionary<String, [Viary]> = [:]
         public var destination: Destination? = nil
         public var errorMessage: String?
 
@@ -26,7 +26,9 @@ public struct ViaryList: ReducerProtocol, Sendable {
             viaries: IdentifiedArrayOf<Viary> = [],
             errorMessage: String? = nil
         ) {
-            self.viaries = viaries
+            self.viaries = Dictionary(grouping: viaries, by: { viary in
+                viary.date.formatted(date: .abbreviated, time: .omitted)
+            })
             self.errorMessage = errorMessage
         }
     }
@@ -57,9 +59,11 @@ public struct ViaryList: ReducerProtocol, Sendable {
         case .loaded(let result):
             switch result {
             case .success(let viaries):
-                state.viaries = IdentifiedArray(
+                state.viaries = Dictionary(grouping: IdentifiedArray(
                     uniqueElements: viaries.sorted(using: KeyPathComparator(\.date)).reversed()
-                )
+                ), by: {
+                    $0.date.formatted(date: .abbreviated, time: .omitted)
+                })
                 if state.viaries.isEmpty {
                     return .send(.createSample)
                 }
