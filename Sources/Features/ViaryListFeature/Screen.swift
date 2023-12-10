@@ -72,8 +72,6 @@ public struct ViaryListScreen: View {
                     .foregroundStyle(Color.accentColor)
             }
             .padding(4)
-            .background(Color.secondaryBackgroundColor)
-            .clipShape(RoundedRectangle(cornerRadius: 10))
             VStack(alignment: .leading) {
                 SelectableText(viary.message)
                 LazyVStack {
