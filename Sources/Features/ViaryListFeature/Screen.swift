@@ -46,23 +46,31 @@ public struct ViaryListScreen: View {
     func list(viewStore: ViewStoreOf<ViaryList>) -> some View {
         List {
             ForEach(viewStore.viaries) { viary in
-                VStack(alignment: .leading) {
-                    SelectableText(viary.message)
-                    LazyVStack {
-                        ForEach(Emotion.Kind.allCases) { kind in
-                            let value = viary.score(of: kind)
-                            HStack {
-                                SelectableText(kind.text)
-                                ProgressView(value: Double(value) / 100)
-                                    .foregroundColor(kind.color)
-                                SelectableText("\(value)%")
+                HStack {
+                    VStack {
+                        Text(viary.date.weekDay)
+                            .bold()
+                        Text(viary.date.month)
+                            .bold()
+                    }
+                    VStack(alignment: .leading) {
+                        SelectableText(viary.message)
+                        LazyVStack {
+                            ForEach(Emotion.Kind.allCases) { kind in
+                                let value = viary.score(of: kind)
+                                HStack {
+                                    SelectableText(kind.text)
+                                    ProgressView(value: Double(value) / 100)
+                                        .foregroundColor(kind.color)
+                                    SelectableText("\(value)%")
+                                }
                             }
                         }
-                    }
-                    HStack {
-                        Text(viary.date, style: .relative)
-                            .foregroundColor(.secondary)
-                        Spacer()
+                        HStack {
+                            Text(viary.date, style: .relative)
+                                .foregroundColor(.secondary)
+                            Spacer()
+                        }
                     }
                 }
                 .onTapGesture {
@@ -70,5 +78,37 @@ public struct ViaryListScreen: View {
                 }
             }
         }
+    }
+}
+
+private extension Date {
+    var weekDay: String {
+        let calender = Calendar.autoupdatingCurrent
+        let component = calender.component(.day, from: self)
+        switch component {
+        case 0:
+            return "SUN"
+        case 1:
+            return "MON"
+        case 2:
+            return "TUE"
+        case 3:
+            return "WED"
+        case 4:
+            return "THU"
+        case 5:
+            return "FRI"
+        case 6:
+            return "SAT"
+        default:
+            return ""
+        }
+
+    }
+
+    var month: String {
+        let calender = Calendar.autoupdatingCurrent
+        let component = calender.component(.month, from: self)
+        return "\(component + 1)月"
     }
 }
