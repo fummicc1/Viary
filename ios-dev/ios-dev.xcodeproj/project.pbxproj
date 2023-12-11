@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,9 +11,8 @@
 		D323E64D29F9756C00F5072D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D323E64C29F9756C00F5072D /* Assets.xcassets */; };
 		D323E65129F9756C00F5072D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D323E65029F9756C00F5072D /* Preview Assets.xcassets */; };
 		D323E67B29F976EB00F5072D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D323E67A29F976EB00F5072D /* GoogleService-Info.plist */; };
-		D323E68529F977B400F5072D /* App in Frameworks */ = {isa = PBXBuildFile; productRef = D323E68429F977B400F5072D /* App */; };
-		D323E68929F9794D00F5072D /* vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = D323E68829F9794D00F5072D /* vocab.json */; };
 		D327985A2A05EC5700807FBA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D32798592A05EC5700807FBA /* Settings.bundle */; };
+		D33878512B1A9E4100FAEC8E /* App in Frameworks */ = {isa = PBXBuildFile; productRef = D33878502B1A9E4100FAEC8E /* App */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,15 +22,8 @@
 		D323E64E29F9756C00F5072D /* ios_dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ios_dev.entitlements; sourceTree = "<group>"; };
 		D323E65029F9756C00F5072D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D323E67A29F976EB00F5072D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D323E68229F9778400F5072D /* App */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = App; path = ../Packages/App; sourceTree = "<group>"; };
 		D323E68729F978EC00F5072D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		D323E68829F9794D00F5072D /* vocab.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = vocab.json; path = ../Packages/Resources/Sources/Resources/vocab.json; sourceTree = "<group>"; };
 		D32798592A05EC5700807FBA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		D3945B3129FF5524005105F2 /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
-		D3945B3329FF560F005105F2 /* CreateViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = CreateViaryFeature; path = ../Packages/Features/CreateViaryFeature; sourceTree = "<group>"; };
-		D3945B3429FF564C005105F2 /* EditViaryFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = EditViaryFeature; path = ../Packages/Features/EditViaryFeature; sourceTree = "<group>"; };
-		D3945B3529FF5656005105F2 /* ViaryListFeature */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryListFeature; path = ../Packages/Features/ViaryListFeature; sourceTree = "<group>"; };
-		D3945B3629FF5664005105F2 /* ViaryUseCase */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ViaryUseCase; path = ../Packages/UseCases/ViaryUseCase; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,7 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D323E68529F977B400F5072D /* App in Frameworks */,
+				D33878512B1A9E4100FAEC8E /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -49,8 +41,6 @@
 		D323E63C29F9756B00F5072D = {
 			isa = PBXGroup;
 			children = (
-				D323E68829F9794D00F5072D /* vocab.json */,
-				D323E67C29F976FF00F5072D /* Packages */,
 				D323E64729F9756B00F5072D /* ios-dev */,
 				D323E64629F9756B00F5072D /* Products */,
 				D323E68329F977B400F5072D /* Frameworks */,
@@ -75,7 +65,6 @@
 				D323E64C29F9756C00F5072D /* Assets.xcassets */,
 				D323E64E29F9756C00F5072D /* ios_dev.entitlements */,
 				D323E64F29F9756C00F5072D /* Preview Content */,
-				D3945B3129FF5524005105F2 /* TestPlan.xctestplan */,
 			);
 			path = "ios-dev";
 			sourceTree = "<group>";
@@ -86,18 +75,6 @@
 				D323E65029F9756C00F5072D /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		D323E67C29F976FF00F5072D /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				D323E68229F9778400F5072D /* App */,
-				D3945B3329FF560F005105F2 /* CreateViaryFeature */,
-				D3945B3429FF564C005105F2 /* EditViaryFeature */,
-				D3945B3529FF5656005105F2 /* ViaryListFeature */,
-				D3945B3629FF5664005105F2 /* ViaryUseCase */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		D323E68329F977B400F5072D /* Frameworks */ = {
@@ -125,7 +102,7 @@
 			);
 			name = "ios-dev";
 			packageProductDependencies = (
-				D323E68429F977B400F5072D /* App */,
+				D33878502B1A9E4100FAEC8E /* App */,
 			);
 			productName = "ios-dev";
 			productReference = D323E64529F9756B00F5072D /* Viary-dev.app */;
@@ -156,6 +133,7 @@
 			);
 			mainGroup = D323E63C29F9756B00F5072D;
 			packageReferences = (
+				D3CD36C82A870005003C3C6C /* XCLocalSwiftPackageReference ".." */,
 			);
 			productRefGroup = D323E64629F9756B00F5072D /* Products */;
 			projectDirPath = "";
@@ -171,7 +149,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D323E68929F9794D00F5072D /* vocab.json in Resources */,
 				D323E65129F9756C00F5072D /* Preview Assets.xcassets in Resources */,
 				D327985A2A05EC5700807FBA /* Settings.bundle in Resources */,
 				D323E64D29F9756C00F5072D /* Assets.xcassets in Resources */,
@@ -198,7 +175,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ $CONFIGURATION = \"Debug\" ]; then\narch=`uname -m`\nif [ $arch == \"arm64\" ]; then\nMINT_PATH=/opt/homebrew/bin/mint\nelse\nMINT_PATH=/usr/local/bin/mint\nfi\nxcrun --sdk macosx $MINT_PATH run mono0926/LicensePlist --output-path ios-dev/Settings.bundle --config-path ../license_plist.yml\nfi\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif [ $CONFIGURATION = \"Debug\" ]; then\n    arch=`uname -m`\n    if [ $arch == \"arm64\" ]; then\n        MINT_PATH=/opt/homebrew/bin/mint\n    else\n        MINT_PATH=/usr/local/bin/mint\n    fi\n    xcrun --sdk macosx $MINT_PATH run mono0926/LicensePlist --output-path ios-dev/Settings.bundle --config-path ../license_plist.yml\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -437,8 +414,15 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D3CD36C82A870005003C3C6C /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
-		D323E68429F977B400F5072D /* App */ = {
+		D33878502B1A9E4100FAEC8E /* App */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = App;
 		};

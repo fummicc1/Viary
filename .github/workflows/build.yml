@@ -24,8 +24,14 @@ jobs:
         run: brew install xcbeautify
       - name: Install mint
         run: brew install mint
-      - name: "Build and Test"
+      - name: "Test Sources"
+        run: |
+          set -e
+          set -o pipefail
+          xcodebuild -scheme Viary test -destination "name=iPhone 14" "OTHER_SWIFT_FLAGS=-D CI" | xcbeautify
+      - name: "Build dev project"
         working-directory: ios-dev
         run: |
+          set -e
           set -o pipefail
-          xcodebuild -project ios-dev.xcodeproj -scheme ios-dev build test -destination 'platform=iOS Simulator,name=iPhone 14' "OTHER_SWIFT_FLAGS=-D CI" | xcbeautify
+          xcodebuild -project ios-dev.xcodeproj -scheme ios-dev build -destination 'platform=iOS Simulator,name=iPhone 14' "OTHER_SWIFT_FLAGS=-D CI" | xcbeautify
