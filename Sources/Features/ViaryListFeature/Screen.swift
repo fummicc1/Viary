@@ -27,8 +27,16 @@ public struct ViaryListScreen: View {
         VStack {
             let viaries = viewStore.viaries
             if viaries.isEmpty {
-                ProgressView()
-                    .progressViewStyle(.circular)
+                FloatingActionable(
+                    .bottomTrailing,
+                    fab: .image(.init(systemSymbol: .plus))
+                ) {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                } didPress: {
+                    viewStore.send(.createSample)
+                }
+
             } else {
                 FloatingActionable(
                     .bottomTrailing,
@@ -93,7 +101,7 @@ public struct ViaryListScreen: View {
     }
 }
 
-private extension Date {
+extension Date {
     var weekDay: String {
         let calender = Calendar.autoupdatingCurrent
         let component = calender.component(.weekday, from: self)
@@ -121,7 +129,13 @@ private extension Date {
     var month: String {
         let calender = Calendar.autoupdatingCurrent
         let component = calender.component(.month, from: self)
-        return "\(component)月"
+        return "\(component)"
+    }
+
+    var year: String {
+        let calender = Calendar.autoupdatingCurrent
+        let component = calender.component(.year, from: self)
+        return "\(component)"
     }
 
 

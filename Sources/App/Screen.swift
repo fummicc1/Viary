@@ -88,7 +88,7 @@ public struct AppScreen: View {
         .environment(
             \.realmConfiguration,
              Realm.Configuration(
-                schemaVersion: 1,
+                schemaVersion: 2,
                 migrationBlock: {
                     realmMigrationManager.migrationMethod(
                         migration: $0,

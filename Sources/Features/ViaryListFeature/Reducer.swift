@@ -27,7 +27,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
             errorMessage: String? = nil
         ) {
             self.viaries = Dictionary(grouping: viaries, by: { viary in
-                viary.date.formatted(date: .abbreviated, time: .omitted)
+                "\(viary.date.year)/\(viary.date.month)"
             })
             self.errorMessage = errorMessage
         }
@@ -59,11 +59,31 @@ public struct ViaryList: ReducerProtocol, Sendable {
         case .loaded(let result):
             switch result {
             case .success(let viaries):
-                state.viaries = Dictionary(grouping: IdentifiedArray(
-                    uniqueElements: viaries.sorted(using: KeyPathComparator(\.date)).reversed()
-                ), by: {
-                    $0.date.formatted(date: .abbreviated, time: .omitted)
-                })
+                state.viaries = Dictionary(
+                    uniqueKeysWithValues: Dictionary(
+                        grouping: viaries.sorted(
+                            using: KeyPathComparator(
+                                \.date,
+                                 order: .reverse
+                            )
+                        ),
+                        by: {
+                            "\($0.date.year)/\($0.date.month)"
+                        }
+                    )
+                    .sorted(
+                        using: KeyPathComparator(
+                            \.key,
+                             order: .reverse
+                        )
+                    ).map({
+                        (
+                            $0.key,
+                            $0.value
+                        )
+                    })
+                )
+
                 if state.viaries.isEmpty {
                     return .send(.createSample)
                 }
