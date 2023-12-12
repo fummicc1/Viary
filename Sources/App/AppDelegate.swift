@@ -7,7 +7,7 @@
 
 import Foundation
 import UIKit
-import ComposableArchitecture
+@_spi(Internals) import ComposableArchitecture
 
 public final class AppDelegate: NSObject, UIApplicationDelegate {
     public let store = StoreOf<AppReducer>(

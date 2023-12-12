@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -11,7 +11,7 @@
 		D323E66829F975A900F5072D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D323E66729F975A900F5072D /* Assets.xcassets */; };
 		D323E66C29F975A900F5072D /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D323E66B29F975A900F5072D /* Preview Assets.xcassets */; };
 		D323E67729F976A500F5072D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D323E67629F976A500F5072D /* GoogleService-Info.plist */; };
-		D323E68B29F9797F00F5072D /* vocab.json in Resources */ = {isa = PBXBuildFile; fileRef = D323E68A29F9797F00F5072D /* vocab.json */; };
+		D36AAEA32B2808DB00588A92 /* App in Frameworks */ = {isa = PBXBuildFile; productRef = D36AAEA22B2808DB00588A92 /* App */; };
 		D3950D7A2A05EF1400D053AA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = D3950D792A05EF1400D053AA /* Settings.bundle */; };
 		D3F6471C29F97A6D0025B4BD /* App in Frameworks */ = {isa = PBXBuildFile; productRef = D3F6471B29F97A6D0025B4BD /* App */; };
 /* End PBXBuildFile section */
@@ -23,8 +23,6 @@
 		D323E66929F975A900F5072D /* ios_prod.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ios_prod.entitlements; sourceTree = "<group>"; };
 		D323E66B29F975A900F5072D /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D323E67629F976A500F5072D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		D323E68629F977FC00F5072D /* App */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = App; path = ../Packages/App; sourceTree = "<group>"; };
-		D323E68A29F9797F00F5072D /* vocab.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = vocab.json; path = ../Packages/Resources/Sources/Resources/vocab.json; sourceTree = "<group>"; };
 		D3950D792A05EF1400D053AA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -33,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D36AAEA32B2808DB00588A92 /* App in Frameworks */,
 				D3F6471C29F97A6D0025B4BD /* App in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -43,8 +42,6 @@
 		D323E65729F975A900F5072D = {
 			isa = PBXGroup;
 			children = (
-				D323E68A29F9797F00F5072D /* vocab.json */,
-				D323E67229F9763800F5072D /* Packages */,
 				D323E66229F975A900F5072D /* ios-prod */,
 				D323E66129F975A900F5072D /* Products */,
 				D323E67F29F9772900F5072D /* Frameworks */,
@@ -80,14 +77,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		D323E67229F9763800F5072D /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				D323E68629F977FC00F5072D /* App */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		D323E67F29F9772900F5072D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +103,7 @@
 			name = "ios-prod";
 			packageProductDependencies = (
 				D3F6471B29F97A6D0025B4BD /* App */,
+				D36AAEA22B2808DB00588A92 /* App */,
 			);
 			productName = "ios-prod";
 			productReference = D323E66029F975A900F5072D /* Viary.app */;
@@ -143,6 +133,9 @@
 				Base,
 			);
 			mainGroup = D323E65729F975A900F5072D;
+			packageReferences = (
+				D36AAEA12B2808DB00588A92 /* XCLocalSwiftPackageReference ".." */,
+			);
 			productRefGroup = D323E66129F975A900F5072D /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -157,7 +150,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D323E68B29F9797F00F5072D /* vocab.json in Resources */,
 				D323E66C29F975A900F5072D /* Preview Assets.xcassets in Resources */,
 				D3950D7A2A05EF1400D053AA /* Settings.bundle in Resources */,
 				D323E66829F975A900F5072D /* Assets.xcassets in Resources */,
@@ -418,7 +410,18 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		D36AAEA12B2808DB00588A92 /* XCLocalSwiftPackageReference ".." */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ..;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		D36AAEA22B2808DB00588A92 /* App */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = App;
+		};
 		D3F6471B29F97A6D0025B4BD /* App */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = App;
