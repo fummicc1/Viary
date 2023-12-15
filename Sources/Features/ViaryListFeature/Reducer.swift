@@ -19,6 +19,15 @@ public struct ViaryList: ReducerProtocol, Sendable {
 
     public struct State: Equatable {
         public var viaries: Dictionary<String, [Viary]> = [:]
+		public var selecteddate: Date?
+		public var filteredViaries: Dictionary<String, [Viary]> {
+			viaries.filter { (key, viary) in
+				guard let selecteddate else {
+					return true
+				}
+				return selecteddate.sectionable == key
+			}
+		}
         public var destination: Destination? = nil
         public var errorMessage: String?
 
@@ -27,7 +36,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
             errorMessage: String? = nil
         ) {
             self.viaries = Dictionary(grouping: viaries, by: { viary in
-                "\(viary.date.year)/\(viary.date.month)"
+				viary.date.sectionable
             })
             self.errorMessage = errorMessage
         }
@@ -37,6 +46,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
         case onAppear
         case loaded(TaskResult<IdentifiedArrayOf<Viary>>)
         case createSample
+		case select(Date?)
         case didTapCreateButton
         case didTap(viary: Viary)
 
@@ -68,7 +78,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
                             )
                         ),
                         by: {
-                            "\($0.date.year)/\($0.date.month)"
+							$0.date.sectionable
                         }
                     )
                     .sorted(
@@ -104,6 +114,9 @@ public struct ViaryList: ReducerProtocol, Sendable {
                 try await viaryRepository.create(viary: newViary, with: emotions)
             }
 
+		case .select(let date):
+			state.selecteddate = date
+
         case .didTapCreateButton:
             return .send(.destination(.create))
 
@@ -115,4 +128,10 @@ public struct ViaryList: ReducerProtocol, Sendable {
         }
         return .none
     }
+}
+
+extension Date {
+	var sectionable: String {
+		"\(year)/\(month)"
+	}
 }
