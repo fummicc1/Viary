@@ -19,6 +19,16 @@ public struct ViaryList: ReducerProtocol, Sendable {
 
     public struct State: Equatable {
         public var viaries: Dictionary<String, [Viary]> = [:]
+		public var selecteddate: Date?
+		public var filteredViaries: Dictionary<String, [Viary]> {
+			viaries.filter { (key, viary) in
+				guard let selecteddate else {
+					return true
+				}
+				return selecteddate.sectionable == key
+			}
+		}
+		public var grabbarOffset: Double = 0
         public var destination: Destination? = nil
         public var errorMessage: String?
 
@@ -27,7 +37,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
             errorMessage: String? = nil
         ) {
             self.viaries = Dictionary(grouping: viaries, by: { viary in
-                "\(viary.date.year)/\(viary.date.month)"
+				viary.date.sectionable
             })
             self.errorMessage = errorMessage
         }
@@ -37,11 +47,18 @@ public struct ViaryList: ReducerProtocol, Sendable {
         case onAppear
         case loaded(TaskResult<IdentifiedArrayOf<Viary>>)
         case createSample
+		case select(Date?)
+		case didDragGrabbar(yOffset: Double)
+		case updateGrabbarYOffset(yOffset: Double)
         case didTapCreateButton
         case didTap(viary: Viary)
 
         case destination(Destination?)
     }
+
+	private enum CancelID: Hashable {
+		case debounceUpdateGrabbarYOffset
+	}
 
     public enum Destination: Equatable, Sendable {
         case detail(Viary.ID)
@@ -68,7 +85,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
                             )
                         ),
                         by: {
-                            "\($0.date.year)/\($0.date.month)"
+							$0.date.sectionable
                         }
                     )
                     .sorted(
@@ -83,10 +100,6 @@ public struct ViaryList: ReducerProtocol, Sendable {
                         )
                     })
                 )
-
-                if state.viaries.isEmpty {
-                    return .send(.createSample)
-                }
             case .failure(let error):
                 state.errorMessage = "\(error)"
             }
@@ -104,6 +117,23 @@ public struct ViaryList: ReducerProtocol, Sendable {
                 try await viaryRepository.create(viary: newViary, with: emotions)
             }
 
+		case .select(let date):
+			state.selecteddate = date
+
+		case .didDragGrabbar(let yOffset):
+			return .send(.updateGrabbarYOffset(yOffset: yOffset)).throttle(
+				id: CancelID.debounceUpdateGrabbarYOffset,
+				for: 0.1,
+				scheduler: DispatchQueue.main,
+				latest: false
+			).animation(
+				.easeInOut
+			)
+
+		case .updateGrabbarYOffset(let yOffset):
+			state.grabbarOffset = yOffset
+
+
         case .didTapCreateButton:
             return .send(.destination(.create))
 
@@ -115,4 +145,10 @@ public struct ViaryList: ReducerProtocol, Sendable {
         }
         return .none
     }
+}
+
+extension Date {
+	var sectionable: String {
+		"\(year)/\(month)"
+	}
 }
