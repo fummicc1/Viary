@@ -28,6 +28,7 @@ public struct ViaryList: ReducerProtocol, Sendable {
 				return selecteddate.sectionable == key
 			}
 		}
+		public var grabbarOffset: Double = 0
         public var destination: Destination? = nil
         public var errorMessage: String?
 
@@ -47,11 +48,17 @@ public struct ViaryList: ReducerProtocol, Sendable {
         case loaded(TaskResult<IdentifiedArrayOf<Viary>>)
         case createSample
 		case select(Date?)
+		case didDragGrabbar(yOffset: Double)
+		case updateGrabbarYOffset(yOffset: Double)
         case didTapCreateButton
         case didTap(viary: Viary)
 
         case destination(Destination?)
     }
+
+	private enum CancelID: Hashable {
+		case debounceUpdateGrabbarYOffset
+	}
 
     public enum Destination: Equatable, Sendable {
         case detail(Viary.ID)
@@ -93,10 +100,6 @@ public struct ViaryList: ReducerProtocol, Sendable {
                         )
                     })
                 )
-
-                if state.viaries.isEmpty {
-                    return .send(.createSample)
-                }
             case .failure(let error):
                 state.errorMessage = "\(error)"
             }
@@ -116,6 +119,20 @@ public struct ViaryList: ReducerProtocol, Sendable {
 
 		case .select(let date):
 			state.selecteddate = date
+
+		case .didDragGrabbar(let yOffset):
+			return .send(.updateGrabbarYOffset(yOffset: yOffset)).throttle(
+				id: CancelID.debounceUpdateGrabbarYOffset,
+				for: 0.1,
+				scheduler: DispatchQueue.main,
+				latest: false
+			).animation(
+				.easeInOut
+			)
+
+		case .updateGrabbarYOffset(let yOffset):
+			state.grabbarOffset = yOffset
+
 
         case .didTapCreateButton:
             return .send(.destination(.create))
