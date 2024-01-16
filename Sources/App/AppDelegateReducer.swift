@@ -3,7 +3,7 @@ import FirebaseCore
 import FirebaseAnalytics
 import ComposableArchitecture
 
-public struct AppDelegateReducer: ReducerProtocol {
+public struct AppDelegateReducer: Reducer {
     public struct State: Equatable {
         public init() {}
     }
@@ -12,7 +12,7 @@ public struct AppDelegateReducer: ReducerProtocol {
         case didFinishLaunching
     }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .didFinishLaunching:
             FirebaseApp.configure()

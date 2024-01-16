@@ -8,7 +8,7 @@ import Utils
 import Ja2En
 
 
-public struct EditViary: ReducerProtocol {
+public struct EditViary: Reducer {
 
     @Dependency(\.emotionDetector) var emotionDetector
     @Dependency(\.viaryRepository) var viaryRepository
@@ -90,7 +90,7 @@ public struct EditViary: ReducerProtocol {
         case messageNotFound(id: Tagged<Viary.Message, String>)
     }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .onAppear:
             if state.needToFetch {

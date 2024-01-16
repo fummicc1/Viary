@@ -9,7 +9,7 @@ import SpeechToText
 import Utils
 import Ja2En
 
-public struct CreateViary: ReducerProtocol, Sendable {
+public struct CreateViary: Reducer, Sendable {
 
     @Dependency(\.viaryRepository) var viaryRepository
     @Dependency(\.speechToTextService) var speechToTextService
@@ -107,10 +107,10 @@ public struct CreateViary: ReducerProtocol, Sendable {
         case onDisappear
     }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .onAppear:
-            return EffectTask.run { send in
+            return .run { send in
                 for await speechStatus in await speechToTextService.speechStatus {
                     await send(.updateSpeechStatus(speechStatus))
                 }
@@ -144,12 +144,12 @@ public struct CreateViary: ReducerProtocol, Sendable {
             }
 
         case .startRecording:
-            return .fireAndForget {
+			return .run { _ in
                 try await speechToTextService.start()
             }
 
         case .stopRecording:
-            return .fireAndForget {
+			return .run { _ in
                 try await speechToTextService.stop()
             }
 
@@ -171,56 +171,57 @@ public struct CreateViary: ReducerProtocol, Sendable {
                 return .none
             }
             state.saveStatus.start()
-            return .task { [state] in
+			return .run { [state] send in
+				do {
+					var messages = state.messages
 
-                var messages = state.messages
+					for (i, message) in messages.enumerated() {
+						var sentence: String = message.sentence
+						var lang: Lang = message.lang
+						if message.lang == .ja {
+							do {
+								sentence = try await ja2EnService.translate(message: sentence)
+								lang = .en
+							} catch {
+								// TODO: Error Handling
+							}
+						}
+						let newScore = await emotionDetector.infer(text: sentence, lang: lang)
+						let emotions = Emotion.Kind.allCases.indices.compactMap { index -> (Emotion.Kind, Emotion)? in
+							if newScore.count <= index {
+								return nil
+							}
+							let kind = Emotion.Kind.allCases[index]
+							let score = newScore[index]
+							return (
+								kind,
+								Emotion(
+									sentence: message.sentence,
+									score: Int(score),
+									kind: kind
+								)
+							)
+						}
+						messages[i].emotions = Dictionary(uniqueKeysWithValues: emotions)
+					}
 
-                for (i, message) in messages.enumerated() {
-                    var sentence: String = message.sentence
-                    var lang: Lang = message.lang
-                    if message.lang == .ja {
-                        do {
-                            sentence = try await ja2EnService.translate(message: sentence)
-                            lang = .en
-                        } catch {
-                            // TODO: Error Handling
-                        }
-                    }
-                    let newScore = await emotionDetector.infer(text: sentence, lang: lang)
-                    let emotions = Emotion.Kind.allCases.indices.compactMap { index -> (Emotion.Kind, Emotion)? in
-                        if newScore.count <= index {
-                            return nil
-                        }
-                        let kind = Emotion.Kind.allCases[index]
-                        let score = newScore[index]
-                        return (
-                            kind,
-                            Emotion(
-                                sentence: message.sentence,
-                                score: Int(score),
-                                kind: kind
-                            )
-                        )
-                    }
-                    messages[i].emotions = Dictionary(uniqueKeysWithValues: emotions)
-                }
-
-                let viary = Viary(
-                    id: .init(rawValue: uuid().uuidString),
-                    messages: IdentifiedArray(uniqueElements: messages),
-                    date: state.date
-                )
-                var emotionsPerMessage: [Viary.Message.ID: [Emotion.Kind: Emotion]] = [:]
-                for message in viary.messages {
-                    emotionsPerMessage[message.id] = message.emotions
-                }
-                try await viaryRepository.create(
-                    viary: viary,
-                    with: emotionsPerMessage
-                )
-                return .saved(.success(true))
-            } catch: { error in
-                return .saved(.failure(error))
+					let viary = Viary(
+						id: .init(rawValue: uuid().uuidString),
+						messages: IdentifiedArray(uniqueElements: messages),
+						date: state.date
+					)
+					var emotionsPerMessage: [Viary.Message.ID: [Emotion.Kind: Emotion]] = [:]
+					for message in viary.messages {
+						emotionsPerMessage[message.id] = message.emotions
+					}
+					try await viaryRepository.create(
+						viary: viary,
+						with: emotionsPerMessage
+					)
+					await send(.saved(.success(true)))
+				} catch {
+					await send(.saved(.failure(error)))
+				}
             }
         case .saved(let result):
             switch result {
@@ -233,7 +234,7 @@ public struct CreateViary: ReducerProtocol, Sendable {
         case .delete(let message):
             state.messages.removeAll(where: { $0 == message })
         case .onDisappear:
-            return .fireAndForget {
+            return .run { _ in
                 try await speechToTextService.stop()
             }
         }

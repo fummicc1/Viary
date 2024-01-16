@@ -3,7 +3,7 @@ import CreateViaryFeature
 import EditViaryFeature
 import ViaryListFeature
 
-public struct AppReducer: ReducerProtocol {
+public struct AppReducer: Reducer {
     public struct State: Equatable {
         public var appDelegate: AppDelegateReducer.State
         public var createViary: CreateViary.State?
@@ -37,7 +37,7 @@ public struct AppReducer: ReducerProtocol {
     public init() { }
 
     @ReducerBuilder<State, Action>
-    public var body: some ReducerProtocol<State, Action> {
+    public var body: some Reducer<State, Action> {
         Scope(state: \.appDelegate, action: /Action.appDelegate) {
             AppDelegateReducer()
         }
