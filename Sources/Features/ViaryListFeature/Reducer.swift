@@ -6,7 +6,7 @@ import Repositories
 import IdentifiedCollections
 import Tagged
 
-public struct ViaryList: ReducerProtocol, Sendable {
+public struct ViaryList: Reducer, Sendable {
 
     @Dependency(\.viaryRepository) var viaryRepository
     @Dependency(\.viarySample) var viarySample
@@ -65,10 +65,10 @@ public struct ViaryList: ReducerProtocol, Sendable {
         case create
     }
 
-    public func reduce(into state: inout State, action: Action) -> EffectTask<Action> {
+    public func reduce(into state: inout State, action: Action) -> Effect<Action> {
         switch action {
         case .onAppear:
-            return EffectTask.run { send in
+            return .run { send in
                 for await viaries in viaryRepository.myViaries {
                     await send(.loaded(.success(viaries)))
                 }
